@@ -87,11 +87,15 @@ Copy and paste these commands into the terminal of the server and your own machi
 
 **Server Side**
 
-`bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/server-setup.sh)`
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/server-setup.sh)
+```
 
 **local side**
 
-`bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/client-setup.sh)`
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/client-setup.sh)
+```
 
 ## Notes
 

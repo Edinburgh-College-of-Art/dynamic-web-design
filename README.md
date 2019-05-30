@@ -29,8 +29,6 @@ A collection of examples using PHP, JavaScript and the F3 framework for Dynamic 
    3. add new folder named `AboveWebRoot`
    4. upload `fatfree-master` to that folder
 
-
-
 ```php
 class DatabaseConnection
 {

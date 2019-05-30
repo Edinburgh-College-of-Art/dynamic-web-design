@@ -50,7 +50,7 @@ sudo sh -c "printf 'class DatabaseConnection
 
 # Clone DWD Git
 cd ~/public_html/
-git clone --recurse-submodules -j8 https://github.com/Edinburgh-College-of-Art/dynamic-web-design.git
+git clone --recurse-submodules -j8 https://github.com/Edinburgh-College-of-Art/dynamic-web-design.git dwd
 cd dynamic-web-design
 git config receive.denyCurrentBranch updateInstead
 

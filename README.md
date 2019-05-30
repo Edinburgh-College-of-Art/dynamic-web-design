@@ -77,8 +77,8 @@ class DatabaseConnection
 1. Sign-in to GitHub
 2. create repository
 3. open terminal
-   - Windows Users will need [Git for Windows]
-4. cd path/to/project
+   - Windows Users will need [Git for Windows](https://gitforwindows.org)
+4. `cd path/to/project`
 5. on GitHub copy clone url
 6. `git remote set-url --add --push origin CLONE_URL`
 7. `git push CLONE_URL --force`

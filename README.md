@@ -91,7 +91,7 @@ First setup your database, then copy and paste these commands into the terminal 
 **Server Side**
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/server-setup.sh)
+wget https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/server-setup.sh; chmod +x server-setup.sh ; ./server-setup.sh
 ```
 
 **local side**

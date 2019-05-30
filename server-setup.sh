@@ -29,23 +29,23 @@ printf '\n'
 #-------------------------------------------------------------------------------
 # add F3
 mkdir ~/AboveWebRoot
-git clone https://github.com/bcosca/fatfree.git
+git clone https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master
 
 # Add DB file
 mkdir ~/AboveWebRoot/autoload
 
-sudo sh -c "printf 'class DatabaseConnection
+printf 'class DatabaseConnection
 {
   static function connect()
   {
     return new DB\SQL(
-  	'mysql:host=localhost;port=3306;dbname=%s_dwd',
-  	'%s',
-  	'%s'
+  	\"mysql:host=localhost;port=3306;dbname=%s_dwd\",
+  	\"%s\",
+  	\"%s\"
     );
   }
 }
-' $USERNAME $USERNAME $PASSWORD > ~/AboveWebRoot/autoload/DatabaseConnection.php"
+' $USERNAME $USERNAME $PASSWORD > ~/AboveWebRoot/autoload/DatabaseConnection.php
 #-------------------------------------------------------------------------------
 
 # Clone DWD Git

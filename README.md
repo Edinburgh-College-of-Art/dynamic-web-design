@@ -98,5 +98,3 @@ bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynami
 ```
 
 ## Notes
-
-These examples assume you are using the playground server at ECA or you are aware of how to port over.

@@ -3,8 +3,8 @@
 # test bash if
 INPUTMATCH=0
 while [[ $INPUTMATCH -eq 0 ]]; do
-  read -p 'CPANEL Username: (.e.g. username@university_domain): ' USERNAME
-  read -p 'Confirm: (.e.g. username@university_domain): ' CONFIRMUSERNAME
+  read -p 'CPANEL Username: ' USERNAME
+  read -p 'Confirm: ' CONFIRMUSERNAME
 
   if [[ "$USERNAME" == "$CONFIRMUSERNAME" ]]; then
     INPUTMATCH=1

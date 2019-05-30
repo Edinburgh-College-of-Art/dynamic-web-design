@@ -32,7 +32,8 @@ while [[ $INPUTMATCH -eq 0 ]]; do
 done
 printf '\n'
 #-------------------------------------------------------------------------------
-git clone 'ssh://'"$USERNAME"'@'"$YOURDOMAIN"'/~/public_html/dwd'
+# git clone 'ssh://'"$USERNAME"'@'"$YOURDOMAIN"'/~/public_html/dwd'
+git clone 'ssh://'"$USERNAME"'@'"$YOURDOMAIN"'/~/public_html/example'
 git clone 'ssh://'"$USERNAME"'@'"$YOURDOMAIN"'/~/public_html/my-site'
 cd my-site
 touch README.md

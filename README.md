@@ -67,11 +67,10 @@ class DatabaseConnection
 ### 4. Project Setup
 
 1. git clone in cpanel
-    1. clone to `public_html/dwd/`
+   1. clone to `public_html/dwd/`
 2. git clone in local machine
 3. create git in `public_html/my-site`
 4. git clone in local machine
-
 
 ### 5. PhpStorm Setup
 
@@ -100,6 +99,40 @@ class DatabaseConnection
 5. on GitHub copy clone url
 6. `git remote set-url --add --push origin CLONE_URL`
 7. `git push CLONE_URL --force`
+
+### Setup Script
+
+**Server Side**
+
+```bash
+# add F3
+mkdir ~/AboveWebRoot
+
+# Clone DWD Git
+cd ~/public_html/
+git clone --recurse-submodules -j8 https://github.com/Edinburgh-College-of-Art/dynamic-web-design.git
+cd dynamic-web-design
+git config receive.denyCurrentBranch updateInstead
+
+# Create project git
+mkdir ~/public_html/my-site
+cd ~/public_html/my-site
+git init
+git config receive.denyCurrentBranch updateInstead
+```
+
+**local side**
+
+```bash
+cd project/directory
+git clone ssh://matthe31@matthew-hamilton.co.uk/~/public_html/dynamic-web-design
+git clone ssh://matthe31@matthew-hamilton.co.uk/~/public_html/my-site
+cd my-site
+touch README.md
+git add .
+git commit -m "init"
+git push
+```
 
 ## Notes
 

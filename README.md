@@ -125,8 +125,8 @@ git config receive.denyCurrentBranch updateInstead
 
 ```bash
 cd project/directory
-git clone ssh://matthe31@matthew-hamilton.co.uk/~/public_html/dynamic-web-design
-git clone ssh://matthe31@matthew-hamilton.co.uk/~/public_html/my-site
+git clone ssh://CPANEL-USERNAME@YOUR-DOMAIN/~/public_html/dynamic-web-design
+git clone ssh://CPANEL-USERNAME@YOUR-DOMAIN/~/public_html/my-site
 cd my-site
 touch README.md
 git add .

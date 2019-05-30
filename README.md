@@ -6,16 +6,9 @@ A collection of examples using PHP, JavaScript and the F3 framework for Dynamic 
 
 ### 1. Domain of Ones Own Setup
 
-### 2. Fat Free Framework Setup
+[Follow the steps here]() to register your domain.
 
-1. [Download Fat Free Framework](https://github.com/bcosca/fatfree/archive/master.zip)
-2. Put Fat Free on your server
-   1. go to cpanel
-   2. file manager
-   3. add new folder named `AboveWebRoot`
-   4. upload `fatfree-master` to that folder
-
-### 3. Database Setup
+### 2. Database Setup
 
 1. In cpanel, go to `MySQL® Databases`
    2. create a new database named `dwd`
@@ -26,6 +19,17 @@ A collection of examples using PHP, JavaScript and the F3 framework for Dynamic 
    1. in `autoload` add a file `DatabaseConnection.php`
    2. in `DatabaseConnection.php` add the following text
    3. fill in your details in placeholders.
+
+### 3. Fat Free Framework Setup
+
+1. [Download Fat Free Framework](https://github.com/bcosca/fatfree/archive/master.zip)
+2. Put Fat Free on your server
+   1. go to cpanel
+   2. file manager
+   3. add new folder named `AboveWebRoot`
+   4. upload `fatfree-master` to that folder
+
+
 
 ```php
 class DatabaseConnection

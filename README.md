@@ -83,55 +83,15 @@ class DatabaseConnection
 
 ### Setup Script
 
+Copy and paste these commands into the terminal of the server and your own machine respectively.
+
 **Server Side**
 
-```bash
-# add F3
-mkdir ~/AboveWebRoot
-git clone https://github.com/bcosca/fatfree.git
-
-# Add DB file
-mkdir ~/AboveWebRoot/autoload
-echo \
-"
-class DatabaseConnection
-{
-  static function connect()
-  {
-    return new DB\SQL(
-  	'mysql:host=localhost;port=3306;dbname=CPANEL-USERNAME_dwd',
-  	'CPANEL-USERNAME',
-  	'CPANEL-PASSWORD'
-    );
-  }
-}
-" > ~/AboveWebRoot/autoload/DatabaseConnection.php
-
-# Clone DWD Git
-cd ~/public_html/
-git clone --recurse-submodules -j8 https://github.com/Edinburgh-College-of-Art/dynamic-web-design.git
-cd dynamic-web-design
-git config receive.denyCurrentBranch updateInstead
-
-# Create project git
-mkdir ~/public_html/my-site
-cd ~/public_html/my-site
-git init
-git config receive.denyCurrentBranch updateInstead
-```
+`bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/server-setup.sh?token=AH5DFIA7XTODFHACMFZTSQC47DQQA)`
 
 **local side**
 
-```bash
-cd project/directory
-git clone ssh://CPANEL-USERNAME@YOUR-DOMAIN/~/public_html/dynamic-web-design
-git clone ssh://CPANEL-USERNAME@YOUR-DOMAIN/~/public_html/my-site
-cd my-site
-touch README.md
-git add .
-git commit -m "init"
-git push
-```
+`bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/client-setup.sh?token=AH5DFIHO7ZCGDZOWTKYHR6247DRDM)`
 
 ## Notes
 

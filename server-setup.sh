@@ -34,7 +34,8 @@ git clone https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master
 # Add DB file
 mkdir ~/AboveWebRoot/autoload
 
-printf 'class DatabaseConnection
+printf '<?php
+class DatabaseConnection
 {
   static function connect()
   {
@@ -45,7 +46,7 @@ printf 'class DatabaseConnection
     );
   }
 }
-' $USERNAME $USERNAME $PASSWORD > ~/AboveWebRoot/autoload/DatabaseConnection.php
+?>' $USERNAME $USERNAME $PASSWORD > ~/AboveWebRoot/autoload/DatabaseConnection.php
 #-------------------------------------------------------------------------------
 
 # Clone DWD Git

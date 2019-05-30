@@ -88,6 +88,24 @@ class DatabaseConnection
 ```bash
 # add F3
 mkdir ~/AboveWebRoot
+git clone https://github.com/bcosca/fatfree.git
+
+# Add DB file
+mkdir ~/AboveWebRoot/autoload
+echo \
+"
+class DatabaseConnection
+{
+  static function connect()
+  {
+    return new DB\SQL(
+  	'mysql:host=localhost;port=3306;dbname=CPANEL-USERNAME_dwd',
+  	'CPANEL-USERNAME',
+  	'CPANEL-PASSWORD'
+    );
+  }
+}
+" > ~/AboveWebRoot/autoload/DatabaseConnection.php
 
 # Clone DWD Git
 cd ~/public_html/

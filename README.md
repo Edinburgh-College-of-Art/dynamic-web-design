@@ -43,7 +43,7 @@ class DatabaseConnection
 }
 ```
 
-5. in cpanel: goto phpMyAdmin
+5. in cpanel: goto `phpMyAdmin`
    1. create a table named `simpleModel` for the `FFF-SimpleExample`
    2. create a table for storing your data
 
@@ -85,7 +85,7 @@ class DatabaseConnection
 
 ### Setup Script
 
-Copy and paste these commands into the terminal of the server and your own machine respectively.
+First setup your database, then copy and paste these commands into the terminal of the server and your own machine respectively.
 
 **Server Side**
 

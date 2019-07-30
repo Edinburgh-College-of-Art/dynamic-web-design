@@ -100,4 +100,50 @@ wget https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-desi
 bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynamic-web-design/master/client-setup.sh)
 ```
 
+***
+
+## Git Hook Setup
+
+**Web Server**
+```bash
+ssh username@your-domain
+mkdir ~/public_html/website/path
+mkdir ~/project_repo/
+cd ~/project_repo/
+git init
+```
+
+
+**Local**
+```bash
+mkdir -p ~/Documents/dwd/my-site
+cd ~/Documents/dwd/my-site
+git init
+git remote add origin ssh://username@your-domain/~/project_repo/
+```
+
+**Web Server**
+
+For post-receive hook, sync all files in repo to website
+
+```bash
+ssh username@your-domain
+cd ~/project_repo/
+echo \
+"#!/bin/sh
+rsync ../* ~/public_html/website/path
+" >> .git/hooks/post-receive
+chmod +x .git/hooks/post-receive
+```
+
+## Staging
+
+**Add more remotes for staging! You can push all over the place, just repeat the steps on different servers and you’re a git-deployment maniac.**
+
+```bash
+git remote add stage ssh://projects@domain.com/~/stage.example.com
+git push stage master
+```
+
+
 ## Notes

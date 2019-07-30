@@ -2,6 +2,23 @@
 
 A collection of examples using PHP, JavaScript and the F3 framework for Dynamic Web Design
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [DynamicWebDesignExamples](#dynamicwebdesignexamples)
+	- [Setup](#setup)
+		- [1. Domain of Ones Own Setup](#1-domain-of-ones-own-setup)
+		- [2. Database Setup](#2-database-setup)
+		- [3. Fat Free Framework Setup](#3-fat-free-framework-setup)
+		- [4. Project Setup](#4-project-setup)
+		- [5. PhpStorm Setup](#5-phpstorm-setup)
+		- [6. GitHub Setup](#6-github-setup)
+		- [Setup Script](#setup-script)
+	- [Git Hook Setup](#git-hook-setup)
+	- [Staging](#staging)
+	- [Notes](#notes)
+
+<!-- /TOC -->
+
 ## Setup
 
 ### 1. Domain of Ones Own Setup
@@ -112,7 +129,6 @@ mkdir ~/project_repo/
 cd ~/project_repo/
 git init
 ```
-
 
 **Local**
 ```bash

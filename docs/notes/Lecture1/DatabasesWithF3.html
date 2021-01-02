@@ -1,0 +1,315 @@
+<html>
+<head>
+<title>Lectures 1-2 slides/notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #000000;
+}
+code {  font-family: "Courier New", Courier, mono; font-size: 16px}
+.style1 {color: #FF0000}
+.style4 {color: #006600}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+}
+.style7 {color: #0000FF}
+.style8 {color: #000000}
+.style9 {color: #FF00CC}
+.style10 {color: #F0292C}
+.RedText {
+	color: #FF0000;
+}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h1>Server-side systems and database serving<br>
+  2: working with databases
+</h1>
+
+<h1><i><a href="http://ddm.ace.ed.ac.uk/lectures/DDM/DynamicWebDesign/">Dynamic Web Design</a></i></h1>
+<h3>John Lee</h3>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+<h1>Working with Databases using PHP and the Fat-Free Framework</h1>
+<p class=MsoNormal>Once we start to accumulate material from forms, or any
+  other data that we want to present on web pages, things can become quite
+  complicated quite quickly. We might want to create forms that are already
+  filled-in with some of the information, and get people to add to them; we
+  might want to have quite elaborate HTML pages which just include at certain
+  points data that comes from constantly updated files about, say, prices of
+items or descriptions of new additions.</p>
+<p>In more sophisticated applications, data 
+is typically organised using databases. Increasingly, web sites are used for e-commerce purposes that require
+    them to present information that is constantly being updated elsewhere (at
+  the &quot;back end&quot;) rather than through the user-facing web site itself. They might
+  be presenting product lines to customers, stock control information to managers
+  on an intranet, or many other things. Or a web site might be presenting simpler,
+  but still continually changing data, such as a message-board or wiki type of
+application, or a &quot;web content management system&quot; such as WordPress (which is built using PHP), etc. </p>
+<p>In all of these cases, usually the web pages are created dynamically from
+  a database, which is also liable to be updated by other people  or systems (perhaps using a web service API, which is something we'll look at in the course, though not in these notes).
+  In the rest of this lecture, we look at a particular system which can achieve
+  connecting to a database, as well as a number of other things: PHP, in combination with a MySQL
+  database. This combination is perhaps the most commonly encountered method
+of integrating databases to be found on the internet, but it is also widely misused. Using the &quot;Fat-Free Framework&quot; (F3) will enable us easily to avoid many of the worst pitfalls in this area.</p>
+<h2>Databases and web interfaces</h2>
+<p>There are again several commonly used ways of making use of databases in the
+  context of a web site. Microsoft, for instance, offers Active Server Pages
+  (ASP) or one can use Java (JSP). There are other proprietary solutions, such as Adobe Coldfusion, and open-source ones such as Django (based on python), but we will be using PHP. The other options are less common and often more
+  expensive, but there are still many providers. </p>
+<p>These systems don't just deal with databases. They can do all kinds of processing,
+  including formatting material, connecting to web services, dynamically creating
+  arbitrary HTML, javascript and CSS, etc. </p>
+<p>The way the systems just mentioned essentially all provide for dealing with
+  material that may include database data is the same as we have seen for PHP:</p>
+<p> (a) define a whole language for describing dynamic material that can be included
+  in HTML pages, then </p>
+<p>(b) embed these descriptions in ordinary HTML pages to make templates and </p>
+<p>(c) arrange for this language to be interpreted by the web server. </p>
+<p>Then pages (as templates) can be designed freely, placed on the server and conveniently
+  augmented with all kinds of additional content at the time they are served
+  to the user. </p>
+<h2>Databases and SQL</h2>
+<p>It is  possible to use a variety of DB systems with PHP, e.g. Microsoft Access,
+  Oracle, etc. The particular database system we will be using is MySQL, which
+  is a free, server-based system very often used with PHP. The database is maintained
+  on a server that may be (but in our case is not) on a different machine from the
+web server: in any case, PHP can get access to it in just the same way.</p>
+<p><a href="additional14.html#MySQL">Further
+  details about how to use MySQL locally are available here</a>. </p>
+<p>First, let's take note of the usual structure of databases. We are for present
+  purposes only interested in very simple ones. These consist of one or more <i>Tables</i>,
+  where each table can be thought of as an array with rows and columns. The rows
+  are <i>records</i>, and within each record the columns are <i>fields</i>. The
+  table will have a name, and so will the fields in each record. A database table
+  is for most purposes very similar to a simple <em>spreadsheet</em>.</p>
+<p>The database is sometimes created and updated directly on-screen, through
+  some sort of user interface, rather like a spreadsheet; but in the systems
+  we are interested in this can also be achieved by using a <i>query language. </i>The
+  most common of these is the &quot;Structured Query Language&quot;, <strong><em>SQL</em></strong>, which
+  was originally invented by IBM but is now very widely used. (Sometimes it's pronounced &quot;Sequel&quot;, but I prefer S-Q-L.)</p>
+<p>In SQL, one can state queries which may request information from the DB, but
+  also may create it, update it in various ways, or delete it. SQL for our purposes
+  can be used quite simply, though it is in fact very sophisticated and can be
+  used to do very complicated things in advanced applications. </p>
+<p class="RedText"><em>Now, here is an important point: when we are using the Fat-Free Framework (F3), as well as many other frameworks, <strong>we often do not need to write any SQL at all</strong>! This is because the F3 mechanism described in the next two sections allows database tables to be queried, updated, deleted from, etc. without explicitly using SQL but just using functions that hide all the SQL in the background. As long as we are only doing simple operations, we don't need to use SQL directly. It becomes useful for more complex database operations, but you may not need these for a simple application. The following subsection  explains how SQL is  used for simple database operations, but to begin with you may consider this optional.</em> <em>If you end up developing functionality that is more complex, you may need to return to it later and extend it further.</em></p>
+<h3>A brief overview of basic SQL (optional)</h3>
+<p>Here we'll assume that a very simple database with just one table called <em>Product </em>already
+  exists and contains data about various manufactured products. The <em>Product</em> table
+  has fields called: <code class="style5">Manufacturer, ManufacturerURL, ProductName,
+  ProductType, ProductDescription, ProductPrice, ProductImage.</code></p>
+<p>The main SQL commands that we'll mention are SELECT, INSERT and UPDATE. The
+  first of these is, naturally, used to select the information that is being
+  requested, e.g. </p>
+<p><code>SELECT fieldname1 fieldname2 ...<br>
+  FROM tablename</code></p>
+<p>where in practice we would use the names of the table and fields we need to address, whatever these
+  are, for instance:</p>
+<p><code>SELECT ProductName ProductType ...<br>
+FROM Product</code></p>
+<p>This can be qualified in various ways, most especially by using WHERE, as
+  in:</p>
+<p><code>SELECT fieldname1 fieldname2 ...<br>
+  FROM tablename<br>
+  WHERE field=value</code></p>
+<p>SQL is best understood by looking at examples. An example of this kind of
+  construction in relation to the data about products might be:</p>
+<p><code>SELECT Manufacturer, ProductName, ProductType<br>
+  FROM Product<br>
+  WHERE ProductType=door</code></p>
+<p>which would have the effect of selecting just these three fields from all
+  records in the Product table that have the value &quot;door&quot; in the ProductType
+  field.</p>
+<p>The next most obvious thing to do with a database is insert data into it,
+  using the pattern:</p>
+<p><code>INSERT INTO tablename(fieldname1, fieldname2, ...)<br>
+  VALUES(value1, value2, ...)</code></p>
+<p>where the field names and values match up, as for example:</p>
+<p><code>INSERT INTO Product(Manufacturer, ManufacturerURL, ProductName, ProductType,
+    ProductDescription, ProductPrice, ProductImage)<br>
+  VALUES('Smith &amp; Sons', 'http://www.smith.com/', 'Door 26', 'door', 'Wooden
+  panelled', '87.25', 'http://www.smith.com/images/door26.jpg')</code></p>
+<p>This would create a new <em>Product</em> record with these values for all
+  the fields. One could specify values for just some of the fields, but the fields
+  named and the values given for them must always be provided in the same order
+  as each other. So:</p>
+<p><code>INSERT INTO Product(Manufacturer, ProductName)<br>
+  VALUES('Smith &amp; Sons', 'Door 26')</code></p>
+<p>is also OK -- the other fields will take default values (typically NULL, but
+  you can specify other things if you like when you create the database table
+  to begin with). </p>
+<p>Alternatively, one may need to update an existing record, for instance:</p>
+<p><code>UPDATE Product<br>
+  SET ProductPrice = '92.63', ProductDescription = 'Wooden richly panelled'<br>
+  WHERE ProductName = 'Door 26'</code></p>
+<p>-- if, say, the price of Door 26 has been changed and we want to update its
+  description. Of course, the identification of this record depends on there
+  being no other product called &quot;Door 26&quot; in the same table. Usually
+  DB systems provide unique identifiers for records to help with identification.</p>
+<p>Deleting records is dangerously easy; the character * is available as a &quot;wildcard&quot;,
+  so:</p>
+<p><code>DELETE * FROM Product</code></p>
+<p>will <em>delete all the records in the Product table</em>! So one needs to
+  restrict this, as in:</p>
+<p><code>DELETE FROM Product<br>
+  WHERE ProductName = 'Door 26'</code></p>
+<p>which will delete all records concerning any product called &quot;Door 26&quot;. </p>
+<p>Further examples of SQL abound, but for many purposes
+  you will not need to know much more about it than this. General details of
+  the language, with examples and tutorials, are easily found in many textbooks and web sites, as well as the copious documentation of MySQL.</p>
+<h2>Linking to databases using PHP </h2>
+<p>Clearly the first step is to create a database. For our own purposes we'll
+  assume this is done directly with MySQL.  It's quite possible to create
+  a database from scratch using PHP, but we assume here that the database already
+  exists and contains the table(s) we need. So the next step is to connect to it.</p>
+<p>There are a number of different ways supported by PHP for creating and working
+  with connections to MySQL (and other) databases. In dfferent tutorials, books,
+  code snippets etc., you may come across several of these. Some of them are
+  relatively outmoded and have been replaced with better methods. Some are extremely
+  insecure, in the sense that they leave your application vulnerable to attack
+from malicious agents. </p>
+<p>Security is a very important consideration when doing anything
+  with PHP. It is so widely used that it is intensively targeted by hackers. Consequently,
+  very often, an older way
+  of doing something will have become vulnerable, and &quot;easy&quot; methods
+  or short cuts are often extremely hazardous. You might think this is a minor
+  issue, but exploits of PHP can easily be used to bring down a server machine
+  or use it to attack many others: this is bad enough in the University context,
+  but in the commercial world can be disastrous, so it is not to be taken lightly.  </p>
+<p><em><strong>In particular, it means you should be very careful when &quot;borrowing&quot; PHP
+  code from sites on the internet. Unless you are very sure of the security and
+  reliability of the source, do not use any code that you have not read carefully
+  and thoroughly understood (which is often difficult with PHP code). This can apply
+  equally to code that doesn't access a database, especially if it uses some risky
+  function such as email.</strong></em></p>
+<p class="RedText">We
+  will not discuss the various methods of connecting to databases using PHP outside of F3. You will find much code on the internet that is based on such methods, including especially the oldest and simplest method, which uses the function <em>mysql_connect()</em>. This function, along with others associated with it, is extremely unsafe,  <strong>deprecated</strong> and  dropped in later versions of PHP,
+  but you will often
+  find it in many  places.
+  Please <em><strong>do not use these functions</strong></em> in your
+  own code:
+  use the method described here, with F3. <strong><em>Remember: DO NOT USE mysql_connect()</em></strong><em><strong> in any circumstances</strong></em>.</p>
+<p>We will assume from here that you are not going to connect to your MySQL database directly from lower-level PHP code, but only through functions provided by the Fat-Free Framework.</p>
+<h2>Working with databases using F3 </h2>
+<h3>Setting up a connection</h3>
+<p>In F3, the making of a database connection is represented, using an object-oriented programming approach, as a specific class that contains a method (function) which sets up the connection. In F3, we will normally put this in an <em>Autoload</em> folder, so that it will be automaltically loaded and made avaialble to the application. Because we may have a number of F3 applications that use the same database connection class, and because we do not want any database connection details to be visible on the web where hackers might get at them, we keep the database connection class in an <em>Autoload</em> folder <strong><em>above the web root.</em></strong> This means it's in a folder that is not inside the <em>html</em> folder where everything that's web-visible has to be. So we simply create a folder called &quot;AboveWebRoot&quot; (for clarity, though in fact it can be called anything) that is at the <em>same level</em> as the html folder, rather than inside it. This folder is useful for other things that we want to keep away from possible hackers, and things that we'd like to make easily available to all our F3 applications.</p>
+<p>Connecting to a MySQL database from PHP, even with F3, requires you to know the
+  address of the database server, and login credentials for accessing it. See
+local details <a href="additional14.html#MySQL" target="_blank">here</a>. We use these in setting up the database connection. So inside the above web root Autoload folder, we have a class called <em>DatabaseConnection</em>, which is defined in a file called <em>DatabaseConnection.php</em>. (You should always define autoload classes in a file of the same name, with the <em>.php</em> extension, and the file should contain nothing except the class definition and comments.) It looks like this:</p>
+<pre><code>
+class DatabaseConnection {
+	static function connect() {
+    	return new DB\SQL(
+    	  'mysql:host=<span class="RedText">hostName</span>;port=<span class="RedText">portNumber</span>;dbname=<span class="RedText">databaseName</span>',
+    	  '<span class="RedText">username</span>',
+    	  '<span class="RedText">password</span>'
+    	);
+	}
+}
+</code></pre>
+<p>The items shown here in red are as given in the local details. The hostName can be &quot;localhost&quot; if your code is run by a PHP server hosted on the same server host  as the MySQL database itself (e.g. playground.eca.ed.ac.uk). The <em>connect()</em> method returns a <em>DB\SQL</em> object, which is an F3 component that holds an SQL database connection.</p>
+<p>In our application's <em>index.php</em> file, we invoke the above method with the following line of code:</p>
+<code>
+  $db = DatabaseConnection::connect();
+</code>
+<p>This invokes the method <em>statically</em>, which means without creating an object of the DatabaseConnection class, because we would have no further use for the object; all we want is the <em>DB\SQL </em>connection object. The variable <em>$db</em> now contains the connection, and we then put it into a global F3 variable <em>DB</em>, for further use as we'll see below:</p>
+<p><code>$f3-&gt;set('DB', $db);
+</code></p>
+<p>(note that <em>DB</em> is not a PHP variable -- it's an F3 variable -- and so it is named as a string, using quotes, and doesn't have the <em>$</em> in front of it that PHP variables must always have).</p>
+<h3><strong>Using a connection in an application</strong></h3>
+<p>Using the Model-View-Controller (MVC) approach, one thinks of the database as being the <em>Model</em>. It provides a representation of relevant information about the domain we're working with. Code that controls how information goes into and out of the database we can think of as the <em>Controller</em>. Taking an object-oriented approach, it will be implemented as a <em>class</em> that contains <em>methods</em> (functions) to carry out the various actions that are needed. Defining a class allows <em>objects</em> of that class to be created.</p>
+<p>Objects in PHP are similar to those in Javascript, having properties and
+  methods, but the syntax looks a little different. Instead of the &quot;dot&quot;,
+  as in <em>object.property</em>, or <em>object.method()</em>, PHP uses a two-character &quot;arrow&quot;,
+  as in <em>object-&gt;property</em>. Otherwise, things are similar in that new
+  objects are created using the operator <em>new</em>, etc. (We saw above that PHP also uses the double-colon, as in <em>object::method(),</em> when working with classes statically; but we will  rarely need to use this.)</p>
+<p>Normally we will define a class suitable for our specific application: in the case of the SimpleForm application it's called <em>SimpleController</em>. This is defined in a file called <em>SimpleController.php</em>, which is placed in the application's Autoload folder (note that this is <strong><em>not</em></strong> the same as the AboveWebRoot Autoload folder), so that it will always be automatically loaded and available to PHP. The code for this is as follows; note that as usual the colours identify parts as discussed in the text below. </p>
+<pre> <code>
+&lt;?php
+// Class that provides methods for working with the form data.
+// There should be NOTHING in this file except this class definition.
+  
+class SimpleController {
+	  <span class="style1">private $mapper;
+</span>
+	  <span class="style7">public function __construct() {
+	  	global $f3;						// needed for $f3-&gt;get() 
+	  	</span><span class="style1">$this-&gt;mapper</span><span class="style7"> = new DB\SQL\Mapper($f3-&gt;get('DB'),&quot;simpleModel&quot;);	// create DB query mapper object
+	  																		// for the &quot;simpleModel&quot; table
+	  }</span>
+  
+	  <span class="style4">public function putIntoDatabase($data) { 
+	  	$this-&gt;mapper-&gt;name = $data[&quot;name&quot;];					// set value for &quot;name&quot; field
+	  	$this-&gt;mapper-&gt;colour = $data[&quot;colour&quot;];				// set value for &quot;colour&quot; field
+	  	$this-&gt;mapper-&gt;save();									// save new record with these fields
+	  }</span>
+  
+	  public function getData() {
+	  	$list = $this-&gt;mapper-&gt;find();
+	  	return $list;
+	  }
+  
+	  public function deleteHandler($idToDelete) {
+	  	$this-&gt;mapper-&gt;load(['id=?', $idToDelete]);				// load DB record matching the given ID
+	  	$this-&gt;mapper-&gt;erase();									// delete the DB record
+	  }
+  
+}
+?&gt;
+  </code></pre>
+<p>In the <em>SimpleController</em> class, I have assumed that whenever an object of this class is created, the first thing it will need is a way to use the connection to the database, so this  is defined in <span class="style7">the special method <code>__construct()</code>, which is automatically called whenever a new object of this class is created (constructed)</span>. (This kind of method is commonly known in object-oriented programming as a <em>constructor</em>.)</p>
+<p>The way to use a database connection in F3 is via a <em>mapper</em> object, which very cleverly manages all the relationships between data in a particular database table and variables in our PHP code. <span class="style1">Hence the first thing in the SImpleController definition is creating a variable (<code>$mapper</code>) for a mapper object</span>. This mapper object is identified in the <code><span class="style7">__construct()</span></code> method as <code><span class="style1">$this-&gt;mapper</span></code>, where <code><span class="style1">$this</span></code> identifies the particular object that is being created when the code is run (&quot;this object&quot;, to the code). The mapper object is created using <code><span class="style7">new DB\SQL\Mapper($f3-&gt;get('DB'),&quot;simpleModel&quot;)</span></code>, because we are creating a new <code><span class="style7">DB\SQL\Mapper</span></code> object (which is part of F3), giving it the reference to our own database connection that we saved before (which we now access using <code><span class="style7">$f3-&gt;get('DB')</span></code>) and the name of the database table we want to map to (<code><span class="style7">simpleModel</span></code>).</p>
+<p>The way the mapper object works is that if there is a field in the database table, say <em>field1</em>, then there is a property in the mapper object that's also called <em>field1, </em>and the values of these are mapped to each other. Hence, we have methods in the SimpleController class that can manipulate data in the table by accessing properties of the mapper object. Thus, data can be put into the table using the <code><span class="style4">putIntoDatabase($data)</span></code> method, where <code><span class="style4">$data</span></code> is an array of values, and when we write <code><span class="style4">$this-&gt;mapper-&gt;name = $data[&quot;name&quot;]</span></code>  we are saying that the property of the mapper object called <em>name</em> (<code><span class="style4">$this-&gt;mapper-&gt;name</span></code>) should be set to the element called <em>name</em> in the <em>$data</em> array. Note that we did not have to use an array here, or use keys in the array that match the database fields; we could just as well say <code><span class="style4">$this-&gt;mapper-&gt;name = </span></code><code><span class="style4">&quot;Fred&quot;</span></code> -- no matter how we set the value of <code><span class="style4">$this-&gt;mapper-&gt;name</span></code>, F3 will arrange that when we call <code><span class="style4">$this-&gt;mapper-&gt;save()</span></code>, a new record will be made in the table, and the  fields will be given values that we have assigned to mapper properties that have the same names. This is all done for us, using SQL behind the scenes, which makes everything much simpler.</p>
+<p>F3 also provides mapper methods to retrieve and delete data, which we exploit  in defining the remaining methods of <em>SimpleController</em>. The code here may look a little complicated, but it is much simpler than the code you need if you use &quot;vanilla&quot; PHP approaches to working with databases (such as the MySQLi extension as described at w3schools and elsewhere). The F3 mapper system  incorporates  important security features that are even more complicated to implement using other approaches, which makes this a very much safer way to implement database connections in our applications.</p>
+<h2>Managing input and  output via  web pages</h2>
+<p>The most typical way to get information from a web site user is via a form, and with F3 the standard way to put information onto a web page is to define a template that contains F3 variables with values that will be resolved when the template is rendered. The variables can then take values that are derived form the database, and hence the database data can be output to a web page. We have already seen how forms can be used, and the code considered there got to the point where it called a method defined in the SimpleController class, which is <em>putIntoDatabase()</em>. This method takes an associative array of values where the keys in the array have the same names as the fields in the databse table that we'd like to put them into, in the SimpleExample case being <em>name</em> and <em>colour</em>. Because F3 does so much for us already, the definition of the function is very simple:</p>
+<p><code> public function putIntoDatabase($data) { <br>
+  <span class="RedText">$this-&gt;mapper-&gt;name = $data[&quot;name&quot;]</span>;					// set value for &quot;name&quot; field<br>
+  <span class="RedText">$this-&gt;mapper-&gt;colour = $data[&quot;colour&quot;]</span>;				// set value for &quot;colour&quot; field<br>
+  <span class="style7">$this-&gt;mapper-&gt;save()</span>;									// save new record with these fields<br>
+}</code></p>
+<p>All this does is <span class="RedText">set the members of the mapper object to take the values that are given in the $data array</span>, and then <span class="style7">call the mapper's save() method</span>, which saves the values in the mapper object into the corresponding databse fields (by using SQL behind the scenes). That's really all there is to it.</p>
+<p>Retrieving data from the database is, in a simple case, even more straightforward. If you simply want to retrieve all the data in the data table, then the following method</p>
+<p> <code>public function getData() {<br>
+  <span class="style7">$list</span> = <span class="RedText">$this-&gt;mapper-&gt;find()</span>;<br>
+<span class="style7">return $list</span>;<br>
+	}</code></p>
+<p>achieves this by <span class="RedText">using the find() method of the mapper object, which if given no arguments will simply find all the data</span>. The returned data will actually be in the form of an array containing one object for each row in the database table. Each of these objects is an associative array, or in other words a list of key-value pairs, where the keys will be the names of the database fields and the values will be whatever value that field has in the particualr row. <span class="style7">This array is returned from the method function using the variable <em>$list</em></span>. The array can be used in simple loop to display the data, e.g. as a table. </p>
+<p>This is shown in the notes under Templates, repeated here. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:</p>
+<p><code>&lt;table&gt;<br>
+  &lt;tr&gt;<br>
+  &lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Colour&lt;/th&gt;<br>
+  &lt;/tr&gt;<br>
+  &lt;repeat group=&quot;{{ @dbData }}&quot; value=&quot;{{ @record }}&quot;&gt;<br>
+  &lt;tr&gt;<br>
+  &lt;td&gt;{{ trim(@record.name) }}&lt;/td&gt;<br>
+  &lt;td&gt;{{ trim(@record.colour) }}&lt;/td&gt;<br>
+  &lt;/tr&gt;<br>
+  &lt;/repeat&gt;<br>
+&lt;/table&gt;</code></p>
+<p>Here, between the <em>&lt;repeat&gt;</em> tags, we have a table row with two cells. Attributes of the opening tag are <em>group</em> and <em>value</em>. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. Each member of the array contains a further associative array, each with keys name and  colour. The expression trim(@record.name) simply takes the name element in the current record and trims any leading or trailing white space from it. So this <em>repeat</em> loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the <em>dataView</em> route (URL ending in <em>FFF-SimpleExample/dataView</em>) -- this HTML is from the template <em>dataView.htm</em>l.</p>
+<p> In the index.php file, a rule is defined for the <em>dataView</em> route as follows:</p>
+<p><code>$f3-&gt;route('GET /dataView',<br>
+function($f3) {<br>
+<span class="RedText">$controller = new SimpleController</span>;<br>
+<span class="style4">$alldata =</span> <span class="style7">$controller-&gt;getData()</span>;<br>
+<br>
+<span class="style9">$f3-&gt;set(&quot;dbData&quot;, $alldata)</span>;<br>
+$f3-&gt;set('html_title','Viewing the data');<br>
+$f3-&gt;set('content','dataView.html');<br>
+echo template::instance()-&gt;render('layout.html');<br>
+}<br>
+);</code></p>
+<p>which straightforwardly <span class="RedText">creates a <em>SimpleController</em> object</span>, then <span class="style7">uses its <em>getData()</em> method as above to retrieve all the rows</span>, <span class="style4">which are put into the variable <em>$alldata</em></span>. This variable is then <span class="style9">used to set an F3 variable <em>dbData</em></span>, which is expected in the <em>dataView.html </em>template, as above.</p>
+<p>This has been a very simple introduction, but still you need no more than
+is covered in these notes and the viewtorials to make some very effective dynamic web sites using F3. </p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<html>
+<head>
+<title>Lectures 1-2 slides/notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #000000;
+}
+code {  font-family: "Courier New", Courier, mono; font-size: 14px}
+.style1 {color: #FF0000}
+.style4 {color: #006600}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+}
+.style7 {color: #0000FF}
+.style8 {color: #000000}
+.style9 {color: #FF00CC}
+.style10 {color: #F0292C}
+.RedText {
+	color: #FF0000;
+}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h1>Server-side systems and database serving</h1>
+
+<h1><i><a href="http://ddm.ace.ed.ac.uk/lectures/DDM/DynamicWebDesign/">Dynamic Web Design</a></i></h1>
+
+<h2>Lecture 2</h2>
+
+<h3>John Lee</h3>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>Working with Databases using PHP</h1>
+<p class=MsoNormal>Once we start to accumulate material from forms, or any
+  other data that we want to present on web pages, things can become quite
+  complicated quite quickly. We might want to create forms that are already
+  filled-in with some of the information, and get people to add to them; we
+  might want to have quite elaborate HTML pages which just include at certain
+  points data that comes from constantly updated files about, say, prices of
+items or descriptions of new additions.</p>
+<p>In more sophisticated applications, data 
+is typically organised using databases. Increasingly, web sites are used for e-commerce purposes that require
+    them to present information that is constantly being updated elsewhere (at
+  the &quot;back end&quot;) rather than through the user-facing web site itself. They might
+  be presenting product lines to customers, stock control information to managers
+  on an intranet, or many other things. Or a web site might be presenting simpler,
+  but still continually changing data, such as a message-board or wiki type of
+  application, or a &quot;web content management system&quot; -- like, in fact,
+  our own MSc Work in Progress pages (created using WordPress, which is also
+based on PHP). </p>
+<p>In all of these cases, usually the web pages are created dynamically from
+  a database, which is also liable to be updated by other people  or systems (perhaps using a web service API, which is something we'll look at in the course, though not in these notes).
+  In the rest of this lecture, we look at a particular system which can achieve
+  connecting to a database, as well as a number of other things: PHP, in combination with a MySQL
+  database. This combination is perhaps the most commonly encountered method
+of integrating databases to be found on the internet.</p>
+<h2>Databases and web interfaces</h2>
+<p>There are again several commonly used ways of making use of databases in the
+  context of a web site. Microsoft, for instance, offers Active Server Pages
+  (ASP) or one can use Java (JSP). There are other proprietary solutions, such as Adobe Coldfusion, but we will be using PHP. The other options are less common and usually slightly more
+  expensive, but there are still many providers. </p>
+<p>These systems don't just deal with databases. They can do all kinds of processing,
+  including formatting material, connecting to web services, dynamically creating
+  arbitrary HTML, javascript and CSS, etc. </p>
+<p>The way the systems just mentioned essentially all provide for dealing with
+  material that may include database data is the same as we have seen for PHP:</p>
+<p> (a) define a whole language for describing dynamic material that can be included
+  in HTML pages, then </p>
+<p>(b) embed these descriptions in ordinary HTML pages to make templates and </p>
+<p>(c) arrange for this language to be interpreted by the web server. </p>
+<p>Then pages (as templates) can be designed freely, placed on the server and conveniently
+  augmented with all kinds of additional content at the time they are served
+  to the user. </p>
+<h2>Databases and SQL</h2>
+<p>It is  possible to use a variety of DB systems with PHP, e.g. Microsoft Access,
+  Oracle, etc. The particular database system we will be using is MySQL, which
+  is a free, server-based system very often used with PHP. The database is maintained
+  on a server that may be (and in our case is) on a different machine from the
+web server, but PHP can get access to it in just the same way.</p>
+<p><a href="additional14.html#MySQL">Further
+  details about how to use MySQL locally are available here</a>. </p>
+<p>First, let's take note of the usual structure of databases. We are for present
+  purposes only interested in very simple ones. These consist of one or more <i>Tables</i>,
+  where each table can be thought of as an array with rows and columns. The rows
+  are <i>records</i>, and within each record the columns are <i>fields</i>. The
+  table will have a name, and so will the fields in each record. A database table
+  is for most purposes very similar to a simple <em>spreadsheet</em>.</p>
+<p>The database is sometimes created and updated directly on-screen, through
+  some sort of user interface, rather like a spreadsheet; but in the systems
+  we are interested in this can also be achieved by using a <i>query language. </i>The
+  most common of these is the &quot;Structured Query Language&quot;, <strong><em>SQL</em></strong>, which
+  was originally invented by IBM but is now very widely used. </p>
+<p>In SQL, one can state queries which may request information from the DB, but
+  also may create it, update it in various ways, or delete it. SQL for our purposes
+  can be used quite simply, though it is in fact very sophisticated and can be
+  used to do very complicated things in advanced applications. </p>
+<p>Here we'll assume that a very simple database with just one table called <em>Product </em>already
+  exists and contains data about various manufactured products. The <em>Product</em> table
+  has fields called: <code class="style5">Manufacturer, ManufacturerURL, ProductName,
+  ProductType, ProductDescription, ProductPrice, ProductImage.</code></p>
+<p>The main SQL commands that we'll mention are SELECT, INSERT and UPDATE. The
+  first of these is, naturally, used to select the information that is being
+  requested, e.g. </p>
+<p><code>SELECT fieldname1 fieldname2 ...<br>
+  FROM tablename</code></p>
+<p>where in practice we would use the names of the table and fields we need to address, whatever these
+  are, for instance:</p>
+<p><code>SELECT PruductName ProductType ...<br>
+FROM Product</code></p>
+<p>This can be qualified in various ways, most especially by using WHERE, as
+  in:</p>
+<p><code>SELECT fieldname1 fieldname2 ...<br>
+  FROM tablename<br>
+  WHERE field=value</code></p>
+<p>SQL is best understood by looking at examples. An example of this kind of
+  construction in relation to the data about products might be:</p>
+<p><code>SELECT Manufacturer, ProductName, ProductType<br>
+  FROM Product<br>
+  WHERE ProductType=door</code></p>
+<p>which would have the effect of selecting just these three fields from all
+  records in the Product table that have the value &quot;door&quot; in the ProductType
+  field.</p>
+<p>The next most obvious thing to do with a database is insert data into it,
+  using the pattern:</p>
+<p><code>INSERT INTO tablename(fieldname1, fieldname2, ...)<br>
+  VALUES(value1, value2, ...)</code></p>
+<p>where the field names and values match up, as for example:</p>
+<p><code>INSERT INTO Product(Manufacturer, ManufacturerURL, ProductName, ProductType,
+    ProductDescription, ProductPrice, ProductImage)<br>
+  VALUES('Smith &amp; Sons', 'http://www.smith.com/', 'Door 26', 'door', 'Wooden
+  panelled', '87.25', 'http://www.smith.com/images/door26.jpg')</code></p>
+<p>This would create a new <em>Product</em> record with these values for all
+  the fields. One could specify values for just some of the fields, but the fields
+  named and the values given for them must always be provided in the same order
+  as each other. So:</p>
+<p><code>INSERT INTO Product(Manufacturer, ProductName)<br>
+  VALUES('Smith &amp; Sons', 'Door 26')</code></p>
+<p>is also OK -- the other fields will take default values (typically NULL, but
+  you can specify other things if you like when you create the database table
+  to begin with). </p>
+<p>Alternatively, one may need to update an existing record, for instance:</p>
+<p><code>UPDATE Product<br>
+  SET ProductPrice = '92.63', ProductDescription = 'Wooden richly panelled'<br>
+  WHERE ProductName = 'Door 26'</code></p>
+<p>-- if, say, the price of Door 26 has been changed and we want to update its
+  description. Of course, the identification of this record depends on there
+  being no other product called &quot;Door 26&quot; in the same table. Usually
+  DB systems provide unique identifiers for records to help with identification.</p>
+<p>Deleting records is dangerously easy; the character * is available as a &quot;wildcard&quot;,
+  so:</p>
+<p><code>DELETE * FROM Product</code></p>
+<p>will <em>delete all the records in the Product table</em>! So one needs to
+  restrict this, as in:</p>
+<p><code>DELETE FROM Product<br>
+  WHERE ProductName = 'Door 26'</code></p>
+<p>which will delete all records concerning any product called &quot;Door 26&quot;. </p>
+<p>Further examples of SQL will be seen as we progress, but for many purposes
+  you will not need to know much more about it than this. General details of
+  the language, with examples and tutorials, are easily found in many textbooks and web sites.</p>
+<h2>Linking to databases using PHP </h2>
+<p>Clearly the first step is to create a database. For our own purposes we'll
+  assume this is done directly with MySQL.  It's quite possible to create
+  a database from scratch using PHP, but we assume here that the database already
+  exists. So the next step is to connect to it.</p>
+<p>There are a number of different ways supported by PHP for creating and working
+  with connections to MySQL (and other) databases. In dfferent tutorials, books,
+  code snippets etc., you may come across several of these. Some of them are
+  relatively outmoded and have been replaced with better methods. Some are extremely
+  insecure, in the sense that they leave your application vulnerable to attack
+from malicious agents. </p>
+<p>This is a very important consideration when doing anything
+  with PHP. It is so widely used that it is intensively targeted by hackers. Consequently,
+  very often, an older way
+  of doing something will have become vulnerable, and &quot;easy&quot; methods
+  or short cuts are often extremely hazardous. You might think this is a minor
+  issue, but exploits of PHP can easily be used to bring down a server machine
+  or use it to attack many others: this is bad enough in the University context,
+  but in the commercial world can be disastrous, so it is not to be taken lightly.  </p>
+<p><em><strong>In particular, it means you should be very careful when &quot;borrowing&quot; PHP
+  code from sites on the internet. Unless you are very sure of the security and
+  reliability of the source, do not use any code that you have not read carefully
+  and thoroughly understood (which is often difficult with PHP code).This can apply
+  equally to code that doesn't access a database, especially if it uses some risky
+  function such as email.</strong></em></p>
+<p>Connecting to a MySQL database from PHP normally requires you to know the
+  address of the database server, and login credentials for accessing it. See
+local details <a href="additional12.html#MySQL" target="_blank">here</a>. </p>
+<p>The particular method we will use for connecting to the database is relatively
+  easy to use securely, but is not the simplest or most straightforward overall.We
+  will not discuss the simplest method (which uses e.g. the function <em>mysql_connect()</em>),
+  because it is deprecated and also will  be dropped in PHP 6;
+  but you will often
+  find it in many other places (including, unfortunately, the O'Reilly reference in Dreamweaver, and at <a href="http://www.w3schools.com/php/php_ref_mysql.asp">
+ http://www.w3schools.com/php/php_ref_mysql.asp</a>).
+  Please <em><strong>do not use these functions</strong></em> in your
+  own code:
+  use the method described here, or some other that takes advantage of prepared
+  statements etc. <strong><em>Remember: DO NOT USE mysql_connect()</em></strong>.</p>
+<p>Recent versions of PHP come with an extension that implements a better way
+  to access MySQL databases. PHP is<em> object-oriented</em>, just like Actionscript
+  and most other scripting languages you might encounter, and this extension
+  is offered as a series of objects that you can use to create and manipulate
+  database connections. It's called the &quot;MySQL Improved Extension&quot;,
+  usually known as <strong><em>MySQLi</em></strong>. There is documentation in the online manual at <a href="http://uk.php.net/manual/en/book.mysqli.php">http://uk.php.net/manual/en/book.mysqli.php</a>,
+  although this can be hard to understand if you are not accustomed to reading
+  such material. (Note that the documentation also describes a &quot;procedural&quot;,
+  i.e not object-oriented, version or style of this extension. We will always
+  use the object-oriented style because most new extensions are only available
+  in this form, and it's absolutely essential to know how to use it. This is because it is
+  much better.)</p>
+<p>Objects in PHP are similar to those in Actionscript, having properties and
+  methods, but the syntax looks a little different. Instead of the &quot;dot&quot;,
+  as in <em>object.property</em>, or <em>object.method()</em>, PHP uses a two-character &quot;arrow&quot;,
+  as in <em>object-&gt;property</em>. Otherwise, things are similar in that new
+  objects are created using the operator <em>new</em>, etc. The examples below
+  are basically the same as  examples in the manual.</p>
+<h3>Making a connection</h3>
+<p>So we begin by creating a new MySQLi object
+  to establish the DB connection (remembering the &quot;$&quot; in
+  variable names):</p>
+<pre>$mysqli = new mysqli(&quot;server&quot;, &quot;username&quot;, &quot;password&quot;, &quot;database&quot;);</pre>
+<p>The arguments to this are <em>strings</em> (hence in quotes), and should be
+  your own individual credentials for accessing your DB on our server. (Or, if
+  you have installed MAMP or similar on your own machine, then the server can
+  be &quot;127.0.0.1&quot; and the rest whatever you have defined in your MySQL
+  instance. In fact, if your code is running on playground, then it's on the same machine as the MySQL server, and so you can use the form &quot;127.0.0.1&quot;, or simply &quot;localhost&quot;, there as well.) &quot;$mysqli&quot; is just a variable, which we could have called anything
+  at all; it's called<em> $mysqli</em> just to make it easy to remember what it is.</p>
+<p>It's now a good policy to check the connection, because if it has failed then
+  going further will cause unpleasant errors.</p>
+<pre>if ($mysqli-&gt;connect_errno) {
+   printf(&quot;Connect failed: %s\n&quot;, $mysqli-&gt;connect_error);
+   exit();
+}</pre>
+<p>Here we exploit the fact that the <em>mysqli</em> object has two properties, <em>connect_errno</em> and <em>connect_error</em>,
+  where the first is non-zero if there is an error, and in that case the second
+  contains a string describing the error.</p>
+<p> The function <em>printf()</em> is an
+  extremely useful way to construct output strings, often used by traditional
+  programmers and hence often found in example code, especially in the manual
+  (see also
+  <a href="http://uk.php.net/manual/en/function.printf.php">http://uk.php.net/manual/en/function.printf.php</a>).
+  In this case, it is equivalent
+  to saying:</p>
+<pre>   echo &quot;Connect failed: &quot; . $mysqli-&gt;connect_error . &quot;\n&quot;;</pre>
+<p>-- which is arguably clearer.</p>
+<h3>Creating a query</h3>
+<p>If there is no error at this stage, then we have a functioning database connection.
+  The next step is to create a query. In sufficiently simple cases, we can
+  do this simply by writing some SQL as a string and sending it to MySQL:</p>
+<pre>if (<span class="style4">$result</span> = <span class="style10">$mysqli-&gt;query(</span><span class="style7">&quot;SELECT * FROM Product&quot;</span><span class="style10">)</span>)   {
+   printf(&quot;Select returned %d rows.\n&quot;, $result-&gt;num_rows);
+}</pre>
+<p>Here <span class="style4">$result</span> is a variable that will be set to
+  a <em>mysqli_result</em> object as &quot;resultset&quot;
+   (if
+  the <em> query()</em> method returns a non-zero value), and we can then extract
+  information from it, e.g. in this case the number of rows it contains.</p>
+<h3>Prepared statements</h3>
+<p>However, with more complex queries
+  this simple method is fraught with danger, since there are ways in which malicious
+  agents could get hold of the query and mess around with it (leading to a dangerous
+  type of attack called <em>SQL injection</em>). For safety, we instead create
+  a<em> <strong>prepared
+  statement</strong></em>.
+  This is a mechanism that packages up the query in a particular way which makes
+  it safer (and for certain kinds of query also makes it substantially
+  more efficient). Basically, we do this whenever our query is going to contain
+  as parameters explicit values in the database, and especially where anything
+  is being inserted into the database. </p>
+<p>It works by taking the query and putting
+  into it placeholders
+  for the parameters
+  that we want to query the database about, or update. Thus a query such as</p>
+<p><code>SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=door</code></p>
+<p> becomes</p>
+<p><code>SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=<span class="style1">?</span></code></p>
+<p>where the &quot;?&quot; is a placeholder for the parameter value &quot;door&quot;.
+  Placeholders are used for values that are actual data values in the DB, i.e.
+  not column names or table names, but data values. Note that if there are several
+  placeholders, they are all represented as &quot;?&quot;s, so there could be
+  a number of these, say as in:</p>
+<p><code>INSERT INTO Product(Manufacturer, ProductName) VALUES(?,?)</code></p>
+<p>The prepared statment is then created thus:</p>
+<pre><span class="style4">$stmt</span> = <span class="style1">$mysqli-&gt;prepare(</span><span class="style7">&quot;<code>SELECT Manufacturer, ProductName FROM Product WHERE ProductType=</code></span><span class="style9"><code>?</code></span><span class="style7">&quot;</span><span class="style1">)</span></pre>
+<p>Here, again, &quot;$stmt&quot; is just a variable, which you could use any name
+  for. But the <em>mysqli-&gt;prepare()</em> method returns a <em>mysqli statement</em> object,
+  which we now work with to create and perform the query itself. We do this by
+  binding the placeholders to specific variables, which we create and give values.
+  For instance:</p>
+<pre>$stmt-&gt;bind_param(&quot;s&quot;, $prodtype);
+$prodtype = &quot;door&quot;;</pre>
+<p>We are here calling the <em>bind_param() </em>method of the <em>mysqli_stmt</em> object
+  that is represented by <em>$stmt</em>. What the call says is that we are binding
+  a <em>string</em> (hence
+  the &quot;s&quot;) to the first
+  parameter (&quot;?&quot;) in the prepared statement, and this string will be
+  provided in the variable<em> $prodtype</em>. If there are several parameters,
+  we give these as separate variables <em><strong>in
+  the order that they appear in the prepared statement</strong></em>,
+  e.g. for the INSERT example above we might have:</p>
+<pre>$stmt-&gt;bind_param(&quot;ss&quot;, $manuf, $prodname);
+$manuf = <code>'Smith &amp; Sons'</code>;
+$prodname = <code>'Door 26'</code>;</pre>
+<p>In this case, &quot;ss&quot; says that we will be giving <em>two</em> parameters
+  which are both strings. Other possible types pf parameters are integer, double
+  and &quot;blob&quot;, which are indicated by the letters &quot;i&quot;, &quot;d&quot; and &quot;b&quot;,
+respectively.</p>
+<p>So now we have the statement ready with its parameters bound, we can <em>execute</em> it:</p>
+<pre>$stmt-&gt;execute();</pre>
+<p>What could be simpler? -- A nice feature of this arrangement is that it always
+  uses the  statement we prepared with the variables we bound to it, but
+  we can change their values. So if we are doing several updates, for instance,
+  we can simply change the variable values and execute
+  again, without re-preparing or re-binding the statement.</p>
+<p>At this point, the query is being executed on the database in MySQL, so if
+  it's a SELECT
+  query then there will (if all goes well) be a <em>resultset</em> of data returned
+  to PHP for
+  us to work with. A resultset is basically a collection of records (rows), with   columns (fields) corresponding to what we asked for in the query, e.g. in this case values for Manufacturer and ProductName.</p>
+<h3>Getting  results</h3>
+<p>In MySQLi the best way to work with results is to bind variables
+  to them, and then use these variables to extract the values. In our example,
+  we were extracting data about the Manufacturer and ProductName, so we bind
+  a variable for each of these:</p>
+<pre>$stmt-&gt;bind_result($manuf, $prodname);</pre>
+<p>Now we call the <em>fetch()</em> method in the statement object, and if we
+  call it more than once it will repeatedly fetch each row in the resultset until
+  there are none left (and then it will return <strong><em>false</em></strong>). Each time, it will put the values in the row retrieved
+  into the variables we have just bound. So if we have a loop like this:</p>
+<pre>while ($stmt-&gt;fetch()) {					// keep going until fetch returns false
+   printf(&quot;%s %s\n&quot;, $manuf, $prodname);
+}</pre>
+<p>we will get a line printed for each row in the resultset, i.e. each row in
+  the data table where the ProductType was &quot;door&quot;.</p>
+<h3>In summary</h3>
+<p>In the end, we should close down the objects we  created, to free memory.
+  So overall, the code for this example is just:</p>
+<pre>$mysqli = new mysqli(&quot;server&quot;, &quot;username&quot;, &quot;password&quot;, &quot;database&quot;);
+if ($mysqli-&gt;connect_errno) {
+   printf(&quot;Connect failed: %s\n&quot;, $mysqli-&gt;connect_error);
+   exit();
+}
+if ($stmt = $mysqli-&gt;prepare(&quot;<code>SELECT Manufacturer, ProductName FROM Product WHERE ProductType=?</code>&quot;)) {
+   $stmt-&gt;bind_param(&quot;s&quot;, $prodtype);
+   $prodtype = &quot;door&quot;;
+   $stmt-&gt;execute();
+   $stmt-&gt;bind_result($manuf, $prodname);
+   while ($stmt-&gt;fetch()) {
+      printf(&quot;%s %s\n&quot;, $manuf, $prodname);
+   }
+   $stmt-&gt;close();
+}
+$mysqli-&gt;close();</pre>
+<p>Not really so bad? -- Notice that here we additionally put the call to <em>$mysqli-&gt;prepare()</em> in
+  a conditional, so that we don't attempt to use the statement if preparing
+  it fails for some reason.</p>
+<h2>Putting the output on a web page</h2>
+<p>Outputting the results of the query can be done in many different ways. Here's
+   a simple way to embed the code above (adding MaufacturerURL and ProductImage
+  for interest) into HTML in a template that creates a table presenting the data
+  in the query (in this case, a slightly more interesting query). We can take advantage of any features of HTML that we like, so for instance instead of just printing out the URL it's easy to make it into a clickable link. We could also of course style this page by simply adding any required  id or class attributes and some CSS styles or a link to a  stylesheet.</p>
+<pre>&lt;TABLE CELLPADDING=&quot;3&quot; CELLSPACING=&quot;0&quot;&gt;
+&lt;TR BGCOLOR=&quot;#888888&quot;&gt;
+&lt;TH&gt;Manufacturer&lt;/TH&gt;
+&lt;TH&gt;Manufacturer URL&lt;/TH&gt;
+&lt;TH&gt;Product Name&lt;/TH&gt;
+&lt;TH&gt;Product Image&lt;/TH&gt;
+&lt;/TR&gt;</pre>
+<pre>&lt;?php
+   /* create connection */
+   $mysqli = new mysqli(&quot;duchamps.caad.ed.ac.uk&quot;, &quot;john&quot;, <span class="style1">&lt;MY_PASSWORD&gt;</span>, &quot;johntest&quot;);</pre>
+<pre>/* check connection */
+   if ($mysqli-&gt;connect_errno) {
+   printf(&quot;Connect failed: %s\n&quot;, $mysqli-&gt;connect_error);
+   exit();
+   }
+   
+   /* create prepared statement */
+   if ($stmt = $mysqli-&gt;prepare(&quot;SELECT Manufacturer, ManufacturerURL,   ProductName, ProductImage FROM Product WHERE ProductType=?&quot;)) {</pre>
+<pre> /* bind parameter(s) for placeholder(s) */
+   $stmt-&gt;bind_param(&quot;s&quot;, $prodtype);
+   $prodtype = &quot;blind&quot;;</pre>
+<pre> /* execute query */
+   $stmt-&gt;execute();</pre>
+<pre> /* bind result variable(s) */
+   $stmt-&gt;bind_result($manuf, $manufURL, $prodname, $prodimg);
+   
+   /* fetch values */
+   while ($stmt-&gt;fetch()) {
+       /* output data values embedded into HTML */
+       echo &quot;&lt;TR BGCOLOR='#BBBBBB'&gt;\n&quot;;
+       echo &quot;&lt;TD&gt;&quot; . $manuf . &quot;&lt;/TD&gt;&quot;;
+       echo &quot;&lt;TD&gt;&lt;A HREF='&quot;. $manufURL . &quot;'&gt;&quot;. $manufURL   . &quot;&lt;/A&gt;&lt;/TD&gt;&quot;;
+       echo &quot;&lt;TD&gt;&quot; . $prodname . &quot;&lt;/TD&gt;&quot;;
+       echo &quot;&lt;TD&gt;&lt;img src='&quot; . $prodimg . &quot;'&gt;&lt;/TD&gt;&quot;;
+       echo &quot;&lt;TR&gt;\n&quot;;
+   }
+   
+   /* close statement */
+   $stmt-&gt;close();
+   }
+   /* close connection */
+   $mysqli-&gt;close();
+   ?&gt;</pre>
+<pre>&lt;/TABLE&gt;</pre>
+<p>You can see this at <a href="http://playground.eca.ed.ac.uk/~jlee/test/prod-data-view.php">http://playground.eca.ed.ac.uk/~jlee/test/prod-data-view.php</a>.<br>
+  The first block of HTML here simply creates the first row of the table, with
+   a background of a particular shade of grey, which just contains the column
+headings. </p>
+<p>A second block is constructed within a while loop that  creates more rows,
+  one for each DB record. This is exactly like the example in the PHP Database Tutorial <a href="http://playground.eca.ed.ac.uk/~jlee/PHP-DatabaseTutorial/">(http://playground.eca.ed.ac.uk/~jlee/PHP-DatabaseTutorial/</a>), except that here I've used <em>echo</em> to print out the HTML from within the one PHP script, whereas in the tutorial a number of separate script elements are embedded in the HTML. You can do it either way.</p>
+<p>One could write all this HTML directly in a text editor (I used TextWrangler), but also one can use an editor like Dreamweaver to create at least some of it.
+  Also, Dreamweaver is able to maintain information about data connections specifically,
+  and knows about PHP. So although you may still have to write PHP
+  scripts directly, Dreamweaver can show you immediately what the page looks like
+  with the live data included. On the other hand, previewing in a (variety of) browser(s) will always give you a better idea of what the page will really look like, and in the end it's much quicker to write code directly in a text editor once you have learned how.</p>
+<p>Since the data we are displaying on the page we are creating here is tabular
+  data, it makes sense to use a table to present it, and we can do this using
+  normal HTML table tags. In other cases, we might want to use CSS for formatting.
+  That's fine: PHP will work just as well in conjunction with CSS. (We
+  could even, if we wanted, write PHP code to generate or adapt CSS dynamically,
+  so that things would be formatted differently in different circumstances.)</p>
+<h2>Getting new data</h2>
+<p>We now finally get back to our discussion of forms ... </p>
+<p>PHP is  a very good
+  environment for processing forms that will collect new data to be added to
+  an existing DB table. PHP will also, of course, support arbitrary processing
+  of data before it's presented, e.g. calculations on numbers or rearranging
+  strings, etc. </p>
+<p>The PHP Database Tutorial (<a href="http://playground.eca.ed.ac.uk/~jlee/PHP-DatabaseTutorial/">http://playground.eca.ed.ac.uk/~jlee/PHP-DatabaseTutorial/</a>) shows you how to do this. Always remember that  taking data from a form and inserting it into a database is a very vulnerable operation with several major security risks: <strong><em>always</em></strong> make sure that you use prepared statements appropriately.</p>
+<p>This has been a very simple introduction, but still you need no more than
+  is covered in these notes and the tutorials to make some very effective dynamic web sites. </p>
+<p>&nbsp;</p>
+</body>
+</html>

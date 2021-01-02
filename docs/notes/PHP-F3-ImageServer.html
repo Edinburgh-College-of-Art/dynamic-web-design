@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PHP ImageServer notes, F3 version</title>
+<style type="text/css">
+p {  font-family: Arial, Helvetica, sans-serif; font-size: 16px}
+code {  font-family: "Courier New", Courier, mono; font-size: 14px}
+.style2 {
+	font-family: "Courier New", Courier, mono;
+	font-size: 14px;
+}
+.style3 {color: #990000}
+.redCode {
+	color: #F00;
+}
+.blueCode {
+	color: #00F;
+}
+.greenCode {
+	color: #0C6;
+}
+.purpleCode {
+	color: #F0F;
+}
+.yellowCode {
+	color: #F90;
+}
+</style>
+
+</head>
+
+<body>
+<h1>Further PHP, with Fat-Free Framework (F3)</h1>
+<h2>An example application: the ImageServer</h2>
+<p>The strategy in this example is to build an application that will allow us to upload images (or in  principle any kind of file), see the images we have uploaded, and delete them if desired. We will also want to be able to show the images as standardised thumbnails as well as at whatever size they were uploaded. To do all this, we will use a simple database to maintain information about the images. The application is complicated by the fact that for security reasons we need to store the uploaded images &quot;above the web root&quot;, where they cannot be directly accessed by potentially malicious code; but all the same we will need some way of having a URL for each image, so that we can show them on web pages.</p>
+<p>As always, there are many different ways this could be done, and many different
+possible architectures even for such a small application. In the chosen approach, the code is written using the Fat-Free Framework (F3). This allows us to define a quite nice separation between code that drives the prsentation of the images, and code that drives the manipulation of the database etc. The concept is a loose application of the Model-View-Controller (MVC) pattern, but not very strict because no particular adherence to this pattern is enforced by F3.</p>
+<p>The complete code can be downloaded from the main notes page, and it's best to look at the snippets discussed below in their context in the whole application, which also includes other useful comments in the code. Note that the application also requires a database with a table, here called &quot;picdata_fff&quot;, that contains the fields <em>id, picname, picfile</em> and <em>pictype</em>, which are used respectively to store an auto-incremented id, an arbitrary name or label entered by the user, the file name and the MIME type of each uploaded image. If you have any questions about any of it, do just <a href="mailto:j.lee@ed.ac.uk">email me</a>.</p>
+<h3>1. The ImageServer class</h3>
+<p>We define the class ImageServer in the  file <em>ImageServer.php</em>, which is in the &quot;autoload&quot; folder within an F3 application setup called FFF-ImageServer, which has a structure directly analogous to the FFF-SimpleExample application. The ImageServer class is a class containing properties (variables) and methods (functions) relating to managing the pictures. Here are the properties:  </p>
+<p><span class="style2"> private $filedata;<br />
+private $uploadResult = &quot;Upload failed! (unknown reason)&quot;;<br />
+private $pictable = &quot;picdata_fff&quot;;<br />
+private $thumbsize = 200;			// max width/height of thumbnail images</span><br>
+<span class="style2">private $acceptedTypes = [&quot;image/jpeg&quot;, &quot;image/png&quot;, &quot;image/gif&quot;, &quot;image/tiff&quot;, &quot;image/svg+xml&quot;]; // file types we'll accept for uploading</span></p>
+<p><em>$pictable </em>is the table in the DB, and thumbsize is the size in pixels for thumbnail images.<em> $filedata</em> is simply a variable to hold data temporarily, and <em>$uploadResult</em> is a self-explanatory message, which will be changed by the code below as necessary. These are all <em>private</em> properties, which cannot be accessed other than by methods defined inside the class itself.</p>
+<p>In the index.php file for the application, we also define several (global) F3 variables, as usual:</p>
+<pre class="style2">$f3-&gt;set('AUTOLOAD','autoload/;../../../AboveWebRoot/autoload/');		// autoload ImageServer class and DB stuff
+$db = DatabaseConnection::connect();										// defined as autoloaded class in AboveWebRoot/autoload/
+$f3-&gt;set('DB', $db);
+$f3-&gt;set('DEBUG',3);
+$f3-&gt;set('UI','ui/');
+$f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
+</pre>
+<p>Here, <em>UPLOADS</em> is the folder where we will store the image files on the server. It should be above the web root but also be somewhere where you have access to write files, which in the setup you have on playground means at the same level as your html directory.   As in the FFF-SimpleExample case, we have here assumed a folder at that level called <em>AboveWebRoot</em> and we have created our <em>ServerImages</em> folder inside it. <em>DB</em> is just the database in which details will be kept. </p>
+<p>ImageServer has an empty constructor function, because no initial setting of the varables is required beyond what we have already done. Otherwise, it defines a number of methods. These include:</p>
+<p>upload() – which deals with uploading imagefiles<br />
+  store() – which stores data about an image<br />
+infoService() – a &quot;service&quot; that returns information about the images that are stored<br />
+deleteService() –  a service that deletes specified images, including their files and database data<br>
+showImage() –  a method that outputs the raw content of an image file, with a suitable type header, as explained below<br>
+thumbFile() – which returns the name of the thumbnail file for a given image
+<br>
+createThumbnail() – which creates a file containing a thumbnail-size copy of an image (always jpg, no matter what the type of the original image)</p>
+<p>We'll discuss these as we see how they're used. The last two of them are <em>private</em> methods, which means they can only be used by code of other methods inside the class itself.</p>
+<h3>2. Uploading the images </h3>
+<p>The first thing the user wants to do is upload an image. So we offer a simple
+  form in an F3 template, <em>upload.html</em>. This is defined in the  folder identified by the <em>UI</em> variable, as in the FFF-SimpleExample. The template is reached immediately by the route defined for the application root (<a href="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/" target="_blank">https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/</a>):</p>
+<p class="style2">&lt;h1&gt;Upload&lt;/h1&gt;<br>
+  &lt;form name=&quot;upload&quot; method=&quot;POST&quot; action=&quot;{{ @BASE }}{{ @PARAMS.0 }}&quot; enctype=&quot;multipart/form-data&quot;&gt;<br>
+&lt;label for='picfile'&gt;Select image file: &lt;/label&gt;&lt;input type=&quot;file&quot; name=&quot;picfile&quot; id=&quot;picfile&quot; /&gt;&lt;br /&gt;<br>
+&lt;label for='picname'&gt;Picture title: &lt;/label&gt;&lt;input type=&quot;text&quot; name=&quot;picname&quot; id=&quot;picanme&quot; placeholder=&quot;Title for image&quot; size=&quot;80&quot;/&gt;&lt;br /&gt;<br>
+&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Submit&quot;/&gt;<br>
+&lt;/form&gt;</p>
+<p>The  form is normal HTML, using an input of type <em>file</em>, which will invite the user to choose
+  a file that will be uploaded and a text input that will be used simply to name
+or describe the file. Note the attribute <span class="style2">enctype=&quot;multipart/form-data&quot; </span> — this is important. You'll see that the action URL of this form is the F3 route <span class="style2">{{ @BASE }}{{ @PARAMS.0 }}</span>, which means the base URL with the first element of the form PARAMS, which is the file name &quot;upload&quot;, but visited with a POST request method. In<em> index.php</em>, the route for a POST request to &quot;/upload&quot; says:</p>
+<p class="style2">$f3-&gt;route('POST /upload',<br>
+function($f3) {<br>
+$is = new ImageServer;<br>
+if ($filedata = $is-&gt;upload()) {						// if this is null, upload failed <br>
+$f3-&gt;set('filedata', $filedata);<br>
+<br>
+$f3-&gt;set('html_title','Image Server Home');<br>
+$f3-&gt;set('content','uploaded.html');<br>
+echo template::instance()-&gt;render('layout.html');<br>
+}<br>
+}<br>
+);</p>
+<p>– which creates an ImageServer object, and runs its <em>upload()</em> method, which returns the data from the upload, or <em>null</em> if the upload failed. If the upload succeeded, these various data are shown to the user via the <em>uploaded.html</em> template.</p>
+<h3>2.1 Uploading</h3>
+<p>The <em>upload()</em> method is made much simpler by using F3, which provides a class called <em>Web</em> for operations like this. The main part of the code is just this:</p>
+<p class="style2"> <span class="redCode">$overwrite = false; // set to true, to overwrite an existing file; Default: false<br>
+$slug = true; // rename file to filesystem-friendly version</span></p>
+<p class="style2"> <span class="blueCode">Web::instance()-&gt;receive</span>(<br>
+  <span class="greenCode">function($file,$anything){<br>
+</span><span class="purpleCode"> $this-&gt;filedata = $file;</span><span class="greenCode"><br>
+  </span> <span class="yellowCode">if($this-&gt;filedata['size'] &gt; (2 * 1024 * 1024)) {		// if bigger than 2 MB<br>
+$this-&gt;uploadResult = &quot;Upload failed! (File &gt; 2MB)&quot;;<br>
+return false; // this file is not valid, return false will skip moving it<br>
+}<br>
+if(!in_array($this-&gt;filedata['type'], $this-&gt;acceptedTypes)) {		// if not an approved type <br>
+$this-&gt;uploadResult = &quot;Upload failed! (File type not accepted)&quot;;<br>
+return false; // this file is not valid, return false will skip moving it<br>
+}</span><span class="greenCode"><br>
+  $this-&gt;uploadResult = &quot;success&quot;;		  // everything worked OK<br>
+  return true; // allows the file to be moved from php tmp dir to your defined upload dir<br>
+  },</span><br>
+  <span class="redCode">$overwrite,<br>
+  $slug</span><br>
+);</p>
+<p>This  looks more complicated than it is ... I have colour-coded it to help identify parts of it in the following discussion: coloured text refers to code of the same colour.</p>
+<p><span class="redCode">The first two lines just set two variables that we will use later to supply arguments to the upload function: this helps us to remember what the arguments mean</span><span class="redCode"></span>. <span class="blueCode">We create a variable, <em>$files</em>, which will be the uploaded file data as returned by a method that belongs to the <em>Web</em> class</span> (see <a href="https://fatfreeframework.com/3.6/web" target="_blank">https://fatfreeframework.com/3.6/web</a>)<span class="blueCode">. We make an instance of this class, and call its <em>receive() </em>method. </span><span class="greenCode">The first argument of the method is an anonymous function, which takes two arguments, <em>$file</em> and <em>$anything </em>(for our purposes the value of the latter will not be used and it doesn't matter what it's called). </span><span class="purpleCode"><em>$file</em> will become the data about the uploaded file, so </span> <span class="purpleCode">we save it by putting it into the variable <em>$this-&gt;filedata</em>, which means it will be available to any method of the ImageServer class.</span> <span class="yellowCode">We then have a couple of tests, to check whether the uploaded file is less than 2MB (an arbitrary limit, which we could change if we like) and that it is one of a specified set of types (because we don't want to allow uploads of just anything). If these tests fail, the anonymous function returns false, and this will cause the upload to be aborted, but we set an informative error message which can be used later. </span><span class="greenCode">Otherwise, we set a variable to say that everything has worked and return true, which means that the uploaded file will be moved into the uploads folder specified in the F3 variable UPLOADS.</span> <span class="redCode">The final two arguments of the Web <em>receive()</em> method are given using the variables we set earlier: <em>$overwrite</em> is true if we want the upload to overwrite any existing file with the same name (since it's false, a duplicated file will be renamed to make it unique). <em>$slug</em> is true if we want the file name to be &quot;slugged&quot;, which means that  unusual characters etc. will be transforned to avoid any problems with the filesystem.</span></p>
+<h3>2.2 Storing the image data</h3>
+<p>The method <em>store()</em> very simply copies details of the uploaded image into a DB record, using the F3 database mapper object:</p>
+<p class="style2"> public function store() {<br>
+global $f3;			// because we need f3-&gt;get()<br>
+$pic = new DB\SQL\Mapper($f3-&gt;get('DB'),$this-&gt;pictable);	// create DB query mapper object<br>
+$pic-&gt;picname = $this-&gt;filedata[&quot;title&quot;];<br>
+$pic-&gt;picfile = $this-&gt;filedata[&quot;name&quot;];<br>
+$pic-&gt;pictype = $this-&gt;filedata[&quot;type&quot;];<br>
+$pic-&gt;save();<br>
+} </p>
+<p class="style2">– where<em> picfile</em> is the actual pathname of the file as saved, <em>picname</em> is the name given to the picture as typed in by the user, and <em>pictype</em> is the MIME type of the image file (e.g. jpg). Entering the image into the DB creates an <em>id</em> for it, which will be completely crucial later.</p>
+<h3>3. Viewing the images</h3>
+<p>To view all the images we will want a template for a page on which they will all appear (as thumbnails) – this is called <em>viewimages.html</em> (viewed via the route <a href="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/viewimages" target="_blank">https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/viewimages</a>). </p>
+<h3>3.1 Retrieving image information</h3>
+<p>In here, we first query the<em> ImageServer </em>method<em> infoService()</em> to find out what images there are. It just returns all the data in the DB, unless it is given a non-zero ID, in which case it returns just the data for that picture:</p>
+<p> <span class="style2">// This just returns all the data we have about images in the DB, just as an array.<br>
+// If given no argument, it uses the default argument, 0, and in this case it returns data about all images.<br>
+// If given an image ID as argument (there can be no image with ID 0), it returns data only about that image.<br>
+public function infoService($picID=0) {<br>
+global $f3;<br>
+$returnData = array();<br>
+$pic=new DB\SQL\Mapper($f3-&gt;get('DB'),$this-&gt;pictable);	// create DB query mapper object<br>
+$list = $pic-&gt;find();<br>
+</span><span class="style2"><span class="redCode">if ($picID == 0) {<br>
+foreach ($list as $record) {<br>
+$recordData = array();<br>
+$recordData[&quot;picfile&quot;] = $record[&quot;picfile&quot;];<br>
+$recordData[&quot;pictype&quot;] = $record[&quot;pictype&quot;];<br>
+$recordData[&quot;picname&quot;] = $record[&quot;picname&quot;];<br>
+$recordData[&quot;picID&quot;] = $record[&quot;id&quot;];<br>
+$recordData[&quot;thumbNail&quot;] = $f3-&gt;get('UPLOADS').$this-&gt;thumbFile($pic[&quot;picfile&quot;]);<br>
+array_push(	$returnData, $recordData);<br>
+	}</span></span><span class="style2"><br>
+return $returnData;<br>
+}<br>
+$pic-&gt;load(['id=?',$picID]);<br>
+$recordData = array();<br>
+$recordData[&quot;picfile&quot;] = $pic[&quot;picfile&quot;];<br>
+$recordData[&quot;pictype&quot;] = $pic[&quot;pictype&quot;];<br>
+$recordData[&quot;picname&quot;] = $pic[&quot;picname&quot;];<br>
+$recordData[&quot;picID&quot;] = $pic[&quot;id&quot;];<br>
+return $recordData;<br>
+}</span><br />
+</p>
+<p>The code in red is assembling an array of all the results, because <em>$pic-&gt;find()</em> provides each row from the database in the form of an associative array, and the relevant elements are extracted from this and then collected together into a larger array, which is then what is returned to the calling point (in this case, in <em>index.php</em>). In <em>index.php</em> there is  code for the <em>viewimages</em> route URL that very simply acquires the above data from the <em>infoService()</em> method and then feeds it to the <em>viewimages.html</em> template:</p>
+<p class="style2">$f3-&gt;route('GET /viewimages',<br>
+function($f3) {<br>
+$is = new ImageServer;<br>
+$info = $is-&gt;infoService(0);<br>
+$f3-&gt;set('datalist', $info);<br>
+$f3-&gt;set('content', 'viewimages.html');<br>
+echo template::instance()-&gt;render('layout.html'); <br>
+}<br>
+);</p>
+<h3>3.2 Displaying an image</h3>
+<p>The <em>viewimages.html</em> template contains a central loop that displays the images:</p>
+<p class="style2">&lt;repeat group=&quot;{{ @datalist }}&quot; value=&quot;{{ @item }}&quot;&gt;<br>
+&lt;div id=&quot;imgdisplay&quot;&gt;<br>
+&lt;p&gt;&lt;a href=&quot;{{ @BASE }}/image/{{ @item.picID }}&quot;&gt;&lt;img src=&quot;{{ @BASE }}/thumb/{{ @item.picID }}&quot; /&gt;&lt;/a&gt;&lt;/p&gt;<br>
+&lt;p&gt;{{ @item.picname }}  (&lt;a href=&quot;{{ @BASE }}/delete/{{ @item.picID }}&quot;&gt;Delete?&lt;/a&gt;)&lt;/p&gt;<br>
+&lt;/div&gt;<br>
+&lt;/repeat&gt;</p>
+<p>and what happens here is that it goes through the IDs of all the images that are in the DB, displaying  each one through a URL of the form: <em>BASE</em>/thumb/<em>id</em>, as a link that when clicked will go to a URL of the form: <em>BASE</em>/image/<em>id</em>. For example, the URL <a href="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/thumb/1" target="_blank">https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/thumb/1</a> shows the thumbnail associated with the image in the database that has id=1 (assuming the image with this id still exists, i.e. hasn't been deleted), and <a href="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1" target="_blank">https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1</a> shows the image itself at its original size. It also includes a link to delete the image. The URL https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/delete/1 would delete image 1 (but I'm not making that a link here because I don't want it to be deleted).</p>
+<p>This is the part that would normally seem simple: we  just use the image URL. <em>But the images don't have a URL because they're stored above the web root!</em> The solution to this is to provide a URL that actually points to a piece of code that can behave exactly like an image. A URL will seem (to the browser) to be an image if it outputs a suitable image header followed by raw image data (because this is just what the browser sees if it looks at an image file). The code for a route such as <em>/image/1</em>  does just this; hence we can use it as the source parameter in an image link, e.g.:</p>
+<p><span class="style2">&lt;img src=&quot;https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1&quot; /&gt;</span></p>
+<p>where it will seem to the browser to just be an image, in this case the thumbnail-sized version of the image with ID 1 in the database (assuming it exists, but of course we should never use an ID here for an image that doesn't exist).</p>
+<p>This is achieved in the code for this route (in index.php, as usual) by invoking the <em>showImage()</em> method of the <em>ImageServer</em> class:</p>
+<p class="style2">$f3-&gt;route('GET|POST /image/@id',<br>
+function($f3) {<br>
+$is = new ImageServer;<br>
+$is-&gt;showImage($f3-&gt;get('PARAMS.id'), false);<br>
+}<br>
+);</p>
+<p>Note here that this is defined for either GET or POST requests (because we might use POST in an AJAX request, for example), and the route is parameterised by having &quot;@id&quot; at the end of the URL. This means that any number entered at the end of the URL will be accepted, and will be avaialble as <em>PARAMS.id</em>, as used in the call to <em>showImage()</em>. This is a powerful aspect of F3 that in a sense mirrors the idea of a query string. (We could alternatively have defined a URL such as <em>/images?id=1</em>, with the same effect.)</p>
+<p>The method <em>showImage()</em> takes the id of the image required, and a boolean parameter that will show the thumbnail if true or the original image if false.</p>
+<p class="style2"> public function showImage($picID, $thumb) {<br>
+global $f3;<br>
+<span class="blueCode">$pic=new DB\SQL\Mapper($f3-&gt;get('DB'),$this-&gt;pictable);	// create DB query mapper object<br>
+$pic-&gt;load(['id=?',$picID]);</span> // load DB record matching the given ID<br>
+<span class="greenCode">$fileToShow = ($thumb?$f3-&gt;get('UPLOADS').$this-&gt;thumbFile($pic[&quot;picfile&quot;]):$pic[&quot;picfile&quot;]);<br>
+$fileType = ($thumb?&quot;image/jpeg&quot;:$pic[&quot;pictype&quot;]);</span> // thumb is always jpeg<br>
+<span class="purpleCode">header(&quot;Content-type: &quot; . $fileType);</span> // write out the image file http header<br>
+<span class="redCode">readfile($fileToShow);</span> // write out raw file contents (image data)<br>
+}</p>
+<p>It <span class="blueCode">finds the DB record for the required image</span>, then <span class="greenCode">locates either the image or thumbnail file in the UPLOAD folder</span>, which is in AboveWebRoot and therefore not normally visible on the web. Then<span class="purpleCode"> it outputs an HTTP header appropriate to the MIME type of the image</span>. This header is what tells the browser to interpret the following data as an image of that type. It then <span class="redCode">reads out the image file data directly from the image file and sends it to the output</span>. The effect is therefore that the browser receives directly the content of a file that is stored above the web root. This is a very secure way of storing and serving files of all kinds.</p>
+<p><em>NB: </em> It's crucial that nothing else is output before the HTTP header, i.e. there can be no HTML or other output of any kind from the code in index.php or the ImageServer file, except for this header and then the raw image file data. It's important to rememebr this e.g. if you sometimes put diagnostic &quot;echo&quot; commands in your code.</p>
+<p>At the  <em>viewimages</em> URL, we have therefore now generated a display of a neat set of clickable thumbnail images, each one being a link to the full-size version of the image, and each with a &quot;delete&quot; link that will allow the image, and all trace of it, to be deleted, as follows.</p>
+<h3>4. Deleting an image</h3>
+<p>To delete an image, we need to remove the image file, the thumbnail image file, and the related database record. This is done by the<em> deleteService()</em> method in the <em>ImageServer</em> class:</p>
+<p class="style2"> public function deleteService($picID) {<br>
+global $f3;<br>
+<span class="redCode">$pic=new DB\SQL\Mapper($f3-&gt;get('DB'),$this-&gt;pictable);	</span>// create DB query mapper object<span class="redCode"><br>
+$pic-&gt;load(['id=?',$picID]);</span> // load DB record matching the given ID<br>
+<span class="blueCode">unlink($pic[&quot;picfile&quot;]);</span> // remove the image file<br>
+<span class="blueCode">unlink($f3-&gt;get('UPLOADS').$this-&gt;thumbFile($pic[&quot;picfile&quot;]));</span> // remove the thumbnail file<br>
+<span class="greenCode">$pic-&gt;erase();</span> // delete the DB record<br>
+}</p>
+<p><span class="redCode">The DB is queried to get the data</span>, then <span class="blueCode">the builtin function <em>unlink()</em> is used to remove the image file and the thumbnail</span>, then <span class="greenCode">the database record is deleted</span>.</p>
+<h3>5. Final thoughts</h3>
+<p>Note that things other than images can be handled easily by changing or removing
+  the restriction on file types allowed in <em>upload()</em>. -- Movies, 3D models, anything you like. You might want
+to have a more elaborate way of keeping track of these, though. </p>
+<p>If you look at index.php, there are various other things that haven't been mentioned in these notes, e.g. the provision of &quot;silent&quot; upload and delete functions that don't produce any output, and an infoService that simply outputs JSON data. These are intended to be used in AJAX requests, especially for a demo application that displays the image in a jQuery Mobile web app. In effect, they provide a simple API to the image server back end.</p>
+<p>There are many aspects and elements in even this small application that haven't been mentioned here: do study the code, and raise questions about anything that's unclear (of which there will be plenty!). If using or adapting this code, you should
+  certainly introduce<strong> error checking</strong>. As mentioned before, many things could have been done differently, and probably much better: this
+  was was translated quickly from a non-F3 version that was put together very quickly in the first place, and is far from perfect. However, the application had to be largely restructured to make sense in F3, and it's already clear that this has been a significant improvement. You could consider many further improvements -- e.g. should the thumbnails
+be created on upload or only when information is requested? There is no real reason for the thumbnails always to be jpg images. Etc.</p>
+<p></p>
+<p>&nbsp;</p>
+</body>
+</html>

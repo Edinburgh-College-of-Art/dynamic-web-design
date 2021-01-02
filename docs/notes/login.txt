@@ -1,0 +1,52 @@
+<?php session_start(); ?>
+
+<html>
+<title>Login demo</title>
+<body>
+
+<?php
+if (isset($_POST['logout'])) {
+	unset($_SESSION['user']);
+	echo "You are now logged out.";
+	exit;
+}
+else if (isset($_SESSION['user'])) {
+	echo "Hello " . $_SESSION['user'];
+?>
+
+	<form action="" method="POST">
+	<input type="submit" name="logout" value="log out">
+	</form>
+
+<?php
+}
+else if (isset($_POST['submit'])) {
+	$_SESSION['user'] = $_POST['login'];
+	echo "You are now logged in as ".$_POST['login'];
+?>
+
+	<form action="" method="POST">
+	<input type="submit" name="logout" value="log out">
+	</form>
+
+<?php
+}
+else {
+?>
+
+	<p>You need to log in ...</p>
+	<form action="" method="POST">
+	<input type="text" name="login" />
+	<br />
+	<input type="submit" name="submit">
+	</form>
+
+<?php
+	exit;
+}
+?>
+
+<p>YOU MAY NOW SEE THE PAGE CONTENT</p>
+
+</body>
+</html>

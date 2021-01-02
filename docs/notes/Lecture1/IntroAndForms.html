@@ -1,0 +1,503 @@
+<html>
+<head>
+<title>Lectures 1-2 slides/notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #000000;
+}
+code {  font-family: "Courier New", Courier, mono; font-size: 14px}
+.style1 {color: #FF0000}
+.style4 {color: #006600}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+}
+.style7 {color: #0000FF}
+.style8 {color: #000000}
+.style9 {color: #FF00CC}
+.style10 {color: #F0292C}
+.RedText {
+	color: #FF0000;
+}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+<h1>Server-side systems and database serving</h1>
+
+<h1><i><a href="http://ddm.ace.ed.ac.uk/lectures/DDM/DynamicWebDesign/">Dynamic Web Design</a></i></h1>
+
+<h2>Lectures 1-2</h2>
+
+<h3>John Lee</h3>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h2>Introduction</h2>
+
+<p class=MsoNormal>Dynamic web sites are everywhere. Very few are static HTML
+  pages. E-commerce systems are dynamic; catalogues, searches, registration/login
+  systems, shopping baskets, message boards, surveys, systems with cookies, RSS
+  feeds -- all these are dynamic. We need to understand how to create and control
+  them for ourselves. </p>
+<p class=MsoNormal>Dynamic web sites are all about change: change not just in
+  the way information is displayed (which we can achieve in the browser with
+  Javascript, Flash, etc.), but change in the information itself. Information
+  may be dynamically substituted with other information, or dynamically created
+  from some other resource. This can only be done at the source of the information:
+  the web server. </p>
+<p class=MsoNormal>So in this course, we begin by turning our focus away from
+  the web user's browser for a while, to consider the role of the web <i>server</i><span
+style='font-style:normal'> in an interaction, and how we can use this to
+    provide for different kinds of functionality. In particular, we look at how
+    information can be obtained from the user by means of <em>form-filling</em>,
+    and we begin to look at how it can be processed once we've got it. </span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>We develop
+  this line of discussion by starting to look at the use of <em>databases</em> and
+  how they can be integrated to provide dynamic information through web sites.
+    These are the techniques and technologies used by most commercial web sites,
+    and this course should equip you to understand how these are created, and
+    develop sites of these kinds for yourself. </span>We will start by considering
+    the simplest kinds of web technologies and then move on to look at a system
+    called PHP, which we will use in this course as
+    our choice from a range of possible technologies with similar capabilities.</p>
+<p class=MsoNormal>As ever in this programme, we are not aiming to do more in
+  the lectures than introduce these things: it is up to you to pursue further
+  resources to find more information and move to a more advanced level.</p>
+<h2>The role of the server</h2>
+
+<p class=MsoNormal>When you look at a web page, what actually happens is that
+your browser connects to a server, specified in the first part of the URL, and
+sends the server a <i>request</i><span style='font-style:normal'>, which
+includes the whole URL. The server provides (i.e. </span><i>serves</i><span
+style='font-style:normal'>) a specific document, specified by the rest of the
+URL. </span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>The document (which is usually just a file full of
+    some kind of data) is downloaded onto your machine, and the browser identifies
+    its <em><strong>type</strong></em>, usually through information in a “header” sent by the server (see
+    below), which normally relates  to the file extension, &quot;.html&quot; etc.
+    (but the header often takes precedence if the file extension is different).
+    If it's HTML, or plain text, or a few other things, the browser will attempt
+    to display it using its own resources; or it may offer it as input to a plugin;
+    otherwise it may launch a helper application or just save the file somewhere.
+    (Usually browser “preferences” determine how various kinds of document are
+    handled; see also <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">http://en.wikipedia.org/wiki/Internet_media_type</a>.)</span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>Sometimes,
+    the document requested by the browser does not already exist on the server
+    machine, at least not in the required form. In that case, the request may
+    fail, but alternatively the server may have been given instructions to do
+    some processing to create or modify the document before serving it. </span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>The HyperText
+      Transfer Protocol (HTTP), which web applications typically use to communicate,
+      is how requests are expressed when the URL begins with &quot;http:&quot;, and
+      it allows one to specify some aspects of how the server should behave. </span></p>
+<h2>CGI</h2>
+
+<p class=MsoNormal>The &quot;Common Gateway Interface&quot; is a standard
+mechanism whereby the server can be made to execute some application on the
+server machine, and provide any result from the application as data to be sent
+back to the originator of the request. </p>
+<p class=MsoNormal>The server will execute the application;
+    it will also pass as a <i><strong>parameter</strong></i><span style='font-style:normal'> to the application any
+  component of the URL that follows a &quot;<strong>?</strong>&quot; character. Thus, if you visit
+  the Google search site (<a href="http://www.google.com/" target="_blank">http://www.google.com/</a>) and execute a search for </span><i>MSc
+  Design Digital Media</i><span style='font-style:normal'>, you'll notice
+  that the URL in the browser changes to something like the following:</span></p>
+<p><code>http://www.google.com/search?hl=en&amp;q=MSc+Design+Digital+Media&amp;btnG=Google+Search</code></p>
+
+
+<p class=MsoNormal>In this URL, <i>search,</i> just before the &quot;<em>?</em>&quot;, <span style='font-style:normal'>
+will be the name of some application on the Google server machine, and the string </span><em>hl=en&amp;q=MSc+Design+Digital+Media&amp;btnG=Google+Search</em> <span style='font-style:normal'>is
+what's handed to it as a parameter. </span></p>
+<p class=MsoNormal><span style='font-style:normal'>By convention, this parameter
+    string (often called the &quot;<em>query
+  string</em>&quot;) consists of a list
+  of named parameters (in this case three: </span><i>h1, q, </i>and<i> btnG</i><span
+style='font-style:normal'>) and their values, linked by &quot;=&quot;. The
+  parameter-value pairs are separated by &quot;&amp;&quot;. Within parameter
+  values, words are separated with the &quot;+&quot; character.</span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>Spaces are not
+  allowed: any such non-alphanumeric characters are represented by &quot;%&quot;
+  and then their ASCII code as a two-digit hexadecimal number, so if spaces do
+  appear they are encoded as &quot;%20&quot;. (This arrangement is called </span><i>URL
+  encoding</i><span style='font-style:normal'>, and has to be used in all URLs,
+  though many browsers will encode URLs before sending them if you just type
+  them in directly.)</span></p>
+<h2>The HTTP request methods</h2>
+<p class=MsoNormal>When a request is sent to a server, a <i><strong>method</strong></i><span
+style='font-style:normal'> is specified for handling any data associated with
+    the request. Usually, this is either GET or POST. The former of these is
+    notionally associated with getting information from the server, while the
+    latter is associated with posting data to it; however these are often not
+    very distinct. Either way, some facility is available for the server to obtain
+    information from the browser, which may then be somehow processed (and then
+    probably other information will be sent back as a response). </span></p>
+<p class=MsoNormal><span
+style='font-style:normal'>In the case of <em>forms</em>, the browser is in fact
+    providing data to the server, but it can do this using either GET or POST
+    methods -- the information is simply sent in different ways. We will normally
+    use the POST method for form data, because it has some security advantages.</span></p>
+<h2>Forms</h2>
+
+<p class=MsoNormal>HTML forms are, at their simplest, just a quick and convenient
+way of adding information to an HTTP request. For example, they can be used to
+  construct a query string for a CGI URL. </p>
+<p class=MsoNormal>Suppose we have an application
+    on our server that saves people's names in a file, and the application is
+  called <i>namesave.cgi</i><span
+style='font-style:normal'>. If one executes it with a name as parameter, it
+  will add the name to a file. We could have the user always type in a URL ending
+  with</span><o:p></o:p></p>
+<p class=MsoNormal style='text-indent:36.0pt; font-size: 14pt;'><span style='font-family:Courier'>.../namesave.cgi?name=John+Smith</span><o:p></o:p></p>
+
+<p class=MsoNormal>(or whatever their name might be), but this is not at all
+convenient. Usually the user would be put off by this, and it is more practical,
+  as well as more attractive and simpler, to provide instead an
+  HTML form as follows.</p>
+
+<p><code>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;title&gt;Simple example form&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;h1&gt;An example of a very simple form&lt;/h1&gt;<br>
+
+&lt;p&gt;<br>
+
+&lt;form method=&quot;GET&quot;
+action=&quot;namesave.cgi&quot;&gt;<br>
+
+Enter your name here:<span style="mso-spacerun: yes">&nbsp;
+</span><br>
+
+&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;<br>
+
+&lt;input type=&quot;submit&quot;&gt;<br>
+
+&lt;input type=&quot;reset&quot;&gt;<br>
+
+&lt;/form&gt;<br>
+
+&lt;/body&gt;<br>
+
+&lt;/html&gt;<br>
+</code><o:p></o:p>
+<p class=MsoNormal>When this HTML is displayed, it looks as follows (<a href="http://ddm.caad.ed.ac.uk/lectures/DDM/Intro_Digital_Media/Lecture11/simpleform.html" target="_blank">or
+  as at this link</a>):
+  <o:p></o:p></p>
+
+<p class=MsoNormal><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75"
+  coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+  filled="f" stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1026" type="#_x0000_t75" style='position:absolute;
+  margin-left:0;margin-top:0;width:395pt;height:129pt;z-index:1' o:allowincell="f">
+  <v:imagedata src="Lecture1notes_files/image001.png" o:title=""/>
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]--><![if !vml]>
+  <img
+ src="Lecture1notes_files/image002.jpg" width=395 height=129 border="0" v:shapes="_x0000_s1026">
+  <![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br style='mso-ignore:vglayout' clear=all>
+</p>
+
+<p class=MsoNormal>And when the Submit button is clicked, the URL changes to
+the one shown above, i.e. it ends in <em>namesave.cgi</em> (and what comes before
+that depends on the URL of the form itself, because in the HTML of the form
+<em>action</em> attribute we have used a <em>relative link -- </em>relative and
+absolute links work in forms just the same way as anywhere else). [NB, the application
+in this example is now a dummy, so you'll get a &quot;permission
+denied&quot; message when you try to execute it, but you can still see what happens
+to the URL.]</p>
+<!--<p class=MsoNormal>(<a href="http://ddm.caad.ed.ac.uk/lectures/DDM/Intro_Digital_Media/Lecture11/listnames.cgi" target="_blank">Access
+  this link to see where the input went ...</a>) </p> -->
+<p class=MsoNormal>This
+  principle can be extended, in that there are a considerable range of types
+  of input available (lists, buttons, checkboxes, etc.), and clearly the URL
+  produced can become very complicated, but the mechanism remains the same.</p>
+<p class=MsoNormal>Editors such as Dreamweaver make the creation of forms very
+simple. The trickier part comes when you want to do something with the data
+they create. The basic mechanism is fairly simple: the &quot;form&quot; tag
+specifies through its &quot;action&quot; attribute a CGI application that will
+be used by the server to process the form data, and the method (GET
+or POST) will be as specified by the &quot;method&quot; attribute:</p>
+<p class=MsoNormal><code>
+&lt;form method=&quot;GET&quot; action=&quot;namesave.cgi&quot;&gt;</code></p>
+<p class=MsoNormal> All you need
+  to do, then, is decide what application to use and create a program that handles
+  the data appropriately.<o:p></o:p></p>
+<p class=MsoNormal>The most obvious difference between GET and POST, in
+practice, is that whereas the GET method sends parameters via the URL as
+described above, POST causes the information to be sent in a different way,
+which is not visible on the URL.<span style="mso-spacerun: yes">&nbsp;
+</span>We have chosen to use GET here for clarity, but obviously POST may have
+ advantages in some situations. The application that processes the data
+will also have to decode it differently depending on which of these methods is
+used, and decoding POST information is more complicated. (With PHP, as we'll
+see below, we normally use POST for form data, but we will not need to know the details of how
+PHP decodes it.)</p>
+<p class=MsoNormal>Remember that the URL query string can be used even wihout
+  forms, to provide information for an application such as ColdFusion. This will
+  continue to be important for us.</p>
+<p class=MsoNormal>We are concerned here only with the &quot;back-end&quot; processing of form data, but the appearance and behaviour of the form for the user is of course also very important. HTML5 provides many useful features in this respecty and is now the best choice for form development (see the Forms chapter in the excellent <em>Dive into HTML5</em> for explanation and examples — <a href="http://diveintohtml5.info/forms.html">http://diveintohtml5.info/forms.html</a>).</p>
+<h2>The processing script</h2>
+
+<p class=MsoNormal>The application program you create to handle form data could
+  be almost anything that can be run on the server machine. You could write it
+  in C, Java, Prolog, Applescript, Visual Basic, FileMaker Pro or various other
+things that might be available. The key factor is that the server runs the application
+in an <em>environment</em> where it is provided with the values for various variables
+as part of the CGI interface, which includes the query string, along with things
+like the user's IP number, the kind of browser they're using, etc.</p>
+<p class=MsoNormal>Often, however, form data is processed by some system that
+  is more integrated with the task of producing HTML pages from other data. Such
+  systems are PHP, ASP, JSP, Coldfusion, and others. These can all be used for
+  a range of CGI-related purposes. We are going to use PHP, which is just one
+  example. You are welcome to look at and compare the others if you want. (PHP
+  can be used on our own server -- details follow. A Coldfusion server is operated
+  by Information Services, to which access can be arranged. ASP is normally available
+only on Windows-based servers, but the others are supported on various platforms.) </p>
+<p class=MsoNormal>What happens with all of these systems is that you write <em>templates</em>,
+  which are HTML pages that have instructions of some kind embedded in them.
+  The server processes the template by removing the instructions and replacing
+  them with more HTML that the instructions tell it how to create, often using
+  data or other resources that may be different at different times. Hence the
+  final page that the user sees is created <em>dynamically</em> just at the moment
+  it is asked for, and so it can be updated in many ways that would be impossible
+  with a static page.</p>
+<h2>PHP</h2>
+<p>We have chosen PHP mainly because it is free, open source
+  software and very widely used. It is also extremely powerful. Its development
+  history is well described at <a href="http://uk.php.net/manual/en/history.php">http://uk.php.net/manual/en/history.php</a>.
+  It has a comprehensive manual, as well as tutorials and other material, on
+  its own web site at <a href="http://uk.php.net/docs.php" target="_blank">http://uk.php.net/docs.php</a>.
+  It is also well integrated with Dreamweaver for editing and design purposes.</p>
+<p>You can install PHP on your own computer (e.g. laptop), along with the MySQL
+  database and the Apache web server, in the form of a neatly packaged setup
+  called (if you are using a Macintosh) MAMP (<a href="www.mamp.info/">www.mamp.info/</a>).
+  This stands for &quot;Macintosh,
+  Apache, MySQL, PHP&quot;, and derives from the original LAMP, which is for
+  the Linux operating system. There is also WAMP or WampServer for Windows machines.
+  We do not undertake to support students in running any setup on their own
+  machines: if you wish to try it, this is up to you. We provide access to all
+  the components on the studio systems, as described <a href="additional14.html" target="_blank">at this link</a>.</p>
+<p>PHP defines a language written between tags that are placed within HTML pages.
+  The tags open with &quot;<strong><em>&lt;?php</em></strong>&quot;, and close with &quot;<em><strong>?&gt;</strong></em>&quot;;
+  they are embedded in ordinary HTML pages that are placed on a machine with
+  a special PHP web server (which is often an extension of the server that serves
+  plain HTML web pages). These pages are sometimes known as <i>templates</i>.
+  When they are served by the server, <em>all the PHP code, with its tags, disappears</em> and
+  is replaced by pieces of HTML that depend on what the PHP statements specified.
+  The resulting page is therefore interpretable by any normal browser. If you
+  look at the HTML source of any PHP page as it arrives at your browser, you
+  wil find nothing other than ordinary HTML, CSS etc. With this kind of system,
+  the pages can be designed exactly as usual, but with these PHP tags as placeholders
+  for material that will be provided dynamically when the page is viewed in the
+  user's browser.</p>
+<p>So there is no PHP user interface: you design your page templates using Dreamweaver,
+  or any other text editor, and you include PHP script elements into the HTML.
+  Dreamweaver and some other editors will have functionality that helps you to
+  do this, but you don't have to use it. Your template contains
+  nothing but text. Then you place the templates onto the PHP server and access
+  them via a web browser, like
+  any other
+  web pages.</p>
+<p>Some of the examples used in what follows are actually based on ones in the
+book <i>Programming in Cold Fusion</i> by Rob Brooks-Bilson (O'Reilly, 2001), because we originally used ColdFusion in this course,
+  but they have been rewritten to use PHP. This emphasises that these systems
+  all do the same thing, even if they do it in slightly different ways. There
+  are many similar books on PHP, and even more material on the web — a good introduction
+  can be found, as usual, <a href="http://www.w3schools.com/php/">at w3schools.com</a>,
+  but unfortunately they do not use the database connection      method that
+we'll be using here (see later), so <em><strong>do not follow their examples on using databases</strong></em>.</p>
+<p> There are plenty of things you can do with PHP without needing to use a database.
+  Here's a simple example of a template. (Note that I am following the
+  terminology of referring to the whole code of the page as a <em>template</em>;
+  sometimes I might call it a <em>page</em>. I will refer to the parts <strong>within
+  the PHP tags</strong> as <em>script</em> elements, or simply <em>the PHP script</em>.
+  This is not necessarily the same terminology as you will find elsewhere, but
+  I think it's clearer if used consistently.)</p>
+<p><code>&lt;HTML&gt;<br>
+  &lt;HEAD&gt;<br>
+  &lt;TITLE&gt;PHP Example&lt;/TITLE&gt;<br>
+  &lt;/HEAD&gt;<br>
+  /&lt;BODY&gt;<br>
+  &lt;H2&gt;Today's date is<br>
+  </code><code>&lt;?php<br>
+    echo date(&quot;d/m/Y&quot;);<br>
+  </code><code>?&gt;<br>
+  &lt;/H2&gt;<br>
+  &lt;/BODY&gt;<br>
+  &lt;/HTML&gt;</code></p>
+<p>This is clearly HTML with just the embedded PHP tags. Within the scope of
+  these tags, everything is taken to be PHP code that should be evaluated. In
+  this case, the result of the evaluation (which is today's date) is simply inserted
+  into the HTML page and handed to the user's browser. What appears on the browser
+  (at the time of editing these notes) is simply:</p>
+<h2>Today's date is 15/01/2014</h2>
+<p>(Try <a href="http://playground.eca.ed.ac.uk/~jlee/test/date.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/date.php</a>.
+  See if you can guess how to make it put the day before the month!) </p>
+<p>The processing of this template is illustrated in the following diagram (click
+  for larger version).</p>
+<p><a href="PHP-process.png" target="_blank"><img src="PHP-process.png" width="547" height="427" alt="PHP processing diagram"></a></p>
+<p class="RedText"><em>Always remember that the PHP script is only processed if the template
+    is <strong>requested from the server</strong>, i.e. if you use a browser and <strong>a URL that begins with http:// </strong>...
+    If you access the template file <strong>directly</strong> with a browser (in which
+    case your URL will begin <strong>file://</strong>) then the script will <strong>not</strong> be processed and so you will <strong>not</strong> see the result you expect.</em></p>
+<p>This is the basic idea behind PHP, which means &quot;PHP: Hypertext Preprocessor&quot;
+  —  it pre-processes your web pages in various ways before they are
+    served to the user. PHP has a very wide range of capabilities and can be
+    used for a great many things. Here we'll talk mainly about forms and databases,
+    but there is also support for email, searching, http connectivity, security
+    and encryption, graphing and charting, and more advanced scripting. See the
+    many books available (or the PHP web site, which has very good documentation)
+    for details. Good online documentation and reference material for PHP is
+    also built into Dreamweaver (<em>Reference</em> under the <em>Help</em> menu,
+    then see <em>O'REILLY PHP
+Pocket Reference</em>). </p>
+<h2>Forms in PHP </h2>
+<p>A simple example of a form that provides data which is processed and then
+  just printed out (not put into a DB or anything like that) is this simple &quot;currency
+  converter&quot;, which is <em>a form that gets posted to itself </em>-- a very
+  useful technique in many situations. This HTML form is
+  in a file called &quot;convert.php&quot;  (<span class="style10"><a href="http://playground.eca.ed.ac.uk/~jlee/test/convert.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/convert.php</a></span>):</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Untitled Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Currency converter&lt;/h2&gt;
+<span class="style1">&lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;convert.php&quot;&gt;</span>
+&lt;p&gt; Source currency: 
+   &lt;input type=&quot;text&quot; name=&quot;Source&quot;&gt;
+&lt;/p&gt;
+&lt;p&gt; Conversion rate: 
+&lt;input type=&quot;text&quot; name=&quot;Rate&quot;&gt;
+&lt;/p&gt;
+&lt;p&gt;
+<span class="style9">&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;Submit&quot;&gt;</span>
+&lt;/p&gt;
+<span class="style8">&lt;/form&gt;</span>
+</code><span class="style7"><code>&lt;?php
+ if (isset($_POST[&quot;Submit&quot;])) {
+    $result=$_POST[&quot;Source&quot;]*$_POST[&quot;Rate&quot;];
+?&gt;</code></span><code>
+</code><span class="style4"><code>&lt;h2&gt;The result is: </code></span><code>
+<span class="style7">&lt;?php
+    echo $result;
+?&gt;</span>
+<span class="style4">in the target currency.&lt;/h2&gt;</span>
+<span class="style7">&lt;?php
+ }
+?&gt;</span>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The colours are just to help me in referring to the code. Notice the use of <em>if</em> (in
+  the blue part, which is the PHP script) for conditional processing: PHP has a full range of conditional
+  constructions like these, which work much the same as in Actionscript, Javascript,
+  or other programming languages.</p>
+<p>Notice also the use of the POST method in the form action (highlighted in
+  red). This makes variables that correspond to the input fields in the form
+  available to the PHP template as members of the <em>$_POST</em> <strong><em>array</em></strong>,
+  accessed as <em>$_POST[&quot;Submit&quot;], $_POST[&quot;Rate&quot;]</em>,
+  and so on. </p>
+<p>Notice that  PHP variables normally start with the character <em>$</em>.
+  This is quite different from Actionscript. You don't need a keyword such as <em>var</em>,
+  and the variables don't have to be declared before they are used.</p>
+<p>In PHP an array may be similar to arrays in other languages, and indexed simply
+  by a number, or it might be an <em>associative array</em> like the <em>$_POST</em> array
+  here. In this type of array, each value is associated with a key that can be
+  used to retrieve it, so here for instance the key "Rate" is associated with
+  whatever value was entered by the user in the <em>Rate</em> field of the form
+  we created. In PHP, the keys are strings, hence the quotes around them (which
+  can be either single or double quotes). The <em>$_POST</em> array will contain
+  anything the PHP script has received via an HTTP POST request, in this case
+  being the material submitted from the form.
+<p>Remember that when a URL appears as the <em>ACTION</em> of a form, it will
+  be called as normal but given a CGI environment with the form variables in
+  it. Whenever a PHP template is called as the script in a form <em>ACTION (</em>if
+  the method is<em> POST</em>), a <em>$_POST</em> array is created as part of the environment.
+  In that array, the item determined by the submit button in the HTML definition
+  of the form (here highlighted in purple) is always defined, or &quot;set&quot;.
+  In this case it's simply called <em>Submit</em> (which will be accessed as <em>$_POST["Submit"]</em>).
+  Hence the <strong>function</strong> <em>isset($_POST["Submit"])</em> will return as true if and only if it
+  is tested when the template is called by being the <em>ACTION</em> of a form.</p>
+<p>When we simply visit the URL <a href="http://playground.eca.ed.ac.uk/~jlee/test/convert.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/convert.php</a> in
+  a browser, it is not being called by a form, so <em>$_POST["Submit"]</em> is
+  not <em><strong>set</strong></em>, and so nothing in the template between the opening and closing "curly
+  brackets" of the PHP conditional block is processed or output: all we see is
+  the form itself. But when we click on the submit button, <strong>the same URL
+  is called, but this time as the form <em>ACTION</em></strong>, and so <em>$_POST["Submit"]</em> <strong><em>is
+  set</em></strong>, the part of the template highlghted in blue (including the green) is processed,
+  and the rest of the HTML (the statement of the result) therefore appears.</p>
+<p>This technique of having the form call itself (having the form ACTION be the
+  form itself) is very common and useful . However, it is also common to have
+  templates that are used <em><strong>only</strong></em> as form actions, as
+  pure CGI scripts, and <em><strong>never</strong></em> called directly in the
+  browser -- an example, displaying the results of a database query, appears
+  below.</p>
+<p>Notice that, with PHP as with most other systems, there are multiple ways
+  of achieving the same thing. The template we have just looked at interweaves
+  PHP code and HTML in a potentially confusing way. Often, PHP developers will
+  output some of the HTML from within the PHP script elements, which makes the
+  overall template simpler and more compact. We could replace the whole part
+  in blue and green, in the above template, with simply the following:</p>
+<pre><span class="style7"><code>&lt;?php
+ if (isset($_POST[&quot;Submit&quot;])) {
+   $result=$_POST[&quot;Source&quot;]*$_POST[&quot;Rate&quot;];
+   echo &quot;&lt;h2&gt;The result is: &quot;;
+   echo $result;
+   echo &quot; in the target currency.&lt;/h2&gt;\n&quot;;
+ }
+?&gt;</code></span></pre>
+<p>Here, the PHP <em>echo</em> statements output the HTML instead of it being
+  in the material outside the script. (The &quot;\n&quot; is just a new line
+  in the output — not really necessary but it will make the output page HTML source more readable if you need to debug it.) One could also make this
+  even more succinct by combining the three <em>echo</em> statements into one, by using
+  the &quot;<em>.&quot;</em> operator (which concatenates strings in the same
+  way as the <em>&quot;+&quot;</em> operator in e.g. Actionscript):</p>
+<pre class="style7"><code>&lt;?php
+ if (isset($_POST[&quot;Submit&quot;])) {
+   $result=$_POST[&quot;Source&quot;]*$_POST[&quot;Rate&quot;];
+   echo &quot;&lt;h2&gt;The result is: &quot; . $result . &quot; in the target currency.&lt;/h2&gt;\n&quot;;
+ }
+?&gt;</code></pre>
+<p>Below, we will notice yet another way of obtaining the same output using the function <em>printf()</em>. It is usually the case with PHP that there are several ways of achieving the same result.</p>
+<h3>The $_GET array</h3>
+<p>Variables that are provided to a template in a query string as part
+  of the URL (or from a form that uses the HTTP GET method) are also made very
+  simply and directly available, similarly to POST variables, as members of a
+  standard array called <em>$_GET</em>. Thus if we have a template called as <em>template?var=val</em> then
+  in the template itself we can access <em>$_GET[&quot;var&quot;] </em>and discover
+  that its value is <em>val</em>.</p>
+<p>A tutorial on creating a form is also available at <a href="http://playground.eca.ed.ac.uk/~jlee/PHP-FormTutorial/">http://playground.eca.ed.ac.uk/~jlee/PHP-FormTutorial/</a></p>
+</body>
+</html>

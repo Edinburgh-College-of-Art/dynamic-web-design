@@ -82,7 +82,7 @@ of integrating databases to be found on the internet, but it is also widely misu
   is a free, server-based system very often used with PHP. The database is maintained
   on a server that may be (but in our case is not) on a different machine from the
 web server: in any case, PHP can get access to it in just the same way.</p>
-<p><a href="additional14.html#MySQL">Further
+<p><a href="additional21.html#MySQL">Further
   details about how to use MySQL locally are available here</a>. </p>
 <p>First, let's take note of the usual structure of databases. We are for present
   purposes only interested in very simple ones. These consist of one or more <i>Tables</i>,
@@ -202,7 +202,7 @@ from malicious agents. </p>
 <p>In F3, the making of a database connection is represented, using an object-oriented programming approach, as a specific class that contains a method (function) which sets up the connection. In F3, we will normally put this in an <em>Autoload</em> folder, so that it will be automaltically loaded and made avaialble to the application. Because we may have a number of F3 applications that use the same database connection class, and because we do not want any database connection details to be visible on the web where hackers might get at them, we keep the database connection class in an <em>Autoload</em> folder <strong><em>above the web root.</em></strong> This means it's in a folder that is not inside the <em>html</em> folder where everything that's web-visible has to be. So we simply create a folder called &quot;AboveWebRoot&quot; (for clarity, though in fact it can be called anything) that is at the <em>same level</em> as the html folder, rather than inside it. This folder is useful for other things that we want to keep away from possible hackers, and things that we'd like to make easily available to all our F3 applications.</p>
 <p>Connecting to a MySQL database from PHP, even with F3, requires you to know the
   address of the database server, and login credentials for accessing it. See
-local details <a href="additional14.html#MySQL" target="_blank">here</a>. We use these in setting up the database connection. So inside the above web root Autoload folder, we have a class called <em>DatabaseConnection</em>, which is defined in a file called <em>DatabaseConnection.php</em>. (You should always define autoload classes in a file of the same name, with the <em>.php</em> extension, and the file should contain nothing except the class definition and comments.) It looks like this:</p>
+local details <a href="additional21.html#MySQL" target="_blank">here</a>. We use these in setting up the database connection. So inside the above web root Autoload folder, we have a class called <em>DatabaseConnection</em>, which is defined in a file called <em>DatabaseConnection.php</em>. (You should always define autoload classes in a file of the same name, with the <em>.php</em> extension, and the file should contain nothing except the class definition and comments.) It looks like this:</p>
 <pre><code>
 class DatabaseConnection {
 	static function connect() {

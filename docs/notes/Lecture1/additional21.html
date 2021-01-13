@@ -42,6 +42,43 @@
       with the server subsequently will be done by simply using the
       database through PHP.<br>
     </p>
+    <p>The generic picture of the situation is like this:<br>
+    </p>
+    <p><img src="diagramPHP.png" height="576" width="763"></p>
+    <p>The "Edinburgh Domains server" is actually a <i>host</i> that
+      hosts the MySQL server as well as the web and PHP servers, so when
+      you make a connection from PHP code you can connect to MySQL as on
+      "localhost", which means the same host as the PHP server. However,
+      if you want to connect to it from a different host, such as your
+      own machine, you will need to provide the appropriate host name
+      for your Edinburgh Domains MySQL server.<br>
+    </p>
+    <p>To access the Edinburgh Domains server, one option is work
+      throught its own online Dashboard, which provides a file manager
+      to manage the files you store on it, as well as management tools
+      for the database server, etc. However, this is quite inconvenient
+      and often we will want a more direct form of connection, which is
+      done through a method called SFTP (secure file transfer protocol).
+      There are many SFTP clients available, such as Cyberduck. You can
+      use any of these. But also, you can make SFTP connections directly
+      within PHPStorm, which allows you to manage the connection and
+      your project code in a very integrated way.<br>
+    </p>
+    <p>Before you can access your Edinburgh Domain through SFTP, you
+      have to configure it. In the Dashboard, you'll see at the very top
+      of the screen, no actually on the dashboard but above the
+      Edinburgh logo, a link that says "Manage you Account". On the
+      drop-down menu under this, choose "User Information". Then you
+      have the option to create an FTP password. It also tells you your
+      username, hostname and port -- these are the crucial details,
+      along with the password, that any SFTP client will need. Create a
+      password, and keep a note of it (though you don't need to use it
+      to create a new one if it gets lost). Then follow instructions for
+      connecting with your chosen SFTP client, or (as in the
+      introductory video) from inside PHPStorm.<br>
+    </p>
+    <p><br>
+    </p>
     <p><br>
     </p>
     <p><br>

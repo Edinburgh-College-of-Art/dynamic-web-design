@@ -77,6 +77,58 @@
       connecting with your chosen SFTP client, or (as in the
       introductory video) from inside PHPStorm.<br>
     </p>
+    <p>Once you have connected, you should find that you can see the
+      folders and files in your <i>home folder</i> (or <i>home
+        directory</i> in the more traditional language I may use from
+      time to time). <i><b>Do not delete anything in here without
+          understanding what it is and why you don't need it!&nbsp; </b></i>Many
+      of these files may be quite important. Similarly, it's best not to
+      put files into most of the folders that you can see. You should
+      see a folder called <i>public_html</i> -- this is the folder that
+      provides the <i>web root</i> of your web site: anything in this
+      folder is visible on the web, with a URL that starts with
+      "&lt;your_domain&gt;.edinburgh.domains". Nothing outside this
+      folder is visible on the web at all. (For this reason, we'll later
+      create a folder called <i>AboveWebRoot</i> that is outside this
+      folder and hence not visible on the web.) Note that "public_html"
+      does <i>not</i> appear in any URL. <br>
+    </p>
+    <p>Please note that URLs to your server are <i>visible to the world</i>,
+      so be aware of this and consider issues of copyright and
+      suitability when placing material on this server. When using this
+      hosting service, you are still bound by the University of
+      Edinburgh Computing Regulations, as well as normal laws and
+      conventions.<br>
+    </p>
+    <p>It will be useful to set your client (or PHPStorm, or the
+      Edinburgh Domains file manager) so that it shows "hidden files".
+      These are files that start with "." and which you normally can't
+      see. You may see quite a few of them, which can mostly be ignored,
+      but we'll need to create and use one called "<i>.htaccess</i>". <br>
+    </p>
+    <p>
+    </p>
+    <h3><a name="MySQL" id="MySQL"></a>Using MySQL</h3>
+    <p>MySQL is a powerful database system traditionally used via a UNIX
+      command-line, entirely by writing SQL commands. This is hugely
+      flexible, but not very attractive. Luckily there are many neat,
+      often freeware, clients with graphical interfaces that will
+      generate the SQL commands for you. MySQL is also server-based,
+      which means that for our purposes we will always be using
+      databases provided by the MySQL server running on your own
+      Edinburgh Domain host. The Dashboard provides for administration
+      of the database using <em>PHPMyAdmin</em>, which is a client
+      written in PHP; it's a little little clunky, but effective. With
+      this, you can create tables, edit the contents, etc. But first,
+      you need to create a database. You do this using the "MySQL
+      Database Wizard" on the Dashboard. It's pretty self-explanatory.
+      Create a database, and a user, and give the user "All Privileges"
+      when prompted. Note what you have called the database and the
+      user, and the password you will have had to create for the user:
+      you'll need these to connect to the database from PHP or a client.<br>
+    </p>
+    <p><br>
+    </p>
     <p><br>
     </p>
     <p><br>

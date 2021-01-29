@@ -92,8 +92,12 @@ code {  font-family: "Courier New", Courier, mono; font-size: 14px}
         href="http://www.w3schools.com/js/js_functions.asp">http://www.w3schools.com/js/js_functions.asp</a></p>
     <p>But also, in javascript, functions can be <em>anonymous</em> –
       you can create a function, e.g. as a value of a variable, without
-      giving it a name directly. This is often used to add methods to
-      objects. Consider the example from <a
+      giving it a name directly. (These are exactly like the anonymous
+      functions in PHP that we have used in Fat Free Framework route
+      rules, for example.) <br>
+    </p>
+    <p>This is often used to add methods to objects. Consider the
+      example from <a
 href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3">http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3</a>:
       in this case, there is code that says:</p>
     <p><span class="style2">this.changeName=changeName;<br>
@@ -133,12 +137,12 @@ href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3">http:
       document.write(myMother.lastname);</p>
     <p>So here, where we created the new person, we also specified the
       function for changing their name. The code in red is just an
-      anonymous function definition, fropped in as a parameter to
+      anonymous function definition, dropped in as a parameter to
       another function call. This isn't of much practical use here, but
       could be in a case where people's names might be changed in
       different ways, or something like that.</p>
-    <p>Play with some of these examples, and try out these ideas. In the
-      lecture, we modified the example to something like:</p>
+    <p>Play with some of these examples, and try out these ideas. One
+      might modify the example to something like:</p>
     <p class="style2">function person(firstname,lastname,age,eyecolor, <span
         class="blueCode">changefunc</span>)<br>
       {<br>
@@ -165,10 +169,12 @@ href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3">http:
       jQuery ...</p>
     <h3>jQuery</h3>
     <p>jQuery is just one among a number of libraries or frameworks
-      avaialble for javascript, but it's the most widely used and I've
+      available for javascript, but it's the most widely used and I've
       not come across a compelling reason to use another one. There is
       excellent introductory material at <a
-        href="http://www.w3schools.com/jquery/default.asp">http://www.w3schools.com/jquery/default.asp</a></p>
+        href="http://www.w3schools.com/jquery/default.asp">http://www.w3schools.com/jquery/default.asp</a>
+      -- note what it says there: "<i>jQuery is easy to learn</i>"!<br>
+    </p>
     <p>One of the most difficult things about jQuery is the syntax, even
       though in reality it's fairly simple: <a
         href="http://www.w3schools.com/jquery/jquery_syntax.asp">http://www.w3schools.com/jquery/jquery_syntax.asp</a></p>
@@ -184,14 +190,15 @@ href="http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3">http:
       commonly used in jQuery: <a
 href="http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_sel_ullifirstchild">http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_sel_ullifirstchild</a>)</p>
     <p>Again, anonymous functions are the usual approach to defining
-      mthods that wil be called in response to interactive events: <a
+      methods that will be called in response to interactive events: <a
         href="http://www.w3schools.com/jquery/jquery_events.asp">http://www.w3schools.com/jquery/jquery_events.asp</a></p>
     <p>Here's an example of a small application that uses jQuery in an
       admittedly rather pointless way, but it shows up some of the
       techniques (<a href="testJQsimple.html">testJQsimple.html</a>) –
       the code is included here, but remember that as often with
       javascript you can also see it (formatted better than here) simply
-      by viewing the page source [<a href="#footnote">footnote</a>]:</p>
+      by viewing the page source (of testJQsimple.html) [<a
+        href="#footnote">footnote</a>]:</p>
     <p class="style2">&lt;script
 src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;<br>
       // A silly example that displays some text such that the mouse

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Using the Google Maps API</title>
+<link rel="stylesheet" type="text/css" href="tutorial.css" />
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAATUxeV346BMyYR0G4QNgtDhQ3xvqHdcJ4rneSgVJClpwoPcc2wxTLTYIBHawcBmOTXScF0NlmXkB7FA" type="text/javascript"></script>
+<script type="text/javascript">
+function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(55.950254, -3.187606), 14);
+		
+		map.addOverlay(new GMarker(55.950254, -3.187606));
+		
+      }
+    }
+</script>
+
+</head>
+<body>
+<body onload="initialize()" onunload="GUnload()" bottommargin="0" topmargin="0" rightmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<div class="middler">
+  <div class="header">
+    <h1>Google Maps API</h1>
+    </div>
+	<div class="date">Page 3, Mike Greer, 26.02.2008</div>
+	<br />
+    
+    <div id="map_canvas" style="width: 500px; height: 300px; float: left;"></div>
+    
+  <p style="clear:left;">Let's go back to the script that calls the map:</p>
+  <textarea style="width: 610px; height: 110px;"><script type="text/javascript">
+function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(55.950254, -3.187606), 14);
+      }
+    }
+</script></textarea>
+
+
+    
+    
+    <a class="last" href="map2.html">&lt;&lt; Geocoding</a>
+    <a class="next" href="map3.html"> &gt;&gt;</a>
+    <div id="footer"></div>
+</div>
+</body>
+</html>

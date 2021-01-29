@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Using the Google Maps API</title>
+<link rel="stylesheet" type="text/css" href="tutorial.css" />
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAATUxeV346BMyYR0G4QNgtDhQ3xvqHdcJ4rneSgVJClpwoPcc2wxTLTYIBHawcBmOTXScF0NlmXkB7FA" type="text/javascript"></script>
+<script type="text/javascript">
+function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(55.950254, -3.187606), 14);
+      }
+    }
+</script>
+
+</head>
+<body>
+<body onload="initialize()" onunload="GUnload()" bottommargin="0" topmargin="0" rightmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<div class="middler">
+    <div class="header">
+        <h1>Google Maps API</h1>
+    </div>
+	<div class="date">Page 2, Mike Greer, 26.02.2008</div>
+	<br />
+	
+	<p>The process of converting an address into latitude and longitude values is known as <b>geocoding.</b>  If you want to hand code the starting location for your map, you can geocode using <a href="http://maps.google.com">Google maps</a>.  Each search you do on Google maps results in geocoding.  Once you've found your location, select "link to this page" (on the right hand side, above the map).
+    </p>
+    <p>A search for Alison House, Edinburgh gives the following link:</p>
+    <textarea style="width: 610px;">http://maps.google.com/maps?f=q&hl=en&geocode=&q=Alison+House&sll=55.950254,-3.187606&sspn=0.429828,1.061554&ie=UTF8&z=16</textarea>
+    <p>We can extract the latitude / longitude from this url, but the whole process is all very tedious, and would be useless if you wanted to make dynamic maps (of, say, the location of an event a user has added to your database).
+    <div id="map_canvas" style="width: 500px; height: 300px"></div>
+    
+    
+    <p>What we need is a way to ask <span style="text-decoration: line-through;">someone else</span> Google to <a href="http://code.google.com/apis/maps/documentation/services.html#Geocoding">geocode for us.</a></p>
+    
+    <p>Google offers a geocoding service.  There are a couple of different ways to ask google to geocode.  We'll look at a method using server-side scripting (coldfusion).  Geocoding can take a while, so using this method should allow you to get the lat/lang values for a location once, and then store it in a database to decrease page loading times.</p>
+    
+    <p>
+    We'll use a similar system to that which we used with the flickr API to get geocoded data back from Google:
+    </p>
+    <ul>
+    	<li>Create a string to use as an HTTP request using CURL in PHP,</li>
+        <li>Ask Google,</li>
+        <li>Get the response as an XML file,</li>
+        <li>Use PHP to parse the XML to grab the data we need.</li>
+    </ul>
+    
+	<p>The code for this example can be found in the DDM share > jr_php > jr_php_googlemaps</p>
+    
+    <div id="footer"></div>
+</div>
+</body>
+</html>

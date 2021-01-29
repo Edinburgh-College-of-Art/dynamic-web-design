@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* CSS Document */
+
+*{
+	padding: 0pc;
+	margin: 0px;
+}
+
+body{
+	background-color: #C7B299;
+}
+
+.header{
+	background-image: url(images/headerBar.png);
+	height: 100px;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+}
+
+.header img{
+	padding-left: 16px;
+}
+
+#player{
+	position: relative;
+	width: 700px;
+	margin: 150px auto 0px 50px;
+}

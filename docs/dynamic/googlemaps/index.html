@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Using the Google Maps API</title>
+<link rel="stylesheet" type="text/css" href="tutorial.css" />
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAATUxeV346BMyYR0G4QNgtDhQ3xvqHdcJ4rneSgVJClpwoPcc2wxTLTYIBHawcBmOTXScF0NlmXkB7FA" type="text/javascript"></script>
+<script type="text/javascript">
+function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+      }
+    }
+</script>
+
+</head>
+<body>
+<body onload="initialize()" onunload="GUnload()" bottommargin="0" topmargin="0" rightmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<div class="middler">
+<div class="header">
+	<h1>Google Maps API</h1>
+</div>
+	<div class="date">Page 1, Mike Greer, 26.02.2008</div>
+	<br />
+    <div class="greybox">
+        <table>
+	        <tr>
+    	    	<th colspan="3">Google Maps API</th>
+    	    </tr>
+             <tr>
+                <td>Website</td>
+                <td><a href="http://code.google.com/apis/maps/">http://code.google.com/apis/maps/</a></td>
+            </tr>
+        	<tr>
+            	<td>Key required?</td>
+            	<td>Yes</td>
+        	</tr>
+            <tr>
+            	<td>Free?</td>
+            	<td>When used on websites free to consumers.</td>
+        	</tr>
+            <tr>
+            	<td>Version:</td>
+            	<td>2</td>
+        	</tr>
+           
+        </table>
+    </div>
+    <div class="clear" />
+    <br />
+<p>The Google Maps API allows you to embed dynamic maps in your webpage.  Using javascript, you can switch on and off various features of the map, place markers on it, or add an overlay to display extra information.  As you might expect, it is brilliantly documented <a href="http://code.google.com/apis/maps/documentation/">here</a>.</p>
+<p>Setting up a basic map takes minutes (the following uses Google's example code, supplied when you complete the first step):</p>
+<ul class="numbers">
+	<li><a href="http://code.google.com/apis/maps/signup.html">Register for an API key</a> - this key is specific to the site you wish to place the map on (so register the correct folder).</li>
+	
+    <li>Bring in the map javascript via a script tag in the header:<br />
+    <code>&lt;script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=YOURKEY" type="text/javascript"&gt;&lt;/script&gt;</code>
+    </li>
+    
+    <li>
+    Add a javascript function which will create the map:<br />
+    <code>&lt;script type="text/javascript"&gt;<br />
+function initialize() {<br />
+      if (GBrowserIsCompatible()) {<br />
+        var map = new GMap2(document.getElementById("map_canvas"));<br />
+        map.setCenter(new GLatLng(37.4419, -122.1419), 13);<br />
+      }<br />
+    }<br />
+&lt;/script&gt;</code>
+    </li>
+    
+    <li>
+    Create a div in the body of your HTML as a placeholder for the map:<br />
+    <code>&lt;div id="map_canvas" style="width: 500px; height: 300px"&gt;&lt;/div&gt;</code>
+    </li>
+
+</ul>
+
+<p>Which produces the following:</p>
+    <div id="map_canvas" style="width: 500px; height: 300px"></div>
+
+<p>The size of this map is determined by the css rules we have applied to the div which contains it.  Our starting location on the map is specified in the javascript function which calls the map: <code>map.setCenter(new GLatLng(37.4419, -122.1419), 13);</code></p>
+ <table>
+	        <tr>
+    	    	<th colspan="3">Position:</th>
+    	    </tr>
+             <tr>
+                <td>Latitude</td>
+                <td>37.4419</td>
+            </tr>
+        	<tr>
+            	<td>Longitude</td>
+            	<td>-122.1419</td>
+        	</tr>
+            <tr>
+            	<td>Zoom</td>
+            	<td>13</td>
+        	</tr>
+        </table>
+
+<a class="next" href="map2.html">Changing the latitude and longitude >></a>
+<div id="footer"></div>
+</div>
+</body>
+</html>

@@ -43,15 +43,14 @@ code {  font-family: "Courier New", Courier, mono; font-size: 14px}
       malicious code; but all the same we will need some way of having a
       URL for each image, so that we can show them on web pages.</p>
     <p>As always, there are many different ways this could be done, and
-      many different
-      possible architectures even for such a small application. In the
-      chosen approach, the code is written using the Fat-Free Framework
-      (F3). This allows us to define a quite nice separation between
-      code that drives the prsentation of the images, and code that
-      drives the manipulation of the database etc. The concept is a
-      loose application of the Model-View-Controller (MVC) pattern, but
-      not very strict because no particular adherence to this pattern is
-      enforced by F3.</p>
+      many different possible architectures even for such a small
+      application. In the chosen approach, the code is written using the
+      Fat-Free Framework (F3). This allows us to define a quite nice
+      separation between code that drives the prsentation of the images,
+      and code that drives the manipulation of the database etc. The
+      concept is a loose application of the Model-View-Controller (MVC)
+      pattern, but not very strict because no particular adherence to
+      this pattern is enforced by F3.</p>
     <p>The complete code can be downloaded from the main notes page, and
       it's best to look at the snippets discussed below in their context
       in the whole application, which also includes other useful
@@ -113,8 +112,7 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       showImage() –&nbsp; a method that outputs the raw content of an
       image file, with a suitable type header, as explained below<br>
       thumbFile() – which returns the name of the thumbnail file for a
-      given image
-      <br>
+      given image <br>
       createThumbnail() – which creates a file containing a
       thumbnail-size copy of an image (always jpg, no matter what the
       type of the original image)</p>
@@ -142,8 +140,9 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       &lt;/form&gt;</p>
     <p>The form is normal HTML, using an input of type <em>file</em>,
       which will invite the user to choose a file that will be uploaded
-      and a text input that will be used simply to name
-      or describe the file. Note the attribute <span class="style2">enctype="multipart/form-data"
+      and a text input that will be used simply to name or describe the
+      file. Note the attribute <span class="style2">enctype="multipart/form-data"
+
       </span> — this is important. You'll see that the action URL of
       this form is the F3 route <span class="style2">{{ @BASE }}{{
         @PARAMS.0 }}</span>, which means the base URL with the first
@@ -211,8 +210,10 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
         target="_blank">https://fatfreeframework.com/3.6/web</a>)<span
         class="blueCode">. We make an instance of this class, and call
         its <em>receive() </em>method. </span><span class="greenCode">The
+
         first argument of the method is an anonymous function, which
         takes two arguments, <em>$file</em> and <em>$anything </em>(for
+
         our purposes the value of the latter will not be used and it
         doesn't matter what it's called). </span><span
         class="purpleCode"><em>$file</em> will become the data about the
@@ -227,6 +228,7 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
         the anonymous function returns false, and this will cause the
         upload to be aborted, but we set an informative error message
         which can be used later. </span><span class="greenCode">Otherwise,
+
         we set a variable to say that everything has worked and return
         true, which means that the uploaded file will be moved into the
         uploads folder specified in the F3 variable UPLOADS.</span> <span
@@ -263,6 +265,7 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       (viewed via the route <a
         href="http://jlee.edinburgh.domains/fatfree/F3-ImageServer/viewimages"
         target="_blank" moz-do-not-send="true">http://jlee.edinburgh.domains/fatfree/F3-ImageServer/viewimages</a>).
+
     </p>
     <h3>3.1 Retrieving image information</h3>
     <p>In here, we first query the<em> ImageServer </em>method<em>
@@ -341,11 +344,10 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       the form: <em>BASE</em>/thumb/<em>id</em>, as a link that when
       clicked will go to a URL of the form: <em>BASE</em>/image/<em>id</em>.
       For example, the URL <a moz-do-not-send="true"
-        href="http://jlee.edinburgh.domains/fatfree/F3-ImageServer/thumb/1">http://jlee.edinburgh.domains/fatfree/F3-ImageServer<a
-          target="_blank">/thumb/1</a></a> shows the thumbnail
-      associated with the image in the database that has id=1 (assuming
-      the image with this id still exists, i.e. hasn't been deleted),
-      and <a
+        href="http://jlee.edinburgh.domains/fatfree/F3-ImageServer/thumb/1">http://jlee.edinburgh.domains/fatfree/F3-ImageServer/thumb/1</a>
+      shows the thumbnail associated with the image in the database that
+      has id=1 (assuming the image with this id still exists, i.e.
+      hasn't been deleted), and <a
         href="http://jlee.edinburgh.domains/fatfree/F3-ImageServer/image/1"
         target="_blank" moz-do-not-send="true">http://jlee.edinburgh.domains/fatfree/F3-ImageServer/image/1</a>
       shows the image itself at its original size. It also includes a
@@ -365,6 +367,7 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       image link, e.g.:</p>
     <p><span class="style2">&lt;img
         src="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1"
+
         /&gt;</span></p>
     <p>where it will seem to the browser to just be an image, in this
       case the thumbnail-sized version of the image with ID 1 in the
@@ -456,8 +459,8 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
     <h3>5. Final thoughts</h3>
     <p>Note that things other than images can be handled easily by
       changing or removing the restriction on file types allowed in <em>upload()</em>.
-      -- Movies, 3D models, anything you like. You might want
-      to have a more elaborate way of keeping track of these, though. </p>
+      -- Movies, 3D models, anything you like. You might want to have a
+      more elaborate way of keeping track of these, though. </p>
     <p>If you look at index.php, there are various other things that
       haven't been mentioned in these notes, e.g. the provision of
       "silent" upload and delete functions that don't produce any
@@ -476,10 +479,9 @@ $f3-&gt;set('UPLOADS','../../../AboveWebRoot/ServerImages/');
       from perfect. However, the application had to be largely
       restructured to make sense in F3, and it's already clear that this
       has been a significant improvement. You could consider many
-      further improvements -- e.g. should the thumbnails
-      be created on upload or only when information is requested? There
-      is no real reason for the thumbnails always to be jpg images. Etc.</p>
-    <p></p>
+      further improvements -- e.g. should the thumbnails be created on
+      upload or only when information is requested? There is no real
+      reason for the thumbnails always to be jpg images. Etc.</p>
     <p>&nbsp;</p>
   </body>
 </html>

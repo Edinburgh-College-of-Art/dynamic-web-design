@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>AJAX 1</title>
+    <script src="{{@BASE}}/ui/js/jquery.min.js"></script>
+    <script>
+        function simplQuery(query_url)
+        {
+            $.ajax({
+                type: 'GET',
+                url: query_url,
+                success: function(response)
+                {
+                    $("#response").html(JSON.stringify(response));
+                },
+                failure: function()
+                {
+                    console.log("ajax failure!");
+                    console.log(query_url);
+                },
+            });
+        }
+    </script>
+</head>
+<body>
+
+<h2>JQUERY Example</h2>
+<input id="url_input"/>
+
+<button onclick="simplQuery($('#url_input').val())">Press Me To Fetch a URL</button>
+<pre id="response">Response Here</pre>
+
+</body>
+</html>

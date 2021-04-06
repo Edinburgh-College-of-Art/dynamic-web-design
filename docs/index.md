@@ -9,5 +9,5 @@ Currently just:
 
 ## Lecture Notes
 {% for lecture in site.lectures %}
-- [{{ lecture.title }}]({{lecture.url}})
+- [{{ lecture.title }}]({{lecture.url | prepend:site.baseurl }})
 {% endfor %}

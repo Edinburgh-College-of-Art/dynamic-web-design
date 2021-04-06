@@ -1,6 +1,6 @@
-# DynamicWebDesignExamples
+# Dynamic Web Design
 
-A collection of examples using PHP, JavaScript and the F3 framework for Dynamic Web Design
+Course material for Dynamic Web Design
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -19,9 +19,12 @@ A collection of examples using PHP, JavaScript and the F3 framework for Dynamic 
 
 <!-- /TOC -->
 
+## Lecture Notes
+
+
 ## Setup
 
-### 1. Domain of Ones Own Setup
+### 1. edinburgh.domains Setup
 
 [Follow the steps here]() to register your domain.
 
@@ -118,7 +121,7 @@ bash <(curl -s https://raw.githubusercontent.com/Edinburgh-College-of-Art/dynami
 ```
 
 ***
-
+<!--
 ## Git Hook Setup
 
 **Web Server**
@@ -162,4 +165,4 @@ git push stage master
 ```
 
 
-## Notes
+## Notes -->

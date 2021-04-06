@@ -11,7 +11,7 @@ title: Original DWD Files
 {% if filetype  == "html" %}
 {% assign path_depth = file.path | split: "/" | size | minus: 2 %}
   <li>
-  {{file.path | split: "/" | slice: 1, path_depth| join: '/' }}<a href="{{file.path}}">/{{file.name | split: "." | first}}</a>
+  {{file.path | split: "/" | slice: 1, path_depth| join: '/' }}<a href="{{file.path | prepend: site.baseurl}}">/{{file.name | split: "." | first}}</a>
   </li>
 {% endif %}
 {% endfor %}

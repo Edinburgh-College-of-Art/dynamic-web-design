@@ -17,8 +17,8 @@ title:            Dynamic Web Design
 email:            ""
 description:      >- # this means to ignore newlines until "baseurl:"
   Course Material for Dynamic Web Design
-baseurl:          "" # the subpath of your site, e.g. /blog
-url:              "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl:          "/dynamic-web-design" # the subpath of your site, e.g. /blog
+url:              "https://edinburgh-college-of-art.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
@@ -37,7 +37,7 @@ collections:
 
 header_pages:
   - about.md
-  
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

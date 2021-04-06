@@ -1,6 +1,9 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
+layout: page
+title: Dynamic Web Design
 ---
+
+A repository for things related to the Dynamic Web Design Course.
+Currently just:
+
+-   [notes](notes)

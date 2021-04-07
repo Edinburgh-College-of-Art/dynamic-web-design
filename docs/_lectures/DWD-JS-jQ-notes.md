@@ -228,7 +228,7 @@ admittedly rather pointless way, but it shows up some of the techniques
 but remember that as often with javascript you can also see it
 (formatted better than here) simply by viewing the page source (of
 testJQsimple.html) [[footnote](#footnote)]:
-
+```html
 <style>
 #maindiv {
 color: blue;
@@ -249,61 +249,34 @@ color: red;
 
 function setupWords()
 {
-  var words = $("#wordarea").val(); // Gets the value (text content)
-  of the textarea
-
-  // Here we split the string of words up into an array of individual
-  words
+  var words = $("#wordarea").val();
   var wordsArray = words.split(" ");
-
-  // Throw away the words, because we're going to rebuild this string
-  with some added HTML
   words = "";
-
-  // Loop through the array of words ...
   for (var i = 0; i < wordsArray.length; i++)
   {
-    // put span tag around each word, including a unique id and class
-    'word'
-    wordsArray[i] = "<span class='word'
-    id = 'wd"+i+"' > "+wordsArray[i]+" < /span>";
-    // and now stick these back together into a single string again
+    wordsArray[i] = "<span class='word' id = 'wd" + i + "' > " + wordsArray[i] + " < /span>";
     words = words + wordsArray[i] + " ";
   }
-
-  // Show the resulting HTML string on the error console, just as a
-  diagnostic
   console.log("words is ", words);
 
-  [ // Note this is exactly equivalent to:
-    document.getElementById("maindiv").innerHTML = words;
-    $("#maindiv").html(words);
-
-    setupjQ();
-  }]
-{
-  .blueCode
+  document.getElementById("maindiv").innerHTML = words;
+  $("#maindiv").html(words);
+  setupjQ();
 }
 
 function setupjQ()
 {
   $(".word").mouseenter(function()
-  { // what to do if the mouse enters
-    one of the span elements(class is word)
-    $(this).css("color", "red"); // turn this element, that the mouse
+  {
+    $(this).css("color", "red");
     has entered, red
-    $("#wddiv").html($(this).html()); // put the innerHTML of this
-    element(a word) into wddiv
-    // Get the id attribute of this element (e.g. "wd27"), take off the
-    first two characters("wd"),
-      // then put the remainder (e.g. "27") into the innerHTML of posdiv
-      $("#posdiv").html($(this).attr("id").substring(2));
-    $("#div2").show(); // show div2 element
+    $("#wddiv").html($(this).html());
+    $("#posdiv").html($(this).attr("id").substring(2));
+    $("#div2").show();
   });
 
   $(".word").mouseleave(function()
-  { // what to do when the mouse leaves
-    the span element
+  {
     $(this).css("color", "blue");
     $("#div2").hide();
   });
@@ -311,9 +284,9 @@ function setupjQ()
 
 $(document).ready(function()
 {
-  $("#div2").hide(); // hide div2 element as soon as document is ready
-  (on page load)
+  $("#div2").hide();
 });
+
 </script>
 
 <div id="maindiv">
@@ -336,7 +309,7 @@ Button that will call setupWords() when clicked -->
 the text -->
 <div id="div2">The current word is: <span id="wddiv"></span>
 at position <span id="posdiv"></span></div>
-
+```
 Footnote: I've subsequently noticed that the remarkable
 jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>)
 can be used to implement the `setupWords()` function above rather more

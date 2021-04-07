@@ -20,7 +20,7 @@ will not need to study (and should strictly avoid) the "vanilla PHP"
 method for connecting to databases, for example.
 
 For those who haven't looked at HTML & CSS before... you should look at
-these viewtorials as soon as possible (password is atrium):
+these "view-torials" as soon as possible (password is atrium):
 
 - [HTML](https://vimeo.com/109699027)
 - [CSS](https://vimeo.com/110455453)

@@ -38,7 +38,7 @@ does what you would expect. Use it often; it's extremely valuable.
 
 ### Javascript and Objects
 
-Almost evertything in javascript is, or can be treated as, an _object_.
+Almost everything in javascript is, or can be treated as, an _object_.
 
 Objects have the usual kind of "dot-based" syntax, e.g. in
 _document.getElementById("box1")_ there is an object, _document_,
@@ -77,22 +77,32 @@ have used in Fat Free Framework route rules, for example.)
 This is often used to add methods to objects. Consider the example from
 <http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3>:
 in this case, there is code that says:
+```js
+[this.changeName = changeName;
 
-[this.changeName=changeName;
-function changeName(name)
+  function changeName(name)
+  {
+    this.lastname = name;
+  }
+]
 {
-this.lastname=name;
-}]{.style2}
+  .style2
+}
 
+```
 What's happening here is that the variable changeName is being given
 the function that's also called changeName as a value. But we could
 equally well write the code like this:
 
-[this.changeName=function (name)
+```js
+[this.changeName = function(name)
 {
-this.lastname=name;
-}]{.style2}
-
+  this.lastname = name;
+}]
+{
+  .style2
+}
+```
 (Try it and see!) This is the way you will see it more often done. The
 code is more compact, and (once you get used to it) easier to work with.
 
@@ -100,23 +110,35 @@ But also, anonymous functions like this can be e.g. given as arguments
 to other functions. Suppose we wanted to specify the changeName function
 as a _parameter_ of the object; then we could rewrite this example along
 the lines:
-
-function person(firstname,lastname,age,eyecolor,
-[changefunc]{.blueCode})
+```js
+function person(firstname, lastname, age, eyecolor,
+  [changefunc]
+  {
+    .blueCode
+  })
 {
-this.firstname=firstname;
-this.lastname=lastname;
-this.age=age;
-this.eyecolor=eyecolor;
+  this.firstname = firstname;
+  this.lastname = lastname;
+  this.age = age;
+  this.eyecolor = eyecolor;
 
-this.changeName=[changefunc]{.blueCode};
+  this.changeName = [changefunc]
+  {
+    .blueCode
+  };
 }
 
-myMother=new person("Sally","Rally",48,"green",
-[function(n){this.lastname=n}]{.redCode});
+myMother = new person("Sally", "Rally", 48, "green",
+  [function(n)
+  {
+    this.lastname = n
+  }]
+  {
+    .redCode
+  });
 myMother.changeName("Doe");
 document.write(myMother.lastname);
-
+```
 So here, where we created the new person, we also specified the function
 for changing their name. The code in red is just an anonymous function
 definition, dropped in as a parameter to another function call. This
@@ -126,27 +148,45 @@ that.
 
 Play with some of these examples, and try out these ideas. One might
 modify the example to something like:
-
-function person(firstname,lastname,age,eyecolor,
-[changefunc]{.blueCode})
+```js
+function person(firstname, lastname, age, eyecolor,
+  [changefunc]
+  {
+    .blueCode
+  })
 {
-this.firstname=firstname;
-this.lastname=lastname;
-this.age=age;
-this.eyecolor=eyecolor;
+  this.firstname = firstname;
+  this.lastname = lastname;
+  this.age = age;
+  this.eyecolor = eyecolor;
 
-this.changeName=[changefunc]{.blueCode};
+  this.changeName = [changefunc]
+  {
+    .blueCode
+  };
 }
 
-myMother=new person("Sally","Rally",48,"green",
-[function(n){this.lastname=n}]{.redCode});
-myFather=new person("George","Doe",48,"green",
-[function(n){this.firstname=n}]{.greenCode});
+myMother = new person("Sally", "Rally", 48, "green",
+  [function(n)
+  {
+    this.lastname = n
+  }]
+  {
+    .redCode
+  });
+myFather = new person("George", "Doe", 48, "green",
+  [function(n)
+  {
+    this.firstname = n
+  }]
+  {
+    .greenCode
+  });
 myMother.changeName("Doe");
 myFather.changeName("Fred");
 document.write(myMother.lastname);
 document.write(myFather.firstname);
-
+```
 -- which outputs "DoeFred". Note that the functions supplied as the
 final parameter to the object are _different_: one changes the lastname,
 the other the firstname.
@@ -189,14 +229,6 @@ but remember that as often with javascript you can also see it
 (formatted better than here) simply by viewing the page source (of
 testJQsimple.html) [[footnote](#footnote)]:
 
-<script
-src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-// A silly example that displays some text such that the mouse running
-over the text causes words to change colour
-// and displays in another div the current word and its position in the
-text. Styling is minimal.
-</script>
-
 <style>
 #maindiv {
 color: blue;
@@ -215,71 +247,75 @@ color: red;
 
 <script>
 
-function setupWords() {
-var words = $("#wordarea").val(); // Gets the value (text content)
-of the textarea
+function setupWords()
+{
+  var words = $("#wordarea").val(); // Gets the value (text content)
+  of the textarea
 
-// Here we split the string of words up into an array of individual
-words
-var wordsArray = words.split(" ");
+  // Here we split the string of words up into an array of individual
+  words
+  var wordsArray = words.split(" ");
 
-// Throw away the words, because we're going to rebuild this string
-with some added HTML
-words = "";
+  // Throw away the words, because we're going to rebuild this string
+  with some added HTML
+  words = "";
 
-// Loop through the array of words ...
-for (var i=0; i < wordsArray.length; i++ ) {
-// put span tag around each word, including a unique id and class
-'word'
-wordsArray[i] = "<span class='word'
-id='wd"+i+"'>"+wordsArray[i]+"</span>";
-// and now stick these back together into a single string again
-words = words+wordsArray[i]+" ";
+  // Loop through the array of words ...
+  for (var i = 0; i < wordsArray.length; i++)
+  {
+    // put span tag around each word, including a unique id and class
+    'word'
+    wordsArray[i] = "<span class='word'
+    id = 'wd"+i+"' > "+wordsArray[i]+" < /span>";
+    // and now stick these back together into a single string again
+    words = words + wordsArray[i] + " ";
+  }
+
+  // Show the resulting HTML string on the error console, just as a
+  diagnostic
+  console.log("words is ", words);
+
+  [ // Note this is exactly equivalent to:
+    document.getElementById("maindiv").innerHTML = words;
+    $("#maindiv").html(words);
+
+    setupjQ();
+  }]
+{
+  .blueCode
 }
 
-// Show the resulting HTML string on the error console, just as a
-diagnostic
-console.log("words is ", words);
+function setupjQ()
+{
+  $(".word").mouseenter(function()
+  { // what to do if the mouse enters
+    one of the span elements(class is word)
+    $(this).css("color", "red"); // turn this element, that the mouse
+    has entered, red
+    $("#wddiv").html($(this).html()); // put the innerHTML of this
+    element(a word) into wddiv
+    // Get the id attribute of this element (e.g. "wd27"), take off the
+    first two characters("wd"),
+      // then put the remainder (e.g. "27") into the innerHTML of posdiv
+      $("#posdiv").html($(this).attr("id").substring(2));
+    $("#div2").show(); // show div2 element
+  });
 
-[ // Note this is exactly equivalent to:
-document.getElementById("maindiv").innerHTML=words;
-$("#maindiv").html(words);
-
-setupjQ();
-}]{.blueCode}
-
-function setupjQ() {
-$(".word").mouseenter(function(){ // what to do if the mouse enters
-one of the span elements (class is word)
-$(this).css("color","red"); // turn this element, that the mouse
-has entered, red
-$("#wddiv").html($(this).html()); // put the innerHTML of this
-element (a word) into wddiv
-// Get the id attribute of this element (e.g. "wd27"), take off the
-first two characters ("wd"),
-// then put the remainder (e.g. "27") into the innerHTML of posdiv
-$("#posdiv").html($(this).attr("id").substring(2));
-$("#div2").show(); // show div2 element
-});
-
-$(".word").mouseleave(function(){ // what to do when the mouse leaves
-the span element
-$(this).css("color","blue");
-$("#div2").hide();
-});
+  $(".word").mouseleave(function()
+  { // what to do when the mouse leaves
+    the span element
+    $(this).css("color", "blue");
+    $("#div2").hide();
+  });
 }
 
-$(document).ready(function(){
-$("#div2").hide(); // hide div2 element as soon as document is ready
-(on page load)
+$(document).ready(function()
+{
+  $("#div2").hide(); // hide div2 element as soon as document is ready
+  (on page load)
 });
 </script>
 
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
 <div id="maindiv">
 <!-- Textarea containing arbitrary text; the user can paste something
 else into this textarea if they want -->
@@ -304,20 +340,24 @@ at position <span id="posdiv"></span></div>
 </html>
 
 Footnote: I've subsequently noticed that the remarkable
-jQuery method _\$.each()_ (see <https://api.jquery.com/jQuery.each/>)
-can be usd to implement the _setupWords()_ function above rather more
+jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>)
+can be used to implement the `setupWords()` function above rather more
 succinctly as:
 
-function setupWords() {
-var words = "";
-$.each($("#wordarea").val().split(" "), function (i, word) {
-words += "<span class='word' id='wd"+i+"'>"+word+"</span>
-";
-});
-\$("#maindiv").html(words);
+```js
+function setupWords()
+{
+  var words = "";
+  $.each($("#wordarea").val().split(" "), function(i, word)
+  {
+    words += "<span class='word' id='wd" + i + "'>" + word + "</span>
+    ";
+  });\
+  $("#maindiv").html(words);
 
-setupjQ();
+  setupjQ();
 }
+```
 
 This does exactly the same thing as the same function (coloured blue) in
 the code above. It's probably slightly more efficient to run; but

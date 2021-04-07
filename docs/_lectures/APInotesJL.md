@@ -155,7 +155,7 @@ Then any text from that phone number will be associated with that name
 (and you can change it at any time by sending another id-name text).
 This is where the parameter "name" in the XML output comes from --
 there is, of course, no "name" parameter in the original Texttools
-API. In the ouput from my API, texts with the "id-name" keyword do not
+API. In the output from my API, texts with the "id-name" keyword do not
 appear at all; for other texts, the text is provided with the keyword
 stripped off, but the keyword is in the "key" parameter.
 

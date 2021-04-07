@@ -73,8 +73,7 @@ The database is maintained on a server that may be (and in our case is)
 on a different machine from the web server, but PHP can get access to it
 in just the same way.
 
-[Further details about how to use MySQL locally are available
-here](additional14.html#MySQL).
+[Further details about how to use MySQL locally are availablehere](additional14.html#MySQL).
 
 First, let's take note of the usual structure of databases. We are for
 present purposes only interested in very simple ones. These consist of
@@ -100,28 +99,37 @@ applications.
 Here we'll assume that a very simple database with just one table
 called _Product_ already exists and contains data about various
 manufactured products. The _Product_ table has fields called:
-`Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage.`{.style5}
+```sql
+Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage.
+```
 
-The main SQL commands that we'll mention are SELECT, INSERT and UPDATE.
-The first of these is, naturally, used to select the information that is
+The main SQL commands that we'll mention are `SELECT`, `INSERT` and `UPDATE`. The first of these is, naturally, used to select the information that is
 being requested, e.g.
 
-`SELECT fieldname1 fieldname2 ... FROM tablename`
+```sql
+SELECT fieldname1 fieldname2 ... FROM tablename
+```
 
 where in practice we would use the names of the table and fields we need
 to address, whatever these are, for instance:
 
-`SELECT PruductName ProductType ... FROM Product`
+```sql
+SELECT PruductName ProductType ... FROM Product
+```
 
 This can be qualified in various ways, most especially by using WHERE,
 as in:
 
-`SELECT fieldname1 fieldname2 ... FROM tablename WHERE field=value`
+```sql
+SELECT fieldname1 fieldname2 ... FROM tablename WHERE field=value
+```
 
 SQL is best understood by looking at examples. An example of this kind
 of construction in relation to the data about products might be:
 
-`SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=door`
+```sql
+SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=door
+```
 
 which would have the effect of selecting just these three fields from
 all records in the Product table that have the value "door" in the
@@ -130,18 +138,24 @@ ProductType field.
 The next most obvious thing to do with a database is insert data into
 it, using the pattern:
 
-`INSERT INTO tablename(fieldname1, fieldname2, ...) VALUES(value1, value2, ...)`
+```sql
+INSERT INTO tablename(fieldname1, fieldname2, ...) VALUES(value1, value2, ...)
+```
 
 where the field names and values match up, as for example:
 
-`INSERT INTO Product(Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage) VALUES('Smith & Sons', 'http://www.smith.com/', 'Door 26', 'door', 'Wooden panelled', '87.25', 'http://www.smith.com/images/door26.jpg')`
+```sql
+INSERT INTO Product(Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage) VALUES('Smith & Sons', 'http://www.smith.com/', 'Door 26', 'door', 'Wooden panelled', '87.25', 'http://www.smith.com/images/door26.jpg')
+```
 
 This would create a new _Product_ record with these values for all the
 fields. One could specify values for just some of the fields, but the
 fields named and the values given for them must always be provided in
 the same order as each other. So:
 
-`INSERT INTO Product(Manufacturer, ProductName) VALUES('Smith & Sons', 'Door 26')`
+```sql
+INSERT INTO Product(Manufacturer, ProductName) VALUES('Smith & Sons', 'Door 26')
+```
 
 is also OK -- the other fields will take default values (typically
 NULL, but you can specify other things if you like when you create the
@@ -149,7 +163,9 @@ database table to begin with).
 
 Alternatively, one may need to update an existing record, for instance:
 
-`UPDATE Product SET ProductPrice = '92.63', ProductDescription = 'Wooden richly panelled' WHERE ProductName = 'Door 26'`
+```sql
+UPDATE Product SET ProductPrice = '92.63', ProductDescription = 'Wooden richly panelled' WHERE ProductName = 'Door 26'
+```
 
 -- if, say, the price of Door 26 has been changed and we want to update
 its description. Of course, the identification of this record depends on
@@ -160,12 +176,16 @@ identification.
 Deleting records is dangerously easy; the character \* is available as a
 "wildcard", so:
 
-`DELETE * FROM Product`
+```sql
+DELETE * FROM Product
+```
 
 will _delete all the records in the Product table_! So one needs to
 restrict this, as in:
 
-`DELETE FROM Product WHERE ProductName = 'Door 26'`
+```sql
+DELETE FROM Product WHERE ProductName = 'Door 26'
+```
 
 which will delete all records concerning any product called "Door 26".
 
@@ -182,7 +202,7 @@ create a database from scratch using PHP, but we assume here that the
 database already exists. So the next step is to connect to it.
 
 There are a number of different ways supported by PHP for creating and
-working with connections to MySQL (and other) databases. In dfferent
+working with connections to MySQL (and other) databases. In different
 tutorials, books, code snippets etc., you may come across several of
 these. Some of them are relatively outmoded and have been replaced with
 better methods. Some are extremely insecure, in the sense that they
@@ -248,9 +268,9 @@ manual.
 
 So we begin by creating a new MySQLi object to establish the DB
 connection (remembering the "\$" in variable names):
-
+```php
     $mysqli = new mysqli("server", "username", "password", "database");
-
+```
 The arguments to this are _strings_ (hence in quotes), and should be
 your own individual credentials for accessing your DB on our server.
 (Or, if you have installed MAMP or similar on your own machine, then the
@@ -264,12 +284,12 @@ is.
 
 It's now a good policy to check the connection, because if it has
 failed then going further will cause unpleasant errors.
-
+```php
     if ($mysqli->connect_errno) {
        printf("Connect failed: %sn", $mysqli->connect_error);
        exit();
     }
-
+```
 Here we exploit the fact that the _mysqli_ object has two properties,
 _connect_errno_ and _connect_error_, where the first is non-zero if
 there is an error, and in that case the second contains a string
@@ -280,9 +300,9 @@ strings, often used by traditional programmers and hence often found in
 example code, especially in the manual (see also
 <http://uk.php.net/manual/en/function.printf.php>). In this case, it is
 equivalent to saying:
-
+```php
        echo "Connect failed: " . $mysqli->connect_error . "n";
-
+```
 -- which is arguably clearer.
 
 ### Creating a query
@@ -291,11 +311,11 @@ If there is no error at this stage, then we have a functioning database
 connection. The next step is to create a query. In sufficiently simple
 cases, we can do this simply by writing some SQL as a string and sending
 it to MySQL:
-
+```php
     if ($result = $mysqli->query("SELECT * FROM Product"))   {
        printf("Select returned %d rows.n", $result->num_rows);
     }
-
+```
 Here [$result]{.style4} is a variable that will be set to a
 _mysqli_result_ object as "resultset" (if the _query()_ method
 returns a non-zero value), and we can then extract information from it,
@@ -318,11 +338,15 @@ It works by taking the query and putting into it placeholders for the
 parameters that we want to query the database about, or update. Thus a
 query such as
 
-`SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=door`
+```sql
+SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=door
+```
 
 becomes
 
-`SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=?`
+```sql
+SELECT Manufacturer, ProductName, ProductType FROM Product WHERE ProductType=?
+```
 
 where the "?" is a placeholder for the parameter value "door".
 Placeholders are used for values that are actual data values in the DB,
@@ -330,21 +354,23 @@ i.e. not column names or table names, but data values. Note that if
 there are several placeholders, they are all represented as "?"s, so
 there could be a number of these, say as in:
 
-`INSERT INTO Product(Manufacturer, ProductName) VALUES(?,?)`
+```sql
+INSERT INTO Product(Manufacturer, ProductName) VALUES(?,?)
+```
 
 The prepared statment is then created thus:
-
+```php
     $stmt = $mysqli->prepare("SELECT Manufacturer, ProductName FROM Product WHERE ProductType=?")
-
+```
 Here, again, "\$stmt" is just a variable, which you could use any name
 for. But the _mysqli->prepare()_ method returns a _mysqli statement_
 object, which we now work with to create and perform the query itself.
 We do this by binding the placeholders to specific variables, which we
 create and give values. For instance:
-
+```php
     $stmt->bind_param("s", $prodtype);
     $prodtype = "door";
-
+```
 We are here calling the _bind_param()_ method of the _mysqli_stmt_
 object that is represented by _\$stmt_. What the call says is that we
 are binding a _string_ (hence the "s") to the first parameter ("?")
@@ -352,11 +378,11 @@ in the prepared statement, and this string will be provided in the
 variable _\$prodtype_. If there are several parameters, we give these as
 separate variables **_in the order that they appear in the prepared
 statement_**, e.g. for the INSERT example above we might have:
-
+```php
     $stmt->bind_param("ss", $manuf, $prodname);
     $manuf = 'Smith & Sons';
     $prodname = 'Door 26';
-
+```
 In this case, "ss" says that we will be giving _two_ parameters which
 are both strings. Other possible types pf parameters are integer, double
 and "blob", which are indicated by the letters "i", "d" and "b",
@@ -364,9 +390,9 @@ respectively.
 
 So now we have the statement ready with its parameters bound, we can
 _execute_ it:
-
+```php
     $stmt->execute();
-
+```
 What could be simpler? -- A nice feature of this arrangement is that it
 always uses the statement we prepared with the variables we bound to it,
 but we can change their values. So if we are doing several updates, for
@@ -394,11 +420,11 @@ it more than once it will repeatedly fetch each row in the resultset
 until there are none left (and then it will return **_false_**). Each
 time, it will put the values in the row retrieved into the variables we
 have just bound. So if we have a loop like this:
-
+```php
     while ($stmt->fetch()) {                    // keep going until fetch returns false
        printf("%s %sn", $manuf, $prodname);
     }
-
+```
 we will get a line printed for each row in the resultset, i.e. each row
 in the data table where the ProductType was "door".
 

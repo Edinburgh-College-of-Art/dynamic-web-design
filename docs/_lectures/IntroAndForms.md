@@ -26,7 +26,7 @@ in an interaction, and how we can use this to provide for different
 kinds of functionality. In particular, we look at how information can be
 obtained from the user by means of *form-filling*, and we begin to look
 at how it can be processed once we've got it.
-]{style="font-style:normal"}
+]
 
 [We develop this line of discussion by starting to look at the use of
 *databases* and how they can be integrated to provide dynamic
@@ -61,7 +61,7 @@ offer it as input to a plugin; otherwise it may launch a helper
 application or just save the file somewhere. (Usually browser
 "preferences" determine how various kinds of document are handled; see
 also
-<http://en.wikipedia.org/wiki/Internet_media_type>.)]{style="font-style:normal"}
+<http://en.wikipedia.org/wiki/Internet_media_type>.)]
 
 [Sometimes, the document requested by the browser does not already exist
 on the server machine, at least not in the required form. In that case,
@@ -89,7 +89,9 @@ follows a "**?**" character. Thus, if you visit the Google search site
 that the URL in the browser changes to something like the
 following:]{style="font-style:normal"}
 
-`http://www.google.com/search?hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search`
+```
+http://www.google.com/search?hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search
+```
 
 In this URL, _search,_ just before the "_?_", [ will be the name of
 some application on the Google server machine, and the string
@@ -140,20 +142,34 @@ in a file, and the application is called _namesave.cgi_[. If one
 executes it with a name as parameter, it will add the name to a file. We
 could have the user always type in a URL ending
 with]{style="font-style:normal"}
-
+```
 [.../namesave.cgi?name=John+Smith]{style="font-family:Courier"}
-
+```
 (or whatever their name might be), but this is not at all convenient.
 Usually the user would be put off by this, and it is more practical, as
 well as more attractive and simpler, to provide instead an HTML form as
 follows.
 
-`<html> <head> <title>Simple example form</title> </head> <body> <h1>An example of a very simple form</h1> <p> <form method="GET" action="namesave.cgi"> Enter your name here: <input type="text" name="name"> <input type="submit"> <input type="reset"> </form> </body> </html>`
+```html
+<html>
+
+  <head>
+    <title>Simple example form</title>
+  </head>
+
+  <body>
+    <h1>An example of a very simple form</h1>
+    <p>
+      <form method="GET" action="namesave.cgi"> Enter your name here: <input type="text" name="name"> <input type="submit"> <input type="reset"> </form>
+  </body>
+
+</html>
+```
 
 When this HTML is displayed, it looks as follows ([or as at this
 link](http://ddm.caad.ed.ac.uk/lectures/DDM/Intro_Digital_Media/Lecture11/simpleform.html)):
 
-![](Lecture1notes_files/image002.jpg){width="395" height="129"}
+![](img/image002.jpg)
 
 And when the Submit button is clicked, the URL changes to the one shown
 above, i.e. it ends in _namesave.cgi_ (and what comes before that
@@ -176,7 +192,9 @@ through its "action" attribute a CGI application that will be used by
 the server to process the form data, and the method (GET or POST) will
 be as specified by the "method" attribute:
 
-`<form method="GET" action="namesave.cgi">`
+```html
+<form method="GET" action="namesave.cgi">
+```
 
 All you need to do, then, is decide what application to use and create a
 program that handles the data appropriately.
@@ -192,7 +210,7 @@ decoding POST information is more complicated. (With PHP, as we'll see
 below, we normally use POST for form data, but we will not need to know
 the details of how PHP decodes it.)
 
-Remember that the URL query string can be used even wihout forms, to
+Remember that the URL query string can be used even without forms, to
 provide information for an application such as ColdFusion. This will
 continue to be important for us.
 
@@ -295,7 +313,19 @@ parts **within the PHP tags** as _script_ elements, or simply _the PHP
 script_. This is not necessarily the same terminology as you will find
 elsewhere, but I think it's clearer if used consistently.)
 
-` <HTML> <HEAD> <TITLE>PHP Example</TITLE> </HEAD> /<BODY> <H2>Today's date is ``<?php echo date("d/m/Y"); ``?> </H2> </BODY> </HTML> `
+```html
+<HTML>
+
+  <HEAD>
+    <TITLE>PHP Example</TITLE>
+  </HEAD> /
+
+  <BODY>
+    <H2>Today's date is ``<?php echo date("d/m/Y"); ``?> </H2>
+  </BODY>
+
+</HTML>
+```
 
 This is clearly HTML with just the embedded PHP tags. Within the scope
 of these tags, everything is taken to be PHP code that should be
@@ -312,7 +342,7 @@ can guess how to make it put the day before the month!)
 The processing of this template is illustrated in the following diagram
 (click for larger version).
 
-[![PHP processing diagram](PHP-process.png){width="547"
+[![PHP processing diagram](img/PHP-process.png){width="547"
 height="427"}](PHP-process.png)
 
 _Always remember that the PHP script is only processed if the template
@@ -342,39 +372,42 @@ simple "currency converter", which is _a form that gets posted to
 itself_ -- a very useful technique in many situations. This HTML form
 is in a file called "convert.php"
 ([<http://playground.eca.ed.ac.uk/~jlee/test/convert.php>]{.style10}):
+```php
+<html>
 
-    <html>
-    <head>
+  <head>
     <title>Untitled Document</title>
-    </head>
-    <body>
+  </head>
+
+  <body>
     <h2>Currency converter</h2>
     <form name="form1" method="post" action="convert.php">
-    <p> Source currency:
-       <input type="text" name="Source">
-    </p>
-    <p> Conversion rate:
-    <input type="text" name="Rate">
-    </p>
-    <p>
-    <input type="submit" name="Submit" value="Submit">
-    </p>
+      <p> Source currency:
+        <input type="text" name="Source">
+      </p>
+      <p> Conversion rate:
+        <input type="text" name="Rate">
+      </p>
+      <p>
+        <input type="submit" name="Submit" value="Submit">
+      </p>
     </form>
     <?php
-     if (isset($_POST["Submit"])) {
-        $result=$_POST["Source"]*$_POST["Rate"];
-    ?>
+ if (isset($_POST["Submit"])) {
+    $result=$_POST["Source"]*$_POST["Rate"];
+?>
     <h2>The result is:
+      <?php
+    echo $result;
+?>
+      in the target currency.</h2>
     <?php
-        echo $result;
-    ?>
-    in the target currency.</h2>
-    <?php
-     }
-    ?>
-    </body>
-    </html>
+ }
+?>
+  </body>
 
+</html>
+```
 The colours are just to help me in referring to the code. Notice the use
 of _if_ (in the blue part, which is the PHP script) for conditional
 processing: PHP has a full range of conditional constructions like
@@ -438,16 +471,16 @@ developers will output some of the HTML from within the PHP script
 elements, which makes the overall template simpler and more compact. We
 could replace the whole part in blue and green, in the above template,
 with simply the following:
-
-    <?php
-     if (isset($_POST["Submit"])) {
-       $result=$_POST["Source"]*$_POST["Rate"];
-       echo "<h2>The result is: ";
-       echo $result;
-       echo " in the target currency.</h2>n";
-     }
-    ?>
-
+```php
+<?php
+if (isset($_POST["Submit"])) {
+    $result=$_POST["Source"]*$_POST["Rate"];
+    echo "<h2>The result is: ";
+    echo $result;
+    echo " in the target currency.</h2>n";
+}
+?>
+```
 Here, the PHP _echo_ statements output the HTML instead of it being in
 the material outside the script. (The "n" is just a new line in the
 output --- not really necessary but it will make the output page HTML
@@ -456,7 +489,7 @@ even more succinct by combining the three _echo_ statements into one, by
 using the "_."_ operator (which concatenates strings in the same way
 as the _"+"_ operator in e.g. Actionscript):
 
-```{.style7}
+```php
 <?php
  if (isset($_POST["Submit"])) {
    $result=$_POST["Source"]*$_POST["Rate"];
@@ -469,14 +502,14 @@ Below, we will notice yet another way of obtaining the same output using
 the function _printf()_. It is usually the case with PHP that there are
 several ways of achieving the same result.
 
-### The \$\_GET array
+### The `$_GET` array
 
 Variables that are provided to a template in a query string as part of
 the URL (or from a form that uses the HTTP GET method) are also made
 very simply and directly available, similarly to POST variables, as
-members of a standard array called _\$\_GET_. Thus if we have a template
+members of a standard array called `$_GET`. Thus if we have a template
 called as _template?var=val_ then in the template itself we can access
-_\$\_GET["var"]_ and discover that its value is _val_.
+`$_GET["var"]` and discover that its value is _val_.
 
 A tutorial on creating a form is also available at
 <http://playground.eca.ed.ac.uk/~jlee/PHP-FormTutorial/>

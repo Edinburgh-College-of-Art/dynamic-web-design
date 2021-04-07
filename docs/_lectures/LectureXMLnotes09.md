@@ -20,7 +20,7 @@ the World Wide Web, and in particular of the rapidly expanding use of
 XML. In this lecture, we look at a few of the basic techniques available
 in this area.]{style="font-style:normal"}
 
-# **HTML**
+## **HTML**
 
 HTML (the "HyperText Markup Language") is historically part of a
 sustained effort to develop a way of describing the form of documents
@@ -50,7 +50,7 @@ So the data (the text) is structured and presented through a system that
 marks it up and allows us to specify what kinds of things it contains
 and how we want to see them displayed.
 
-# XML
+## XML
 
 A problem with HTML, even with this elaborated styling mechanism, is
 that the objective of the markup is to control the _appearance_[ of a

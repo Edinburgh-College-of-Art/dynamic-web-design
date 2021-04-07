@@ -45,16 +45,16 @@ FFF-ImageServer, which has a structure directly analogous to the
 FFF-SimpleExample application. The ImageServer class is a class
 containing properties (variables) and methods (functions) relating to
 managing the pictures. Here are the properties:
-
+```php
 [ private $filedata;
 private $uploadResult = "Upload failed! (unknown reason)";
 private $pictable = "picdata_fff";
 private $thumbsize = 200; // max width/height of thumbnail
 images]{.style2}
 [private \$acceptedTypes = ["image/jpeg", "image/png",
-"image/gif", "image/tiff", "image/svg+xml"]; // file types we'll
+    "image/gif", "image/tiff", "image/svg+xml"]; // file types we'll
 accept for uploading]{.style2}
-
+```
 _\$pictable_ is the table in the DB, and thumbsize is the size in pixels
 for thumbnail images. _\$filedata_ is simply a variable to hold data
 temporarily, and _\$uploadResult_ is a self-explanatory message, which
@@ -65,7 +65,7 @@ inside the class itself.
 In the index.php file for the application, we also define several
 (global) F3 variables, as usual:
 
-```{.style2}
+```php
 $f3->set('AUTOLOAD','autoload/;../../../AboveWebRoot/autoload/');        // autoload ImageServer class and DB stuff
 $db = DatabaseConnection::connect();                                        // defined as autoloaded class in AboveWebRoot/autoload/
 $f3->set('DB', $db);
@@ -111,18 +111,15 @@ simple form in an F3 template, _upload.html_. This is defined in the
 folder identified by the _UI_ variable, as in the FFF-SimpleExample. The
 template is reached immediately by the route defined for the application
 root (<http://jlee.edinburgh.domains/fatfree/F3-ImageServer/>):
-
+```php
 <h1>Upload</h1>
 <form name="upload" method="POST" action="{{ @BASE }}{{
 @PARAMS.0 }}" enctype="multipart/form-data">
-<label for='picfile'>Select image file: </label><input
-type="file" name="picfile" id="picfile" /><br />
-<label for='picname'>Picture title: </label><input type="text"
-name="picname" id="picanme" placeholder="Title for image"
-size="80"/><br />
-<input type="submit" name="submit" value="Submit"/>
+  <label for='picfile'>Select image file: </label><input type="file" name="picfile" id="picfile" /><br />
+  <label for='picname'>Picture title: </label><input type="text" name="picname" id="picanme" placeholder="Title for image" size="80" /><br />
+  <input type="submit" name="submit" value="Submit" />
 </form>
-
+```
 The form is normal HTML, using an input of type _file_, which will
 invite the user to choose a file that will be uploaded and a text input
 that will be used simply to name or describe the file. Note the
@@ -132,20 +129,20 @@ important. You'll see that the action URL of this form is the F3 route
 the first element of the form PARAMS, which is the file name "upload",
 but visited with a POST request method. In _index.php_, the route for a
 POST request to "/upload" says:
-
+```php
 $f3->route('POST /upload',
-function($f3) {
-$is = new ImageServer;
-if ($filedata = $is->upload()) { // if this is null, upload failed
-$f3->set('filedata', \$filedata);
+    function($f3) {
+        $is = new ImageServer;
+        if ($filedata = $is->upload()) { // if this is null, upload failed
+            $f3->set('filedata', \$filedata);
 
-$f3->set('html_title','Image Server Home');
-$f3->set('content','uploaded.html');
-echo template::instance()->render('layout.html');
-}
-}
+            $f3->set('html_title','Image Server Home');
+            $f3->set('content','uploaded.html');
+            echo template::instance()->render('layout.html');
+        }
+    }
 );
-
+```
 -- which creates an ImageServer object, and runs its _upload()_ method,
 which returns the data from the upload, or _null_ if the upload failed.
 If the upload succeeded, these various data are shown to the user via
@@ -156,6 +153,7 @@ the _uploaded.html_ template.
 The _upload()_ method is made much simpler by using F3, which provides a
 class called _Web_ for operations like this. The main part of the code
 is just this:
+```php
 
 [$overwrite = false; // set to true, to overwrite an existing file;
 Default: false
@@ -163,27 +161,27 @@ $slug = true; // rename file to filesystem-friendly version]{.redCode}
 
 [Web::instance()->receive]{.blueCode}(
 [function($file,$anything){
-]{.greenCode}[ $this->filedata = $file;]{.purpleCode}[
-]{.greenCode} [if($this->filedata['size'] > (2 * 1024 * 1024))
-{ // if bigger than 2 MB
-$this->uploadResult = "Upload failed! (File > 2MB)";
-return false; // this file is not valid, return false will skip moving
-it
+    ]{.greenCode}[ $this->filedata = $file;]{.purpleCode}[
+    ]{.greenCode} [if($this->filedata['size'] > (2 * 1024 * 1024))
+    { // if bigger than 2 MB
+        $this->uploadResult = "Upload failed! (File > 2MB)";
+        return false; // this file is not valid, return false will skip moving
+        it
 }
 if(!in_array($this->filedata['type'], $this->acceptedTypes)) {
 // if not an approved type
-$this->uploadResult = "Upload failed! (File type not accepted)";
-return false; // this file is not valid, return false will skip moving
-it
+    $this->uploadResult = "Upload failed! (File type not accepted)";
+    return false; // this file is not valid, return false will skip moving
+    it
 }]{.yellowCode}[
-$this->uploadResult = "success"; // everything worked OK
+        $this->uploadResult = "success"; // everything worked OK
 return true; // allows the file to be moved from php tmp dir to your
 defined upload dir
 },]{.greenCode}
 [$overwrite,
-$slug]{.redCode}
-);
+    $slug]{.redCode}
 
+```
 This looks more complicated than it is ... I have colour-coded it to
 help identify parts of it in the following discussion: coloured text
 refers to code of the same colour.
@@ -222,17 +220,17 @@ transforned to avoid any problems with the filesystem.]{.redCode}
 
 The method _store()_ very simply copies details of the uploaded image
 into a DB record, using the F3 database mapper object:
-
+```php
 public function store() {
-global $f3; // because we need f3->get()
-$pic = new DBSQLMapper($f3->get('DB'),$this->pictable); //
-create DB query mapper object
+    global $f3; // because we need f3->get()
+    $pic = new DBSQLMapper($f3->get('DB'),$this->pictable); //
+    create DB query mapper object
 $pic->picname = $this->filedata["title"];
 $pic->picfile = $this->filedata["name"];
 $pic->pictype = $this->filedata["type"];
 \$pic->save();
 }
-
+```
 -- where _picfile_ is the actual pathname of the file as saved,
 _picname_ is the name given to the picture as typed in by the user, and
 _pictype_ is the MIME type of the image file (e.g. jpg). Entering the
@@ -252,7 +250,7 @@ In here, we first query the _ImageServer_ method _infoService()_ to find
 out what images there are. It just returns all the data in the DB,
 unless it is given a non-zero ID, in which case it returns just the data
 for that picture:
-
+```php
 [// This just returns all the data we have about images in the DB, just
 as an array.
 // If given no argument, it uses the default argument, 0, and in this
@@ -260,22 +258,22 @@ case it returns data about all images.
 // If given an image ID as argument (there can be no image with ID 0),
 it returns data only about that image.
 public function infoService($picID=0) {
-global $f3;
-$returnData = array();
-$pic=new DBSQLMapper($f3->get('DB'),$this->pictable); //
-create DB query mapper object
+    global $f3;
+    $returnData = array();
+    $pic=new DBSQLMapper($f3->get('DB'),$this->pictable); //
+    create DB query mapper object
 $list = $pic->find();
 ]{.style2}[[if ($picID == 0) {
-foreach ($list as $record) {
-$recordData = array();
-$recordData["picfile"] = $record["picfile"];
-$recordData["pictype"] = $record["pictype"];
-$recordData["picname"] = $record["picname"];
-$recordData["picID"] = $record["id"];
-$recordData["thumbNail"] =
-$f3->get('UPLOADS').$this->thumbFile($pic["picfile"]);
-array_push( $returnData, $recordData);
-}]{.redCode}]{.style2}[
+        foreach ($list as $record) {
+            $recordData = array();
+            $recordData["picfile"] = $record["picfile"];
+            $recordData["pictype"] = $record["pictype"];
+            $recordData["picname"] = $record["picname"];
+            $recordData["picID"] = $record["id"];
+            $recordData["thumbNail"] =
+                $f3->get('UPLOADS').$this->thumbFile($pic["picfile"]);
+            array_push( $returnData, $recordData);
+        }]{.redCode}]{.style2}[
 return $returnData;
 }
 $pic->load(['id=?',$picID]);
@@ -286,7 +284,7 @@ $recordData["picname"] = $pic["picname"];
 $recordData["picID"] = $pic["id"];
 return $recordData;
 }]{.style2}
-
+```
 The code in red is assembling an array of all the results, because
 _\$pic->find()_ provides each row from the database in the form of an
 associative array, and the relevant elements are extracted from this and
@@ -295,30 +293,32 @@ returned to the calling point (in this case, in _index.php_). In
 _index.php_ there is code for the _viewimages_ route URL that very
 simply acquires the above data from the _infoService()_ method and then
 feeds it to the _viewimages.html_ template:
-
+```php
 $f3->route('GET /viewimages',
-function($f3) {
-$is = new ImageServer;
-$info = $is->infoService(0);
-$f3->set('datalist', $info);
-$f3->set('content', 'viewimages.html');
-echo template::instance()->render('layout.html');
-}
+    function($f3) {
+        $is = new ImageServer;
+        $info = $is->infoService(0);
+        $f3->set('datalist', $info);
+        $f3->set('content', 'viewimages.html');
+        echo template::instance()->render('layout.html');
+    }
 );
-
+```
 ### 3.2 Displaying an image
 
 The _viewimages.html_ template contains a central loop that displays the
 images:
 
+```php
 <repeat group="{{ @datalist }}" value="{{ @item }}">
-<div id="imgdisplay">
-<p><a href="{{ @BASE }}/image/{{ @item.picID }}"><img src="{{
+    <div id="imgdisplay">
+        <p><a href="{{ @BASE }}/image/{{ @item.picID }}"><img src="{{
 @BASE }}/thumb/{{ @item.picID }}" /></a></p>
-<p>{{ @item.picname }} (<a href="{{ @BASE }}/delete/{{
+        <p>{{ @item.picname }} (<a href="{{ @BASE }}/delete/{{
 @item.picID }}">Delete?</a>)</p>
-</div>
+    </div>
 </repeat>
+```
 
 and what happens here is that it goes through the IDs of all the images
 that are in the DB, displaying each one through a URL of the form:
@@ -344,11 +344,11 @@ header followed by raw image data (because this is just what the browser
 sees if it looks at an image file). The code for a route such as
 _/image/1_ does just this; hence we can use it as the source parameter
 in an image link, e.g.:
-
+```php
 [<img
 src="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1"
 />]{.style2}
-
+```
 where it will seem to the browser to just be an image, in this case the
 thumbnail-sized version of the image with ID 1 in the database (assuming
 it exists, but of course we should never use an ID here for an image
@@ -356,14 +356,14 @@ that doesn't exist).
 
 This is achieved in the code for this route (in index.php, as usual) by
 invoking the _showImage()_ method of the _ImageServer_ class:
-
+```php
 $f3->route('GET|POST /image/@id',
-function($f3) {
-$is = new ImageServer;
-$is->showImage(\$f3->get('PARAMS.id'), false);
+    function($f3) {
+        $is = new ImageServer;
+        $is->showImage(\$f3->get('PARAMS.id'), false);
 }
 );
-
+```
 Note here that this is defined for either GET or POST requests (because
 we might use POST in an AJAX request, for example), and the route is
 parameterised by having "@id" at the end of the URL. This means that
@@ -376,23 +376,23 @@ _/images?id=1_, with the same effect.)
 The method _showImage()_ takes the id of the image required, and a
 boolean parameter that will show the thumbnail if true or the original
 image if false.
-
+```php
 public function showImage($picID, $thumb) {
-global $f3;
-[$pic=new DBSQLMapper($f3->get('DB'),$this->pictable); //
-create DB query mapper object
+    global $f3;
+    [$pic=new DBSQLMapper($f3->get('DB'),$this->pictable); //
+    create DB query mapper object
 $pic->load(['id=?',$picID]);]{.blueCode} // load DB record
 matching the given ID
-[$fileToShow =
-($thumb?$f3->get('UPLOADS').$this->thumbFile($pic["picfile"]):$pic["picfile"]);
+    [$fileToShow =
+        ($thumb?$f3->get('UPLOADS').$this->thumbFile($pic["picfile"]):$pic["picfile"]);
 $fileType = ($thumb?"image/jpeg":$pic["pictype"]);]{.greenCode}
 // thumb is always jpeg
 [header("Content-type: " . $fileType);]{.purpleCode} // write out the
 image file http header
-[readfile($fileToShow);]{.redCode} // write out raw file contents
+    [readfile($fileToShow);]{.redCode} // write out raw file contents
 (image data)
 }
-
+```
 It [finds the DB record for the required image]{.blueCode}, then
 [locates either the image or thumbnail file in the UPLOAD
 folder]{.greenCode}, which is in AboveWebRoot and therefore not normally
@@ -421,19 +421,19 @@ will allow the image, and all trace of it, to be deleted, as follows.
 To delete an image, we need to remove the image file, the thumbnail
 image file, and the related database record. This is done by the
 _deleteService()_ method in the _ImageServer_ class:
-
+```php
 public function deleteService($picID) {
-global $f3;
-[$pic=new DBSQLMapper($f3->get('DB'),$this->pictable);
-]{.redCode}// create DB query mapper object[
-$pic->load(['id=?',$picID]);]{.redCode} // load DB record
-matching the given ID
-[unlink($pic["picfile"]);]{.blueCode} // remove the image file
+    global $f3;
+    [$pic=new DBSQLMapper($f3->get('DB'),$this->pictable);
+    ]{.redCode}// create DB query mapper object[
+    $pic->load(['id=?',$picID]);]{.redCode} // load DB record
+    matching the given ID
+    [unlink($pic["picfile"]);]{.blueCode} // remove the image file
 [unlink($f3->get('UPLOADS').$this->thumbFile($pic["picfile"]));]{.blueCode}
 // remove the thumbnail file
 [$pic->erase();]{.greenCode} // delete the DB record
 }
-
+```
 [The DB is queried to get the data]{.redCode}, then [the builtin
 function *unlink()* is used to remove the image file and the
 thumbnail]{.blueCode}, then [the database record is

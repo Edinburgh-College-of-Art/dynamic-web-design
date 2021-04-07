@@ -21,8 +21,9 @@ using _try_. Here is an earlier example set up to catch the undefined
 variable exception using _catch()_
 (<http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/urltest-catch.cfm?message1=MESSAGE&>):
 
+```php
 [try {
-echo "The first message given on the URL was <font
+    echo "The first message given on the URL was <font
 color=red>".$_GET["message1"]]{.style2}[."</font> ...n";
 <br />
 "The second message given on the URL was <font
@@ -30,10 +31,10 @@ color=red>".$\_GET["message2"]."</font> ...n";
 /CFOUTPUT>
 ]{.style2}[}
 catch(Exception $e){
-echo "<p>**** I'm afraid you have some kind of error:
+    echo "<p>**** I'm afraid you have some kind of error:
 ".$e->getMessage()."</p>";
 }]{.style2}
-
+```
 In PHP documentation (and books) there are examples of how to use
 catch() to handle specific errors (that throw exceptions) from
 databases. Here's a simple example of using it to handle the situation
@@ -41,7 +42,7 @@ when a database is unavailable, which usually happens when the database
 server is down, even though the ColdFusion server is OK.
 
 Here is a somewhat defensively coded database update query:
-
+```xml
 <CFTRY>
 <CFLOCK NAME="InsertNewRecord" TYPE="EXCLUSIVE" TIMEOUT="30">
 <CFTRANSACTION>
@@ -59,3 +60,4 @@ href="mailto:J.Lee@ed.ac.uk">John Lee</a>.<br> Thanks.</p>
 <CFABORT>
 </CFCATCH>
 </CFTRY>
+```

@@ -9,26 +9,26 @@ author: "John Lee"
 A handy construct in PHP, which allows you to use conditionals without
 having lots of clumsy "if ... then" constructions, is the following
 kind of *conditiona*l _expression_:
-
+```js
     (condition)?(what if true):(what if false)
-
+```
 --- where the brackets are optional if there is no ambiguity.
 
 Consider this
 (<http://playground.eca.ed.ac.uk/~jlee/test/urltest.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)):
-
+```php
     <?php
      echo "The first message given on the URL was <font color=red>" . (isset($_GET["message1"])?$_GET["message1"]:"not specified") . "</font> ...<br />";
      echo "The second message was <font color=red>" . ($_GET["message2"]?$_GET["message2"]:"not specified") . "</font>n";
     ?>
-
+```
 (It's an old example: such use of the _font_ tag is deprecated now --
 use CSS for anything like this.)
 
 The part highlighted in red says that if the URL parameter _message1_ is
 set, then it should be echoed, otherwise the string "not specified"
 should be. The part in green says the same about _message2_, but
-withouth using _isset()_. What happens in this case depends on how the
+without using _isset()_. What happens in this case depends on how the
 PHP server is set up. On my local machine, _\$\_GET["message2"]_
 will evaluate to FALSE if the paramter is not set, so that _isset()_ can
 be omitted. However, on the _playground_ server, there is a check for
@@ -42,9 +42,9 @@ includes the initial _echo_, which is clearly too wide.
 
 This kind of conditional expression is often useful when assembling
 strings for output, e.g. as in:
-
+```php
     echo "You ordered " . $n . " item" . ($n==1?"":"s") . "n";
-
+```
 which simply says "You ordered 1 item", if _\$n_ is 1, or else e.g.
 "You ordered 23 items" if _\$n_ is not 1. A small consideration, but
 little things like this can make an interface seem much more natural and
@@ -66,14 +66,17 @@ DEBUG, and of course have *$f3->(run)\* at the end. Or you could drop
 the following code into any F3 index.php file, such as the SimpleExample
 one. So you could define a route, let's say for a URL ending in
 "/urltest", such as:
-
-    $f3->route('GET /urltest',
-      function ($f3) {
-         echo "The first message given on the URL was <font color=red>" . ($f3->exists("GET.message1")?$f3->get("GET.message1"):"not specified") . "</font> ...<br />";
-         echo "The second message was <font color=red>" . ($f3->exists("GET.message2")?$f3->get("GET.message2"):"not specified") . "</font>n";
-      }
-    );
-
+```php
+$f3->route('GET /urltest',
+  function($f3)
+  {
+    echo "The first message given on the URL was <font color=red>".($f3->exists("GET.message1") ? $f3->get("GET.message1") : "not specified").
+    "</font> ...<br />";
+    echo "The second message was <font color=red>".($f3 -> exists("GET.message2") ? $f3 -> get("GET.message2") : "not specified").
+    "</font>n";
+  }
+);
+```
 It works just the same as the vanilla PHP version.
 
 In F3, it would be natural to use a template for situations such as the
@@ -82,15 +85,16 @@ would be a useful exercise to reconstruct these examples using an F3
 template. Here's a hint: in F3 you can embed expressions within
 templates (see <https://fatfreeframework.com/3.6/views-and-templates>,
 which is highly recommended reading). So instead of a line like:
-
+```php
 <input type="checkbox" name="checkIt" id="checkbox" [<?php echo
 isset(\$\_POST["checkIt"])?"checked":"";?>]{.style8} />
-
+```
 you could have:
 
+```php
 <input type="checkbox" name="checkIt" id="checkbox" [{{
 @POST.checkIt?"checked":"" }}]{.style8} />
-
+```
 which is much neater and more readable than the bare PHP version.
 
 ## Checking data types
@@ -122,29 +126,29 @@ error or an empty string (depending on how your server is configured).
 Consider this situation
 (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)):
 
+```html
 <form id="form1" name="form1" method="post" action="">
-<p>Check box:
-<input type="checkbox" name="checkIt" id="checkbox" />
-</p>
-<p>
-<input type="submit" name="Submit" id="button" value="Update"
-/>
-</p>
+  <p>Check box:
+    <input type="checkbox" name="checkIt" id="checkbox" />
+  </p>
+  <p>
+    <input type="submit" name="Submit" id="button" value="Update" />
+  </p>
 </form>
 <p>
-<?php
+  <?php
 echo "Value of checkbox is " . $_POST["checkIt"];
 ?>
-
+```
 Here, you'll find that if the box is checked, the value is "on", but
 if it isn't you get an error, or at least an incomplete sentence. The
 simplest way to fix this would be to use a conditional expression:
-
+```php
 <?php
 echo "Value of checkbox is " .
-[(isset($_POST["checkIt"])?"on":"off")]{.style8};
+    [(isset($_POST["checkIt"])?"on":"off")]{.style8};
 ?>
-
+```
 (or use whatever other strings you like instead of "on" and "off")
 then the problem is resolved fairly elegantly
 (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest2.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)).
@@ -156,24 +160,23 @@ at the point where the box is created on the form, and if so have it
 checked already when it appears. In this way, the state of the box
 remains as the user tends to expect
 (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest3.php>):
-
+```php
 <body>
-<form id="form1" name="form1" method="post" action="">
-<p>Check box:
-<input type="checkbox" name="checkIt" id="checkbox" [<?php echo
+  <form id="form1" name="form1" method="post" action="">
+    <p>Check box:
+      <input type="checkbox" name="checkIt" id="checkbox" [<?php echo
 isset($_POST["checkIt"])?"checked":"";?>]{.style8} />
-</p>
-<p>
-<input type="submit" name="Submit" id="button" value="Update"
-/>
-</p>
-</form>
-<p>
+    </p>
+    <p>
+      <input type="submit" name="Submit" id="button" value="Update" />
+    </p>
+  </form>
+  <p>
 <?php
 echo "Value of checkbox is " .
 (isset($_POST["checkIt"])?"on":"off");
 ?>
-
+```
 Notice that if you want "on" (the actual value returned from the form)
 to be something else, say "set", then you can add _value="set"_ as a
 attribute to the input of type checkbox, but in the code we have here we

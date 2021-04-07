@@ -4,6 +4,18 @@ title: "Server-side systems and database serving 2: working with databases"
 author: "John Lee"
 ---
 
+- [Working with Databases using PHP and the Fat-Free Framework](#working-with-databases-using-php-and-the-fat-free-framework)
+  - [Databases and web interfaces](#databases-and-web-interfaces)
+  - [Databases and SQL](#databases-and-sql)
+    - [A brief overview of basic SQL (optional)](#a-brief-overview-of-basic-sql-optional)
+  - [Linking to databases using PHP](#linking-to-databases-using-php)
+  - [Working with databases using F3](#working-with-databases-using-f3)
+    - [Setting up a connection](#setting-up-a-connection)
+    - [**Using a connection in an application**](#using-a-connection-in-an-application)
+  - [Managing input and output via web pages](#managing-input-and-output-via-web-pages)
+
+
+
 # Working with Databases using PHP and the Fat-Free Framework
 
 Once we start to accumulate material from forms, or any other data that

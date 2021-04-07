@@ -4,6 +4,19 @@ title: Further PHP
 author: "John Lee"
 ---
 
+
+- [An example application: the ImageServer](#an-example-application-the-imageserver)
+    - [1. The Manpics class](#1-the-manpics-class)
+    - [2. Uploading the images](#2-uploading-the-images)
+        - [2.1 Sanitising input](#21-sanitising-input)
+        - [2.2 Uploading](#22-uploading)
+    - [2.3 Storing the image data](#23-storing-the-image-data)
+    - [3. Viewing the images](#3-viewing-the-images)
+        - [3.1 Retrieving image information](#31-retrieving-image-information)
+        - [3.2 Displaying an image](#32-displaying-an-image)
+    - [4. Deleting an image](#4-deleting-an-image)
+    - [5. Final thoughts](#5-final-thoughts)
+
 ## An example application: the ImageServer
 
 The strategy in this example is to build an application that will allow

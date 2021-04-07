@@ -5,21 +5,17 @@ author: "John Lee"
 lecture: 2
 ---
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-	- [Working with Databases using PHP](#working-with-databases-using-php)
-	- [Databases and web interfaces](#databases-and-web-interfaces)
-	- [Databases and SQL](#databases-and-sql)
-	- [Linking to databases using PHP](#linking-to-databases-using-php)
-		- [Making a connection](#making-a-connection)
-		- [Creating a query](#creating-a-query)
-		- [Prepared statements](#prepared-statements)
-		- [Getting results](#getting-results)
-		- [In summary](#in-summary)
-	- [Putting the output on a web page](#putting-the-output-on-a-web-page)
-	- [Getting new data](#getting-new-data)
-
-<!-- /TOC -->
+- [Working with Databases using PHP](#working-with-databases-using-php)
+- [Databases and web interfaces](#databases-and-web-interfaces)
+- [Databases and SQL](#databases-and-sql)
+- [Linking to databases using PHP](#linking-to-databases-using-php)
+  - [Making a connection](#making-a-connection)
+  - [Creating a query](#creating-a-query)
+  - [Prepared statements](#prepared-statements)
+  - [Getting results](#getting-results)
+  - [In summary](#in-summary)
+- [Putting the output on a web page](#putting-the-output-on-a-web-page)
+- [Getting new data](#getting-new-data)
 
 ## Working with Databases using PHP
 
@@ -115,6 +111,7 @@ applications.
 Here we'll assume that a very simple database with just one table
 called _Product_ already exists and contains data about various
 manufactured products. The _Product_ table has fields called:
+
 ```sql
 Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage.
 ```
@@ -284,9 +281,11 @@ manual.
 
 So we begin by creating a new MySQLi object to establish the DB
 connection (remembering the "\$" in variable names):
+
 ```php
     $mysqli = new mysqli("server", "username", "password", "database");
 ```
+
 The arguments to this are _strings_ (hence in quotes), and should be
 your own individual credentials for accessing your DB on our server.
 (Or, if you have installed MAMP or similar on your own machine, then the
@@ -300,12 +299,14 @@ is.
 
 It's now a good policy to check the connection, because if it has
 failed then going further will cause unpleasant errors.
+
 ```php
     if ($mysqli->connect_errno) {
        printf("Connect failed: %sn", $mysqli->connect_error);
        exit();
     }
 ```
+
 Here we exploit the fact that the _mysqli_ object has two properties,
 _connect_errno_ and _connect_error_, where the first is non-zero if
 there is an error, and in that case the second contains a string
@@ -316,9 +317,11 @@ strings, often used by traditional programmers and hence often found in
 example code, especially in the manual (see also
 <http://uk.php.net/manual/en/function.printf.php>). In this case, it is
 equivalent to saying:
+
 ```php
        echo "Connect failed: " . $mysqli->connect_error . "n";
 ```
+
 -- which is arguably clearer.
 
 ### Creating a query
@@ -327,11 +330,13 @@ If there is no error at this stage, then we have a functioning database
 connection. The next step is to create a query. In sufficiently simple
 cases, we can do this simply by writing some SQL as a string and sending
 it to MySQL:
+
 ```php
     if ($result = $mysqli->query("SELECT * FROM Product"))   {
        printf("Select returned %d rows.n", $result->num_rows);
     }
 ```
+
 Here [$result]{.style4} is a variable that will be set to a
 _mysqli_result_ object as "resultset" (if the _query()_ method
 returns a non-zero value), and we can then extract information from it,
@@ -375,18 +380,22 @@ INSERT INTO Product(Manufacturer, ProductName) VALUES(?,?)
 ```
 
 The prepared statment is then created thus:
+
 ```php
     $stmt = $mysqli->prepare("SELECT Manufacturer, ProductName FROM Product WHERE ProductType=?")
 ```
+
 Here, again, "\$stmt" is just a variable, which you could use any name
 for. But the _mysqli->prepare()_ method returns a _mysqli statement_
 object, which we now work with to create and perform the query itself.
 We do this by binding the placeholders to specific variables, which we
 create and give values. For instance:
+
 ```php
     $stmt->bind_param("s", $prodtype);
     $prodtype = "door";
 ```
+
 We are here calling the _bind_param()_ method of the _mysqli_stmt_
 object that is represented by _\$stmt_. What the call says is that we
 are binding a _string_ (hence the "s") to the first parameter ("?")
@@ -394,11 +403,13 @@ in the prepared statement, and this string will be provided in the
 variable _\$prodtype_. If there are several parameters, we give these as
 separate variables **_in the order that they appear in the prepared
 statement_**, e.g. for the INSERT example above we might have:
+
 ```php
     $stmt->bind_param("ss", $manuf, $prodname);
     $manuf = 'Smith & Sons';
     $prodname = 'Door 26';
 ```
+
 In this case, "ss" says that we will be giving _two_ parameters which
 are both strings. Other possible types pf parameters are integer, double
 and "blob", which are indicated by the letters "i", "d" and "b",
@@ -406,9 +417,11 @@ respectively.
 
 So now we have the statement ready with its parameters bound, we can
 _execute_ it:
+
 ```php
     $stmt->execute();
 ```
+
 What could be simpler? -- A nice feature of this arrangement is that it
 always uses the statement we prepared with the variables we bound to it,
 but we can change their values. So if we are doing several updates, for
@@ -436,11 +449,13 @@ it more than once it will repeatedly fetch each row in the resultset
 until there are none left (and then it will return **_false_**). Each
 time, it will put the values in the row retrieved into the variables we
 have just bound. So if we have a loop like this:
+
 ```php
     while ($stmt->fetch()) {                    // keep going until fetch returns false
        printf("%s %sn", $manuf, $prodname);
     }
 ```
+
 we will get a line printed for each row in the resultset, i.e. each row
 in the data table where the ProductType was "door".
 

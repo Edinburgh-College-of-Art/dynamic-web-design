@@ -4,6 +4,17 @@ title: Server-side systems and database serving
 author: "John Lee"
 ---
 
+- [Introduction](#introduction)
+- [The role of the server](#the-role-of-the-server)
+- [CGI](#cgi)
+- [The HTTP request methods](#the-http-request-methods)
+- [Forms](#forms)
+- [The processing script](#the-processing-script)
+- [PHP](#php)
+- [Today's date is 15/01/2014](#todays-date-is-15012014)
+- [Forms in PHP](#forms-in-php)
+  - [The $_GET array](#the-get-array)
+
 ## Introduction
 
 Dynamic web sites are everywhere. Very few are static HTML pages.

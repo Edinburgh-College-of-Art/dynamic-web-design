@@ -6,8 +6,8 @@ author: "John Lee"
 
 
 
-	- [Course notes](#course-notes)
-		- [Lecture notes:](#lecture-notes)
+- [Course notes](#course-notes)
+- [Lecture notes:](#lecture-notes)
 
 
 

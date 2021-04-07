@@ -4,13 +4,9 @@ title: Additional thoughts on PHP
 author: "John Lee"
 ---
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-	- [Conditional expressions](#conditional-expressions)
-	- [Checking data types](#checking-data-types)
-	- [Checkboxes](#checkboxes)
-
-<!-- /TOC -->
+- [Conditional expressions](#conditional-expressions)
+- [Checking data types](#checking-data-types)
+- [Checkboxes](#checkboxes)
 
 ## Conditional expressions
 

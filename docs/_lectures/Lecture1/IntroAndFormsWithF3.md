@@ -4,6 +4,24 @@ title: "Server-side systems and database serving 1: introduction and forms"
 author: "John Lee"
 ---
 
+
+- [Introduction](#introduction)
+- [The role of the server](#the-role-of-the-server)
+- [CGI](#cgi)
+- [The HTTP request methods](#the-http-request-methods)
+- [Forms](#forms)
+- [The processing script](#the-processing-script)
+- [PHP](#php)
+- [Today's date is 11/01/2019](#todays-date-is-11012019)
+- [The Fat-Free Framework (F3)](#the-fat-free-framework-f3)
+    - [Routes](#routes)
+    - [Templates](#templates)
+    - [Forms in F3](#forms-in-f3)
+    - [The GET object](#the-get-object)
+    - [The PARAMS object](#the-params-object)
+
+
+
 ## Introduction
 
 Dynamic web sites are everywhere. Very few are static HTML pages.

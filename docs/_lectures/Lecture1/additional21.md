@@ -4,6 +4,11 @@ title: Using a server for Dynamic Web Design
 author: "John Lee"
 ---
 
+- [Edinburgh Domains](#edinburgh-domains)
+  - [Using MySQL](#using-mysql)
+  - [Accessing MySQL from PHP](#accessing-mysql-from-php)
+  - [Consequences of hacking](#consequences-of-hacking)
+
 ## Edinburgh Domains
 
 For this course, it's necessary to have access to a web server on which

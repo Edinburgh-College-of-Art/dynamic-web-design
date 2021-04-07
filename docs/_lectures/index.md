@@ -4,6 +4,13 @@ title: Dynamic Web Design 2020-21
 author: "John Lee"
 ---
 
+
+
+	- [Course notes](#course-notes)
+		- [Lecture notes:](#lecture-notes)
+
+
+
 ## Course notes
 
 Here are links to course notes, tutorials etc. Material will be updated

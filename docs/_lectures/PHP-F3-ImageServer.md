@@ -4,6 +4,17 @@ title: Further PHP, with Fat-Free Framework (F3)
 author: "John Lee"
 ---
 
+- [An example application: the ImageServer](#an-example-application-the-imageserver)
+    - [1. The ImageServer class](#1-the-imageserver-class)
+    - [2. Uploading the images](#2-uploading-the-images)
+        - [2.1 Uploading](#21-uploading)
+        - [2.2 Storing the image data](#22-storing-the-image-data)
+    - [3. Viewing the images](#3-viewing-the-images)
+        - [3.1 Retrieving image information](#31-retrieving-image-information)
+        - [3.2 Displaying an image](#32-displaying-an-image)
+    - [4. Deleting an image](#4-deleting-an-image)
+    - [5. Final thoughts](#5-final-thoughts)
+
 ## An example application: the ImageServer
 
 The strategy in this example is to build an application that will allow
@@ -31,8 +42,8 @@ The complete code can be downloaded from the main notes page, and it's
 best to look at the snippets discussed below in their context in the
 whole application, which also includes other useful comments in the
 code. Note that the application also requires a database with a table,
-here called "picdata_fff", that contains the fields _id, picname,
-picfile_ and _pictype_, which are used respectively to store an
+here called "picdata*fff", that contains the fields \_id, picname,
+picfile* and _pictype_, which are used respectively to store an
 auto-incremented id, an arbitrary name or label entered by the user, the
 file name and the MIME type of each uploaded image. If you have any
 questions about any of it, do just [email me](mailto:j.lee@ed.ac.uk).
@@ -45,6 +56,7 @@ FFF-ImageServer, which has a structure directly analogous to the
 FFF-SimpleExample application. The ImageServer class is a class
 containing properties (variables) and methods (functions) relating to
 managing the pictures. Here are the properties:
+
 ```php
 [ private $filedata;
 private $uploadResult = "Upload failed! (unknown reason)";
@@ -55,6 +67,7 @@ images]{.style2}
     "image/gif", "image/tiff", "image/svg+xml"]; // file types we'll
 accept for uploading]{.style2}
 ```
+
 _\$pictable_ is the table in the DB, and thumbsize is the size in pixels
 for thumbnail images. _\$filedata_ is simply a variable to hold data
 temporarily, and _\$uploadResult_ is a self-explanatory message, which
@@ -111,6 +124,7 @@ simple form in an F3 template, _upload.html_. This is defined in the
 folder identified by the _UI_ variable, as in the FFF-SimpleExample. The
 template is reached immediately by the route defined for the application
 root (<http://jlee.edinburgh.domains/fatfree/F3-ImageServer/>):
+
 ```php
 <h1>Upload</h1>
 <form name="upload" method="POST" action="{{ @BASE }}{{
@@ -120,6 +134,7 @@ root (<http://jlee.edinburgh.domains/fatfree/F3-ImageServer/>):
   <input type="submit" name="submit" value="Submit" />
 </form>
 ```
+
 The form is normal HTML, using an input of type _file_, which will
 invite the user to choose a file that will be uploaded and a text input
 that will be used simply to name or describe the file. Note the
@@ -129,6 +144,7 @@ important. You'll see that the action URL of this form is the F3 route
 the first element of the form PARAMS, which is the file name "upload",
 but visited with a POST request method. In _index.php_, the route for a
 POST request to "/upload" says:
+
 ```php
 $f3->route('POST /upload',
     function($f3) {
@@ -143,16 +159,18 @@ $f3->route('POST /upload',
     }
 );
 ```
+
 -- which creates an ImageServer object, and runs its _upload()_ method,
 which returns the data from the upload, or _null_ if the upload failed.
 If the upload succeeded, these various data are shown to the user via
 the _uploaded.html_ template.
 
-### 2.1 Uploading
+#### 2.1 Uploading
 
 The _upload()_ method is made much simpler by using F3, which provides a
 class called _Web_ for operations like this. The main part of the code
 is just this:
+
 ```php
 
 [$overwrite = false; // set to true, to overwrite an existing file;
@@ -182,6 +200,7 @@ defined upload dir
     $slug]{.redCode}
 
 ```
+
 This looks more complicated than it is ... I have colour-coded it to
 help identify parts of it in the following discussion: coloured text
 refers to code of the same colour.
@@ -216,10 +235,11 @@ renamed to make it unique). *$slug* is true if we want the file name to
 be "slugged", which means that unusual characters etc. will be
 transforned to avoid any problems with the filesystem.]{.redCode}
 
-### 2.2 Storing the image data
+#### 2.2 Storing the image data
 
 The method _store()_ very simply copies details of the uploaded image
 into a DB record, using the F3 database mapper object:
+
 ```php
 public function store() {
     global $f3; // because we need f3->get()
@@ -231,6 +251,7 @@ $pic->pictype = $this->filedata["type"];
 \$pic->save();
 }
 ```
+
 -- where _picfile_ is the actual pathname of the file as saved,
 _picname_ is the name given to the picture as typed in by the user, and
 _pictype_ is the MIME type of the image file (e.g. jpg). Entering the
@@ -244,12 +265,13 @@ will all appear (as thumbnails) -- this is called _viewimages.html_
 (viewed via the route
 <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/viewimages>).
 
-### 3.1 Retrieving image information
+#### 3.1 Retrieving image information
 
 In here, we first query the _ImageServer_ method _infoService()_ to find
 out what images there are. It just returns all the data in the DB,
 unless it is given a non-zero ID, in which case it returns just the data
 for that picture:
+
 ```php
 [// This just returns all the data we have about images in the DB, just
 as an array.
@@ -285,6 +307,7 @@ $recordData["picID"] = $pic["id"];
 return $recordData;
 }]{.style2}
 ```
+
 The code in red is assembling an array of all the results, because
 _\$pic->find()_ provides each row from the database in the form of an
 associative array, and the relevant elements are extracted from this and
@@ -293,6 +316,7 @@ returned to the calling point (in this case, in _index.php_). In
 _index.php_ there is code for the _viewimages_ route URL that very
 simply acquires the above data from the _infoService()_ method and then
 feeds it to the _viewimages.html_ template:
+
 ```php
 $f3->route('GET /viewimages',
     function($f3) {
@@ -304,7 +328,8 @@ $f3->route('GET /viewimages',
     }
 );
 ```
-### 3.2 Displaying an image
+
+#### 3.2 Displaying an image
 
 The _viewimages.html_ template contains a central loop that displays the
 images:
@@ -344,11 +369,13 @@ header followed by raw image data (because this is just what the browser
 sees if it looks at an image file). The code for a route such as
 _/image/1_ does just this; hence we can use it as the source parameter
 in an image link, e.g.:
+
 ```php
 [<img
 src="https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/image/1"
 />]{.style2}
 ```
+
 where it will seem to the browser to just be an image, in this case the
 thumbnail-sized version of the image with ID 1 in the database (assuming
 it exists, but of course we should never use an ID here for an image
@@ -356,6 +383,7 @@ that doesn't exist).
 
 This is achieved in the code for this route (in index.php, as usual) by
 invoking the _showImage()_ method of the _ImageServer_ class:
+
 ```php
 $f3->route('GET|POST /image/@id',
     function($f3) {
@@ -364,6 +392,7 @@ $f3->route('GET|POST /image/@id',
 }
 );
 ```
+
 Note here that this is defined for either GET or POST requests (because
 we might use POST in an AJAX request, for example), and the route is
 parameterised by having "@id" at the end of the URL. This means that
@@ -376,6 +405,7 @@ _/images?id=1_, with the same effect.)
 The method _showImage()_ takes the id of the image required, and a
 boolean parameter that will show the thumbnail if true or the original
 image if false.
+
 ```php
 public function showImage($picID, $thumb) {
     global $f3;
@@ -393,6 +423,7 @@ image file http header
 (image data)
 }
 ```
+
 It [finds the DB record for the required image]{.blueCode}, then
 [locates either the image or thumbnail file in the UPLOAD
 folder]{.greenCode}, which is in AboveWebRoot and therefore not normally
@@ -421,6 +452,7 @@ will allow the image, and all trace of it, to be deleted, as follows.
 To delete an image, we need to remove the image file, the thumbnail
 image file, and the related database record. This is done by the
 _deleteService()_ method in the _ImageServer_ class:
+
 ```php
 public function deleteService($picID) {
     global $f3;
@@ -434,6 +466,7 @@ public function deleteService($picID) {
 [$pic->erase();]{.greenCode} // delete the DB record
 }
 ```
+
 [The DB is queried to get the data]{.redCode}, then [the builtin
 function *unlink()* is used to remove the image file and the
 thumbnail]{.blueCode}, then [the database record is

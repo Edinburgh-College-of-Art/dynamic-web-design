@@ -4,6 +4,8 @@ title: "More on APIs: when requests get more complicated ..."
 author: "John Lee"
 ---
 
+
+
 APIs can take many different forms. Some of them require no parameters
 to be supplied, but usually you'll have to specify something, if only a
 string to search for, etc. Such parameters might be asked for in the

@@ -4,6 +4,14 @@ title: "Distinguishing Form and Substance: HTML and XML"
 author: "John Lee"
 ---
 
+- [Introduction to Design and Digital Media](#introduction-to-design-and-digital-media)
+- [**HTML**](#html)
+- [XML](#xml)
+- [REQUIRED>](#required) - [XML for data exchange](#xml-for-data-exchange)
+- [XML processing with ColdFusion](#xml-processing-with-coldfusion)
+- [Why is XML really becoming such a buzzword?](#why-is-xml-really-becoming-such-a-buzzword)
+- [Sources and resources](#sources-and-resources)
+
 ## Introduction to Design and Digital Media
 
 The focus of this lecture is on information, how to present it through
@@ -193,7 +201,7 @@ a type. ]{style="font-style:normal"}
 
 [It is entirely up to us how we organise these things. We can have other
 tags, and we can have whatever attributes we like. (The structure here
-isn't necessarily a good structure, of course � it's just for the sake
+isn't necessarily a good structure, of course  it's just for the sake
 of an example.) ]{style="font-style:normal"}
 
 [It would be good to make sure that we use these things consistently,
@@ -233,7 +241,7 @@ a manufacturer and a name, and _optionally_ a description and a price.
 The manufacturer may have a URL attribute, and the name must have a
 type, which has to be one of the things listed. Nothing much is said
 about what can be entered as the description or price (they're just
-"parsed character data" � PCDATA), but further requirements could be
+"parsed character data"  PCDATA), but further requirements could be
 placed on these if we wanted. However, simple though it is, this already
 specifies quite usefully the structure of what can count as part of our
 product database.
@@ -241,7 +249,7 @@ product database.
 Now we want to display (or _style_[) the data. One possibility is simply
 to use CSS again. CSS will allow us to define styles for any tags, so we
 could have, e.g.:]{style="font-style:normal"}
-
+```
 productDB{ display: block;
 margin-left: 10%; margin-right: 10%;
 background-color: rgb(150, 150, 256);
@@ -260,14 +268,14 @@ font-size:70%; color:green
 price{
 font-size:75%; color:yellow
 }
-
-� and include this CSS specification at the head of our XML file, which
+```
+ and include this CSS specification at the head of our XML file, which
 we then use as if it were HTML. This produces the following (see
 [products2.css](products2.css) and [products2c.xml](products2c.xml)):
 
 ![](CSS-result.png){width="519" height="286"}
 
-� which is not ideal, since we have rather little control over e.g. the
+ which is not ideal, since we have rather little control over e.g. the
 order in which things appear, and the attributes have been ignored.
 
 A better option is to use XSL, which is a system specifically developed
@@ -278,7 +286,7 @@ However, for practical purposes it can be used relatively simply.
 XSL is processed by a system known as XSLT, versions of which are
 conveniently implemented in most modern browsers (though there are also
 many XSLT implementations that can be used at the server side, e.g. in
-ColdFusion � see discussion later).
+ColdFusion  see discussion later).
 
 XSLT can be given XSL stylesheets _to transform any XML structure into
 any other_[. Since HTML is also an XML structure, XSLT will take this
@@ -314,7 +322,7 @@ If the data above is put into Filemaker Pro as a normal data table and
 then extracted as XML, one way of doing that produces the following,
 which should by now be fairly recognisable
 (]{style="color:black"}[products-fp5.xml](products-fp5.xml)[):]{style="color:black"}
-
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <FMPDSORESULT xmlns="http://www.filemaker.com/fmpdsoresult">
@@ -380,7 +388,7 @@ which should by now be fairly recognisable
 </ROW>
 
 </FMPDSORESULT>
-
+```
 Some things to note here are that there are no attributes of the field
 tags (which have here been made into separate fields, unlike in our
 original form of the example), and that each record has to contain each
@@ -390,7 +398,7 @@ structure of relational databases. Also some general information and the
 ROW and FMPDSORESULT tags have been added. Hence, this XML is now well
 structured for import into some other suitable database (possibly, as is
 provided for in FMP, after further transformations with XSL stylesheets
-� it would be easy for instance to transform this XML into the original
+ it would be easy for instance to transform this XML into the original
 XML product data that we had above).
 
 This kind of technique can be used to exchange data between different
@@ -408,14 +416,14 @@ serialised the data above, but it would not be difficult in principle.
 ]{style="font-style:normal"}You can find a discussion of this in the
 O'Reilly ColdFusion book.
 
-# XML processing with ColdFusion
+## XML processing with ColdFusion
 
 ColdFusion has very advanced features for handling XML data, aside from
 the serialisation just mentioned. It can read, parse, create, transform
 and style XML in many diverse ways, including applying XSL stylesheets.
 This means that in principle if you are doing anything with XML you can
-do it at the server side, and not assume anything about the user�s
-browser�s ability to style XML at all. (Similar functions are provided
+do it at the server side, and not assume anything about the users
+browsers ability to style XML at all. (Similar functions are provided
 by most other server-side processing systems, such as PHP. ) We'll
 mention this again once we've seen the more basic features of
 ColdFusion.
@@ -431,7 +439,7 @@ templates elsewhere.
 But more important than XSLT applications is the use of XML for broader
 web applications, as we will now see.
 
-# Why is XML really becoming such a buzzword?
+## Why is XML really becoming such a buzzword?
 
 Probably the best answer to this question is: _Web Services_. Web
 services are arbitrary elements of functionality that developers can
@@ -450,7 +458,7 @@ information in a simple repeating structure. Among many other possible
 examples, Amazon.com provides a comprehensive set of web services which
 allow other web sites to include Amazon functions, searches,
 information, etc. (without it necessarily being obvious that these
-services have come from Amazon) � see
+services have come from Amazon)  see
 <http://www.amazon.com/webservices/>.
 
 This kind of service is already leading towards the web becoming an
@@ -464,13 +472,13 @@ service. XML is clearly emerging as the standard syntax in which the
 billions of communications required for global commerce will be framed
 in the coming decades.
 
-# Sources and resources
+## Sources and resources
 
 HTML, XML, XSL and a vast range of other such standards are supervised
 by the "World Wide Web Consortium", generally known as _W3C_[. Full
 definitions (highly technical) but also pointers to a number of useful
 tutorial and other resources can be found at the W3C website:
 <http://www.w3c.org/>.  There are also national resource centres, e.g.
-the W3C UK site at <http://www.w3c.rl.ac.uk/> � and thousands of other
+the W3C UK site at <http://www.w3c.rl.ac.uk/>  and thousands of other
 websites devoted to these topics, which a simple search will immediately
 reveal ...]{style="font-style:normal"}

@@ -5,7 +5,23 @@ author: "John Lee"
 lecture: 2
 ---
 
-# Working with Databases using PHP
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+	- [Working with Databases using PHP](#working-with-databases-using-php)
+	- [Databases and web interfaces](#databases-and-web-interfaces)
+	- [Databases and SQL](#databases-and-sql)
+	- [Linking to databases using PHP](#linking-to-databases-using-php)
+		- [Making a connection](#making-a-connection)
+		- [Creating a query](#creating-a-query)
+		- [Prepared statements](#prepared-statements)
+		- [Getting results](#getting-results)
+		- [In summary](#in-summary)
+	- [Putting the output on a web page](#putting-the-output-on-a-web-page)
+	- [Getting new data](#getting-new-data)
+
+<!-- /TOC -->
+
+## Working with Databases using PHP
 
 Once we start to accumulate material from forms, or any other data that
 we want to present on web pages, things can become quite complicated

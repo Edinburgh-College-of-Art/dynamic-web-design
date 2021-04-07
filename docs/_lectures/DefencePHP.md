@@ -4,6 +4,7 @@ title: Yet More PHP
 author: "John Lee"
 ---
 
+
 ## Defensive programming
 
 "Defensive programming" is about defending yourself against problems

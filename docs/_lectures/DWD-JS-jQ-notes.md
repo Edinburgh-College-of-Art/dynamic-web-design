@@ -336,8 +336,6 @@ Button that will call setupWords() when clicked -->
 the text -->
 <div id="div2">The current word is: <span id="wddiv"></span>
 at position <span id="posdiv"></span></div>
-</body>
-</html>
 
 Footnote: I've subsequently noticed that the remarkable
 jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>)

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<script type="text/javascript" src="scripts/swfobject.js"></script>
+ 
+<div id="player">Loading...</div>
+ 
+<script type="text/javascript">
+var so = new SWFObject('media/mediaplayer.swf','mpl','850','480','8');
+so.addParam('allowscriptaccess','always');
+so.addParam('allowfullscreen','true');
+so.addVariable('logo', 'images/ddm2.png');
+so.addVariable('height','480');
+so.addVariable('width','850');
+so.addVariable('displayheight','480');
+so.addVariable('displaywidth', '640');
+so.addVariable('file','playlists/test3.rss');
+so.addVariable('frontcolor','0x000066');
+so.addVariable('lightcolor','0x0000FF');
+so.addVariable('screencolor','0xCCCCFF');
+so.addVariable('autoscroll','true');
+so.write('player');
+so.write('container3');
+</script>
+
+
+</body>
+</html>

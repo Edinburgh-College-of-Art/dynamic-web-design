@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*frame on top - from css zen garden @ http://www.csszengarden.com/202/202.css*/
+
+body
+{
+	position:relative;
+	background:#000 url('cote.png') repeat-y 50% 0%;
+	text-align:center;
+	z-index:1;
+}
+
+#extraDiv1
+{
+	position:fixed !important;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:23.2% !important;
+	height:102px;
+	min-height:102px;
+	max-height:230px;
+	z-index:2;
+}
+#extraDiv1 span
+{
+	display:block;
+	position:absolute;
+	bottom:-198px;
+	left:0;
+	width:100%;
+	height:428px;
+	background:url('haut1.png') no-repeat 50% 100%;
+}
+#extraDiv2
+{
+	position:fixed !important;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:23.2% !important;
+	height:102px;
+	min-height:102px;
+	max-height:230px;
+	background:url('haut2.png') no-repeat 50% 100%;
+	z-index:4;
+}
+#extraDiv3
+{
+	position:fixed !important;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:30% !important;
+	height:110px;
+	min-height:110px;
+	max-height:318px;
+	background:url('bas.png') no-repeat 50% 0%;
+	z-index:4;
+}

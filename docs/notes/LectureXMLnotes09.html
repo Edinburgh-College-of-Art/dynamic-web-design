@@ -1,0 +1,387 @@
+<html>
+<head>
+<meta name=Title content="Distinguishing Form and Substance: HTML and XML">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>Distinguishing Form and Substance: HTML and XML</title>
+<style>
+<!--
+.codejla
+	{font-size:11.0pt;
+	font-family:Courier;}
+.Section1
+	{page:Section1;}
+.codejl {
+	font-family: "Courier New", Courier, mono;
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: bolder;
+}
+-->
+</style>
+</head>
+<body bgcolor=#FFFFFF link=blue vlink=purple class="Normal" lang=EN-GB> 
+  <p><span style='font-size:18.0pt'><b>Distinguishing Form and Substance: HTML
+        and XML</b></span></p> 
+  <p><span style='font-size:14.0pt'>Introduction to Design and Digital Media</span></p> 
+  <p><span style='font-size:14.0pt'>John Lee</span></p> 
+  <p>The focus of this lecture is on information,  how to present it through
+    the Web, and also how to package and transmit it between applications.. </p> 
+  <p>When we think about presenting information, it seems intuitively plausible
+    that we can draw a distinction between <i>what</i><span
+style='font-style:normal'> the information is that 's being presented, and on
+    the other hand </span><i>how</i><span style='font-style:normal'> it's being
+    presented. Another way of thinking of this is that we can distinguish the
+    substance or content of the information from the form in which it's expressed.
+    These intuitions are the basis of many of the approaches to information presentation
+    on the World Wide Web, and in particular of the rapidly expanding use of
+    XML. In this lecture, we look at a few of the basic techniques available
+    in this area.</span></p> 
+  <h1><b>HTML</b></h1> 
+  <p>HTML (the &quot;HyperText Markup Language&quot;) is historically part of
+    a sustained effort to develop a way of describing the form of documents (&quot;marking
+    them up&quot;) in a way that would be standardised and facilitate their exchange
+  between people and computer systems.</p>
+  <p>Researchers tried a considerable range
+    of approaches, often based initially on traditional concepts such as &quot;title&quot;, &quot;section&quot;, &quot;subsection&quot;, &quot;paragraph&quot;,
+    etc. It was realised that a good deal of flexibility was going to be required
+    to cover the huge range of existing and possible future types of document.
+    This resulted in a very general solution: the Standard General Markup Language
+    (SGML). Modern markup languages like HTML are ultimately derived from this.</p>
+  <p>In some sense, HTML has the effect of treating a document as a kind of data.
+    It contains specific tags that identifiy text features that we usually see
+    as fairly intuitive: headings, paragraphs, lists, tables, etc.&nbsp;These
+    are aspects of the <em>structure</em> of the document, that are somewhat
+    independent from the content in it.We are already used to the idea that the
+    way these things appear (are formatted) can change, and can be controlled
+    via Cascading Style Sheets (CSS). CSS allows us to define styling information
+    for specific tags, and include this with the &quot;vanilla&quot; HTML
+    so that the way these tags are interpreted is changed globally.</p>
+  <p>So the data (the text) is structured and presented through a system that
+    marks it up and allows us to specify what kinds of things it contains and
+    how we want to see them displayed.</p>
+<h1>XML  </h1>
+  <p>A problem with HTML, even with this elaborated styling mechanism, is that
+    the objective of the markup is to control the <i>appearance</i><span
+style='font-style:normal'> of a document, the way text is laid out and presented,
+    not the structure of the <em>information</em> (the content) that it contains,
+which is whatever the text is <em>about</em>. </span></p>
+  <p><span
+style='font-style:normal'>But often, the latter is much more useful.
+    If we can mark up the content and then as a completely separate step define
+    different ways for this to appear, we will have a much more flexible system.
+</span></p>
+  <p><span
+style='font-style:normal'>The </span><i>Extensible
+    Markup Language</i><span style='font-style:normal'> (XML)
+    is fundamentally a way of defining our own tags, which are meaningful to
+    us in terms of some particular kind of information we are interested in.
+    There is then also a system (actually, a number of alternative systems) that
+    will let us transform these tags into normal HTML as understood by browsers,
+so that we can present the information however we want (if we want to present
+it at all</span> -- as we'll see, XML is intended for many other purposes than
+this).</p> 
+  <p>XML  can be used to define documents of endless varieties, as a
+    sort of elaborated form of HTML, including special kinds of paragraphs, lists
+    etc. HTML itself is now defined by the W3C in terms of XML, and very often
+the two are closely integrated. </p>
+  <p>XHTML, as
+    commonly used with CSS, is really an extended set of HTML tags, defined using
+    XML,  which allows a more refined control of appearance without altering
+    the content. </p>
+  <p>Systems that work with HTML that isn't expected to be human-readable
+    often get very complicated about the integration. As an example of this,
+    the following comes from the source of an
+    old version of these notes, which is HTML produced from MS Word:</p>
+  <p class="codejl">&lt;html xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot;<br>
+  xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;<br>
+  xmlns:w=&quot;urn:schemas-microsoft-com:office:word&quot;<br>
+xmlns=&quot;http://www.w3.org/TR/REC-html40&quot;&gt;<br>
+&lt;head&gt;<br>
+&lt;meta name=Title content=&quot;Distinguishing Form and Substance: HTML
+    and XML&quot;&gt;<br>
+&lt;meta name=Keywords content=&quot;&quot;&gt;<br>
+&lt;meta http-equiv=Content-Type content=&quot;text/html; charset=windows-1252&quot;&gt;<br>
+&lt;meta name=ProgId content=Word.Document&gt;<br>
+&lt;meta name=Generator content=&quot;Microsoft Word 10&quot;&gt;<br>
+&lt;meta name=Originator content=&quot;Microsoft Word 10&quot;&gt;<br>
+&lt;link rel=File-List href=&quot;Lecture3notes_files/filelist.xml&quot;&gt;<br>
+&lt;link rel=Edit-Time-Data href=&quot;Lecture3notes_files/editdata.mso&quot;&gt;<br>
+&lt;!--[if !mso]&gt;<br>
+&lt;style&gt;<br>
+    v\:* {behavior:url(#default#VML);}<br>
+    o\:* {behavior:url(#default#VML);}<br>
+    w\:* {behavior:url(#default#VML);}<br>
+    .shape {behavior:url(#default#VML);}<br>
+&lt;/style&gt;<br>
+&lt;![endif]--&gt;<br>
+&lt;title&gt;Distinguishing Form and Substance: HTML and XML&lt;/title&gt;<br>
+&lt;!--[if gte mso 9]&gt;&lt;xml&gt;<br>
+&lt;o:DocumentProperties&gt;<br>
+&lt;o:Author&gt;John Lee&lt;/o:Author&gt;<br>
+&lt;o:Template&gt;Normal&lt;/o:Template&gt;<br>
+&lt;o:LastAuthor&gt;John Lee&lt;/o:LastAuthor&gt;<br>
+&lt;o:Revision&gt;2&lt;/o:Revision&gt;<br>
+&lt;o:Created&gt;2004-01-20T10:56:00Z&lt;/o:Created&gt;<br>
+&lt;o:LastSaved&gt;2004-01-20T10:56:00Z&lt;/o:LastSaved&gt;<br>
+&lt;o:Pages&gt;32&lt;/o:Pages&gt;<br>
+&lt;o:Words&gt;3711&lt;/o:Words&gt;<br>
+&lt;o:Characters&gt;21158&lt;/o:Characters&gt;<br>
+&lt;o:Company&gt;University of Edinburgh&lt;/o:Company&gt;<br>
+&lt;o:Lines&gt;176&lt;/o:Lines&gt;</p>
+  <p>-- the complexity of this HTML and the amount of embedded XML information
+  is very striking! Most of the material is <em>metadata</em> about the nature
+  of the matrerial in the document, which is something else we'll come back to. </p>
+  <p>We will not be looking any further at text document markup here, but will
+    focus more on the use of XML for marking up <i>general data</i><span style='font-style:
+normal'> that may be about any kind of items. We want to be able to identify
+    the items and their attributes before we consider any issues about how to
+    process or present this data, and this is where XML turns out to be ideal.</span></p>
+  <p>Suppose we have some information about a collection of building products,
+    similar to the ones considered in the ColdFusion examples earlier. The following
+    is a possible way to mark this up.</p> 
+  <p class=codejl>&lt;productDB&gt;<br>
+  &lt;product&gt;<br>
+  &lt;manuf URL=&quot;http://www.wilkins.com&quot;&gt;Wilkins doors&lt;/manuf&gt;<br>
+  &lt;name type=&quot;door&quot;&gt;Superdoor&lt;/name&gt;<br>
+&lt;description&gt;Excellent sound insulation properties.&nbsp; Lightweight.&lt;/description&gt;<br>
+&lt;price&gt;87.43&lt;/price&gt;<br>
+&lt;/product&gt;<br>
+&lt;product&gt;<br>
+&lt;manuf URL=&quot;http://www.fenester.com&quot;&gt;Fenester
+  plc&lt;/manuf&gt;<br>
+&lt;name type=&quot;window&quot;&gt;Ultra Sash&lt;/name&gt;<br>
+&lt;description&gt;Double glazed.&nbsp; Smooth action.&lt;/description&gt;<br>
+&lt;price&gt;123.41&lt;/price&gt;<br>
+&lt;/product&gt;<br>
+&lt;product&gt;<br>
+&lt;manuf&gt;Lights Unlimited&lt;/manuf&gt;<br>
+&lt;name type=&quot;lighting&quot;&gt;Track spot 43&lt;/name&gt;<br>
+&lt;price&gt;21.99&lt;/price&gt;<br>
+&lt;/product&gt;<br>
+&lt;/productDB&gt;</p>
+  <p>This is a database of products (<span class="codejl">productDB</span>),
+    containing at present only 3 items (<span class="codejl">product</span>),
+    about each of which we have information such as the manufacturer (<span class="codejl">manuf</span>),
+    name of the product, a description and a price. In addition, some of these
+    tags have <i>attributes</i><span
+style='font-style:normal'>: the manufacturer has (optionally) a URL, and the
+    name has a type. </span></p>
+  <p><span
+style='font-style:normal'>It is entirely up to us how we organise these things.
+      We can have other tags, and we can have whatever attributes we like. (The
+      structure here isn't necessarily a good structure, of course — it's just for the sake
+    of an example.) </span></p>
+  <p><span
+style='font-style:normal'>It would be good to make sure that we use these things
+      consistently, however, and especially if the database gets at all large
+      then it would be nice to have this consistency checked automatically. </span></p>
+  <p><span
+style='font-style:normal'>With
+    XML, that's easy, because we can create a Document Type Definition (DTD).
+    The DTD simply defines a set of tags and attributes, and says how they
+    can be used. </span></p>
+  <p><span
+style='font-style:normal'>Whenever an XML file is read, it will be </span><i>parsed</i><span style='font-style:
+normal'>, and if the parser is a </span><i>validating parser</i><span
+style='font-style:normal'> it will check against the DTD so see if the tags are
+    used as the DTD says.&nbsp; If they are not, an XML error message will
+    be generated.&nbsp; Here's a DTD for the XML above (<a href="products-bare.xml" target="_blank">products-bare.xml</a>).</span></p> 
+  <p class=codejl>&lt;!DOCTYPE productDB [<br>
+  &lt;!ELEMENT productDB (product)* &gt;<br>
+  &lt;!ELEMENT product (manuf,name,description?,price?) &gt;<br>
+  &lt;!ELEMENT manuf
+  (#PCDATA) &gt;<br>
+  &lt;!ATTLIST manuf URL NMTOKEN #IMPLIED&gt;<br>
+  &lt;!ELEMENT name (#PCDATA) &gt;<br>
+  &lt;!ATTLIST name type (door|window|flooring|lighting|furniture)
+  #REQUIRED&gt;<br>
+  &lt;!ELEMENT description (#PCDATA) &gt;<br>
+  &lt;!ELEMENT price (#PCDATA) &gt;<br>]&gt;</p> 
+  <p>This looks more complicated than it really is (!). All it says is that a
+    productDB consists of an arbitrary number of products, each of which has
+    a manufacturer and a name, and <em>optionally</em> a description and a price. The
+    manufacturer may have a URL attribute, and the name must have a type, which
+    has to be one of the things listed. Nothing much is said about what can be
+    entered as the description or price (they're just &quot;parsed character
+    data&quot; — PCDATA), but further requirements could be placed on these if
+    we wanted. However, simple though it is, this already specifies quite usefully
+    the structure of what can count as part of our product database.</p> 
+  <p>Now we want to display (or <i>style</i><span
+style='font-style:normal'>) the data. One possibility is simply to use CSS again.
+      CSS will allow us to define styles for any tags, so we could have, e.g.:</span></p> 
+  <p class=codejl>productDB{ display: block;<br>
+  margin-left: 10%; margin-right: 10%;<br>
+  background-color: rgb(150, 150, 256);<br>
+  font-size: 18pt; font-weight: bold;<br>
+  font-family: arial, helvetica, sans-serif;<br>
+  }<br>
+  product{ display:&nbsp; block;<br>
+  font-size: 80%; color: blue<br>
+  }<br>
+  manuf{ display:block;<br>
+  font-size: 80%; font-style: italic; color: red<br>
+  }<br>
+  description{ display:block;<br>
+  font-size:70%; color:green<br>
+  }<br>
+  price{<br>
+  font-size:75%; color:yellow<br>
+  }</p>
+  <p>— and include this CSS specification at the head of our XML file, which
+    we then use as if it were HTML. This produces the following (see <a
+href="products2.css" target="_blank">products2.css</a> and <a href="products2c.xml" target="_blank">products2c.xml</a>):</p> 
+  <p><img border=0 width=519 height=286
+src="CSS-result.png" v:shapes="_x0000_i1025"></p> 
+  <p>— which is not ideal, since we have rather little control over e.g. the
+    order in which things appear, and the attributes have been ignored.</p> 
+  <p>A better option is to use XSL, which is a system specifically developed
+    for styling XML files. XSL is quite complicated in general, and embeds a
+    powerful programming language which can define elaborate presentations. However,
+    for practical purposes it can be used relatively simply.</p>
+<p> XSL is processed
+    by a system known as XSLT, versions of which are conveniently implemented
+    in most modern browsers (though there are also many XSLT implementations
+    that can be used at the server side, e.g. in ColdFusion  — see discussion
+    later).</p>
+  <p> XSLT can be given XSL stylesheets <i>to transform any XML structure
+    into any other</i><span style='font-style:normal'>. Since HTML is also an
+    XML structure, XSLT will take this XSL stylesheet and use it to transform
+    the original XML into an HTML output. </span></p>
+<p><a href="http://www.w3schools.com/xsl/xsl_transformation.asp" target="_blank">Here</a> is
+  a simple example from an external website.</p>
+<p>Despite the power, broad cross-platform support, and relative ease of use
+    of browser-based XML styling, it still does not seem to be widely exploited
+in user-directed systems. This will perhaps change in the future. </p>
+  <h2>XML for data exchange </h2>
+  <p><span style='color:black'>The major value of XML is as an exchange format
+    for transmitting data across networks, and its value arises mainly from
+    its being standard. XML itself is not remarkable, but there are a remarkable
+    array of tools and software systems now available for processing it and
+    making use of it. </span></p>
+  <p><span style='color:black'>Database systems driving web sites directly often
+      do not use XML (as we have seen with ColdFusion), because
+    it can be quite inefficient to process in comparison with other representations
+    of the same data. But if we have to interface with data stored in different
+    formats, e.g. text files, or if substantial amounts of data have to be
+    transferred somewhere else, XML is an excellent choice.</span></p>
+  <p><span style='color:black'>For this reason, most everyday database systems
+      (such as Filemaker Pro,  MySQL, MS Access, etc.) nowadays provide automatic
+      translation to XML. If the data above is put into Filemaker Pro as a normal
+      data table and then extracted as XML, one way of doing that produces the
+      following, which should by now be fairly recognisable (</span><a href="products-fp5.xml" target="_blank">products-fp5.xml</a><span
+style='color:black'>):</span></p> 
+  <p class=codejl>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</p> 
+  <p class=codejl>&lt;FMPDSORESULT xmlns=&quot;http://www.filemaker.com/fmpdsoresult&quot;&gt;</p> 
+  <p class=codejl>&lt;ERRORCODE&gt;0&lt;/ERRORCODE&gt;</p> 
+  <p class=codejl>&lt;DATABASE&gt;products.fp5&lt;/DATABASE&gt;</p> 
+  <p class=codejl>&lt;LAYOUT&gt;</p> 
+  <p class=codejl>&lt;/LAYOUT&gt;</p> 
+  <p class=codejl>&lt;ROW MODID=&quot;2&quot; RECORDID=&quot;1&quot;&gt;</p> 
+  <p class=codejl>&lt;manuf&gt;Wilkins doors&lt;/manuf&gt;</p> 
+  <p class=codejl>&lt;URL&gt;http://www.wilkins.com&lt;/URL&gt;</p> 
+  <p class=codejl>&lt;name&gt;Superdoor&lt;/name&gt;</p> 
+  <p class=codejl>&lt;type&gt;door&lt;/type&gt;</p> 
+  <p class=codejl>&lt;description&gt;Excellent sound insulation properties.&lt;/description&gt;</p> 
+  <p class=codejl>&lt;price&gt;87.43&lt;/price&gt;</p> 
+  <p class=codejl>&lt;/ROW&gt;</p> 
+  <p class=codejl>&lt;ROW MODID=&quot;0&quot; RECORDID=&quot;2&quot;&gt;</p> 
+  <p class=codejl>&lt;manuf&gt;Fenester plc&lt;/manuf&gt;</p> 
+  <p class=codejl>&lt;URL&gt;http://www.fenester.com&lt;/URL&gt;</p> 
+  <p class=codejl>&lt;name&gt;Ultra Sash&lt;/name&gt;</p> 
+  <p class=codejl>&lt;type&gt;window&lt;/type&gt;</p> 
+  <p class=codejl>&lt;description&gt;Double glazed. Smooth action.&lt;/description&gt;</p> 
+  <p class=codejl>&lt;price&gt;123.41&lt;/price&gt;</p> 
+  <p class=codejl>&lt;/ROW&gt;</p> 
+  <p class=codejl>&lt;ROW MODID=&quot;0&quot; RECORDID=&quot;3&quot;&gt;</p> 
+  <p class=codejl>&lt;manuf&gt;Lights Unlimited&lt;/manuf&gt;</p> 
+  <p class=codejl>&lt;URL&gt;</p> 
+  <p class=codejl>&lt;/URL&gt;</p> 
+  <p class=codejl>&lt;name&gt;Track spot 43&lt;/name&gt;</p> 
+  <p class=codejl>&lt;type&gt;lighting&lt;/type&gt;</p> 
+  <p class=codejl>&lt;description&gt;</p> 
+  <p class=codejl>&lt;/description&gt;</p> 
+  <p class=codejl>&lt;price&gt;21.99&lt;/price&gt;</p> 
+  <p class=codejl>&lt;/ROW&gt;</p> 
+  <p class=codejl>&lt;/FMPDSORESULT&gt;</p> 
+  <p>Some things to note here are that there are no attributes of the field tags
+    (which have here been made into separate fields, unlike in our original form
+    of the example), and that each record has to contain each field tag, even
+    if there is no data for that field. This is thus a stricter set of conditions
+    on the XML, which respect the typical structure of relational databases.
+    Also some general information and the ROW and FMPDSORESULT tags have been
+    added. Hence, this XML is now well structured for import into some other
+    suitable database (possibly, as is provided for in FMP, after further transformations
+    with XSL stylesheets — it would be easy for instance to transform this XML
+    into the original XML product data that we had above).</p> 
+  <p style='
+text-autospace:none'>This kind of technique can be used to exchange data between
+    different databases on different servers, and is potentially very powerful
+    in conjunction with the ability of many database-oriented systems to <i>serialise</i><span style='font-style:normal'> data.
+    Data serialisation means turning it into a string which can then be easily
+    communicated across a network. </span></p>
+  <p style='
+text-autospace:none'><span style='font-style:normal'>Here, XML comes into its
+      own. A standard format known as WDDX is used to serialise data from arbitrary
+      databases, and then it can be sent somewhere else and deserialised before
+      being used directly to update another database. The WDDX format is somewhat
+      obscure, so I have not serialised the data above, but it would not be difficult
+      in principle. </span>You can find a discussion of this in the O'Reilly ColdFusion book. </p> 
+<h1>XML processing with ColdFusion</h1> 
+  <p>ColdFusion has very advanced features for handling
+    XML data, aside from the serialisation just mentioned. It can read, parse,
+    create, transform and style XML in many diverse ways, including applying
+    XSL stylesheets. This means that in principle if you are doing anything with
+    XML you can do it at the server side, and not assume anything about the user’s
+    browser’s
+    ability to style XML at all. (Similar functions are provided by most other
+    server-side processing systems, such as PHP. ) We'll mention this again once
+    we've seen the more basic features of ColdFusion.</p> 
+  <p>There is a good introduction to XML in ColdFusion, though quite terse and
+    not always easy going (originally from the Macromedia developer centre),
+    installed at <a
+href="http://webdbdev.ucs.ed.ac.uk/ddm/XmlExampleCode/xmlxslt.pdf" target="_blank">http://webdbdev.ucs.ed.ac.uk/ddm/2009/XmlExampleCode/xmlxslt.pdf</a>,
+    with the code examples discussed in that text being available in the same
+    directory. As usual, you can copy and paste these into your own templates
+  elsewhere.</p>
+  <p>But more important than XSLT applications is the use of XML for broader
+    web applications, as we will now see.</p> 
+  <h1>Why is XML really becoming such a buzzword?</h1> 
+  <p>Probably the best answer to this question is: <i>Web Services</i>. Web
+      services are arbitrary elements of functionality that developers can make
+      available on the web for use in applications created by other developers.
+      They are fast becoming a central feature of e-commerce systems. You can
+      find directories of them, e.g. at <a
+href="http://www.xmethods.net/" target="_blank">http://www.xmethods.net/</a>.
+      These will let you do all kinds of things, and ColdFusion is a very simple
+    system in which to access them. </p>
+  <p>Web services generally
+    operate using the Simple Object Access Protocol (SOAP), which is an XML format.
+    Web services are described using the Web Services Description Language (WSDL),
+    which is also an XML format. Another well known case is Really Simple Syndication
+    (RSS): RSS &quot;feeds&quot; are just XML pages that regularly update, with
+    outline information in a simple repeating structure. Among
+    many other possible examples, Amazon.com provides a comprehensive set of
+    web services which allow other web sites to include Amazon functions, searches,
+    information, etc. (without it necessarily being obvious that these services
+have come from Amazon) — see <a
+href="http://www.amazon.com/webservices/" target="_blank">http://www.amazon.com/webservices/</a>.    </p>
+  <p>This kind of service is already leading towards the web becoming an integrated
+    network of applications that join relatively seamlessly together in complex
+    ways that the typical user is entirely unaware of. Many are free, but also
+    access to web services can be bought and sold; there are systems for charging,
+    etc. This is a good example of <b>B2B</b> (i.e.
+    business-to-business) e-commerce. Most web services use XML as an interchange
+    format for the information that forms the basis of the service. XML is clearly
+    emerging as the standard syntax in which the billions of communications required
+    for global commerce will be framed in the coming decades.</p>
+<h1>Sources and resources</h1> 
+  <p>HTML, XML, XSL and a vast range of other such standards are supervised by
+    the &quot;World Wide Web Consortium&quot;, generally known as <i>W3C</i><span
+style='font-style:normal'>. Full definitions (highly technical) but also pointers
+    to a number of useful tutorial and other resources can be found at the W3C
+    website: <a href="http://www.w3c.org/" target="_blank">http://www.w3c.org/</a>.&nbsp; There
+    are also national resource centres, e.g. the W3C UK site at <a href="http://www.w3c.rl.ac.uk/" target="_blank">http://www.w3c.rl.ac.uk/</a> — and
+    thousands of other websites devoted to these topics, which a simple search
+    will immediately reveal ...</span></p> 
+</body>
+</html>

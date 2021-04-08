@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>More PHP</title>
+<style type="text/css">
+<!--
+p {  font-family: Arial, Helvetica, sans-serif; font-size: 16px}
+code {  font-family: "Courier New", Courier, mono; font-size: 14px}
+.style2 {
+	font-family: "Courier New", Courier, mono;
+	font-size: 14px;
+}
+.style8 {font-family: "Courier New", Courier, mono; font-size: 14px; color: #FF0000; }
+.style9 {color: #FF0000}
+.green {
+	color: #11C700;
+}
+.green {
+	color: #038B16;
+}
+-->
+</style>
+</head>
+
+<body>
+<h1>Additional thoughts on PHP </h1>
+<h2>Conditional expressions</h2>
+<p>A handy construct in PHP, which allows you to use conditionals without having lots of clumsy &quot;if ... then&quot; constructions, is the following kind of<em>  conditiona</em>l <em>expression</em>:</p>
+<pre>(condition)?(what if true):(what if false)</pre>
+<p>--- where the brackets are optional if there is no ambiguity.</p>
+<p>Consider this (<a href="http://playground.eca.ed.ac.uk/~jlee/test/urltest.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/urltest.php</a><a href="http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm" target="_blank"></a>):</p>
+<pre>&lt;?php
+ echo &quot;The first message given on the URL was &lt;font color=red&gt;&quot; . <span class="style8">(isset($_GET[&quot;message1&quot;])?$_GET[&quot;message1&quot;]:&quot;not specified&quot;)</span> . &quot;&lt;/font&gt; ...&lt;br /&gt;&quot;;
+ echo &quot;The second message was &lt;font color=red&gt;&quot; . <span class="style2"><span class="green">($_GET[&quot;message2&quot;]?$_GET[&quot;message2&quot;]:&quot;not specified&quot;)</span></span> . &quot;&lt;/font&gt;\n&quot;;
+?&gt;</pre>
+<p>The part highlighted in red says that if the URL parameter <em>message1</em> is set, then it should be echoed, otherwise the string &quot;not specified&quot; should be. The part in green says the same about <em>message2</em>, but withouth using <em>isset()</em>. What happens in this case depends on how the PHP server is set up. On my local machine, <em> $_GET[&quot;message2&quot;]</em> will evaluate to FALSE if the paramter is not set, so that <em>isset()</em> can be omitted. However, on the <em>playground</em> server, there is a check for undefined parameters, and so you will get an error in this case. Therefore you should always use the <em>isset()</em> test when working with URL parameters, so that your code remains safe and portable.</p>
+<p>Notice that the whole conditional expression is enclosed in brackets. This is necessary, because otherwise the scope of the conditional includes the initial <em>echo</em>, which is clearly too wide.</p>
+<p>This kind of  conditional expression is often useful when assembling strings for output, e.g. as in:</p>
+<pre>echo &quot;You ordered &quot; . $n . &quot; item&quot; . ($n==1?&quot;&quot;:&quot;s&quot;) . &quot;\n&quot;;</pre>
+<p>which simply says &quot;You ordered 1 item&quot;, if <em>$n</em> is 1, or else e.g. &quot;You ordered 23 items&quot; if <em>$n</em> is not 1. A small consideration, but little things like this can make an interface seem much more natural and would be far more clumsy to code without this handy little expression. It's worth noting that the expression is inherited from C, and exists also in C++, Java, Actionscript, Javascript, etc.</p>
+<h2>Checking data types</h2>
+<p>The above example noted that PHP may be very forgiving if parameters are not set, often evaluating them to 0 rather than producing an error. In the same way, the &quot;currency converter&quot; example we had before (<a href="http://playground.eca.ed.ac.uk/~jlee/test/convert.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/convert.php</a>) will quietly produce an output of 0 if nothing at all is entered in the boxes, or if letters are entered instead of numbers! In general, PHP will tend to convert between data types such as strings and numbers, so that operations like multiplying them together appear to work without problems. For instance, <em>echo 23*&quot;fish&quot;</em> will simply output 0. But of course, you may get unpredictable results in such situations, and it's best to be as careful as you can to check that you are using appropriate data. One way to do this is by using functions such as <em>is_numeric()</em>, and others that you can find listed at <a href="http://www.php.net/manual/en/ref.var.php" target="_blank">http://www.php.net/manual/en/ref.var.php</a>.</p>
+<h2>Checkboxes</h2>
+<p>Another useful context for conditionals is where you are using checkboxes on a
+  form. These can be confusing because if the box is checked then its value will (by default) be the string &quot;on&quot;, whereas if the box is not checked on the form,
+  then the corresponding <em>$_POST</em> variable is <em>unset</em>, so if you try to
+use it you will  get either an error or an empty string (depending on how your server is configured).</p>
+<p>Consider this situation (<a href="http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php</a><a href="http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm" target="_blank"></a>):</p>
+<p class="style2">&lt;form id=&quot;form1&quot; name=&quot;form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt;<br />
+  &lt;p&gt;Check box:<br />
+  &lt;input type=&quot;checkbox&quot; name=&quot;checkIt&quot; id=&quot;checkbox&quot; /&gt;<br />
+  &lt;/p&gt;<br />
+  &lt;p&gt;<br />
+  &lt;input type=&quot;submit&quot; name=&quot;Submit&quot; id=&quot;button&quot; value=&quot;Update&quot; /&gt;<br />
+  &lt;/p&gt;<br />
+  &lt;/form&gt;<br />
+  &lt;p&gt;<br />
+  &lt;?php<br />
+  echo &quot;Value of checkbox is &quot; . $_POST[&quot;checkIt&quot;];<br />
+?&gt;</p>
+<p>Here, you'll find that if the box is checked, the value is &quot;on&quot;, but if it
+  isn't you  get an error, or at least an incomplete sentence. The simplest way to fix this would be to use a conditional expression:</p>
+<p class="style2">
+  &lt;?php<br />
+  echo &quot;Value of checkbox is &quot; . <span class="style8">(isset($_POST[&quot;checkIt&quot;])?&quot;on&quot;:&quot;off&quot;)</span>;<br />
+?&gt;</p>
+<p>(or use whatever other  strings you like instead of &quot;on&quot; and &quot;off&quot;) then the problem is resolved
+  fairly elegantly (<a href="http://playground.eca.ed.ac.uk/~jlee/test/boxtest2.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/boxtest2.php</a><a href="http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm" target="_blank"></a>).</p>
+<p>But this still looks odd to the user, since the text doesn't always correspond to the state of the checkbox just after they click the button. Better still, we can use a test for whether the box is checked at
+  the point where the box is created on the form, and if so have it checked already
+  when it appears. In this way, the state of the box remains as the user tends
+  to expect (<a href="http://playground.eca.ed.ac.uk/~jlee/test/boxtest3.php" target="_blank">http://playground.eca.ed.ac.uk/~jlee/test/boxtest3.php</a>):</p>
+<p class="style2">&lt;body&gt;<br />
+  &lt;form id=&quot;form1&quot; name=&quot;form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt;<br />
+  &lt;p&gt;Check box:<br />
+  &lt;input type=&quot;checkbox&quot; name=&quot;checkIt&quot; id=&quot;checkbox&quot; <span class="style8">&lt;?php echo isset($_POST[&quot;checkIt&quot;])?&quot;checked&quot;:&quot;&quot;;?&gt;</span> /&gt;<br />
+  &lt;/p&gt;<br />
+  &lt;p&gt;<br />
+  &lt;input type=&quot;submit&quot; name=&quot;Submit&quot; id=&quot;button&quot; value=&quot;Update&quot; /&gt;<br />
+  &lt;/p&gt;<br />
+  &lt;/form&gt;<br />
+  &lt;p&gt;<br />
+  &lt;?php<br />
+  echo &quot;Value of checkbox is &quot; . (isset($_POST[&quot;checkIt&quot;])?&quot;on&quot;:&quot;off&quot;);<br />
+?&gt;</p>
+<p>Notice that if you want &quot;on&quot; (the actual value returned from the form) to be something else, say &quot;set&quot;,
+  then you can add <em>value=&quot;set&quot;</em> as a attribute to the input
+  of type checkbox, but in the code  we have here we are never looking at the actual value returned in <em>$_POST[&quot;checkIt&quot;]</em>, so it doesn't matter.</p>
+<p>Of course, there are many situations where we want a form to appear with values already in it, and this is often a useful technique when getting that to happen.</p>
+<p><br />
+</p>
+</body>
+</html>

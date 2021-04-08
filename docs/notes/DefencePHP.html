@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>More PHP</title>
+<style type="text/css">
+<!--
+p {  font-family: Arial, Helvetica, sans-serif; font-size: 16px}
+code {  font-family: "Courier New", Courier, mono; font-size: 14px}
+.style1 {color: #FF0000}
+.style2 {
+	font-family: "Courier New", Courier, mono;
+	font-size: 14px;
+}
+.style3 {color: #006600}
+.style4 {color: #0000FF}
+.style5 {color: #FF00FF}
+.style6 {font-family: "Courier New", Courier, mono}
+.style7 {font-size: 16px}
+-->
+</style>
+</head>
+
+<body>
+<h1>Yet More PHP</h1>
+<h1><em>Dynamic Web Design</em></h1>
+<h3>John Lee </h3>
+<p>&nbsp;</p>
+<h2>Defensive programming</h2>
+<p>&quot;Defensive programming&quot; is about  defending yourself against problems
+  by anticipating them and arranging things so that they are handled elegantly
+  (or at least, reasonably neatly).</p>
+<p>PHP provides a good mechanism for doing this, with its <em>catch()</em> construction.
+  Many programming languages (e.g. ActionScript and Java) have the idea of an <em>exception</em>,
+  which means some sort of unwanted condition. An error will often <em>throw</em> an exception; if one can <em>catch</em> the
+  exception, one can <em>handle</em> it in some reasonable way.</p>
+<p>The <em>catch()</em> construction works within a context that is set up by using <em>try</em>. Here
+  is an earlier example set up to catch the undefined variable exception
+using <em>catch()</em> (<a href="http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/urltest-catch.cfm?message1=MESSAGE&amp;" target="_blank">http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/urltest-catch.cfm?message1=MESSAGE&amp;</a>):</p>
+<p><br />
+  <span class="style2">try {<br />
+echo &quot;The first message given on the URL was &lt;font color=red&gt;&quot;.$_GET[&quot;message1&quot;]</span><span class="style2">.&quot;&lt;/font&gt; ...\n&quot;;<br />
+  &lt;br /&gt;<br />
+  &quot;The second message given on the URL was &lt;font color=red&gt;&quot;.$_GET[&quot;message2&quot;].&quot;&lt;/font&gt; ...\n&quot;;<br />
+  /CFOUTPUT&gt;<br />
+  </span><span class="style2">}<br />
+  catch(Exception $e){<br />
+  echo &quot;&lt;p&gt;**** I'm afraid you have some kind of error: &quot;.$e-&gt;getMessage().&quot;&lt;/p&gt;&quot;;<br />
+  }</span></p>
+<p>In PHP documentation (and books) there are examples of how to use catch()
+  to handle specific errors (that throw exceptions) from databases. Here's a simple example of using
+  it to handle the situation when a database is unavailable, which usually happens
+  when
+  the database server is down, even though the ColdFusion server is OK.</p>
+<p>Here is a somewhat defensively coded database update query:</p>
+<p class="style2"> &lt;CFTRY&gt;<br />
+&lt;CFLOCK NAME=&quot;InsertNewRecord&quot; TYPE=&quot;EXCLUSIVE&quot; TIMEOUT=&quot;30&quot;&gt;<br />
+&lt;CFTRANSACTION&gt;<br />
+&lt;CFQUERY NAME=&quot;TcktRequest&quot; DATASOURCE=&quot;ddmtest&quot;&gt;<br />
+INSERT INTO justanexample(email, name, number)<br />
+VALUES ('#Form.email#', '#Form.name#', '#Form.number#')<br />
+&lt;/CFQUERY&gt;<br />
+&lt;/CFTRANSACTION&gt;<br />
+&lt;/CFLOCK&gt;<br />
+&lt;CFCATCH type=&quot;Database&quot;&gt;<br />
+&lt;h3&gt;Error: Unfortunately the database connection has failed.  &lt;br&gt;<br />
+Probably the database server is down: please try again later. &lt;/h3&gt;<br />
+&lt;p&gt;If problems persist, please contact &lt;a href=&quot;mailto:J.Lee@ed.ac.uk&quot;&gt;John
+Lee&lt;/a&gt;.&lt;br&gt; Thanks.&lt;/p&gt;<br />
+&lt;CFABORT&gt;<br />
+&lt;/CFCATCH&gt;<br />
+&lt;/CFTRY&gt;</p>
+<p>&nbsp;</p>
+</body>
+</html>

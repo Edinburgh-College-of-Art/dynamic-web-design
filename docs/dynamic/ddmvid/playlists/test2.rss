@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>ACE Podcasts: ACE Podcasts</title>
+    <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/blog/</link>
+    <description>This is a feed of pages for ACE Podcasts</description>
+    <lastBuildDate>Thu, 05 Jun 2008 11:35:10 GMT</lastBuildDate>
+    <generator>PyRSS2Gen-1.0.0</generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+	
+    <item>
+      <title>bob's cat's dinner's gravy</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/35a25/</link>
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-06-05/bob%27s_cat%27s_dinner%27s_gravy.flv" length="400832" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/35a25/</guid>
+      <pubDate>Thu, 05 Jun 2008 08:41:32 GMT</pubDate>
+    </item>
+	
+    <item>
+      <title>Messing around on Nelson's Monument</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/afb1d/</link>
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-06-04/Messing_around_on_Nelson%27s_Monument.flv" length="16808145" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/afb1d/</guid>
+      <pubDate>Thu, 05 Jun 2008 08:20:24 GMT</pubDate>
+    </item>
+    <item>
+      <title>Rosa and SL experiment: residents, sitters and griefers</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/a7bc4/</link>
+      
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-06-04/Rosa_and_SL_experiment%3A_residents%2C_sitters_and_griefers.flv" length="28196134" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/a7bc4/</guid>
+      <pubDate>Wed, 04 Jun 2008 15:25:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>A test of flash</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/37e25/</link>
+      
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-06-04/A_test_of_flash.flv" length="805854" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/37e25/</guid>
+      <pubDate>Wed, 04 Jun 2008 13:35:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>Jia Li's Robot</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/d58bf/</link>
+   
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-04-11/Jia_Li%27s_Robot.flv" length="15274869" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/d58bf/</guid>
+      <pubDate>Fri, 11 Apr 2008 15:32:50 GMT</pubDate>
+    </item>
+    <item>
+      <title>Royal Mile, Edinburgh</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/2a483/</link>
+      
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-04-11/Royal_Mile%2C_Edinburgh.flv" length="457794946" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/2a483/</guid>
+      <pubDate>Fri, 11 Apr 2008 14:05:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>Workshop idea -compressed-</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/c3be6/</link>
+      
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-04-10/Workshop_idea_%28compressed%29.flv" length="23361485" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/c3be6/</guid>
+      <pubDate>Fri, 11 Apr 2008 09:00:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>What is the difference between old and new media?</title>
+      <link>http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/d8de6/</link>
+      
+      <enclosure url="https://ace-podcast.ace.ed.ac.uk/Podcasts/2008-04-07/What_is_the_difference_between_old_and_new_media%3F.flv" length="3081149" type="video/x-flv"></enclosure>
+      <guid isPermaLink="true">http://ace-podcast.ace.ed.ac.uk/groups/digitalsstaff/weblog/d8de6/</guid>
+      <pubDate>Mon, 07 Apr 2008 14:37:04 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

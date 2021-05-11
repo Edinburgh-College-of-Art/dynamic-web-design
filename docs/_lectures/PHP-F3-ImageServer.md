@@ -2,18 +2,20 @@
 layout: page
 title: Further PHP, with Fat-Free Framework (F3)
 author: "John Lee"
+order: 6
+week: 5
 ---
 
-- [An example application: the ImageServer](#an-example-application-the-imageserver)
-    - [1. The ImageServer class](#1-the-imageserver-class)
-    - [2. Uploading the images](#2-uploading-the-images)
-        - [2.1 Uploading](#21-uploading)
-        - [2.2 Storing the image data](#22-storing-the-image-data)
-    - [3. Viewing the images](#3-viewing-the-images)
-        - [3.1 Retrieving image information](#31-retrieving-image-information)
-        - [3.2 Displaying an image](#32-displaying-an-image)
-    - [4. Deleting an image](#4-deleting-an-image)
-    - [5. Final thoughts](#5-final-thoughts)
+-   [An example application: the ImageServer](#an-example-application-the-imageserver)
+    -   [1. The ImageServer class](#1-the-imageserver-class)
+    -   [2. Uploading the images](#2-uploading-the-images)
+        -   [2.1 Uploading](#21-uploading)
+        -   [2.2 Storing the image data](#22-storing-the-image-data)
+    -   [3. Viewing the images](#3-viewing-the-images)
+        -   [3.1 Retrieving image information](#31-retrieving-image-information)
+        -   [3.2 Displaying an image](#32-displaying-an-image)
+    -   [4. Deleting an image](#4-deleting-an-image)
+    -   [5. Final thoughts](#5-final-thoughts)
 
 ## An example application: the ImageServer
 
@@ -42,8 +44,8 @@ The complete code can be downloaded from the main notes page, and it's
 best to look at the snippets discussed below in their context in the
 whole application, which also includes other useful comments in the
 code. Note that the application also requires a database with a table,
-here called "picdata*fff", that contains the fields \_id, picname,
-picfile* and _pictype_, which are used respectively to store an
+here called "picdata_fff", that contains the fields \_id, picname,
+picfile_ and _pictype_, which are used respectively to store an
 auto-incremented id, an arbitrary name or label entered by the user, the
 file name and the MIME type of each uploaded image. If you have any
 questions about any of it, do just [email me](mailto:j.lee@ed.ac.uk).
@@ -68,9 +70,9 @@ images]{.style2}
 accept for uploading]{.style2}
 ```
 
-_\$pictable_ is the table in the DB, and thumbsize is the size in pixels
-for thumbnail images. _\$filedata_ is simply a variable to hold data
-temporarily, and _\$uploadResult_ is a self-explanatory message, which
+_\\$pictable_ is the table in the DB, and thumbsize is the size in pixels
+for thumbnail images. _\\$filedata_ is simply a variable to hold data
+temporarily, and _\\$uploadResult_ is a self-explanatory message, which
 will be changed by the code below as necessary. These are all _private_
 properties, which cannot be accessed other than by methods defined
 inside the class itself.
@@ -160,7 +162,7 @@ $f3->route('POST /upload',
 );
 ```
 
--- which creates an ImageServer object, and runs its _upload()_ method,
+\-- which creates an ImageServer object, and runs its _upload()_ method,
 which returns the data from the upload, or _null_ if the upload failed.
 If the upload succeeded, these various data are shown to the user via
 the _uploaded.html_ template.
@@ -172,7 +174,6 @@ class called _Web_ for operations like this. The main part of the code
 is just this:
 
 ```php
-
 [$overwrite = false; // set to true, to overwrite an existing file;
 Default: false
 $slug = true; // rename file to filesystem-friendly version]{.redCode}
@@ -198,7 +199,6 @@ defined upload dir
 },]{.greenCode}
 [$overwrite,
     $slug]{.redCode}
-
 ```
 
 This looks more complicated than it is ... I have colour-coded it to
@@ -207,7 +207,7 @@ refers to code of the same colour.
 
 [The first two lines just set two variables that we will use later to
 supply arguments to the upload function: this helps us to remember what
-the arguments mean]{.redCode}[]{.redCode}. [We create a variable,
+the arguments mean]{.redCode}\[]{.redCode}. [We create a variable,
 *$files*, which will be the uploaded file data as returned by a method
 that belongs to the *Web* class]{.blueCode} (see
 <https://fatfreeframework.com/3.7/web>)[. We make an instance of this
@@ -252,7 +252,7 @@ $pic->pictype = $this->filedata["type"];
 }
 ```
 
--- where _picfile_ is the actual pathname of the file as saved,
+\-- where _picfile_ is the actual pathname of the file as saved,
 _picname_ is the name given to the picture as typed in by the user, and
 _pictype_ is the MIME type of the image file (e.g. jpg). Entering the
 image into the DB creates an _id_ for it, which will be completely
@@ -309,7 +309,7 @@ return $recordData;
 ```
 
 The code in red is assembling an array of all the results, because
-_\$pic->find()_ provides each row from the database in the form of an
+_\\$pic->find()_ provides each row from the database in the form of an
 associative array, and the relevant elements are extracted from this and
 then collected together into a larger array, which is then what is
 returned to the calling point (in this case, in _index.php_). In
@@ -356,7 +356,7 @@ deleted), and
 <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/image/1> shows the
 image itself at its original size. It also includes a link to delete the
 image. The URL
-https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/delete/1
+<https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-ImageServer/delete/1>
 would delete image 1 (but I'm not making that a link here because I
 don't want it to be deleted).
 

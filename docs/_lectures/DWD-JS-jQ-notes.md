@@ -2,13 +2,15 @@
 layout: page
 title: Javascript and jQuery
 author: "John Lee"
+order: 6
+week: 5
 ---
 
-- [Introduction to JavaScript](#introduction-to-javascript)
-- [One thing to note](#one-thing-to-note)
-    - [Javascript and Objects](#javascript-and-objects)
-    - [Javascript and Functions](#javascript-and-functions)
-    - [jQuery](#jquery)
+-   [Introduction to JavaScript](#introduction-to-javascript)
+-   [One thing to note](#one-thing-to-note)
+    -   [Javascript and Objects](#javascript-and-objects)
+    -   [Javascript and Functions](#javascript-and-functions)
+    -   [jQuery](#jquery)
 
 ## Introduction to JavaScript
 
@@ -16,7 +18,7 @@ In these notes I assume familiarity with the basic syntax etc. of
 javascript. It's quite similar to various programming or scripting
 languages you might have come across, including PHP (but with some
 important differences, e.g. variables don't normally start with
-"\$"). I will refer heavily to some external resources such as the
+"\\$"). I will refer heavily to some external resources such as the
 w3schools pages, which on these topics are very good, and their "Try it
 yourself" feature is invaluable for experimenting.
 
@@ -97,7 +99,6 @@ in this case, there is code that says:
 {
   .style2
 }
-
 ```
 
 What's happening here is that the variable changeName is being given
@@ -202,7 +203,7 @@ document.write(myMother.lastname);
 document.write(myFather.firstname);
 ```
 
--- which outputs "DoeFred". Note that the functions supplied as the
+\-- which outputs "DoeFred". Note that the functions supplied as the
 final parameter to the object are _different_: one changes the lastname,
 the other the firstname.
 
@@ -242,7 +243,7 @@ admittedly rather pointless way, but it shows up some of the techniques
 ([testJQsimple.html](testJQsimple.html)) -- the code is included here,
 but remember that as often with javascript you can also see it
 (formatted better than here) simply by viewing the page source (of
-testJQsimple.html) [[footnote](#footnote)]:
+testJQsimple.html) \[[footnote](#footnote)]:
 
 ```html
 <style>

@@ -2,6 +2,8 @@
 layout: page
 title: "More on APIs: when requests get more complicated ..."
 author: "John Lee"
+order: 8
+week: 7
 ---
 
 APIs can take many different forms. Some of them require no parameters
@@ -105,9 +107,7 @@ so the XML format is:
 
 This can be accessed at
 
-```
-    http://webdb.ucs.ed.ac.uk/ddm/ACEstaff/john/textsIn2.cfm?xml
-```
+        http://webdb.ucs.ed.ac.uk/ddm/ACEstaff/john/textsIn2.cfm?xml
 
 (if you leave off the "?xml" then it ouputs [a listing in HTML that
 you can see on a normal web

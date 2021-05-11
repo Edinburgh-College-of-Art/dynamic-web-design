@@ -33,6 +33,9 @@ plugins:
 collections:
     lectures:
         output:   true
+    setup:
+        output:   true
+
 
 
 

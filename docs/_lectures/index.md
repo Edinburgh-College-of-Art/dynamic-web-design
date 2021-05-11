@@ -36,27 +36,28 @@ these "view-torials" as soon as possible (password is atrium):
 1.  [Instructions for using local servers](additional.html)
 2.  [Introduction and Forms with F3](IntroAndFormsWithF3.html "Intro and Forms")
 3.  [Databases with F3](DatabasesWithF3.html "DBs with PHP")
-4.  [Jules' notes on database design](pdf/jr_DWD_dbdesign.pdf) (PDF), [the zipped source files for the blog example](zip/jr_WK03_DWD_DBTutorial.zip), and [the screencast of his tutorial](https://vimeo.com/85351919). And [further blog code](zip/jr_blog2.zip).
-5.  [More PHP \[updated for Fat-Free Framework\]](conditionalsPHP+F3.html)
-6.  [Evaluation/usability](EvaluationNotes.html)
+4.  [Jules' notes on database design](pdf/jr_DWD_dbdesign.pdf) (PDF), [the zipped source files for the blog example](zip/jr_blog2.zip), and [the screencast of his tutorial](https://vimeo.com/85351919).
+5.  More PHP [updated for Fat-Free Framework](conditionalsPHP+F3.html)
+6.  [Evaluation / Usability](EvaluationNotes.html)
 7.  Conditional expressions plus cookies / sessions: [A viewtorial on implementing login with a session in F3](https://vid-linker-dev.eca.ed.ac.uk/linker.html?v=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&p=0&cv=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&cp=0)
     \-- code for this, with some additional comments, can be downloaded
-    [here](FFF-SimpleExampleS.zip). The demo can be viewed and played
-    with
-    [here](https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-SimpleExampleS/)
-    (with username guest, password **guest**).] This is [cookietest.php](http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php), and this is [login.php](http://playground.eca.ed.ac.uk/~jlee/test/login.php); [here](cookietest.txt) you can read as text the PHP file for the cookies example, and [here](login.txt) is the one for the login example. A video of a lecture about these (very poor quality) is at <https://vimeo.com/119117628>.
-8.  Further PHP (and the ImageServer) **There is now a Fat-Free Framework version of the ImageServer:**
+    [here](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip). The demo can be viewed and played
+    with [here](https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-SimpleExampleS/)
+    (with username guest, password **guest**).] This is [cookietest.php](http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php), and this is [login.php](http://playground.eca.ed.ac.uk/~jlee/test/login.php);
+    - [here you can read as text the PHP file for the cookies example](php/cookietest.txt)
+    - [here is the one for the login example](php/login.txt).
+    - A video of a lecture about these (very poor quality) is at <https://vimeo.com/119117628>.
+8.  Further PHP and the ImageServer:
     -   [here are the notes](PHP-F3-ImageServer.html)
-    -   [here is the zipped code](FFF-ImageServer-2.zip) Just let me know if you have any problems with this.
-9.  Javascript and APIs: here are links to Jules' notes --
-    <http://ddm.ace.ed.ac.uk/dynamic/apiflickr.html> There used to be notes here for the Google Maps APIs; however, Google have changed the API so these are now out of date, and Google's own notes are now much better. So just look at [the Google documentation here](https://developers.google.com/maps/documentation/javascript/).
+    -   [here is the zipped code](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-ImageServer.zip) Just let me know if you have any problems with this.
+9.  Javascript and APIs: [here are links to Jules' notes](http://ddm.ace.ed.ac.uk/dynamic/apiflickr.html) --
+     There used to be notes here for the Google Maps APIs; however, Google have changed the API so these are now out of date, and Google's own notes are now much better. So just look at [the Google documentation here](https://developers.google.com/maps/documentation/javascript/).
 10. [Javascript and jQuery notes](DWD-JS-jQ-notes.html)
-    [Zipped code](AJAX.zip) for AJAX and jQuery examples, based on
-    Jules' originals. The video of the lecture is at <https://vimeo.com/121459052>.
-11. [XML](LectureXMLnotes09.html)
-12. Further APIs [Notes for material on Txttools API etc](APInotesJL.html).
+    [Zipped code](zip/AJAX.zip) for AJAX and jQuery examples, based on
+    Jules' originals. [(see this video of the lecture)](https://vimeo.com/121459052>.)
+11. Further APIs [Notes for material on Txttools API etc](APInotesJL.html).
 
-**Note that not all of these things will necessarily be referred to in
+**NB: that not all of these things will necessarily be referred to in
 this year's lectures or tutorials.**
 
 Any problems, just let me know: [John](mailto:J.Lee@ed.ac.uk).

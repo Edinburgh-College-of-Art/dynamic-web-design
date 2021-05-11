@@ -16,7 +16,7 @@ If you have installed PHPStorm, follow the same process but select DataGrip. [Si
 
 When you first start DataGrip you will be asked to set some defaults. **Just skip this stage**
 
-![Skip Defaults](jpg/skipdefaults.jpg)
+![Skip Defaults](img/skipdefaults.jpg)
 
 ## Accessing your database
 
@@ -24,7 +24,7 @@ When you first start DataGrip you will be asked to set some defaults. **Just ski
 
 To connect to your Database, select `File` > `Data Source` > `MariaDB`
 
-![add new db](jpg/add_db.jpg)
+![add new db](img/add_db.jpg)
 
 Fill in the details
 
@@ -38,25 +38,25 @@ Fill in the details
 
 **Your Student Number e.g.:** s12345678
 
-![connect to db](jpg/DBdetails.jpg)
+![connect to db](img/DBdetails.jpg)
 
 Click test connection and, if prompted, install drivers.
 
-![install drivers](jpg/DownloadDrivers.jpg)
+![install drivers](img/DownloadDrivers.jpg)
 
 ### Creating a table
 
 Create a table by right clicking on your database and select `New` > `Table`
 
-![New Table](jpg/NewTable.jpg)
+![New Table](img/NewTable.jpg)
 
 Add in your columns with the `+` icon. Give your column a name and type.
 
-![Add Column](jpg/fields.jpg)
+![Add Column](img/fields.jpg)
 
 You can find a suggestion for type by pressing AutoComplete <kbd>CTRL</kbd> + <kbd>SPACEBAR</kbd>
 
-![AutoComplete](jpg/autocomplete.jpg)
+![AutoComplete](img/autocomplete.jpg)
 
 The most common types you will use are `int` and `varchar`. The number in brackets is the size of the field.
 
@@ -64,19 +64,19 @@ The most common types you will use are `int` and `varchar`. The number in bracke
 
 **NB:** don't forget to check the `Auto inc` checkbox if you need a number to automatically increase.
 
-![Auto inc](jpg/auto_inc.jpg)
+![Auto inc](img/auto_inc.jpg)
 
 ### [Structure View](https://www.jetbrains.com/help/datagrip/structure-tool-window-file-structure-popup.html)
 
 To view and edit the structure of your table, navigate through the top bar menu `View | Tool Windows | Structure`.
 
-![structure](jpg/structure.jpg)
+![structure](img/structure.jpg)
 
 ### [Data View](https://www.jetbrains.com/help/datagrip/settings-tools-database-data-views.html)
 
 To view a table, double click on the side bar **OR** right click on the table and select `Jump To Editor`
 
-![Jump To Editor](jpg/EditTable.jpg)
+![Jump To Editor](img/EditTable.jpg)
 
 ## Shortcuts / HotKeys
 

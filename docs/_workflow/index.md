@@ -170,9 +170,9 @@ simplQuery('http://date.jsontest.com')
 
     Copy `F3.xml` to the `templates` folder or create one if it does not exist in:
 
-    - Windows: <your home directory>\.PhpStorm<version>\config\templates
-    - Linux: ~/.PhpStorm<version>/config/templates
-    - MacOS: ~/Library/Preferences/PhpStorm<version>/templates
+    - Windows: `<your home directory>\.PhpStorm<version>\config\templates`
+    - Linux: `~/.PhpStorm<version>/config/templates`
+    - MacOS: `~/Library/Preferences/PhpStorm<version>/templates`
 
     Copy `F3_Codestyle.xml` to the `codestyles` directory
 

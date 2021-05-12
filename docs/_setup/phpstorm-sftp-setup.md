@@ -2,13 +2,22 @@
 layout: page
 title: Setup PHPStorm SFTP
 course: Dynamic Web Design
-order: 5
+order: 1
 ---
 
 An easy way to edit your site directly is to connect via SSH File Transfer Protocol (SFTP). This guide covers how to upload files over SFTP with PHPStorm. You can approach this 2 ways.
 
+<!--
 -   **Method 1:** create a single _main_ project that will allow you to see your entire server
--   **Method 2:** create individual project per site your are working on.
+-   **Method 2:** create individual project per site your are working on. -->
+
+If you haven't already, got to [Jetbrains.com/student](https://www.jetbrains.com/community/education/#students) to sign up for your academic licence.
+
+Once you have signed-up, [login to jetbrains](https://account.jetbrains.com/login) and you should see your academic. Click Download under neath the licence to see the apps available and select PHPStorm
+
+![](img/jetbrains-download.png)
+
+
 
 * * *
 
@@ -61,22 +70,14 @@ An easy way to edit your site directly is to connect via SSH File Transfer Proto
 
 ### Map a Folder
 
--   Still in `Build, Execution, Deployment` -> `Deployment`, go to Mappings tab
-
-#### Method 1:
-
--   Deployment Path: `/public_html`
--   Web Path: `/`
+-   In your project, create a Directory named `public_html`
+-   Go back to `Build, Execution, Deployment` -> `Deployment`,
+-   go to `Mappings` tab and set
+    -   Local Path: click folder icon and select `public_html` folder you just creates
+    -   Deployment Path: click folder icon and select `/public_html`
+    -   Web Path: `/`
 
 ![Map a folder Gif](gif/PHPStormSetMappings.gif)
-
-#### Method 2:
-
--   Deployment Path: click folder icon
-    -   naviagte to `/public_html`
-    -   right-click
-    -   create new Directory name it `fatfree`
--   Web Path: `/fatfree/FFF-SimpleExample`
 
 * * *
 
@@ -89,7 +90,7 @@ An easy way to edit your site directly is to connect via SSH File Transfer Proto
 
 ### Upload to server
 
--   Copy the contents of the [example project]({{site.url}}/example-projects-downloads) into your PHPStorm project
+-   Copy the contents of the [example project]({{site.url}}/example-projects-downloads) into your PHPStorm project's `public_html` folder.
 
 #### Manual Upload
 

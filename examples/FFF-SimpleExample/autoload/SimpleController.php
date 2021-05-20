@@ -18,12 +18,14 @@ class SimpleController {
 		$this->mapper->save();					 // save new record with these fields
 	}
 
-	public function getData() {
+	public function getData()
+    {
 		return $this->mapper->find();
 	}
 
-	public function deleteFromDatabase($idToDelete) {
-		$this->mapper->load(['id=?', $idToDelete]);				// load DB record matching the given ID
-		$this->mapper->erase();									// delete the DB record
+	public function deleteFromDatabase($idToDelete)
+    {
+		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID
+		$this->mapper->erase();						// delete the DB record
 	}
 }

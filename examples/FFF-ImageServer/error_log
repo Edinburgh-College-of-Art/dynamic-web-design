@@ -1,0 +1,11 @@
+[20-May-2021 12:25:52 UTC] PDOStatement: Table 'mhamilte_SimpleModel.picdata_fff' doesn't exist
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/base.php:2347] Base->error()
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/db/sql.php:239] user_error()
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/db/sql.php:410] DB\SQL->exec()
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/db/sql/mapper.php:761] DB\SQL->schema()
+[20-May-2021 12:25:52 UTC] [FFF-ImageServer/autoload/ImageServer.php:24] DB\SQL\Mapper->__construct()
+[20-May-2021 12:25:52 UTC] [FFF-ImageServer/autoload/ImageServer.php:79] ImageServer->store()
+[20-May-2021 12:25:52 UTC] [FFF-ImageServer/index.php:46] ImageServer->upload()
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/base.php:1960] {closure}()
+[20-May-2021 12:25:52 UTC] [/home/mhamilte/AboveWebRoot/lib/base.php:1759] Base->call()
+[20-May-2021 12:25:52 UTC] [FFF-ImageServer/index.php:148] Base->run()

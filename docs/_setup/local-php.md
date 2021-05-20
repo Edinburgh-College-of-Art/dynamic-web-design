@@ -7,16 +7,14 @@ order: 6
 
 Sometimes it's nice to test out ideas on your own or just as a means of [Staging](https://en.wikipedia.org/wiki/Deployment_environment#Staging) before uploading to your web server. Here are a few ways you can run php locally to do some debugging.
 
----
+* * *
 
 ## PHP REPL
 
 If you are running macOS then you can run a local PHP REPL (Read, Evaluate, Print, Loop) in the Terminal with this command. If you are on windows or linux, you will need to install PHP (see below)
-
+```sh
+    php -a
 ```
-php -a
-```
-
 You can now type in individual lines of PHP code to see if they work, a great tool for debugging. Try
 
 ```php
@@ -30,7 +28,7 @@ You can also run php scripts with:
 require_once('PATH/TO/FILENAME.php')
 ```
 
----
+* * *
 
 ## Installing PHP
 
@@ -143,31 +141,34 @@ require_once('PATH/TO/FILENAME.php')
     <article role="tabpanel" class="tab-pane active" id="shell-linux">
       <p>
         In Terminal, paste-in
+
 {% highlight bash %}
-wget https://www.apachefriends.org/xampp-files/7.2.2/xampp-linux-x64-7.2.2-0-installer.run
+wget <https://www.apachefriends.org/xampp-files/7.2.2/xampp-linux-x64-7.2.2-0-installer.run>
 chmod +x xampp-linux-x64-5.6.33-0-installer.run
 ./xampp-linux-x64-7.2.2-0-installer.run
 {% endhighlight %}
+
       </p>
     </article>
+
   </div>
 
 </div>
 
----
+* * *
 
 ## PHPStorm
 
 Now you have PHP installed on your machine, you can run your php scripts and webpages in PHPStorm. Here is a step by step and see the GIF below.
 
-1. Go to: `Preference` `>` `Languages & Frameworks` `>` `PHP`
-2. Click `...`
-3. Click **+**
-4. In `PHP Executable` double click the folder icon.
-5. Navigate to your `XAMPP` or `MAMP`
-6. Select `bin` `>` `php`
-7. Select a php version
-8. In the `bin` directory select `php-cgi`
+1.  Go to: `Preference` `>` `Languages & Frameworks` `>` `PHP`
+2.  Click `...`
+3.  Click **+**
+4.  In `PHP Executable` double click the folder icon.
+5.  Navigate to your `XAMPP` or `MAMP`
+6.  Select `bin` `>` `php`
+7.  Select a php version
+8.  In the `bin` directory select `php-cgi`
 
 ![Set Local PHP](gif/SetPHPLocal.gif)
 

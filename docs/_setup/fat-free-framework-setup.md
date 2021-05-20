@@ -17,6 +17,7 @@ This is a short guide to adding the Fat Free Framework to your server. Makesure 
 5.  Go to `Build, Execution, Deployment` -> `Deployment`,
 6.  go to `Mappings` tab
 7.  Click <kbd>Add New Mapping</kbd>
+
     -   Local Path: `AboveWebRoot` folder you just creates
     -   Deployment Path:
         -   right click the top level

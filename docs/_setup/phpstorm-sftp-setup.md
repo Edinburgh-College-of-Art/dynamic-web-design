@@ -13,11 +13,9 @@ An easy way to edit your site directly is to connect via SSH File Transfer Proto
 
 If you haven't already, got to [Jetbrains.com/student](https://www.jetbrains.com/community/education/#students) to sign up for your academic licence.
 
-Once you have signed-up, [login to jetbrains](https://account.jetbrains.com/login) and you should see your academic. Click Download under neath the licence to see the apps available and select PHPStorm
+Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/login) and you should see your academic. Click Download under neath the licence to see the apps available and select PHPStorm
 
 ![](img/jetbrains-download.png)
-
-
 
 * * *
 
@@ -52,7 +50,7 @@ Once you have signed-up, [login to jetbrains](https://account.jetbrains.com/logi
 
 * * *
 
-**†** Your Domain Username and Password should have been provdied in your sign-up email. You can change your password in at <https://edinburgh.domains/user-information/> (sign-in required)
+**†** Your Domain Username and Password should have been provided in your sign-up email. You can change your password at <https://edinburgh.domains/user-information/> (sign-in required)
 
 ![Set SFTP Server Gif](gif/PHPStormSetSFTP.gif)
 

@@ -11,7 +11,7 @@ If you are using PHPStorm, a local http server will be created for you when you 
 
 If you opted for [Sublime Text Editor](https://www.sublimetext.com/), a very simple way to set up a Local Server, without having to know the Command Line interface, is to use the [Browser Sync](https://packagecontrol.io/packages/Browser%20Sync) plugin for Sublime Text 3.
 
-***
+* * *
 
 ## Web Server for Chrome extension
 
@@ -21,7 +21,7 @@ By default, the Web Server won't run in the background, so keep it open for it t
 
 After launching the Web Server a new window will open. There you can click [CHOOSE FOLDER] and select the folder with the HTML page for your sketch. Now you can just click on the Web Server URL (`http://127.0.0.1:8887` by default) to see and open your sketch. If you name your sketch HTML page `index.html` and enable `Automatically show index.html`, your sketch will load as soon as you open the URL!
 
-***
+* * *
 
 ## Python SimpleHTTPServer (1st option)
 
@@ -31,21 +31,17 @@ If you need a quick web server running and you don't want to mess with setting u
 
 Type in Terminal:
 
-```
-python -m SimpleHTTPServer
-```
+    python -m SimpleHTTPServer
 
 Or if you are using Python 3, type:
 
-```
-python -m http.server
-```
+    python -m http.server
 
 Then visit `http://localhost:8000` on your browser.
 
 Unfortunately the python simple server is very slow. Loading a local page will often stall and it can't stream video and has trouble with even medium size files like an 8MB mp3 for example. However, it should suffice for loading in most text files, fonts and most images.
 
-***
+* * *
 
 ## Node http-server (2nd option)
 
@@ -74,23 +70,23 @@ http-server -c-1
 Alternatively, you can setup a `browser-sync` server which has the added benefit of automatically reloading the webpage when any changes were saved in the source code.
 
 1.  Follow instructions above to install node.js and open a Terminal/Command Prompt window
-1.  Type
+2.  Type
 
         npm install -g browser-sync
 
-1.  `cd` into your project folder.
-1.  Type
+3.  `cd` into your project folder.
+4.  Type
 
         browser-sync start --server -f -w
 
-1.  Your website should be available at `http://localhost:3000` and whenever you save a file in your project, the webpage will automatically reload.
+5.  Your website should be available at `http://localhost:3000` and whenever you save a file in your project, the webpage will automatically reload.
 
-- [https://www.browsersync.io/#install](https://www.browsersync.io/#install)
-- [https://github.com/CodingTrain/Rainbow-Topics/issues/646](https://github.com/CodingTrain/Rainbow-Topics/issues/646)
+-   <https://www.browsersync.io/#install>
+-   <https://github.com/CodingTrain/Rainbow-Topics/issues/646>
 
-Note 2: If you encountered an error that says `EACCES` when installing either `http-server` or `browser-sync` it means npm is not installed with the right permissions, follow the steps outlined at https://docs.npmjs.com/getting-started/fixing-npm-permissions to fix it.
+Note 2: If you encountered an error that says `EACCES` when installing either `http-server` or `browser-sync` it means npm is not installed with the right permissions, follow the steps outlined at <https://docs.npmjs.com/getting-started/fixing-npm-permissions> to fix it.
 
-***
+* * *
 
 ## Using PHP built-in web server (3rd option)
 
@@ -98,19 +94,15 @@ Note 2: If you encountered an error that says `EACCES` when installing either `h
 
 To check if you have PHP installed you can open a terminal and issue the command:
 
-```
-php -version
-```
+    php -version
 
 If you have PHP CLI (Command Line Interpreter) installed you can start a local development server by using the command:
 
-```
-php -S localhost:8000
-```
+    php -S localhost:8000
 
 Then point your browser at `http://localhost:8000/`
 
-***
+* * *
 
 ## Setting up Browser Sync for Sublime Text (command line free option)
 
@@ -118,20 +110,20 @@ The Browser Sync plugin for Sublime Text allows you to launch your project in th
 
 To install the plugin you will first need load the Package repository by doing this:
 
-- Open the Command Palette by using <kbd>Ctrl</kbd> + <kbd>⇧</kbd> + <kbd>P</kbd> or going to Tools > Command Palette
-- Type "Install Package" and hit <kbd>⏎</kbd>
-- The repository will be loaded in a matter of seconds
+-   Open the Command Palette by using <kbd>Ctrl</kbd> + <kbd>⇧</kbd> + <kbd>P</kbd> or going to Tools > Command Palette
+-   Type "Install Package" and hit <kbd>⏎</kbd>
+-   The repository will be loaded in a matter of seconds
 
 Once the repository is loaded, you can search and launch the installation of the Browser Sync plugin.
 
-- Inside the same Command Palette type `Browsersync`
-- The suggest option shows you the Browser Sync plugin, click on it and hit <kbd>⏎</kbd>
-- Once completed the installation of the plugin, a new menu, "Browser Sync", appears on the menu bar
+-   Inside the same Command Palette type `Browsersync`
+-   The suggest option shows you the Browser Sync plugin, click on it and hit <kbd>⏎</kbd>
+-   Once completed the installation of the plugin, a new menu, "Browser Sync", appears on the menu bar
 
 Now that the Browser Sync plugin is installed on your Sublime Text Editor, here is how to use it.
 
-- Say you have Chrome opened and in Sublime Text your project is opened as well.
-- In the "Browser Sync" menu, go to "Start File" and choose your".../index.html" file
-- Then, go to "Browser Sync" menu again and click "Launch"
-- Now your project should open in a new Chrome Tab
-- Each time you'll save (<kbd>Ctrl</kbd> + <kbd>S</kbd>) your modifications in Sublime Text, your projects Chrome Tab will refresh
+-   Say you have Chrome opened and in Sublime Text your project is opened as well.
+-   In the "Browser Sync" menu, go to "Start File" and choose your".../index.html" file
+-   Then, go to "Browser Sync" menu again and click "Launch"
+-   Now your project should open in a new Chrome Tab
+-   Each time you'll save (<kbd>Ctrl</kbd> + <kbd>S</kbd>) your modifications in Sublime Text, your projects Chrome Tab will refresh

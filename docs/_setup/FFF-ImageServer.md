@@ -28,13 +28,13 @@ There are a couple of steps to take in order to setup this example
     - You will need to add an additional column
 ![](img/phpMyAdmin_add_column.png)
 
-| Name      | Type    | Length/Values | Index   | A_I |
-| --------- | ------- | ------------- | ------- | --- |
-| id        | BIGINT  | -             | Primary | x   |
-| title     | VARCHAR | 200           | -       | -   |
-| filepath  | VARCHAR | 200           | -       | -   |
-| type      | VARCHAR | 20            | -       | -   |
-| thumbnail | VARCHAR | 200           | -       | -   |
+| Name      | Type    | Length | Index   | A_I |
+| --------- | ------- | ------ | ------- | --- |
+| id        | BIGINT  | -      | Primary | x   |
+| title     | VARCHAR | 200    | -       | -   |
+| filepath  | VARCHAR | 200    | -       | -   |
+| type      | VARCHAR | 20     | -       | -   |
+| thumbnail | VARCHAR | 200    | -       | -   |
 
 - you can leave other unmentioned attributes blank.
 - when you check `A_I` or `Primary` just click `Go` on the pop-up

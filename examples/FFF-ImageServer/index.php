@@ -36,6 +36,17 @@ $f3->route('GET /',
     }
 );
 
+$f3->route('GET /about',
+    function($f3)
+    {
+        $file = F3::instance()->read('README.md');
+        $html = Markdown::instance()->convert($file);
+        $f3->set('article_html', $html);
+        $f3->set('content','article.html');
+        echo template::instance()->render('layout.html');;
+    }
+);
+
 // When using GET, provide a form for the user to upload an image via the file input type
 $f3->route('GET /upload',
     function ($f3) {

@@ -21,14 +21,54 @@ There are a couple of steps to take in order to setup this example
 5. add a new table named `picdata_fff` with these columns
     - You will need to add an additional column
 
-| Name      | Type    | Length/Values | Index   | A_I |
-| --------- | ------- | ------------- | ------- | --- |
-| id        | BIGINT  | -             | Primary | x   |
-| title     | VARCHAR | 200           | -       | -   |
-| filepath  | VARCHAR | 200           | -       | -   |
-| type      | VARCHAR | 20            | -       | -   |
-| thumbnail | VARCHAR | 200           | -       | -   |
-
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Length</th>
+              <th>Index</th>
+              <th>A_I</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>BIGINT</td>
+              <td>-</td>
+              <td>Primary</td>
+              <td>x</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>VARCHAR</td>
+              <td>200</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>filepath</td>
+              <td>VARCHAR</td>
+              <td>200</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>VARCHAR</td>
+              <td>20</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>thumbnail</td>
+              <td>VARCHAR</td>
+              <td>200</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
 - you can leave other unmentioned attributes blank.
 - when you check `A_I` or `Primary` just click `Go` on the pop-up
 

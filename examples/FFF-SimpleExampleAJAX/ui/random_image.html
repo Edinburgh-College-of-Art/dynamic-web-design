@@ -1,0 +1,25 @@
+<script>
+    function getRandomImage()
+    {
+        $.ajax({
+            type: 'GET',
+            url: 'https://mhamilt7.edinburgh.domains/FFF-ImageServer/infoservice',
+            success: response =>
+            {
+                let randIndex = Math.floor(Math.random() * response.length);
+                let responseString = `/FFF-ImageServer/thumb/${response[randIndex]["id"]}`;
+                $("#response").html(responseString);
+                $("#random_image").attr("src", responseString);
+            },
+            failure: error    => console.log(error)
+        });
+
+    }
+    getRandomImage();
+</script>
+
+<h1>Get a Random Thumbnail from FFF-ImageServer</h1>
+<p>Remeber you will need to have uploaded images first</p>
+<button onclick="getRandomImage()">Press Me To Fetch Get A Random Thumbnail</button>
+<div><img id="random_image" src=''></div>
+<pre id="response"></pre>

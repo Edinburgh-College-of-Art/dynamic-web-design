@@ -1,33 +1,19 @@
-<html>
-<head>
-    <title>AJAX 1</title>
-    <script src="{{@BASE}}/ui/js/jquery.min.js"></script>
-    <script>
-        function simplQuery(query_url)
-        {
-            $.ajax({
-                type: 'GET',
-                url: query_url,
-                success: function(response)
-                {
-                    $("#response").html(JSON.stringify(response));
-                },
-                failure: function()
-                {
-                    console.log("ajax failure!");
-                    console.log(query_url);
-                },
-            });
-        }
-    </script>
-</head>
-<body>
+
+<script>
+    function simpleQuery(queryUrl)
+    {
+        $.ajax({
+            type: 'GET',
+            url: queryUrl,
+            success: response => $("#response").html(JSON.stringify(response, null, 4)),
+            failure: error => console.log(error)
+        });
+    }
+</script>
 
 <h2>JQUERY Example</h2>
+<p>Enter a URL and press the button to see the response below. Why not try the infoservice of you FFF-ImageServer?</p>
+<pre>https://DOMAIN.edinburgh.domains/FFF-ImageServer/infoservice</pre>
 <input id="url_input"/>
-
-<button onclick="simplQuery($('#url_input').val())">Press Me To Fetch a URL</button>
+<button onclick="simpleQuery($('#url_input').val())">Press Me To Fetch Response from a URL</button>
 <pre id="response">Response Here</pre>
-
-</body>
-</html>

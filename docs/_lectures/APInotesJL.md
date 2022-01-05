@@ -11,7 +11,16 @@ APIs can take many different forms. Some of them require no parameters to be sup
 Details of the requests are given in their How-To document ([here](XML_Messaging_Connector_for_txttools_2.2.pdf)). We have to construct an XML-formatted string that we send to their server via HTTP POST in a variable called XMLPost. This amounts to exactly the same thing as having a form with a textfield called XMLPost, and putting the XML string into that text field -- but we don't want to create a form and have to click a button, we just want to do this from a PHP script. So we use code like this:
 
 ```xml
-$XMLrequest='<?xml version="1.0" ?><Request><Authentication><Username><![CDATA[jlee@ed]]></Username><Password><![CDATA[PASSWORD-GOES-HERE]]></Password> </Authentication><RetrieveInbound><RetrieveType><![CDATA[ALL]]></RetrieveType></RetrieveInbound></Request>';
+$XMLrequest='<?xml version="1.0" ?>
+<Request>
+    <Authentication>
+        <Username><![CDATA[jlee@ed]]></Username>
+        <Password><![CDATA[PASSWORD-GOES-HERE]]></Password>
+    </Authentication>
+    <RetrieveInbound>
+        <RetrieveType><![CDATA[ALL]]></RetrieveType>
+    </RetrieveInbound>
+</Request>';
 
 $TXTurl="http://www.txttools.co.uk/connectors/XML/xml.jsp";  // The txttools API URL
 

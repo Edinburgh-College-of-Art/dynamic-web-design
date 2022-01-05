@@ -131,15 +131,17 @@ In F3, the making of a database connection is represented, using an object-orien
 Connecting to a MySQL database from PHP, even with F3, requires you to know the address of the database server, and login credentials for accessing it. See local details [here](additional21.html#MySQL). We use these in setting up the database connection. So inside the above web root Autoload folder, we have a class called _DatabaseConnection_, which is defined in a file called _DatabaseConnection.php_. (You should always define autoload classes in a file of the same name, with the _.php_ extension, and the file should contain nothing except the class definition and comments.) It looks like this:
 
 ```php
-    class DatabaseConnection {
-        static function connect() {
-            return new DBSQL(
-              'mysql:host=hostName;port=portNumber;dbname=databaseName',
-              'username',
-              'password'
-            );
-        }
+class DatabaseConnection
+{
+    static function connect()
+    {
+        return new DBSQL(
+            'mysql:host=hostName;port=portNumber;dbname=databaseName',
+            'username',
+            'password'
+        );
     }
+}
 ```
 
 The items shown here in red are as given in the local details. The hostName can be "localhost" if your code is run by a PHP server hosted on the same server host as the MySQL database itself (e.g. playground.eca.ed.ac.uk). The _connect()_ method returns a _DBSQL_ object, which is an F3 component that holds an SQL database connection.
@@ -154,7 +156,7 @@ This invokes the method _statically_, which means without creating an object of 
 
 (note that _DB_ is not a PHP variable -- it's an F3 variable -- and so it is named as a string, using quotes, and doesn't have the _\\$_ in front of it that PHP variables must always have).
 
-### **Using a connection in an application**
+### Using a connection in an application
 
 Using the Model-View-Controller (MVC) approach, one thinks of the database as being the _Model_. It provides a representation of relevant information about the domain we're working with. Code that controls how information goes into and out of the database we can think of as the _Controller_. Taking an object-oriented approach, it will be implemented as a _class_ that contains _methods_ (functions) to carry out the various actions that are needed. Defining a class allows _objects_ of that class to be created.
 
@@ -163,37 +165,43 @@ Objects in PHP are similar to those in Javascript, having properties and methods
 Normally we will define a class suitable for our specific application: in the case of the SimpleForm application it's called _SimpleController_. This is defined in a file called _SimpleController.php_, which is placed in the application's Autoload folder (note that this is **_not_** the same as the AboveWebRoot Autoload folder), so that it will always be automatically loaded and available to PHP. The code for this is as follows; note that as usual the colours identify parts as discussed in the text below.
 
 ```php
-    <?php
-    // Class that provides methods for working with the form data.
-    // There should be NOTHING in this file except this class definition.
+<?php
+// Class that provides methods for working with the form data.
+// There should be NOTHING in this file except this class definition.
 
-    class SimpleController {
-          private $mapper;
+class SimpleController
+{
+    private $mapper;
 
-          public function __construct() {
-            global $f3;                     // needed for $f3->get()
-            $this->mapper = new DBSQLMapper($f3->get('DB'),"simpleModel");    // create DB query mapper object
-                                                                                // for the "simpleModel" table
-          }
-
-          public function putIntoDatabase($data) {
-            $this->mapper->name = $data["name"];                    // set value for "name" field
-            $this->mapper->colour = $data["colour"];                // set value for "colour" field
-            $this->mapper->save();                                    // save new record with these fields
-          }
-
-          public function getData() {
-            $list = $this->mapper->find();
-            return $list;
-          }
-
-          public function deleteHandler($idToDelete) {
-            $this->mapper->load(['id=?', $idToDelete]);               // load DB record matching the given ID
-            $this->mapper->erase();                                   // delete the DB record
-          }
-
+    public function __construct()
+    {
+        global $f3;                     // needed for $f3->get()
+        $this->mapper = new DBSQLMapper($f3->get('DB'), "simpleModel");    // create DB query mapper object
+        // for the "simpleModel" table
     }
-    ?>
+
+    public function putIntoDatabase($data)
+    {
+        $this->mapper->name = $data["name"];                    // set value for "name" field
+        $this->mapper->colour = $data["colour"];                // set value for "colour" field
+        $this->mapper->save();                                    // save new record with these fields
+    }
+
+    public function getData()
+    {
+        $list = $this->mapper->find();
+        return $list;
+    }
+
+    public function deleteHandler($idToDelete)
+    {
+        $this->mapper->load(['id=?', $idToDelete]);               // load DB record matching the given ID
+        $this->mapper->erase();                                   // delete the DB record
+    }
+
+}
+
+?>
 ```
 
 In the _SimpleController_ class, I have assumed that whenever an object of this class is created, the first thing it will need is a way to use the connection to the database, so this is defined in [the special method `__construct()`, which is automatically called whenever a new object of this class is created (constructed)]. (This kind of method is commonly known in object-oriented programming as a _constructor_.)
@@ -221,7 +229,18 @@ achieves this by [using the find() method of the mapper object, which if given n
 This is shown in the notes under Templates, repeated here. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
 ```php
-<table> <tr> <th>Name</th><th>Colour</th> </tr> <repeat group="{% raw %}{{ @dbData }}{% endraw %}" value="{{ @record }}"> <tr> <td>{{ trim(@record.name) }}</td> <td>{{ trim(@record.colour) }}</td> </tr> </repeat> </table>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Colour</th>
+    </tr>
+    <repeat group="{% raw %}{{ @dbData }}{% endraw %}" value="{{ @record }}">
+        <tr>
+            <td>{{ trim(@record.name) }}</td>
+            <td>{{ trim(@record.colour) }}</td>
+        </tr>
+    </repeat>
+</table>
 ```
 
 Here, between the _<repeat>_ tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. Each member of the array contains a further associative array, each with keys name and colour. The expression trim(@record.name) simply takes the name element in the current record and trims any leading or trailing white space from it. So this _repeat_ loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the _dataView_ route (URL ending in _FFF-SimpleExample/dataView_) -- this HTML is from the template _dataView.htm_l.

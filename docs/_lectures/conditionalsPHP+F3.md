@@ -89,7 +89,7 @@ Another useful context for conditionals is where you are using checkboxes on a f
 
 Consider this situation (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)):
 
-```html
+```php
 <form id="form1" name="form1" method="post" action="">
   <p>Check box:
     <input type="checkbox" name="checkIt" id="checkbox" />
@@ -99,18 +99,13 @@ Consider this situation (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>
   </p>
 </form>
 <p>
-  <?php
-echo "Value of checkbox is " . $_POST["checkIt"];
-?>
+  <?php echo "Value of checkbox is " . $_POST["checkIt"]; ?>
 ```
 
 Here, you'll find that if the box is checked, the value is "on", but if it isn't you get an error, or at least an incomplete sentence. The simplest way to fix this would be to use a conditional expression:
 
 ```php
-<?php
-echo "Value of checkbox is " .
-    [(isset($_POST["checkIt"])?"on":"off")];
-?>
+<?php echo "Value of checkbox is " . (isset($_POST["checkIt"])?"on":"off");?>
 ```
 
 (or use whatever other strings you like instead of "on" and "off") then the problem is resolved fairly elegantly (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest2.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)).
@@ -119,20 +114,16 @@ But this still looks odd to the user, since the text doesn't always correspond t
 
 ```php
 <body>
-  <form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="">
     <p>Check box:
-      <input type="checkbox" name="checkIt" id="checkbox" [<?php echo
-isset($_POST["checkIt"])?"checked":"";?>] />
+        <input type="checkbox" name="checkIt" id="checkbox" <?php echo isset($_POST["checkIt"]) ? "checked" : ""; ?> />
     </p>
     <p>
-      <input type="submit" name="Submit" id="button" value="Update" />
+        <input type="submit" name="Submit" id="button" value="Update"/>
     </p>
-  </form>
-  <p>
-<?php
-echo "Value of checkbox is " .
-(isset($_POST["checkIt"])?"on":"off");
-?>
+</form>
+
+<?php echo "Value of checkbox is " . (isset($_POST["checkIt"]) ? "on" : "off"); ?>
 ```
 
 Notice that if you want "on" (the actual value returned from the form) to be something else, say "set", then you can add _value="set"_ as a attribute to the input of type checkbox, but in the code we have here we are never looking at the actual value returned in _\\$\_POST["checkIt"]_, so it doesn't matter.

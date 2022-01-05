@@ -56,10 +56,11 @@ This is often used to add methods to objects. Consider the example from <http://
 ```js
 this.changeName = changeName;
 
-  function changeName(name)
-  {
-    this.lastname = name;
-  }
+function changeName(name)
+{
+  this.lastname = name;
+}
+
 ```
 
 What's happening here is that the variable changeName is being given the function that's also called changeName as a value. But we could equally well write the code like this:
@@ -230,7 +231,7 @@ function setupWords()
   {
     words += "<span class='word' id='wd" + i + "'>" + word + "</span>
     ";
-  });\
+  });
   $("#maindiv").html(words);
 
   setupjQ();

@@ -27,59 +27,63 @@ Dynamic web sites are everywhere. Very few are static HTML pages. E-commerce sys
 
 Dynamic web sites are all about change: change not just in the way information is displayed (which we can achieve in the browser with Javascript, Flash, etc.), but change in the information itself. Information may be dynamically substituted with other information, or dynamically created from some other resource. This can only be done at the source of the information: the web server.
 
-So in this course, we begin by turning our focus away from the web user's browser for a while, to consider the role of the web _server_[ in an interaction, and how we can use this to provide for different kinds of functionality. In particular, we look at how information can be obtained from the user by means of *form-filling*, and we begin to look at how it can be processed once we've got it. ]{style="font-style:normal"}
+So in this course, we begin by turning our focus away from the web user's browser for a while, to consider the role of the web _server_ in an interaction, and how we can use this to provide for different kinds of functionality. In particular, we look at how information can be obtained from the user by means of *form-filling*, and we begin to look at how it can be processed once we've got it.
 
-[We develop this line of discussion by starting to look at the use of *databases* and how they can be integrated to provide dynamic information through web sites. These are the techniques and technologies used by most commercial web sites, and this course should equip you to understand how these are created, and develop sites of these kinds for yourself. ]{style="font-style:normal"}We will start by considering the simplest kinds of web technologies and then move on to look at a system called PHP, which we will use in this course as our choice from a range of possible technologies with similar capabilities.
+We develop this line of discussion by starting to look at the use of *databases* and how they can be integrated to provide dynamic information through web sites. These are the techniques and technologies used by most commercial web sites, and this course should equip you to understand how these are created, and develop sites of these kinds for yourself. We will start by considering the simplest kinds of web technologies and then move on to look at a system called PHP, which we will use in this course as our choice from a range of possible technologies with similar capabilities.
 
 As ever in the Design and Digital Media (or Digital Media Design) programme, we are not aiming to do more in the lectures than introduce these things: it is up to you to pursue further resources to find more information and move to a more advanced level.
 
 ## The role of the server
 
-When you look at a web page, what actually happens is that your browser connects to a server, specified in the first part of the URL, and sends the server a _request_[, which includes the whole URL. The server provides (i.e. ]{style="font-style:normal"}_serves_[) a specific document, specified by the rest of the URL. ]{style="font-style:normal"}
+When you look at a web page, what actually happens is that your browser connects to a server, specified in the first part of the URL, and sends the server a _request_, which includes the whole URL. The server provides (i.e. _serves_) a specific document, specified by the rest of the URL.
 
-[The document (which is usually just a file full of some kind of data) is downloaded onto your machine, and the browser identifies its ***type***, usually through information in a "header" sent by the server (see below), which normally relates to the file extension, ".html" etc. (but the header often takes precedence if the file extension is different). If it's HTML, or plain text, or a few other things, the browser will attempt to display it using its own resources; or it may offer it as input to a plugin; otherwise it may launch a helper application or just save the file somewhere. (Usually browser "preferences" determine how various kinds of document are handled; see also <http://en.wikipedia.org/wiki/Internet_media_type>.)]{style="font-style:normal"}
+The document (which is usually just a file full of some kind of data) is downloaded onto your machine, and the browser identifies its ***type***, usually through information in a "header" sent by the server (see below), which normally relates to the file extension, ".html" etc. (but the header often takes precedence if the file extension is different). If it's HTML, or plain text, or a few other things, the browser will attempt to display it using its own resources; or it may offer it as input to a plugin; otherwise it may launch a helper application or just save the file somewhere. (Usually browser "preferences" determine how various kinds of document are handled; see also <http://en.wikipedia.org/wiki/Internet_media_type>.)
 
-[Sometimes, the document requested by the browser does not already exist on the server machine, at least not in the required form. In that case, the request may fail, but alternatively the server may have been given instructions to do some processing to create or modify the document before serving it. ]{style="font-style:normal"}
+Sometimes, the document requested by the browser does not already exist on the server machine, at least not in the required form. In that case, the request may fail, but alternatively the server may have been given instructions to do some processing to create or modify the document before serving it.
 
-[The HyperText Transfer Protocol (HTTP), which web applications typically use to communicate, is how requests are expressed when the URL begins with "http:", and it allows one to specify some aspects of how the server should behave. ]{style="font-style:normal"}
+The HyperText Transfer Protocol (HTTP), which web applications typically use to communicate, is how requests are expressed when the URL begins with "http:", and it allows one to specify some aspects of how the server should behave.
 
 ## CGI
 
 The "Common Gateway Interface" is a standard mechanism whereby the server can be made to execute some application on the server machine, and provide any result from the application as data to be sent back to the originator of the request.
 
-The server will execute the application; it will also pass as a **_parameter_**[ to the application any component of the URL that follows a "**?**" character. Thus, if you visit the Google search site (<http://www.google.com/>) and execute a search for ]{style="font-style:normal"}_MSc Design Digital Media_[, you'll notice that the URL in the browser changes to something like the following (roughly, though the details may differ at different times and places):]{style="font-style:normal"}
+The server will execute the application; it will also pass as a **_parameter_** to the application any component of the URL that follows a "**?**" character. Thus, if you visit the Google search site (<http://www.google.com/>) and execute a search for _MSc Design Digital Media_, you'll notice that the URL in the browser changes to something like the following (roughly, though the details may differ at different times and places):
 
 `http://www.google.com/search?hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search`
 
-In this URL, _search,_ just before the "_?_", [ will be the name of some application on the Google server machine, and the string ]{style="font-style:normal"}_hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search_ [is what's handed to it as a parameter. ]{style="font-style:normal"}
+In this URL, _search,_ just before the "_?_",  will be the name of some application on the Google server machine, and the string _hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search_ [is what's handed to it as a parameter.
 
-[By convention, this parameter string (often called the "*query string*") consists of a list of named parameters (in this case three: ]{style="font-style:normal"}_h1, q,_ and _btnG_[) and their values, linked by "=". The parameter-value pairs are separated by "&". Within parameter values, words are separated with the "+" character.]{style="font-style:normal"}
+By convention, this parameter string (often called the "*query string*") consists of a list of named parameters (in this case three: _h1, q,_ and _btnG_) and their values, linked by "=". The parameter-value pairs are separated by "&". Within parameter values, words are separated with the "+" character.
 
-[Spaces are not allowed: any such non-alphanumeric characters are represented by "%" and then their ASCII code as a two-digit hexadecimal number, so if spaces do appear they are encoded as "%20". (Because the ASCII code for a space is 32 in decimal, 20 in hex. This arrangement is called ]{style="font-style:normal"}_URL encoding_[, and has to be used in all URLs, though most browsers now will silently encode URLs before sending them if you just type them in directly.)]{style="font-style:normal"}
+Spaces are not allowed: any such non-alphanumeric characters are represented by "%" and then their ASCII code as a two-digit hexadecimal number, so if spaces do appear they are encoded as "%20". (Because the ASCII code for a space is 32 in decimal, 20 in hex. This arrangement is called ]{style="font-style:normal"}_URL encoding_, and has to be used in all URLs, though most browsers now will silently encode URLs before sending them if you just type them in directly.)
 
 ## The HTTP request methods
 
-When a request is sent to a server, a **_method_**[ is specified for handling any data associated with the request. Usually, this is either GET or POST. The former of these is notionally associated with getting information from the server, while the latter is associated with posting data to it; however these are often not very distinct. Either way, some facility is available for the server to obtain information from the browser, which may then be somehow processed (and then probably other information will be sent back as a response). ]{style="font-style:normal"}
+When a request is sent to a server, a **_method_** is specified for handling any data associated with the request. Usually, this is either GET or POST. The former of these is notionally associated with getting information from the server, while the latter is associated with posting data to it; however these are often not very distinct. Either way, some facility is available for the server to obtain information from the browser, which may then be somehow processed (and then probably other information will be sent back as a response).
 
-[In the case of *forms*, the browser is in fact providing data to the server, but it can do this using either GET or POST methods -- the information is simply sent in different ways. We will normally use the POST method for form data, because it has some security advantages.]{style="font-style:normal"}
+In the case of *forms*, the browser is in fact providing data to the server, but it can do this using either GET or POST methods -- the information is simply sent in different ways. We will normally use the POST method for form data, because it has some security advantages.
 
 ## Forms
 
 HTML forms are, at their simplest, just a quick and convenient way of adding information to an HTTP request. For example, they can be used to construct a query string for a CGI URL.
 
-Suppose we have an application on our server that saves people's names in a file, and the application is called _namesave.cgi_[. If one executes it with a name as parameter, it will add the name to a file. We could have the user always type in a URL ending with]{style="font-style:normal"}
-
-[.../namesave.cgi?name=John+Smith]{style="font-family:Courier"}
+Suppose we have an application on our server that saves people's names in a file, and the application is called _namesave.cgi_. If one executes it with a name as parameter, it will add the name to a file. We could have the user always type in a URL ending with `.../namesave.cgi?name=John+Smith`
 
 (or whatever their name might be), but this is not at all convenient. Usually the user would be put off by this, and it is more practical, as well as more attractive and simpler, to provide instead an HTML form as follows.
 
 ```html
 <html>
-<head><title>Simple example form</title></head>
-<body><h1>An example of a very simple form</h1>
+<head>
+    <title>Simple example form</title>
+</head>
+<body>
+<h1>An example of a very simple form</h1>
 <p>
-<form method="GET" action="namesave.cgi"> Enter your name here:  <input type="text" name="name"> <input type="submit">
-    <input type="reset"></form>
+<form method="GET" action="namesave.cgi"> Enter your name here: 
+    <input type="text" name="name">
+    <input type="submit">
+    <input type="reset">
+</form>
 </body>
 </html>
 ```
@@ -87,7 +91,7 @@ When this HTML is displayed, it looks as follows ([or as at this link](http://dd
 
 ![](Lecture1notes_files/image002.jpg){width="395" height="129"}
 
-And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). \[[NB, the application in this example is now a dummy, so you'll get a "permission denied" message when you try to execute it, but you can still see what happens to the URL.]]
+And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). **NB, the application in this example is now a dummy, so you'll get a "permission denied" message when you try to execute it, but you can still see what happens to the URL.**
 
 This principle can be extended, in that there are a considerable range of types of input available (lists, buttons, checkboxes, etc.), and clearly the URL produced can become very complicated, but the mechanism remains the same.
 
@@ -99,7 +103,7 @@ Editors such as Dreamweaver make the creation of forms very simple. The trickier
 
 All you need to do, then, is decide what application to use and create a program that handles the data appropriately.
 
-The most obvious difference between GET and POST, in practice, is that whereas the GET method sends parameters via the URL as described above, POST causes the information to be sent in a different way, which is not visible on the URL.[  ]{style="mso-spacerun: yes"}We have chosen to use GET here for clarity, but obviously POST may have advantages in many situations. The application that processes the data will also have to decode it differently depending on which of these methods is used, and decoding POST information is more complicated. (With PHP, as we'll see below, we normally use POST for form data, but we will not need to know the details of how PHP decodes it.)
+The most obvious difference between GET and POST, in practice, is that whereas the GET method sends parameters via the URL as described above, POST causes the information to be sent in a different way, which is not visible on the URL. We have chosen to use GET here for clarity, but obviously POST may have advantages in many situations. The application that processes the data will also have to decode it differently depending on which of these methods is used, and decoding POST information is more complicated. (With PHP, as we'll see below, we normally use POST for form data, but we will not need to know the details of how PHP decodes it.)
 
 Remember that the URL query string can be used even wihout forms, to provide information for an application. This will continue to be important for us.
 
@@ -187,8 +191,12 @@ For you, this final line will be different, depending on the name of the directo
 
 So in the FFF-SimpleExample example discussed in the introductory Viewtorial for this course, the home directory of the F3 application is _.../FFF-SimpleExample/_ (where "..." is the file system path to the directory, e.g., on my laptop, /Users/jlee/Sites/fatfree/FFF-SimpleExample/). In this directory there is a .htaccess file as above. When I visit the URL _<http://localhost/fatfree/FFF-SimpleExample/>_ the server will go to index.php, but then it will look for a rule defining the directory as a route, bearing in mind that by default my browser will be sending an HTTP request using the method GET. This rule appears as:
 
-```
-$f3->route('GET /',         function ($f3) {         $f3->set('html_title','Simple Example Home');         $f3->set('content','simpleform.html');         echo Template::instance()->render('layout.html');         }         );
+```php
+$f3->route('GET /', function ($f3) {
+    $f3->set('html_title', 'Simple Example Home');
+    $f3->set('content', 'simpleform.html');
+    echo Template::instance()->render('layout.html');
+});
 ```
 
 This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, _layout.html_.
@@ -196,7 +204,11 @@ This says that the F3 method _route_ (a method of the F3 object represented by _
 In general, a route will need a first argument that specifies an HTTP method and a URL element, and a second that specifies or defines a function to run. In FFF-SimpleExample, there is another route rule, for example, that looks like this:
 
 ```php
-$f3->route('GET /simpleform',         function($f3) {         $f3->set('html_title','Simple Input Form');         $f3->set('content','simpleform.html');         echo template::instance()->render('layout ().html');         }         );
+$f3->route('GET /simpleform', function ($f3) {
+    $f3->set('html_title', 'Simple Input Form');
+    $f3->set('content', 'simpleform.html');
+    echo template::instance()->render('layout ().html');
+});
 ```
 
 which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<http://localhost/fatfree/FFF-SimpleExample/simpleform>_ \--  will produce exacly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its _html_title_ variable being different.)
@@ -257,8 +269,21 @@ A key item in SimpleExample is the simple form that allows the user to enter the
 
 The first main point to note is the _action_ attribute of the opening _<form>_ tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the _simpleform_ route. Hence, F3 looks in _index.php_ for a rule that begins with 'POST /simpleform', and it finds
 
-```
-$f3->route('POST /simpleform',         function($f3) {         $formdata = array(); // array to         pass on the entered data in         $formdata["name"] = $f3->get('POST.name'); // whatever         was called "name" on the form         $formdata["colour"] = $f3->get('POST.colour'); // whatever         was called "colour" on the form                  $controller = new SimpleController;         $controller->putIntoDatabase($formdata);                  $f3->set('formData',$formdata);         // set info in F3 variable for access in response template                  $f3->set('html_title','Simple Example Response');         $f3->set('content','response.html');         echo template::instance()->render('layout.html');         }         );
+```php
+$f3->route('POST /simpleform', function ($f3) {
+    $formdata = array(); // array to         pass on the entered data in
+    $formdata["name"] = $f3->get('POST.name'); // whatever         was called "name" on the form
+    $formdata["colour"] = $f3->get('POST.colour'); // whatever         was called "colour" on the form
+    $controller = new SimpleController;
+    $controller->putIntoDatabase($formdata);
+    $f3->set('formData', $formdata);         // set info in F3 variable for access in response template
+    $f3->set('html_title', 'Simple Example Response');
+    $f3->set('content', 'response.html');
+    echo template::instance()->render('layout.html');
+});
+
+
+
 ```
 
 This looks slightly complicated, but basically it [extracts the data entered on the form]. This comes to F3 as members of the _POST_ object: one for each HTML _input_ or _select_ on the form. The form defined an input called _name_ and a select called _colour_: hence, the POST object has members _POST.name_ and _POST.colour_. The code takes these and packs them into [a two-element associative array called *$formdata*], which [it then hands to the controller function that puts the elements into the database]. If the items on the form, the keys in the array and the fields in the database all consistently use the same names, the scheme is very clear and easy to maintain, modify, etc. Finally, [the *$formdata* array is also put into the F3 variable *formdata*], [which the *response.html* template will use to show the user that it got the correct values:]
@@ -279,9 +304,11 @@ the URL (or from a form that uses the HTTP GET method) are also made very simply
 
 In F3 applications, the GET option is not used as much as when working with vanilla PHP, because F3 defines an alternative means of getting parameters via the URL. You can add a parameter as an extension to the URL, by simply adding "/" followed by the parameter value. The route rule can then be written to allow this to be accessed as follows:
 
+```php
+$f3->route('GET /example/@var', function ($f3) {
+    echo "The parameter value you gave was: " . $f3->get('PARAMS.var');
+}
 ```
-$f3->route('GET /example/@var',         function($f3) {         echo "The parameter value you gave was: " . $f3->get('PARAMS.var');         }         }
-`
 
 If you now browse to the URL _".../example/fish"_, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
 ror will result.

@@ -34,9 +34,9 @@ require_once('PATH/TO/FILENAME.php')
 
 <div>
   <ul class="nav nav-tabs nav-justified" role="tablist">
-    <li role="presentation" class="active"><a data-os="windows" href="#shell-windows" aria-controls="Windows" role="tab" data-toggle="tab"><i class="fab fa-windows"></i> Windows</a></li>
-    <li role="presentation"><a data-os="macos" href="#shell-macos" aria-controls="MacOS" role="tab" data-toggle="tab"><i class="fab fa-apple"></i> macOS</a></li>
-    <li role="presentation"><a data-os="linux" href="#shell-linux" aria-controls="Linux" role="tab" data-toggle="tab"><i class="fab fa-linux"></i> Linux</a></li>
+    <li role="presentation" class="active"><a data-os="windows" href="#shell-windows" aria-controls="Windows" role="tab" data-toggle="tab"><i class="fa fa-windows"></i> Windows</a></li>
+    <li role="presentation"><a data-os="macos" href="#shell-macos" aria-controls="MacOS" role="tab" data-toggle="tab"><i class="fa fa-apple"></i> macOS</a></li>
+    <li role="presentation"><a data-os="linux" href="#shell-linux" aria-controls="Linux" role="tab" data-toggle="tab"><i class="fa fa-linux"></i> Linux</a></li>
   </ul>
   <div class="tab-content">
     <article role="tabpanel" class="tab-pane active" id="shell-windows">

@@ -281,7 +281,7 @@ In F3 applications, the GET option is not used as much as when working with vani
 
 ```
 $f3->route('GET /example/@var',         function($f3) {         echo "The parameter value you gave was: " . $f3->get('PARAMS.var');         }         }
-```
+`
 
 If you now browse to the URL _".../example/fish"_, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
 ror will result.

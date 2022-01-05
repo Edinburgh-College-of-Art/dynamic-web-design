@@ -129,7 +129,7 @@ you may need to return to it later and extend it further._
 Here we'll assume that a very simple database with just one table
 called _Product_ already exists and contains data about various
 manufactured products. The _Product_ table has fields called:
-`Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage.`{.style5}
+`Manufacturer, ManufacturerURL, ProductName, ProductType, ProductDescription, ProductPrice, ProductImage.`
 
 The main SQL commands that we'll mention are SELECT, INSERT and UPDATE.
 The first of these is, naturally, used to select the information that is
@@ -383,7 +383,7 @@ In the _SimpleController_ class, I have assumed that whenever an object
 of this class is created, the first thing it will need is a way to use
 the connection to the database, so this is defined in [the special
 method `__construct()`, which is automatically called whenever a new
-object of this class is created (constructed)]{.style7}. (This kind of
+object of this class is created (constructed)]. (This kind of
 method is commonly known in object-oriented programming as a
 _constructor_.)
 
@@ -391,7 +391,7 @@ The way to use a database connection in F3 is via a _mapper_ object,
 which very cleverly manages all the relationships between data in a
 particular database table and variables in our PHP code. [Hence the
 first thing in the SImpleController definition is creating a variable
-(`$mapper`) for a mapper object]{.style1}. This mapper object is
+(`$mapper`) for a mapper object]. This mapper object is
 identified in the `__construct()` method as `$this->mapper`, where
 `$this` identifies the particular object that is being created when the
 code is run ("this object", to the code). The mapper object is created
@@ -449,8 +449,8 @@ function is very simple:
 `public function putIntoDatabase($data) { $this->mapper->name = $data["name"]; // set value for "name" field $this->mapper->colour = $data["colour"]; // set value for "colour" field $this->mapper->save(); // save new record with these fields }`
 
 All this does is [set the members of the mapper object to take the
-values that are given in the $data array]{.RedText}, and then [call the
-mapper's save() method]{.style7}, which saves the values in the mapper
+values that are given in the $data array], and then [call the
+mapper's save() method], which saves the values in the mapper
 object into the corresponding databse fields (by using SQL behind the
 scenes). That's really all there is to it.
 
@@ -461,13 +461,13 @@ table, then the following method
 `public function getData() { $list = $this->mapper->find(); return $list; }`
 
 achieves this by [using the find() method of the mapper object, which if
-given no arguments will simply find all the data]{.RedText}. The
+given no arguments will simply find all the data]. The
 returned data will actually be in the form of an array containing one
 object for each row in the database table. Each of these objects is an
 associative array, or in other words a list of key-value pairs, where
 the keys will be the names of the database fields and the values will be
 whatever value that field has in the particualr row. [This array is
-returned from the method function using the variable *$list*]{.style7}.
+returned from the method function using the variable *$list*].
 The array can be used in simple loop to display the data, e.g. as a
 table.
 
@@ -509,7 +509,7 @@ $f3->route('GET /dataView', function($f3)
 });
 ```
 
-which straightforwardly [creates a *SimpleController* object], then [uses its *getData()* method as above to retrieve all the rows]{.style7}, [which are put into the variable *$alldata*]. This variable is then [used to set an F3 variable *dbData*], which is expected in the _dataView.html_ template, as above.
+which straightforwardly [creates a *SimpleController* object], then [uses its *getData()* method as above to retrieve all the rows], [which are put into the variable *$alldata*]. This variable is then [used to set an F3 variable *dbData*], which is expected in the _dataView.html_ template, as above.
 
 This has been a very simple introduction, but still you need no more
 than is covered in these notes and the viewtorials to make some very

@@ -103,14 +103,14 @@ which is highly recommended reading). So instead of a line like:
 
 ```php
 <input type="checkbox" name="checkIt" id="checkbox" [<?php echo
-isset(\$\_POST["checkIt"])?"checked":"";?>]{.style8} />
+isset(\$\_POST["checkIt"])?"checked":"";?>] />
 ```
 
 you could have:
 
 ```php
 <input type="checkbox" name="checkIt" id="checkbox" [{{
-@POST.checkIt?"checked":"" }}]{.style8} />
+@POST.checkIt?"checked":"" }}] />
 ```
 
 which is much neater and more readable than the bare PHP version.
@@ -166,7 +166,7 @@ simplest way to fix this would be to use a conditional expression:
 ```php
 <?php
 echo "Value of checkbox is " .
-    [(isset($_POST["checkIt"])?"on":"off")]{.style8};
+    [(isset($_POST["checkIt"])?"on":"off")];
 ?>
 ```
 
@@ -187,7 +187,7 @@ remains as the user tends to expect
   <form id="form1" name="form1" method="post" action="">
     <p>Check box:
       <input type="checkbox" name="checkIt" id="checkbox" [<?php echo
-isset($_POST["checkIt"])?"checked":"";?>]{.style8} />
+isset($_POST["checkIt"])?"checked":"";?>] />
     </p>
     <p>
       <input type="submit" name="Submit" id="button" value="Update" />

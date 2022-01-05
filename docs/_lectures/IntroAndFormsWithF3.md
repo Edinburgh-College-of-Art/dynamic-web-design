@@ -127,7 +127,7 @@ There are many books on PHP, and even more material on the web --- a good introd
 
 There are plenty of things you can do with PHP without needing to use a database. Here's a simple example of a PHP page. I will refer to the parts **within the PHP tags** as _script_ elements, or simply _the PHP script_.
 
-```
+```php
 <HTML>
 <HEAD><TITLE>PHP Example</TITLE></HEAD>
 <BODY><H2>Today's date is ``<?php         echo date("d/m/Y");       ``?>         </H2></BODY>
@@ -142,7 +142,7 @@ This is clearly HTML with just the embedded PHP tags. Within the scope of these 
 
 The processing of this page is illustrated in the following diagram (click for larger version).
 
-\[![PHP processing diagram](img/PHP-process.png)
+![PHP processing diagram](img/PHP-process.png)
 
 _Always remember that the PHP script is only processed if the page is **requested from the server**, i.e. if you use a browser and **a URL that begins with http&#x3A;//** ... If you access the template file **directly** with a browser (in which case your URL will begin **file://**) then the script will **not** be processed and so you will **not** see the result you expect._
 
@@ -160,7 +160,13 @@ But in F3, things are different. The index.php file is taken as a file that defi
 
 This is possible because, in the directory identified by the URL, there is a file called ".htaccess" (but because it starts with "." it is usually hidden by default in file views), in which a _redirection_ is defined. Redirection is a general facility offered by web servers, whereby rules can be defined that cause a URL to be redirected to somewhere else, by being rewritten as a different URL. In the F3 case, any URL that points into this directory is processed as a route, according to rules that are defined in index.php. This is achieved through the _.htaccess_ file containing the following:
 
-`RewriteEngine On         RewriteCond %{REQUEST_FILENAME} !-f         RewriteCond %{REQUEST_FILENAME} !-d         RewriteCond %{REQUEST_FILENAME} !-l         RewriteRule .* index.php [L,QSA]`
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L,QSA]
+```
 
 Roughly speaking, this means: (line 1) the RewriteEngine is activated; (lines 2-4) if a URL is requested from this directory that looks like a filename but isn't a file, directory or link, it is (line 5) passed to the RewriteRule that says it is rewritten to _index.php_ (in the same directory as the _.htaccess_ file).
 
@@ -168,19 +174,30 @@ This .htaccess file has to be in the home directory of the F3 application, and e
 
 [**Important note:**] there is a wrinkle here, in that the rewrite mechanism will not work in this simple way on our Playground server, or in other situations where other types of rewriting are happening. On the Playground server, our URLs typically include a component that starts with "~", followed by a username (e.g., in my case, "~jlee"), which identifies with the "html" directory (web root) of a particular user. In this kind of context, the resolving of the "~" seems to confuse the resolving of the rewrite. To get around this, the .htaccess file needs to have another line that specifies the application home directory, so in full it should be (for my directory on Playground):
 
-`RewriteEngine On         RewriteCond %{REQUEST_FILENAME} !-f         RewriteCond %{REQUEST_FILENAME} !-d         RewriteCond %{REQUEST_FILENAME} !-l         RewriteRule .* index.php [L,QSA]         RewriteBase /~jlee/fatfree/FFF-simpleExample/`
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L,QSA]
+RewriteBase /~jlee/fatfree/FFF-simpleExample/
+```
 
 For you, this final line will be different, depending on the name of the directory you are using. If your student id is _s1900000_, then the directory will be _/~s1900000/fatree/FFF-simpleExample_ if you have called your directory "FFF-simpleExample" and put it inside a directory called "fatfree" in your html directory.
 
 So in the FFF-SimpleExample example discussed in the introductory Viewtorial for this course, the home directory of the F3 application is _.../FFF-SimpleExample/_ (where "..." is the file system path to the directory, e.g., on my laptop, /Users/jlee/Sites/fatfree/FFF-SimpleExample/). In this directory there is a .htaccess file as above. When I visit the URL _<http://localhost/fatfree/FFF-SimpleExample/>_ the server will go to index.php, but then it will look for a rule defining the directory as a route, bearing in mind that by default my browser will be sending an HTTP request using the method GET. This rule appears as:
 
-`$f3->route('GET /',         function ($f3) {         $f3->set('html_title','Simple Example Home');         $f3->set('content','simpleform.html');         echo Template::instance()->render('layout.html');         }         );`
+```
+$f3->route('GET /',         function ($f3) {         $f3->set('html_title','Simple Example Home');         $f3->set('content','simpleform.html');         echo Template::instance()->render('layout.html');         }         );
+```
 
 This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, _layout.html_.
 
 In general, a route will need a first argument that specifies an HTTP method and a URL element, and a second that specifies or defines a function to run. In FFF-SimpleExample, there is another route rule, for example, that looks like this:
 
-`$f3->route('GET /simpleform',         function($f3) {         $f3->set('html_title','Simple Input Form');         $f3->set('content','simpleform.html');         echo template::instance()->render('layout ().html');         }         );`
+```php
+$f3->route('GET /simpleform',         function($f3) {         $f3->set('html_title','Simple Input Form');         $f3->set('content','simpleform.html');         echo template::instance()->render('layout ().html');         }         );
+```
 
 which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<http://localhost/fatfree/FFF-SimpleExample/simpleform>_ \--  will produce exacly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its _html_title_ variable being different.)
 
@@ -198,7 +215,20 @@ Another concept fundamental to F3, and to most other frameworks, is the idea of 
 
 Crucially, the template system supports contructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
-`<table>         <tr>         <th>Name</th><th>Colour</th>         </tr>         <repeat group="{{ @dbData }}" value="{{ @record }}">         <tr>         <td>{{ trim(@record.name) }}</td>         <td>{{ trim(@record.colour) }}</td>         </tr>         </repeat>         </table>`
+```html
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Colour</th>
+    </tr>
+    <repeat group="{{ @dbData }}" value="{{ @record }}">
+        <tr>
+            <td>{{ trim(@record.name) }}</td>
+            <td>{{ trim(@record.colour) }}</td>
+        </tr>
+    </repeat>
+</table>
+```
 
 Here, between the _<repeat>_ tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim(@record.name) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the _dataView_ route (URL ending in _FFF-SimpleExample/dataView_) \-- this HTML is from the template _dataView.htm_l.
 
@@ -208,15 +238,37 @@ We can take advantage of any features of HTML that we like, so for instance if w
 
 A key item in SimpleExample is the simple form that allows the user to enter their name and choose a colour. The HTML for this is very simple:
 
-`<p>This is a simple form</p>         <form id="form1" name="form1" method="post" action="{{ @BASE         }}/simpleform">         Please enter your name:          <input name="name" type="text" placeholder="Enter name"         id="name" size="50" />                  <p>Choose a colour:          <select name="colour" id="colour">         <option value="blue">Blue</option>         <option value="red" selected="selected">Red</option>         <option value="green">Green</option>         </select>         </p>         <p>         <input type="submit" name="Submit" value="Submit" />         </p>         </form>`
+```html
+<p>This is a simple form</p>
+<form id="form1" name="form1" method="post" action="{{@BASE}}/simpleform"> Please enter your name:
+    <input name="name" type="text" placeholder="Enter name" id="name" size="50"/>
+    <p>Choose a colour:
+      <select name="colour" id="colour">
+        <option value="blue">Blue</option>
+        <option value="red" selected="selected">Red</option>
+        <option value="green">Green</option>
+    </select>
+    </p>
+    <p>
+      <input type="submit" name="Submit" value="Submit"/>
+    </p>
+</form>
+```
 
 The first main point to note is the _action_ attribute of the opening _<form>_ tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the _simpleform_ route. Hence, F3 looks in _index.php_ for a rule that begins with 'POST /simpleform', and it finds
 
-`$f3->route('POST /simpleform',         function($f3) {         $formdata = array(); // array to         pass on the entered data in         $formdata["name"] = $f3->get('POST.name'); // whatever         was called "name" on the form         $formdata["colour"] = $f3->get('POST.colour'); // whatever         was called "colour" on the form                  $controller = new SimpleController;         $controller->putIntoDatabase($formdata);                  $f3->set('formData',$formdata);         // set info in F3 variable for access in response template                  $f3->set('html_title','Simple Example Response');         $f3->set('content','response.html');         echo template::instance()->render('layout.html');         }         );`
+```
+$f3->route('POST /simpleform',         function($f3) {         $formdata = array(); // array to         pass on the entered data in         $formdata["name"] = $f3->get('POST.name'); // whatever         was called "name" on the form         $formdata["colour"] = $f3->get('POST.colour'); // whatever         was called "colour" on the form                  $controller = new SimpleController;         $controller->putIntoDatabase($formdata);                  $f3->set('formData',$formdata);         // set info in F3 variable for access in response template                  $f3->set('html_title','Simple Example Response');         $f3->set('content','response.html');         echo template::instance()->render('layout.html');         }         );
+```
 
 This looks slightly complicated, but basically it [extracts the data entered on the form]. This comes to F3 as members of the _POST_ object: one for each HTML _input_ or _select_ on the form. The form defined an input called _name_ and a select called _colour_: hence, the POST object has members _POST.name_ and _POST.colour_. The code takes these and packs them into [a two-element associative array called *$formdata*], which [it then hands to the controller function that puts the elements into the database]. If the items on the form, the keys in the array and the fields in the database all consistently use the same names, the scheme is very clear and easy to maintain, modify, etc. Finally, [the *$formdata* array is also put into the F3 variable *formdata*], [which the *response.html* template will use to show the user that it got the correct values:]
 
-`<h1>Thanks for your data, {{           @formData.name }} ...</h1>         <p> Your colour was {{           @formData.colour }} </p>         <hr />         <a href="{{ @BASE }}/dataView">Show all data</a>`
+```html
+<h1>Thanks for your data, {{ @formData.name }} ...</h1>
+<p> Your colour was {{ @formData.colour }} </p>
+<hr/>
+<a href="{{ @BASE }}/dataView">Show all data</a>
+```
 
 ### The GET object
 
@@ -227,7 +279,9 @@ the URL (or from a form that uses the HTTP GET method) are also made very simply
 
 In F3 applications, the GET option is not used as much as when working with vanilla PHP, because F3 defines an alternative means of getting parameters via the URL. You can add a parameter as an extension to the URL, by simply adding "/" followed by the parameter value. The route rule can then be written to allow this to be accessed as follows:
 
-`$f3->route('GET /example/@var',         function($f3) {         echo "The parameter value you gave was: " . $f3->get('PARAMS.var');         }         }`
+```
+$f3->route('GET /example/@var',         function($f3) {         echo "The parameter value you gave was: " . $f3->get('PARAMS.var');         }         }
+```
 
 If you now browse to the URL _".../example/fish"_, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
 ror will result.

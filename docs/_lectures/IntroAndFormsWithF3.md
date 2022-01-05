@@ -53,13 +53,13 @@ The server will execute the application; it will also pass as a **_parameter_** 
 
 In this URL, _search,_ just before the "_?_",  will be the name of some application on the Google server machine, and the string _hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search_ [is what's handed to it as a parameter.
 
-By convention, this parameter string (often called the "*query string*") consists of a list of named parameters (in this case three: _h1, q,_ and _btnG_) and their values, linked by "=". The parameter-value pairs are separated by "&". Within parameter values, words are separated with the "+" character.
+By convention, this parameter string (often called the "*query string*") consists of a list of named parameters (in this case three: _h1, q,_ and `btnG`) and their values, linked by "=". The parameter-value pairs are separated by "&". Within parameter values, words are separated with the "+" character.
 
 Spaces are not allowed: any such non-alphanumeric characters are represented by "%" and then their ASCII code as a two-digit hexadecimal number, so if spaces do appear they are encoded as "%20". (Because the ASCII code for a space is 32 in decimal, 20 in hex. This arrangement is called ]{style="font-style:normal"}_URL encoding_, and has to be used in all URLs, though most browsers now will silently encode URLs before sending them if you just type them in directly.)
 
 ## The HTTP request methods
 
-When a request is sent to a server, a **_method_** is specified for handling any data associated with the request. Usually, this is either GET or POST. The former of these is notionally associated with getting information from the server, while the latter is associated with posting data to it; however these are often not very distinct. Either way, some facility is available for the server to obtain information from the browser, which may then be somehow processed (and then probably other information will be sent back as a response).
+When a request is sent to a server, a **`method`** is specified for handling any data associated with the request. Usually, this is either GET or POST. The former of these is notionally associated with getting information from the server, while the latter is associated with posting data to it; however these are often not very distinct. Either way, some facility is available for the server to obtain information from the browser, which may then be somehow processed (and then probably other information will be sent back as a response).
 
 In the case of *forms*, the browser is in fact providing data to the server, but it can do this using either GET or POST methods -- the information is simply sent in different ways. We will normally use the POST method for form data, because it has some security advantages.
 
@@ -123,7 +123,7 @@ We have chosen PHP mainly because it is free, open source software and very wide
 
 You can install PHP on your own computer (e.g. laptop), along with the MySQL database and the Apache web server, in the form of a neatly packaged setup called (if you are using a Macintosh) MAMP ([www.mamp.info/](www.mamp.info/)). This stands for "Macintosh, Apache, MySQL, PHP", and derives from the original LAMP, which is for the Linux operating system. There is also WAMP or WampServer for Windows machines. We do not undertake to support students in running any setup on their own machines: if you wish to try it, this is up to you. We provide access to all the components via the _Edinburgh Domains_ service, as described [at this link](additional.html).
 
-PHP defines a language written between tags that are placed within HTML pages (or in files that have no HTML, which function simply as PHP scripts). The tags open with "**_&lt;?php_**", and close with "**_?>_**"; they are embedded in ordinary HTML pages that are placed on a machine with a special PHP web server (which is often an extension of the server that serves plain HTML web pages). These pages are sometimes known as _templates_. When they are served by the server, _all the PHP code, with its tags, disappears_ and is replaced by pieces of HTML that depend on what the PHP statements specified. The resulting page is therefore interpretable by any normal browser. If you look at the HTML source of any PHP page as it arrives at your browser, you will find nothing other than ordinary HTML, CSS etc. -- no trace of PHP code. With this kind of system, the pages can be designed exactly as usual, but with these PHP tags as placeholders for material that will be provided dynamically when the page is viewed in the user's browser.
+PHP defines a language written between tags that are placed within HTML pages (or in files that have no HTML, which function simply as PHP scripts). The tags open with `<?php`, and close with `?>`; they are embedded in ordinary HTML pages that are placed on a machine with a special PHP web server (which is often an extension of the server that serves plain HTML web pages). These pages are sometimes known as _templates_. When they are served by the server, _all the PHP code, with its tags, disappears_ and is replaced by pieces of HTML that depend on what the PHP statements specified. The resulting page is therefore interpretable by any normal browser. If you look at the HTML source of any PHP page as it arrives at your browser, you will find nothing other than ordinary HTML, CSS etc. -- no trace of PHP code. With this kind of system, the pages can be designed exactly as usual, but with these PHP tags as placeholders for material that will be provided dynamically when the page is viewed in the user's browser.
 
 So there is no PHP user interface: you design your page templates using Dreamweaver, or any other text editor, and you include PHP script elements into the HTML. Dreamweaver and some other editors will have functionality that helps you to do this, but you don't have to use it. Your template contains nothing but text. Then you place the templates onto the PHP-enabled web server and access them via a web browser, like any other web pages.
 
@@ -158,11 +158,11 @@ In this course, we are going to use a _framework_, which is essentially a set of
 
 ### Routes
 
-A key concept in F3, as in many frameworks, is the _route_. A URL as described above normally identifies a file, which may contain a script that will be executed, but in F3 a URL usually identifies a route. A route is actually interpreted by a PHP function that you define within a PHP file, usually _index.php_. This function provides a rule for interpreting the route. Normally, any URL that ends in a trailing slash ("/") is interpreted as ending at a folder (in these notes we will call a folder a _directory_, in keeping with UNIX terminology) and implicitly identifying the file _index.suffix_ in that directory (where _suffix_ may be html, jpg, php, etc.). If the file _index.php_ exists, it will be executed on the PHP interpreter; _index.html_ would simply be served as a webpage, etc. There should only ever be one _index_ file, so the URL with the trailing slash has an identical result to one that has the index file on the end.
+A key concept in F3, as in many frameworks, is the _route_. A URL as described above normally identifies a file, which may contain a script that will be executed, but in F3 a URL usually identifies a route. A route is actually interpreted by a PHP function that you define within a PHP file, usually `index.php`. This function provides a rule for interpreting the route. Normally, any URL that ends in a trailing slash ("/") is interpreted as ending at a folder (in these notes we will call a folder a _directory_, in keeping with UNIX terminology) and implicitly identifying the file _index.suffix_ in that directory (where _suffix_ may be html, jpg, php, etc.). If the file `index.php` exists, it will be executed on the PHP interpreter; `index.html` would simply be served as a webpage, etc. There should only ever be one _index_ file, so the URL with the trailing slash has an identical result to one that has the index file on the end.
 
 But in F3, things are different. The index.php file is taken as a file that defines various setup parameters and routes. The URL that ends in a trailing slash is taken to identify a route defined in the index.php file. If "index.php" is added to the end of the URL, it will fail, unless a route for the resulting URL is explicitly defined. Normal URL behaviour seems to be turned on its head.
 
-This is possible because, in the directory identified by the URL, there is a file called ".htaccess" (but because it starts with "." it is usually hidden by default in file views), in which a _redirection_ is defined. Redirection is a general facility offered by web servers, whereby rules can be defined that cause a URL to be redirected to somewhere else, by being rewritten as a different URL. In the F3 case, any URL that points into this directory is processed as a route, according to rules that are defined in index.php. This is achieved through the _.htaccess_ file containing the following:
+This is possible because, in the directory identified by the URL, there is a file called ".htaccess" (but because it starts with "." it is usually hidden by default in file views), in which a _redirection_ is defined. Redirection is a general facility offered by web servers, whereby rules can be defined that cause a URL to be redirected to somewhere else, by being rewritten as a different URL. In the F3 case, any URL that points into this directory is processed as a route, according to rules that are defined in index.php. This is achieved through the `.htaccess` file containing the following:
 
 ```
 RewriteEngine On
@@ -172,7 +172,7 @@ RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule .* index.php [L,QSA]
 ```
 
-Roughly speaking, this means: (line 1) the RewriteEngine is activated; (lines 2-4) if a URL is requested from this directory that looks like a filename but isn't a file, directory or link, it is (line 5) passed to the RewriteRule that says it is rewritten to _index.php_ (in the same directory as the _.htaccess_ file).
+Roughly speaking, this means: (line 1) the RewriteEngine is activated; (lines 2-4) if a URL is requested from this directory that looks like a filename but isn't a file, directory or link, it is (line 5) passed to the RewriteRule that says it is rewritten to `index.php` (in the same directory as the `.htaccess` file).
 
 This .htaccess file has to be in the home directory of the F3 application, and each F3 application will require its own .htaccess file (though usually they are all identical to the above).
 
@@ -199,7 +199,7 @@ $f3->route('GET /', function ($f3) {
 });
 ```
 
-This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, _layout.html_.
+This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, `layout.html`.
 
 In general, a route will need a first argument that specifies an HTTP method and a URL element, and a second that specifies or defines a function to run. In FFF-SimpleExample, there is another route rule, for example, that looks like this:
 
@@ -211,7 +211,7 @@ $f3->route('GET /simpleform', function ($f3) {
 });
 ```
 
-which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<http://localhost/fatfree/FFF-SimpleExample/simpleform>_ \--  will produce exacly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its _html_title_ variable being different.)
+which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<http://localhost/fatfree/FFF-SimpleExample/simpleform>_ \--  will produce exacly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its `html_title` variable being different.)
 
 If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is quite different.
 
@@ -223,7 +223,7 @@ Another concept fundamental to F3, and to most other frameworks, is the idea of 
 
 `{{ @html_title }}`
 
-\--  if we find this embedded in normal HTML, it means that when the template is rendered, this will be removed completely and replaced, in this cse, by the value of the F3 variable _html_title_ (any white space between the double braces will be removed as well). The "@" symbol just directs the interpreter to look for an F3 variable. Other things can be done as well -- see the F3 documentation for details.
+--  if we find this embedded in normal HTML, it means that when the template is rendered, this will be removed completely and replaced, in this cse, by the value of the F3 variable `html_title` (any white space between the double braces will be removed as well). The "@" symbol just directs the interpreter to look for an F3 variable. Other things can be done as well -- see the F3 documentation for details.
 
 Crucially, the template system supports contructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
@@ -242,7 +242,7 @@ Crucially, the template system supports contructions such as loops. Suppose we h
 </table>
 ```
 
-Here, between the _<repeat>_ tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim(@record.name) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the _dataView_ route (URL ending in _FFF-SimpleExample/dataView_) \-- this HTML is from the template _dataView.htm_l.
+Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _FFF-SimpleExample/dataView_) -- this HTML is from the template `dataView.html`.
 
 We can take advantage of any features of HTML that we like, so for instance if we had a URL in the database then, rather than just printing it out, it's easy to make it into a clickable link. We could also of course style this page by simply adding any required id or class attributes and some CSS styles or a link to a stylesheet. Since the data we are displaying on the page we are creating here is tabular data, it makes sense to use a table to present it, but instead we could generate a whole series of DIVs etc. if we wanted. Then we would certainly want to use CSS for formatting -- we could even, if we wanted, write PHP code to generate or adapt CSS dynamically, so that things would be formatted differently in different circumstances.
 
@@ -267,7 +267,7 @@ A key item in SimpleExample is the simple form that allows the user to enter the
 </form>
 ```
 
-The first main point to note is the _action_ attribute of the opening _<form>_ tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the _simpleform_ route. Hence, F3 looks in _index.php_ for a rule that begins with 'POST /simpleform', and it finds
+The first main point to note is the _action_ attribute of the opening `<form>` tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the `simpleform` route. Hence, F3 looks in `index.php` for a rule that begins with 'POST /simpleform', and it finds
 
 ```php
 $f3->route('POST /simpleform', function ($f3) {
@@ -281,12 +281,9 @@ $f3->route('POST /simpleform', function ($f3) {
     $f3->set('content', 'response.html');
     echo template::instance()->render('layout.html');
 });
-
-
-
 ```
 
-This looks slightly complicated, but basically it [extracts the data entered on the form]. This comes to F3 as members of the _POST_ object: one for each HTML _input_ or _select_ on the form. The form defined an input called _name_ and a select called _colour_: hence, the POST object has members _POST.name_ and _POST.colour_. The code takes these and packs them into [a two-element associative array called *$formdata*], which [it then hands to the controller function that puts the elements into the database]. If the items on the form, the keys in the array and the fields in the database all consistently use the same names, the scheme is very clear and easy to maintain, modify, etc. Finally, [the *$formdata* array is also put into the F3 variable *formdata*], [which the *response.html* template will use to show the user that it got the correct values:]
+This looks slightly complicated, but basically it extracts the data entered on the form. This comes to F3 as members of the `POST` object: one for each HTML `input` or `select` on the form. The form defined an input called `name` and a select called `colour`: hence, the POST object has members `POST.name` and `POST.colour`. The code takes these and packs them into a two-element associative array called *$formdata*, which it then hands to the controller function that puts the elements into the database. If the items on the form, the keys in the array and the fields in the database all consistently use the same names, the scheme is very clear and easy to maintain, modify, etc. Finally, the *$formdata* array is also put into the F3 variable *formdata*, which the *response.html* template will use to show the user that it got the correct values:
 
 ```html
 <h1>Thanks for your data, {{ @formData.name }} ...</h1>
@@ -298,7 +295,7 @@ This looks slightly complicated, but basically it [extracts the data entered on 
 ### The GET object
 
 Variables that are provided to a template in a query string as part of
-the URL (or from a form that uses the HTTP GET method) are also made very simply and directly available, similarly to POST variables, as members of a standard F3 object called _GET_. Thus if we have a route called as _.../route?var=val_ then in the route rule itself we can access _GET.var_ (using $f3->get()) and discover that its value is _val_.
+the URL (or from a form that uses the HTTP GET method) are also made very simply and directly available, similarly to POST variables, as members of a standard F3 object called `GET`. Thus if we have a route called as `.../route?var=val` then in the route rule itself we can access `GET.var` (using $f3->get()) and discover that its value is `val`.
 
 ### The PARAMS object
 
@@ -310,5 +307,5 @@ $f3->route('GET /example/@var', function ($f3) {
 }
 ```
 
-If you now browse to the URL _".../example/fish"_, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
+If you now browse to the URL `.../example/fish`, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
 ror will result.

@@ -99,7 +99,7 @@ Consider this situation (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>
   </p>
 </form>
 <p>
-  <?php echo "Value of checkbox is " . $_POST["checkIt"]; ?>
+<?php echo "Value of checkbox is " . $_POST["checkIt"]; ?>
 ```
 
 Here, you'll find that if the box is checked, the value is "on", but if it isn't you get an error, or at least an incomplete sentence. The simplest way to fix this would be to use a conditional expression:

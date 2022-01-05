@@ -11,21 +11,15 @@ week: 1
 
 ## Course notes
 
-Here are links to course notes, tutorials etc. Material will be updated
-and extended (or cut) as required, so should not be considered as the
-final version until the lecture it relates to has happened. This page
-itself may well be revised as we go along.
+Here are links to course notes, tutorials etc. Material will be updated and extended (or cut) as required, so should not be considered as the final version until the lecture it relates to has happened. This page itself may well be revised as we go along.
 
 First of all, [here is the handbookpage](http://digital.eca.ed.ac.uk/ddmhandbook/category/dynamic-web-design-p00177/).
 
 Additionally to the lecture notes, there are:
 
-[Some introductory talk slides (PDF)](pdf/DWD-intro14.pdf), and [a video of this talk](https://vimeo.com/125231197); This year, we are using the Fat-Free Framework for PHP (<https://fatfreeframework.com/>), normally referred to here as **_F3_**. Some of these notes are older and do not take F3 into account. This is OK, in that all the normal PHP approaches still work, but you
-will not need to study (and should strictly avoid) the "vanilla PHP"
-method for connecting to databases, for example.
+[Some introductory talk slides (PDF)](pdf/DWD-intro14.pdf), and [a video of this talk](https://vimeo.com/125231197); This year, we are using the Fat-Free Framework for PHP (<https://fatfreeframework.com/>), normally referred to here as **_F3_**. Some of these notes are older and do not take F3 into account. This is OK, in that all the normal PHP approaches still work, but you will not need to study (and should strictly avoid) the "vanilla PHP" method for connecting to databases, for example.
 
-For those who haven't looked at HTML & CSS before... you should look at
-these "view-torials" as soon as possible (password is atrium):
+For those who haven't looked at HTML & CSS before... you should look at these "view-torials" as soon as possible (password is atrium):
 
 -   [HTML](https://vimeo.com/109699027)
 -   [CSS](https://vimeo.com/110455453)

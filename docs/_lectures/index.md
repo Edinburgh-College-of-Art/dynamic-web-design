@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Dynamic Web Design 2020-21
+title: Dynamic Web Design Introduction
 author: "John Lee"
 order: 0
 week: 1

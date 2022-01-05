@@ -22,7 +22,7 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 </div>
 <!-- div that will be hidden except when the mouse is over a word in the text -->
 <br/>
-<div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span>.<br/> Definition: <span id='definition'></span></div>
+<div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span>.<br/> Definition: <em id='definition'></em></div>
 
 <script>
 
@@ -38,7 +38,7 @@ function simpleQuery(queryUrl)
 
 function setDefinitionFromDictionaryResponse(response)
 {
-  let first_definition = JSON.stringify(response[0].meanings[0].definitions[0].definition)
+  let first_definition = response[0].meanings[0].definitions[0].definition
   $("#definition").html(first_definition);
 }
 

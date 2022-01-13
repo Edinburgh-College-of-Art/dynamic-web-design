@@ -62,9 +62,8 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   Click Test Connection
     -   This should be successful. See Troubleshooting if there is an error.
 -   Click autodetect next to Root Path. This should be `/home/DOMAIN_USERNAME`
--   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`
-    -   click the globe icon to test this resolves correctly
-    -
+-   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`. Click the globe icon to test this resolves correctly
+
 * * *
 
 ### Map a Folder
@@ -78,7 +77,7 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 
 ![Map a folder Gif](gif/4-sftp-setup-map-whole-project.gif)
 
-- (Optional) Dpeneding on your role, it might be more relevant to map a separate `AboveWebRoot` and `projectname` folder instead.
+- (Optional) Depending on your role, it might be more relevant to map a separate `AboveWebRoot` and `projectname` folder instead.
 
 ![Map a folder Gif](gif/4a-sftp-setup-map-separate-project-and-root.gif)
 

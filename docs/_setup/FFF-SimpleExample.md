@@ -33,6 +33,7 @@ To use the FFF-SimpleExample as a template:
 
 ![](gif/7-project-setup.gif)
 
+
 ## Structure
 
 Noted below are the parts of this project and which role within the MVC design pattern it concerns.

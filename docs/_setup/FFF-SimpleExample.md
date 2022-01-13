@@ -55,4 +55,4 @@ from the _View_ and sent to the _Model_.
 
 The `.html` files within the `ui/` folder are where your _View_ decides on how pages are organised. Both _View_ and
 _Controller_ will need to talk to each other to decide on how the site is templated and naming conventions for variables.
-Everytime you see `{{@A_Variable}}`, the _View_ and the _Controller_ probably need to talk to each other.
+Everytime you see `{{ "{{" }} @A_Variable }}`, the _View_ and the _Controller_ probably need to talk to each other.

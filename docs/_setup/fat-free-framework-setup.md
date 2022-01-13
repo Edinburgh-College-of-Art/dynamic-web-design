@@ -15,7 +15,7 @@ This is a short guide to adding the Fat Free Framework to your server. Make sure
 3.  In PHPStorm Create a Directory named `AboveWebRoot`
 4.  Add copy the contents of `fatfree-master` folder to the `AboveWebRoot` Directory
 
-![fatfree to AboveWebRoot](gif/6-fff-setup)
+![fatfree to AboveWebRoot](gif/6-fff-setup.gif)
 
 5.  Go to `Build, Execution, Deployment` -> `Deployment`,
 6.  go to `Mappings` tab

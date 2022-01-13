@@ -21,7 +21,7 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 
 ### Create A New Project
 
-![Create A New Project GIF](gif/PHPStormNewProject.gif)
+![Create A New Project GIF](gif/1-new-phpstorm-project.gif)
 
 * * *
 
@@ -36,6 +36,9 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   Click the <kbd>+</kbd> icon to add a server.
     -   Select SFTP
     -   good idea to name it the same as your domain `your_domain.edinburgh.domains`
+
+![Set SFTP Server Gif](gif/2-sftp-setup-add-webserver.gif)
+
 -   Next to SSH Configuration, click <kbd>...</kbd>
     -   click <kbd>+</kbd>
     -   Enter these details
@@ -48,11 +51,11 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 | Authentication type: | Password                        |
 | Root Path            | **DOMAIN_PASSWORD**†            |
 
+![Set SFTP Server Gif](gif/3-sftp-setup-add-ssh.gif)
+
 * * *
 
 **†** Your Domain Username and Password should have been provided in your sign-up email. You can change your password at <https://edinburgh.domains/user-information/> (sign-in required)
-
-![Set SFTP Server Gif](gif/PHPStormSetSFTP.gif)
 
 ### Test Connection
 
@@ -61,21 +64,34 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   Click autodetect next to Root Path. This should be `/home/DOMAIN_USERNAME`
 -   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`
     -   click the globe icon to test this resolves correctly
-
-![Test Connection](img/TestConnection.png)
-
+    -
 * * *
 
 ### Map a Folder
 
--   In your project, create a Directory named `public_html`
--   Go back to `Build, Execution, Deployment` -> `Deployment`,
+-   Go to `Build, Execution, Deployment` -> `Deployment`,
 -   go to `Mappings` tab and set
-    -   Local Path: click folder icon and select `public_html` folder you just creates
-    -   Deployment Path: click folder icon and select `/public_html`
+    -   Local Path: click folder icon and select your project folder
+    -   Deployment Path: click folder icon and select `/public_html/projectname`
+      -   you may need to create the `projectname` folder
     -   Web Path: `/`
 
-![Map a folder Gif](gif/PHPStormSetMappings.gif)
+![Map a folder Gif](gif/4-sftp-setup-map-whole-project.gif)
+
+- (Optional) Dpeneding on your role, it might be more relevant to map a separate `AboveWebRoot` and `projectname` folder instead.
+
+![Map a folder Gif](gif/4a-sftp-setup-map-separate-project-and-root.gif)
+
+### Deployment Options
+
+Once you have succesfully setup and mapped your project, there are a couple more options to configure in `Build, Execution, Deployment` -> `Deployment` -> `Options`:
+
+-   Set `Upload changed files automatically to the default server` select `on explicit action`
+-   Click `Override default permisions on files` and make sure it is set to `(644)`
+-   Click `Override default permisions on folders` and make sure it is set to `(755)`
+
+![Automatic Upload GIF](gif/5-sftp-setup-deployment-options.gif)
+
 
 * * *
 
@@ -98,13 +114,3 @@ To upload files manually:
 -   `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
 
 ![Manual Upload GIF](gif/PHPStormManualUpload.gif)
-
-#### Automatic Upload
-
-You can also set the project to automatically upload every time you save.
-
--   In `Build, Execution, Deployment` -> `Deployment`
--   Click the disclosure triangle and select `Options`
--   For `Upload changed files automatically to the default server` select `on explicit action`
-
-![Automatic Upload GIF](gif/PHPStormAutoUpload.gif)

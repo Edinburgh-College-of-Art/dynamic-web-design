@@ -24,7 +24,14 @@ Make sure you have first run through
 - [Fat Free Framework Setup](./fat-free-framework-setup.html)
 - [Database Setup](./database-setup.html)
 
-after that simply add the FFF-SimpleExample Folder to your PHPStorm projects `public_html` folder. You can then change the name of the directory to your own project name. [Don't forget to update the mappings!](./phpstorm-sftp-setup.html#map-a-folder)
+To use the FFF-SimpleExample as a template:
+
+- add the `FFF-SimpleExample` Folder to your PHPStorm project.
+- change the `FFF-SimpleExample` Folder name to you project name
+- move the contents of `autoload` to `AboveWebRoot/autoload`
+- [update the mappings](./phpstorm-sftp-setup.html#map-a-folder)
+
+![](gif/7-project-setup.gif)
 
 ## Structure
 

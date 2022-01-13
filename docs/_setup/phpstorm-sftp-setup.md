@@ -55,7 +55,7 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 
 * * *
 
-**†** Your Domain Username and Password should have been provided in your sign-up email. You can change your password at <https://edinburgh.domains/user-information/> (sign-in required)
+**†** Your Domain Username and Password should have been provided in your sign-up email. You can change your password at [edinburgh.domains/user-information/](https://edinburgh.domains/user-information/) (sign-in required)
 
 ### Test Connection
 

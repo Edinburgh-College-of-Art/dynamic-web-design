@@ -13,9 +13,8 @@ order: 3
 3.  Create a Database
     1.  name the database `SimpleModel`
     2.  click `Create Database`
-4.  add user to database
 5.  Add New User:
-    4.  just use the same username you already e.g. `username_username`
+    4.  just use the same username you have already e.g. `username_username`
     5.  type a password
     6.  click `Create User`
 6.  Add User to Database

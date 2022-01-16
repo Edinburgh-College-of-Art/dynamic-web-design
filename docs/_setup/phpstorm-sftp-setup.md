@@ -11,9 +11,9 @@ An easy way to edit your site directly is to connect via SSH File Transfer Proto
 -   **Method 1:** create a single _main_ project that will allow you to see your entire server
 -   **Method 2:** create individual project per site your are working on. -->
 
-If you haven't already, got to [Jetbrains.com/student](https://www.jetbrains.com/community/education/#students) to sign up for your academic licence.
+If you haven't already, go to [Jetbrains.com/student](https://www.jetbrains.com/community/education/#students) to sign-up for your academic licence.
 
-Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/login) and you should see your academic. Click Download under neath the licence to see the apps available and select PHPStorm
+Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/login) and you should see your academic licences. Click `Download` underneath the licence to see the apps available. Select PHPStorm
 
 ![](img/jetbrains-download.png)
 
@@ -35,7 +35,7 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   `Build, Execution, Deployment` -> `Deployment`
 -   Click the <kbd>+</kbd> icon to add a server.
     -   Select SFTP
-    -   good idea to name it the same as your domain `your_domain.edinburgh.domains`
+    -   It is a good idea to name it the same as your domain `your_domain.edinburgh.domains`
 
 ![Set SFTP Server Gif](gif/2-sftp-setup-add-webserver.gif)
 
@@ -62,14 +62,14 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   Click Test Connection
     -   This should be successful. See Troubleshooting if there is an error.
 -   Click autodetect next to Root Path. This should be `/home/DOMAIN_USERNAME`
--   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`. Click the globe icon to test this resolves correctly
+-   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`.
 
 * * *
 
 ### Map a Folder
 
 -   Go to `Build, Execution, Deployment` -> `Deployment`,
--   go to `Mappings` tab and set
+-   go to the `Mappings` tab and set
     -   Local Path: click folder icon and select your project folder
     -   Deployment Path: click folder icon and select `/public_html/projectname`
       -   you may need to create the `projectname` folder

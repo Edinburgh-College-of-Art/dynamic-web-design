@@ -2,7 +2,7 @@
 layout: page
 title: Local Server (Optional)
 course: Dynamic Web Design
-order: 5
+order: 10
 ---
 
 Some functionality of a web page works as expected when the files are placed online via FTP or SSH. However, if you try to view them locally, you see some kind of "cross-origin" errors in console. The solution to this is to view them using what's called a local web server. This tutorial includes instructions for setting up several types of local web servers on each of macOS, Windows, and Linux.

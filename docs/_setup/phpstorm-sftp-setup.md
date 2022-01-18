@@ -49,7 +49,7 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 | port                 | `22`                            |
 | User Name            | **DOMAIN_USERNAME**†            |
 | Authentication type: | Password                        |
-| Root Path            | **DOMAIN_PASSWORD**†            |
+| Password             | **DOMAIN_PASSWORD**†            |
 
 ![Set SFTP Server Gif](gif/3-sftp-setup-add-ssh.gif)
 

@@ -20,7 +20,7 @@ It is recommened that you use the [FFF-SimpleExample](./FFF-SimpleExample.html) 
 
 Make sure you have first run through
 
-- [PHPStorm Setup](./phpstorm_sftp_setup.html)
+- [PHPStorm Setup](./phpstorm-sftp-setup.html)
 - [Fat Free Framework Setup](./fat-free-framework-setup.html)
 - [Database Setup](./database-setup.html)
 

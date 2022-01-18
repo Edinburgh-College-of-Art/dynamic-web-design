@@ -103,7 +103,7 @@ Once you have succesfully setup and mapped your project, there are a couple more
 
 ### Upload to server
 
--   Copy the contents of the [example project]({{site.url}}/example-projects-downloads) into your PHPStorm project's `public_html` folder.
+-   Copy the contents of the [example project](../#example-projects-downloads) into your PHPStorm project's `public_html` folder.
 
 #### Manual Upload
 

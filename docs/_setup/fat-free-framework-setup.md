@@ -3,7 +3,7 @@ layout: page
 title: Fat Free Framework Setup
 course: Dynamic Web Design
 repo_url: dynamic-web-design
-order: 2
+order: 4
 ---
 
 This is a short guide on how to add the Fat Free Framework to your server. Make sure to follow [Setup PHPStorm SFTP](phpstorm-sftp-setup) first.

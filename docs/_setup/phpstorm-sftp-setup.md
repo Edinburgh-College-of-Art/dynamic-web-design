@@ -62,58 +62,16 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 -   Click Test Connection
     -   This should be successful. See Troubleshooting if there is an error.
 
-* * *
-
-### Map a Folder
-
--   Go to `Build, Execution, Deployment` -> `Deployment`,
--   Click Autodetect next to Root Path. This should set Root Path to: `/home/DOMAIN_USERNAME`
-    -   You could now also set Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`.
-
-![](img/autodetect.jpg)
-
-
--   go to the `Mappings` tab and set
-    -   Local Path: click folder icon and select your project folder
-    -   Deployment Path: click folder icon and select `/public_html/projectname`
-      -   you may need to create the `projectname` folder
-    -   Web Path: `/`
-
-![Map a folder Gif](gif/4-sftp-setup-map-whole-project.gif)
-
-- (Optional) Depending on your role, it might be more relevant to map a separate `AboveWebRoot` and `projectname` folder instead.
-
-![Map a folder Gif](gif/4a-sftp-setup-map-separate-project-and-root.gif)
-
 ### Deployment Options
 
-Once you have succesfully setup and mapped your project, there are a couple more options to configure in `Build, Execution, Deployment` -> `Deployment` -> `Options`:
+Once you have successfully setup and mapped your project, there are a couple more options to configure in `Build, Execution, Deployment` -> `Deployment` -> `Options`:
 
 -   Set `Upload changed files automatically to the default server` select `on explicit action`
--   Click `Override default permisions on files` and make sure it is set to `(644)`
--   Click `Override default permisions on folders` and make sure it is set to `(755)`
+-   Click `Override default permissions on files` and make sure it is set to `(644)`
+-   Click `Override default permissions on folders` and make sure it is set to `(755)`
 
 ![Automatic Upload GIF](gif/5-sftp-setup-deployment-options.gif)
 
-
 * * *
 
-### Download from Server
-
--   Right Click your project folder
--   Navigate to `Deployment` -> `Download from your_domain.edinburgh.domains`
-
-![Map a folder Gif](img/DownloadFromServer.png)
-
-### Upload to server
-
--   Copy the contents of the [example project](../#example-projects-downloads) into your PHPStorm project's `projectname` folder.
-
-#### Manual Upload
-
-To upload files manually:
-
--   Right click the project folder
--   `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
-
-![Manual Upload GIF](gif/PHPStormManualUpload.gif)
+Your SFTP connection setup for the project is complete. The next stage is to [add the Fat Free Framework and the `FFF-SimpleExample` to your server](./FFF-SimpleExample.html).

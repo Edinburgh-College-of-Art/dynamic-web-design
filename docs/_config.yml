@@ -40,7 +40,7 @@ collections:
 
 
 header_pages:
-  - about.md
+  - workflow/faq.md
 
 
 # Exclude from processing.

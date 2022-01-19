@@ -51,12 +51,41 @@ You are probably
 - Are querying a https from a http site or vice versa
 - you have opened the `html` page your browser address bar should read `file://path/to/your/file`, don't do that, use your server instead.
 
-### 500 Internal Server Error
+### Internal Server Error
 
-Something weird with edinburgh.domains
+This error means something went wrong on the server when trying to access your site. This could be down to:
 
-- `.htaccess`
-- permissions
+- folder or file permissions
+- authentication
+- invalid php code
+
+Here are some ways to help identify each and fix them.
+
+#### Internal Server Error: SQLSTATE
+
+```
+Internal Server Error
+
+SQLSTATE[HY000] [1045] Access denied for user 'username'@'localhost' (using password: YES) [/home/username/AboveWebRoot/fatfree/lib/db/sql.php:548]
+```
+
+Your Database password is incorrect in `DatabaseConnection.php` reset the password and try again.
+
+Be sure to check the file in your PHPStorm project matches the file on your Server in `AboveWebRoot/autoload/DatabaseConnection.php`.
+
+#### The server encountered an internal error or misconfiguration
+
+```
+The server encountered an internal error or misconfiguration and was unable to complete your request.
+
+Please contact the server administrator at webmaster@your_domain.edinburgh.domains to inform them of the time this error occurred, and the actions you performed just before this error.
+
+More information about this error may be available in the server error log.
+
+Additionally, a 500 Internal Server Error error was encountered while trying to use an ErrorDocument to handle the request.
+```
+
+
 
 ### How do I share my data base
 

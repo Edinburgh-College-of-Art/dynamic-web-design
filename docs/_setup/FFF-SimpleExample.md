@@ -15,7 +15,7 @@ There are a few setup steps that need to be run through first. Be sure to read e
 
 - [Setup](#setup)
   - [1. Add Fat Free Framework (FFF)](#1-add-fat-free-framework-fff)
-  - [2 . Add FFF-SimpleExample](#2-add-fff-simpleexample)
+  - [2. Add FFF-SimpleExample](#2-add-fff-simpleexample)
   - [3. Mapping folders](#3-mapping-folders)
   - [4. DatabaseConnection Setup](#4-databaseconnection-setup)
     - [4a. Create Database](#4a-create-database)
@@ -31,33 +31,21 @@ There are a few setup steps that need to be run through first. Be sure to read e
 
 ### 1. Add Fat Free Framework (FFF)
 
-1.  Go to the [FFF Website](https://fatfreeframework.com/3.6/home)
-2.  [Download the latest release](https://github.com/bcosca/fatfree/archive/master.zip)
-3.  In PHPStorm Create a Directory named `AboveWebRoot`
-4.  Add copy the contents of `fatfree-master` folder to the `AboveWebRoot` Directory
+-  Go to the [FFF Website](https://fatfreeframework.com/3.6/home)
+-  [Download the latest release](https://github.com/bcosca/fatfree/archive/master.zip)
+-  In PHPStorm Create a Directory named `AboveWebRoot`
+-  Add copy the `fatfree-master` folder to the `AboveWebRoot` Directory
 
-![fatfree to AboveWebRoot](gif/6-fff-setup.gif)
-
-5.  Go to `Build, Execution, Deployment` -> `Deployment`,
-6.  go to `Mappings` tab
-7.  Click <kbd>Add New Mapping</kbd>
-
-    -   Local Path: `AboveWebRoot` folder you just creates
-    -   Deployment Path:
-        -   right click the top level
-        -   create a Directory named `AboveWebRoot` ![](img/phpstorm-new-mapping-directory.png)
-    -   Web Path: `/`
-    -   click Okay
-
-8.  Right click the `AboveWebRoot` directory in your PHPStorm project and select `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
-9.  Fat free should now be on your server. Check in your `edinburgh.domains` File Manager to make sure.
-
-### 2 . Add FFF-SimpleExample
+### 2. Add FFF-SimpleExample
 
 -   First [download the `FFF-SimpleExample.zip`](<>)
 -   moved the unzipped folder to your PHPStorm project folder.
 -   In `AboveWebRoot` create an `autoload` folder
 -   move the `DatabaseConnection.php` in your `FFF-SimpleExample/autoload` to `AboveWebRoot/autoload`
+
+Your Project should now look like this:
+
+![](img/project-structure.jpg)
 
 ### 3. Mapping folders
 
@@ -67,53 +55,61 @@ There are a few setup steps that need to be run through first. Be sure to read e
 
 ![](img/autodetect.jpg)
 
--   go to the `Mappings` tab and set
-    -   Local Path: click folder icon and select your project folder
-    -   Deployment Path: click folder icon and select `/public_html/FFF-SimpleExample`
-    -   you may need to create the `FFF-SimpleExample` folder
+-   go to the `Mappings` tab and click <kbd>Add New Mapping</kbd>
+-   Set a mapping for both `AboveWebRoot` and `FFF-SimpleExample`
+  -   `AboveWebRoot`:
+    -   Local Path: click folder icon and select `AboveWebRoot`
+    -   Deployment Path:
+        -   right click the top level
+        -   create a Directory named `AboveWebRoot` ![](img/phpstorm-new-mapping-directory.png)
+    -   Web Path: `/`
+  -   `FFF-SimpleExample`
+    -   Local Path: click folder icon and select `FFF-SimpleExample`
+    -   Deployment Path:
+        -   right click the `public_html`
+        -   create a Directory named `FFF-SimpleExample`
     -   Web Path: `/FFF-SimpleExample`
 
-![Map a folder Gif](gif/4a-sftp-setup-map-separate-project-and-root.gif)
 
-* * *
+-  Right click the project folder and select `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
 
-To use the FFF-SimpleExample as a template:
 
--   add the `FFF-SimpleExample` Folder to your PHPStorm project.
--   change the `FFF-SimpleExample` Folder name to you project name
--   move the contents of `autoload` to `AboveWebRoot/autoload`
--   [update the mappings](./phpstorm-sftp-setup.html#map-a-folder)
+- Your mappings should look something like:
 
-![](gif/7-project-setup.gif)
+![Map a folder Gif](img/mappings.jpg)
+
 
 ### 4. DatabaseConnection Setup
 
 #### 4a. Create Database
 
-1.  go to your edinburgh.domains dashboard
-2.  go to **MySQL® Databases**
-3.  Create a Database
-    1.  name the database `SimpleModel`
-    2.  click `Create Database`
-4.  Add New User:
-    4.  just use the same username you have already e.g. `username_username`
-    5.  type a password
-    6.  click `Create User`
-5.  Add User to Database
-    8.  Your username should be the only one in the drop down.
-    9.  add this to the `username_SimpleModel` database
-    10. click `Add`
+-  go to your edinburgh.domains dashboard
+-  go to **MySQL® Databases**
+-  Create a Database
+    -  name the database `SimpleModel`
+    -  click `Create Database`
+-  Add New User:
+    -  just use the same username you have already e.g. `username_username`
+    -  type a password
+    -  click `Create User`
+-  Add User to Database
+    -  Your username should be the only one in the drop down.
+    -  add this to the `username_SimpleModel` database
+    -. click `Add`
 
 #### 4b. Create a table
 
-1.  go to your edinburgh.domains dashboard
-2.  go to **phpMyAdmin**
-3.  Select your database `Username_DatabaseName`
-4.  click `New`
-    ![](img/phpMyAdmin_new_table.png)
-5.  add a new table named `simpleModel` with these columns
-6.  You will need to add an additional column
-    ![](img/phpMyAdmin_add_column.png)
+-  go to your edinburgh.domains dashboard
+-  go to **phpMyAdmin**
+-  Select your database `Username_DatabaseName`
+-  click `New`
+
+![](img/phpMyAdmin_new_table.png)
+
+-  add a new table named `simpleModel` with these columns
+-  You will need to add an additional column
+
+![](img/phpMyAdmin_add_column.png)
 
 | Name   | Type    | Length/Values | Index   | A_I |
 | ------ | ------- | ------------- | ------- | --- |
@@ -130,16 +126,19 @@ To use the FFF-SimpleExample as a template:
 
 #### 4c. Set Authentication
 
-1.  Go to `AboveWebRoot` `>` `autoload` `>` `DatabaseConnection.php`
-2.  Fill in the missing details of the file
+-  Go to `AboveWebRoot` `>` `autoload` `>` `DatabaseConnection.php`
+-  Fill in the missing details of the file by changing
+  - `USERNAME_DATABASENAME`
+  - `USERNAME_USERNAME`
+  - `PASSWORD`
 
 ```php
 class DatabaseConnection {
 
   static function connect() {
       return new DB\SQL(
-      'mysql:host=localhost;port=3306;dbname=<USERNAME_DATABASENAME>',
-      '<USERNAME_USERNAME>',
+      'mysql:host=localhost;port=3306;dbname=USERNAME_DATABASENAME',
+      'USERNAME_USERNAME',
       'PASSWORD'
       );
   }

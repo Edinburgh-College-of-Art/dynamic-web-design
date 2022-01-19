@@ -125,9 +125,9 @@ Your Project should now look like this:
 
 -   Go to `AboveWebRoot` `>` `autoload` `>` `DatabaseConnection.php`
 -   Fill in the missing details of the file by changing
--   `USERNAME_DATABASENAME`
--   `USERNAME_USERNAME`
--   `PASSWORD`
+    -   `USERNAME_DATABASENAME`
+    -   `USERNAME_USERNAME`
+    -   `PASSWORD`
 
 ```php
 class DatabaseConnection {

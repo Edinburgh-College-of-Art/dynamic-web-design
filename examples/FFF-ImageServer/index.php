@@ -6,7 +6,7 @@
 // NB nothing must be output by code in this first section, or it will break the /image/@id view
 //==============================================================================
 $home = '/home/'.get_current_user();
-$f3   = require($home.'/AboveWebRoot/lib/base.php');
+$f3 = require($home.'/AboveWebRoot/fatfree-master/lib/base.php');
 
 // autoload Controller class(es) and anything hidden above web root, e.g. DB stuff
 $f3->set('AUTOLOAD', 'autoload/;'.$home.'/AboveWebRoot/autoload/');

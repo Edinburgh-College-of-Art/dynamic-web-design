@@ -1,7 +1,7 @@
 <?php
 //==============================================================================
 $home = '/home/'.get_current_user();
-$f3   = require($home.'/AboveWebRoot/lib/base.php');
+$f3 = require($home.'/AboveWebRoot/fatfree-master/lib/base.php');
 $f3->set('AUTOLOAD', 'autoload/;'.$home.'/AboveWebRoot/autoload/');
 $db = DatabaseConnection::connect();
 $f3->set('DB', $db);
@@ -188,4 +188,3 @@ $f3->route('POST /editView',		// this is used when the form is submitted, i.e. m
 ////////////////////////
 
 $f3->run();
-

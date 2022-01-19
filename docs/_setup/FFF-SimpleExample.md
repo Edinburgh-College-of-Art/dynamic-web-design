@@ -36,7 +36,7 @@ There are a few setup steps that need to be run through first. Be sure to read e
 
 ### 2. Add FFF-SimpleExample
 
--   First [download the `FFF-SimpleExample.zip`](<>)
+-   First [download the `FFF-SimpleExample.zip`](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip)
 -   moved the unzipped folder to your PHPStorm project folder.
 -   In `AboveWebRoot` create an `autoload` folder
 -   move the `DatabaseConnection.php` in your `FFF-SimpleExample/autoload` to `AboveWebRoot/autoload`

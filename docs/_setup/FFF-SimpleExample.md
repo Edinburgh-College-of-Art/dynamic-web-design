@@ -1,11 +1,9 @@
 ---
 layout: page
-title: FFF-SimpleExample
+title: Setup FFF-SimpleExample
 course: Dynamic Web Design
 order: 2
 ---
-
-
 
 Now you have your SFTP connection setup we can upload the FFF-SimpleExample.
 
@@ -13,28 +11,28 @@ There are a few setup steps that need to be run through first. Be sure to read e
 
 ## Table of Contents
 
-- [Setup](#setup)
-  - [1. Add Fat Free Framework (FFF)](#1-add-fat-free-framework-fff)
-  - [2. Add FFF-SimpleExample](#2-add-fff-simpleexample)
-  - [3. Mapping folders](#3-mapping-folders)
-  - [4. DatabaseConnection Setup](#4-databaseconnection-setup)
-    - [4a. Create Database](#4a-create-database)
-    - [4b. Create a table](#4b-create-a-table)
-    - [4c. Set Authentication](#4c-set-authentication)
-  - [5. Upload to Server](#5-upload-to-server)
-- [About the Example](#about-the-example)
-  - [**autoload/** [Role: Model / Controller]](#autoload-role-model-controller)
-  - [**index.php** [Role: Controller]](#indexphp-role-controller)
-  - [**ui/** [Role: View / Controller]](#ui-role-view-controller)
+-   [Setup](#setup)
+    -   [1. Add Fat Free Framework (FFF)](#1-add-fat-free-framework-fff)
+    -   [2. Add FFF-SimpleExample](#2-add-fff-simpleexample)
+    -   [3. Mapping folders](#3-mapping-folders)
+    -   [4. DatabaseConnection Setup](#4-databaseconnection-setup)
+        -   [4a. Create Database](#4a-create-database)
+        -   [4b. Create a table](#4b-create-a-table)
+        -   [4c. Set Authentication](#4c-set-authentication)
+    -   [5. Upload to Server](#5-upload-to-server)
+-   [About the Example](#about-the-example)
+    -   [**autoload/** \[Role: Model / Controller\]](#autoload-role-model-controller)
+    -   [**index.php** \[Role: Controller\]](#indexphp-role-controller)
+    -   [**ui/** \[Role: View / Controller\]](#ui-role-view-controller)
 
 ## Setup
 
 ### 1. Add Fat Free Framework (FFF)
 
--  Go to the [FFF Website](https://fatfreeframework.com/3.6/home)
--  [Download the latest release](https://github.com/bcosca/fatfree/archive/master.zip)
--  In PHPStorm Create a Directory named `AboveWebRoot`
--  Add copy the `fatfree-master` folder to the `AboveWebRoot` Directory
+-   Go to the [FFF Website](https://fatfreeframework.com/3.6/home)
+-   [Download the latest release](https://github.com/bcosca/fatfree/archive/master.zip)
+-   In PHPStorm Create a Directory named `AboveWebRoot`
+-   Add copy the `fatfree-master` folder to the `AboveWebRoot` Directory
 
 ### 2. Add FFF-SimpleExample
 
@@ -57,13 +55,13 @@ Your Project should now look like this:
 
 -   go to the `Mappings` tab and click <kbd>Add New Mapping</kbd>
 -   Set a mapping for both `AboveWebRoot` and `FFF-SimpleExample`
-  -   `AboveWebRoot`:
+-   `AboveWebRoot`:
     -   Local Path: click folder icon and select `AboveWebRoot`
     -   Deployment Path:
         -   right click the top level
         -   create a Directory named `AboveWebRoot` ![](img/phpstorm-new-mapping-directory.png)
     -   Web Path: `/`
-  -   `FFF-SimpleExample`
+-   `FFF-SimpleExample`
     -   Local Path: click folder icon and select `FFF-SimpleExample`
     -   Deployment Path:
         -   right click the `public_html`
@@ -71,43 +69,42 @@ Your Project should now look like this:
     -   Web Path: `/FFF-SimpleExample`
 
 
--  Right click the project folder and select `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
+-   Right click the project folder and select `Deployment` -> `Upload to YOUR_DOMAIN.edinburgh.domains`
 
 
-- Your mappings should look something like:
+-   Your mappings should look something like:
 
 ![Map a folder Gif](img/mappings.jpg)
-
 
 ### 4. DatabaseConnection Setup
 
 #### 4a. Create Database
 
--  go to your edinburgh.domains dashboard
--  go to **MySQL® Databases**
--  Create a Database
-    -  name the database `SimpleModel`
-    -  click `Create Database`
--  Add New User:
-    -  just use the same username you have already e.g. `username_username`
-    -  type a password
-    -  click `Create User`
--  Add User to Database
-    -  Your username should be the only one in the drop down.
-    -  add this to the `username_SimpleModel` database
-    -. click `Add`
+-   go to your edinburgh.domains dashboard
+-   go to **MySQL® Databases**
+-   Create a Database
+    -   name the database `SimpleModel`
+    -   click `Create Database`
+-   Add New User:
+    -   just use the same username you have already e.g. `username_username`
+    -   type a password
+    -   click `Create User`
+-   Add User to Database
+    -   Your username should be the only one in the drop down.
+    -   add this to the `username_SimpleModel` database
+        \-. click `Add`
 
 #### 4b. Create a table
 
--  go to your edinburgh.domains dashboard
--  go to **phpMyAdmin**
--  Select your database `Username_DatabaseName`
--  click `New`
+-   go to your edinburgh.domains dashboard
+-   go to **phpMyAdmin**
+-   Select your database `Username_DatabaseName`
+-   click `New`
 
 ![](img/phpMyAdmin_new_table.png)
 
--  add a new table named `simpleModel` with these columns
--  You will need to add an additional column
+-   add a new table named `simpleModel` with these columns
+-   You will need to add an additional column
 
 ![](img/phpMyAdmin_add_column.png)
 
@@ -126,11 +123,11 @@ Your Project should now look like this:
 
 #### 4c. Set Authentication
 
--  Go to `AboveWebRoot` `>` `autoload` `>` `DatabaseConnection.php`
--  Fill in the missing details of the file by changing
-  - `USERNAME_DATABASENAME`
-  - `USERNAME_USERNAME`
-  - `PASSWORD`
+-   Go to `AboveWebRoot` `>` `autoload` `>` `DatabaseConnection.php`
+-   Fill in the missing details of the file by changing
+-   `USERNAME_DATABASENAME`
+-   `USERNAME_USERNAME`
+-   `PASSWORD`
 
 ```php
 class DatabaseConnection {
@@ -155,10 +152,9 @@ To upload all files in your project:
 
 ![Manual Upload GIF](gif/PHPStormManualUpload.gif)
 
-
 Your site should now be available at `YOUR_DOMAIN.edinburgh.domains/FFF-SimpleExample`.
 
-***
+* * *
 
 ## About the Example
 

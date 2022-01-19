@@ -61,14 +61,18 @@ Once you have signed-up, [login to JetBrains](https://account.jetbrains.com/logi
 
 -   Click Test Connection
     -   This should be successful. See Troubleshooting if there is an error.
--   Click autodetect next to Root Path. This should be `/home/DOMAIN_USERNAME`
--   Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`.
 
 * * *
 
 ### Map a Folder
 
 -   Go to `Build, Execution, Deployment` -> `Deployment`,
+-   Click Autodetect next to Root Path. This should set Root Path to: `/home/DOMAIN_USERNAME`
+    -   You could now also set Web Server url: `https://YOUR_DOMAIN.edinburgh.domains`.
+
+![](img/autodetect.jpg)
+
+
 -   go to the `Mappings` tab and set
     -   Local Path: click folder icon and select your project folder
     -   Deployment Path: click folder icon and select `/public_html/projectname`

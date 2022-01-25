@@ -117,7 +117,7 @@ Your Project should now look like this:
 -   you can leave other unmentioned attributes blank.
 -   when you check `A_I` or `Primary` just click `Go` on the pop-up
 
-![](img/phpMyAdmin_sql_fields.png)
+![](img/phpMyAdmin_simpleModel_table.png)
 
 6.  click `Save`
 

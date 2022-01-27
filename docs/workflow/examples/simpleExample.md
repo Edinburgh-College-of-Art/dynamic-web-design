@@ -63,6 +63,7 @@ statement that has the following properties:
     front page.
 
 So, the routing statement would be of the form:
+
 ```php
 $f3->route('GET /',
 
@@ -74,6 +75,7 @@ $f3->route('GET /',
 
 );
 ```
+
 The important part here is 'GET /' -- this is the way you got the page
 (either GET or POST) and the address (in this case /). The line '//build
 the page' is a comment -- i.e. it does nothing as it has '//' in front
@@ -134,7 +136,6 @@ Looking at layout.html:
 <include href="{{ @content }}"/>
 </body>
 </html>
-
 ```
 
 This is the basic template for every page on your site - everything
@@ -189,63 +190,80 @@ replace it with the text 'Simple Example Home' -- this is what the
 command 'set' does. So, when the code on line 32 is run, it looks at
 layout.html, and sees there is a variable called 'html_title' and
 replaces
+
+```html
+{{ @html_title }}
 ```
-    {{ @html_title }}
-```
+
 With
 
 Simple Example Home.
 
 Looking at line 32:
+
 ```php
 $f3->set('content','simpleHome.html');
 ```
+
 This has the same format as the previous line and replaces the variable
 'content' with the file name simpleHome.html -- this variable must be a
 file name as the way it is used in layout.html expects it to be a file
 name.
 
 So the variable:
-```
-    {{ @content }}
 
+```html
+{{ @content }}
 ```
+
 Is replaced with
-```
+
+```sh
 simpleHome.html
 ```
+
 And once the page is shown, the line (line 8 in layout.html after
 filling in the variable)
+
 ```html
 <include href="simpleHome.html" />
 ```
+
 Will be replaced with
+
+```html
+<h1>Simple Form homepage</h1>
+
+<p>
+
+<a href="{{ @BASE }}/simpleform">This will take you to the input
+form<a/>
+
+</p>
 ```
-    <h1>Simple Form homepage</h1>
 
-    <p>
-
-    <a href="{{ @BASE }}/simpleform">This will take you to the input
-    form<a/>
-
-    </p>
-```
 Notice that in this file is _another_ variable --
+
+```html
+{{ @BASE }}
 ```
-    {{ @BASE }}
-```
+
 This is a variable that you don't need to set manually -- the code
 automatically uses the file .htaccess to set the URL of the website --
 ie the _base_ of the site. It uses the location of index.php to set this
 \-- in the case of my site I have put the code in the folders
 fatfree/F3-SimpleExample/, so it replaces
+
+```html
+{{ @BASE }}
 ```
-    {{ @BASE }}
-```
+
 With
-```
+
+```sh
 /fatfree/F3-SimpleExample/
 ```
+
 ## Overall Page
 
 When you look at the page source you can see how these have been
@@ -293,9 +311,7 @@ $f3->route('GET /simpleform',
         echo template::instance()->render('layout.html');
 
     }
-
 );
-
 ```
 
 This does exactly the same as the first page, except the title and the
@@ -367,6 +383,7 @@ height="1.531058617672791in"}
 You can reuse pages that you have already created to show different content just by changing the content of the variables.
 
 For example, assuming you created the page in the steps above, add the following to index.php
+
 ```php
 $f3->route('GET /dogfan',
 
@@ -386,6 +403,7 @@ $f3->route('GET /dogfan',
 
 );
 ```
+
 This reuses the NewPage.html but puts in different values so you see the following:
 
 ![](img/image5.png){width="2.874640201224847in"

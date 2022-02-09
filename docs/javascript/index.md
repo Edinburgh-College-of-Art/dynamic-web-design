@@ -42,11 +42,8 @@ We're going to look at how to use javascript in conjunction with the document ob
 ## References:
 
 -   [MDN](https://developer.mozilla.org/en-US/docs/Web/javascript)
--   [W3Schools,](http://www.w3schools.com/js/default.asp)
--   [HowToCreate javascript
-    tutorial,](http://www.howtocreate.co.uk/tutorials/javascript/)
--   [The web developer's field
-    guide,](http://webdevelopersfieldguide.com/)
+-   [W3Schools](http://www.w3schools.com/js/default.asp)
+-   [HowToCreate Javascript Tutorial](http://www.howtocreate.co.uk/tutorials/javascript/)
 
 ## Suggested Libraries:
 

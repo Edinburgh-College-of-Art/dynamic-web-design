@@ -207,7 +207,7 @@ In general, a route will need a first argument that specifies an HTTP method and
 $f3->route('GET /simpleform', function ($f3) {
     $f3->set('html_title', 'Simple Input Form');
     $f3->set('content', 'simpleform.html');
-    echo template::instance()->render('layout ().html');
+    echo template::instance()->render('layout.html');
 });
 ```
 

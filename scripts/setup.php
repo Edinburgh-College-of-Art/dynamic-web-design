@@ -16,7 +16,7 @@
     <input type="submit" value="Submit">
   </form>
 
-  <pre>
+
     <?php
     $username = get_current_user();
     $home = '/home/'.$username;
@@ -32,19 +32,19 @@
       // does username match
       if ($dbusername != $confirm_name)
       {
-        echo "Usernames do not match\n";
-        echo $dbusername."\n";
-        echo $confirm_name."\n";
-        echo "\n";
+        echo "<pre>Usernames do not match\n</pre>";
+        echo "<pre>".$dbusername."\n</pre>";
+        echo "<pre>".$confirm_name."\n</pre>";
+        echo "<pre>\n</pre>";
         $is_data_correct = false;
       }
       // does password match
       if ($pass != $confirm_pass)
       {
-        echo "Passwords do not match";
-        echo $pass."\n";
-        echo $confirm_pass."\n";
-        echo "\n";
+        echo "<pre>Passwords do not match</pre>";
+        echo '<pre>'.$pass."\n"."</pre>";
+        echo '<pre>'.$confirm_pass."\n"."</pre>";
+        echo '<pre>'."\n"."</pre>";
         $is_data_correct = false;
       }
 
@@ -57,23 +57,23 @@
         echo "\n";
         switch ($ex->getCode()) {
           case 1044:
-          echo "Username and Password are correct, but this user does not access to the database";
+          echo "<pre>Username and Password are correct, but this user does not access to the database</pre>";
           break;
           case 1045:
-          echo "Username Does not exist";
+          echo "<pre>Username Does not exist</pre>";
           break;
           default:
-          echo "Username or Password is incorrect or your Database is not named: ".$username.'_SimpleModel';
+          echo "<pre>Username or Password is incorrect or your Database is not named: ".$username.'_SimpleModel</pre>';
         }
 
         $is_data_correct = false;
 
-        echo "\n";
+        echo "<pre>\n</pre>";
       }
 
       if($is_data_correct)
       {
-        echo "Success!\n";
+        echo "<pre>Success!\n</pre>";
 
         $file_txt = "<?php\n";
         $file_txt .="class DatabaseConnection\n";
@@ -96,7 +96,8 @@
         $f3->set('AUTOLOAD','autoload/;'.$home.'/AboveWebRoot/autoload/');
         $db = DatabaseConnection::connect();
         $db->exec("CREATE TABLE IF NOT EXISTS simpleModel (id int NOT NULL AUTO_INCREMENT, name varchar(128),  colour varchar(128), PRIMARY KEY (id))");
-        echo "Table Created\n";
+
+        echo "<script>window.location.replace(\"/FFF-SimpleExample\");</script>";
       }
     }
     else {
@@ -118,6 +119,6 @@
       }
     }
     ?>
-  </pre>
+
 </body>
 </html>

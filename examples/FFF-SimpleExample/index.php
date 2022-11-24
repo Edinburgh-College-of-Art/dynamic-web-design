@@ -102,6 +102,7 @@ $f3->route('GET /about',
     {
         $file = F3::instance()->read('README.md');
         $html = Markdown::instance()->convert($file);
+        $f3->set('html_title', "FFF-SimpleExample");
         $f3->set('article_html', $html);
         $f3->set('content','article.html');
         echo template::instance()->render('layout.html');;
@@ -125,18 +126,7 @@ $f3->set('ONERROR', // what to do if something goes wrong.
         echo template::instance()->render('layout.html');
     }
 );
-$test = $_SERVER['HOME'];
-//==============================================================================
-$f3->route('GET /test', // have a test page to print out variables
-    function($f3)
-    {
-        global $test;
-        $f3->set('html_title','TEST');
-        $f3->set('DUMP', pprint_var($f3));
-        $f3->set('content','error.html');
-        echo template::instance()->render('layout.html');;
-    }
-);
+
 //==============================================================================
 // Run the FFF engine //
 $f3->run();

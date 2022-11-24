@@ -21,11 +21,36 @@ project folder on the server.
     - You will need to add an additional column
       ![](img/phpMyAdmin_add_column.png)
 
-| Name   | Type    | Length/Values | Index   | A_I |
-| ------ | ------- | ------------- | ------- | --- |
-| id     | BIGINT  | -             | Primary | x   |
-| name   | VARCHAR | 200           | -       | -   |
-| colour | VARCHAR | 200           | -       | -   |
+      <table>
+          <tr>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Length/Values</td>
+              <td>Index</td>
+              <td>A_I</td>
+          </tr>
+          <tr>
+              <td>id</td>
+              <td>BIGINT</td>
+              <td>-</td>
+              <td>Primary</td>
+              <td>x</td>
+          </tr>
+          <tr>
+              <td>name</td>
+              <td>VARCHAR</td>
+              <td>200</td>
+              <td>-</td>
+              <td>-</td>
+          </tr>
+          <tr>
+              <td>colour</td>
+              <td>VARCHAR</td>
+              <td>200</td>
+              <td>-</td>
+              <td>-</td>
+          </tr>
+      </table>
 
 - you can leave other unmentioned attributes blank.
 - when you check `A_I` or `Primary` just click `Go` on the pop-up

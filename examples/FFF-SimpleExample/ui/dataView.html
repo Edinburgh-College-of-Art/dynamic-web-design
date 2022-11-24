@@ -6,8 +6,8 @@
 	</tr>
 	<repeat group="{{ @dbData }}" value="{{ @record }}">
 		<tr>
-			<td>{{ trim(@record.colour) }}</td>
 			<td>{{ trim(@record.name) }}</td>
+			<td>{{ trim(@record.colour) }}</td>
 		</tr>
 	</repeat>
 </table>

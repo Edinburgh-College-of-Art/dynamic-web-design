@@ -3,7 +3,7 @@
 <body>
 
   <h2>Setup Server For FatFreeFramework</h2>
-  <p>You will first have to <a href="https://edinburgh-college-of-art.github.io/courses/dwd/database-setup.html">Create a Database</a> before running this setup page.</p>
+  <p>You will first have to <a href="https://edinburgh-college-of-art.github.io/dynamic-web-design/setup/database-setup.html">Create a Database</a> before running this setup page.</p>
 
   <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     <label for="uname">Database username: <?= get_current_user().'_'?></label>
@@ -50,7 +50,6 @@
     }
 
     $db_user = $username.'_'.$dbusername;
-
 
 
     try{

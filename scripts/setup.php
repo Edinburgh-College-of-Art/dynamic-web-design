@@ -88,7 +88,7 @@
         }
         break;
         case 1045:
-        echo "<pre>Username Does not exist</pre>";
+        echo "<pre>Username Does not exist or Password is Incorrect</pre>";
         break;
         default:
         echo "<pre>Username or Password is incorrect or your Database is not named: ".$username.'_SimpleModel</pre>';
@@ -132,7 +132,7 @@
     # Download and set file structure for Fat Free
     if (!file_exists($home."/AboveWebRoot"))
     {
-      shell_exec("mkdir ~/AboveWebRoot");
+      shell_exec("mkdir ~/AboveWebRoot");    
     }
     if (!file_exists($home."/AboveWebRoot/fatfree-master")){
       shell_exec("git clone --depth 1 --branch 3.7.3 https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master");

@@ -19,9 +19,48 @@
 
 
   <?php
-  $username = get_current_user();
-  $home = '/home/'.$username;
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+  //----------------------------------------------------------------------------
+
+  switch ($_SERVER["REQUEST_METHOD"]) {
+    case 'GET':
+    setupDirectoryForDWD();
+    break;
+    case 'POST':
+    checkDatabaseCredentials();
+    break;
+    default:
+    break;
+  }
+  //----------------------------------------------------------------------------
+
+  function setupDirectoryForDWD()
+  {
+    $username = get_current_user();
+    $home = '/home/'.$username;
+
+    if (!file_exists($home."/AboveWebRoot"))
+    {
+      shell_exec("mkdir ~/AboveWebRoot");
+    }
+    if (!file_exists($home."/AboveWebRoot/fatfree-master")){
+      shell_exec("git clone --depth 1 --branch 3.7.3 https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master");
+    }
+    if (!file_exists($home."/AboveWebRoot/autoload")){
+      shell_exec("mkdir ~/AboveWebRoot/autoload");
+    }
+    if (!file_exists($home."/public_html/FFF-SimpleExample")){
+      shell_exec("wget https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip");
+      shell_exec("unzip FFF-SimpleExample.zip");
+      shell_exec("rm FFF-SimpleExample.zip");
+    }
+  }
+  //----------------------------------------------------------------------------
+  function checkDatabaseCredentials()
+  {
+    $username = get_current_user();
+    $home = '/home/'.$username;
     // collect value of input field
     $dbusername = $_POST['uname'];
     $confirm_name = $_POST['confirm_uname'];
@@ -60,22 +99,22 @@
       switch ($ex->getCode()) {
         case 1044:
 
-          $dbh = new \PDO("mysql:host=localhost;port=3306;",$db_user,$pass);
-          $dbs = $dbh->query( 'SHOW DATABASES' );
+        $dbh = new \PDO("mysql:host=localhost;port=3306;",$db_user,$pass);
+        $dbs = $dbh->query( 'SHOW DATABASES' );
 
-          echo "<h3>Databases</h3>".'<br>';
-          $database_has_correct_name = false;
-          $db = $dbs->fetchColumn( 0 );
-          $num_databases = 0;
-          while( ( $db = $dbs->fetchColumn( 0 ) ) !== false )
+        echo "<h3>Databases</h3>".'<br>';
+        $database_has_correct_name = false;
+        $db = $dbs->fetchColumn( 0 );
+        $num_databases = 0;
+        while( ( $db = $dbs->fetchColumn( 0 ) ) !== false )
+        {
+          $num_databases++;
+          if($db == $username."_SimpleModel")
           {
-            $num_databases++;
-            if($db == $username."_SimpleModel")
-            {
-              $database_has_correct_name = true;
-            }
-            echo $db.'<br>';
+            $database_has_correct_name = true;
           }
+          echo $db.'<br>';
+        }
         if($database_has_correct_name)
         {
           echo "<pre>Username and Password are correct, {$db_user} probably does not have access to the database\n</pre>";
@@ -126,24 +165,6 @@
       $db->exec("CREATE TABLE IF NOT EXISTS simpleModel (id int NOT NULL AUTO_INCREMENT, name varchar(128),  colour varchar(128), PRIMARY KEY (id))");
 
       echo "<script>window.location.replace(\"/FFF-SimpleExample\");</script>";
-    }
-  }
-  else {
-    # Download and set file structure for Fat Free
-    if (!file_exists($home."/AboveWebRoot"))
-    {
-      shell_exec("mkdir ~/AboveWebRoot");
-    }
-    if (!file_exists($home."/AboveWebRoot/fatfree-master")){
-      shell_exec("git clone --depth 1 --branch 3.7.3 https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master");
-    }
-    if (!file_exists($home."/AboveWebRoot/autoload")){
-      shell_exec("mkdir ~/AboveWebRoot/autoload");
-    }
-    if (!file_exists($home."/public_html/FFF-SimpleExample")){
-      shell_exec("wget https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip");
-      shell_exec("unzip FFF-SimpleExample.zip");
-      shell_exec("rm FFF-SimpleExample.zip");
     }
   }
   ?>

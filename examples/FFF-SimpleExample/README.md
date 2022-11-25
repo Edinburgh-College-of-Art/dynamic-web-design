@@ -16,45 +16,45 @@ project folder on the server.
 2. go to **phpMyAdmin**
 3. Select your database `Username_DatabaseName`
 4. click `New`
-   ![](img/phpMyAdmin_new_table.png)
+   ![ ](img/phpMyAdmin_new_table.png)
 5. add a new table named `simpleModel` with these columns
     - You will need to add an additional column
-      ![](img/phpMyAdmin_add_column.png)
+      ![ ](img/phpMyAdmin_add_column.png)
 
-      <table>
-          <tr>
-              <td>Name</td>
-              <td>Type</td>
-              <td>Length/Values</td>
-              <td>Index</td>
-              <td>A_I</td>
-          </tr>
-          <tr>
-              <td>id</td>
-              <td>BIGINT</td>
-              <td>-</td>
-              <td>Primary</td>
-              <td>x</td>
-          </tr>
-          <tr>
-              <td>name</td>
-              <td>VARCHAR</td>
-              <td>200</td>
-              <td>-</td>
-              <td>-</td>
-          </tr>
-          <tr>
-              <td>colour</td>
-              <td>VARCHAR</td>
-              <td>200</td>
-              <td>-</td>
-              <td>-</td>
-          </tr>
-      </table>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Length/Values</td>
+        <td>Index</td>
+        <td>A_I</td>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>BIGINT</td>
+        <td>-</td>
+        <td>Primary</td>
+        <td>x</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>VARCHAR</td>
+        <td>200</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>colour</td>
+        <td>VARCHAR</td>
+        <td>200</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+</table>
 
 - you can leave other unmentioned attributes blank.
 - when you check `A_I` or `Primary` just click `Go` on the pop-up
-  ![](img/phpMyAdmin_sql_fields.png)
+  ![ ](img/phpMyAdmin_sql_fields.png)
 6. click `Save`
 
 

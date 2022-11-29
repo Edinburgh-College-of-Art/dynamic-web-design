@@ -7,7 +7,11 @@
     - Create ~/AboveWebRoot (if non-existent)
     - Create ~/AboveWebRoot/autoload (if non-existent)
     - download Fat Free Framework @ tag 3.7.3 into ~/AboveWebRoot/fatfree-master (if non-existent)
-    - download FFF-SimpleExample to ~/public_html/FFF-SimpleExample (if non-existent)
+    - download FFF examples
+        - FFF-SimpleExample to ~/public_html/FFF-SimpleExample (if non-existent)
+        - FFF-ImageServer to ~/public_html/FFF-ImageServer (if non-existent)
+        - FFF-SimpleExampleAJAX to ~/public_html/FFF-SimpleExampleAJAX (if non-existent)
+
 
     On POST:
     - Check usernames match
@@ -72,6 +76,16 @@
       shell_exec("wget https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip");
       shell_exec("unzip FFF-SimpleExample.zip");
       shell_exec("rm FFF-SimpleExample.zip");
+    }
+    if (!file_exists($home."/public_html/FFF-ImageServer")){
+      shell_exec("wget https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-ImageServer.zip");
+      shell_exec("unzip FFF-ImageServer.zip");
+      shell_exec("rm FFF-ImageServer.zip");
+    }
+    if (!file_exists($home."/public_html/FFF-SimpleExampleAJAX")){
+      shell_exec("wget https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExampleAJAX.zip");
+      shell_exec("unzip FFF-SimpleExampleAJAX.zip");
+      shell_exec("rm FFF-SimpleExampleAJAX.zip");
     }
   }
   //----------------------------------------------------------------------------

@@ -221,9 +221,11 @@ Routes are absolutely fundamental to the use of F3, and also support various oth
 
 Another concept fundamental to F3, and to most other frameworks, is the idea of a template. A template is usually an HTML page that contains elements which will be replaced when the page is _rendered_ (turned into normal HTML for display by the browser). Typically, they will be replaced by values drawn from a database, or computed in some way. In F3, these elements are recognised by being enclosed in curly double braces, e.g.
 
+{% raw %}
 `{{ @html_title }}`
+{% endraw %}
 
---  if we find this embedded in normal HTML, it means that when the template is rendered, this will be removed completely and replaced, in this cse, by the value of the F3 variable `html_title` (any white space between the double braces will be removed as well). The "@" symbol just directs the interpreter to look for an F3 variable. Other things can be done as well -- see the F3 documentation for details.
+--  if we find this embedded in normal HTML, it means that when the template is rendered, this will be removed completely and replaced, in this case, by the value of the F3 variable `html_title` (any white space between the double braces will be removed as well). The "@" symbol just directs the interpreter to look for an F3 variable. Other things can be done as well -- see the F3 documentation for details.
 
 Crucially, the template system supports contructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 

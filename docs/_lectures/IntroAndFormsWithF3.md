@@ -87,7 +87,7 @@ Suppose we have an application on our server that saves people's names in a file
 </body>
 </html>
 ```
-When this HTML is displayed, it looks as follows ([or as at this link](http://ddm.caad.ed.ac.uk/lectures/DDM/Intro_Digital_Media/Lecture11/simpleform.html)):
+When this HTML is displayed, it looks as follows ([or as at this link](https://jlee.edinburgh.domains/test/verysimpleform.html)):
 
 ![](Lecture1notes_files/image002.jpg){width="395" height="129"}
 

@@ -21,3 +21,5 @@ order: 3
     8.  Your username should be the only one in the drop down.
     9.  add this to the `username_SimpleModel` database
     10. click `Add`
+    11. In `Manage User Privileges` select `ALL PRIVILEGES`
+    12. Click `Make Changes`

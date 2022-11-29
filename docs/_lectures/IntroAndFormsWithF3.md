@@ -227,6 +227,7 @@ Another concept fundamental to F3, and to most other frameworks, is the idea of 
 
 Crucially, the template system supports contructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
+{% raw %}
 ```html
 <table>
     <tr>
@@ -241,6 +242,7 @@ Crucially, the template system supports contructions such as loops. Suppose we h
     </repeat>
 </table>
 ```
+{% endraw %}
 
 Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _FFF-SimpleExample/dataView_) -- this HTML is from the template `dataView.html`.
 

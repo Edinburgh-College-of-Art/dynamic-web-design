@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Setup Database
+title: Create Database
 course: Dynamic Web Design
 repo_url: dynamic-web-design
 order: 3

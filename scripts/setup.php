@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
+<head>
+<!-- Setup Page for Dynamic Web Design -->
+</head>
 <body>
 
   <h2>Setup Server For FatFreeFramework</h2>
-  <p>You will first have to <a href="https://edinburgh-college-of-art.github.io/dynamic-web-design/setup/database-setup.html">Create a Database</a> before running this setup page.</p>
+  <p>You will first have to <a href="https://edinburgh-college-of-art.github.io/dynamic-web-design/setup/database-setup.html" target="_blank" rel="noopener noreferrer">Create a Database</a> before running this setup page.</p>
 
   <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     <label for="uname">Database username: <?= get_current_user().'_'?></label>
@@ -11,16 +14,13 @@
     <label for="confirm_uname">Confirm Database username: <?= get_current_user().'_'?></label>
     <input type="text" id="confirm_uname" name="confirm_uname" value="dbusername"><br>
     <label for="dbpass">Database Password</label>
-    <input type="text" id="dbpass" name="dbpass" value="e.g. VFhCy#U}0DXL"><br>
+    <input type="text" id="dbpass" name="dbpass" value="YOUR_DATABASE_PASSWORD"><br>
     <label for="confirm_dbpass">Confirm Database Password</label>
-    <input type="text" id="confirm_dbpass" name="confirm_dbpass" value="e.g. VFhCy#U}0DXL"><br>
+    <input type="text" id="confirm_dbpass" name="confirm_dbpass" value="YOUR_DATABASE_PASSWORD"><br>
     <input type="submit" value="Submit">
   </form>
 
-
   <?php
-
-
   //----------------------------------------------------------------------------
 
   switch ($_SERVER["REQUEST_METHOD"]) {

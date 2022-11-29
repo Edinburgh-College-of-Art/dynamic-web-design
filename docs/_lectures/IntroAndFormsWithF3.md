@@ -89,7 +89,7 @@ Suppose we have an application on our server that saves people's names in a file
 ```
 When this HTML is displayed, it looks as follows ([or as at this link](https://jlee.edinburgh.domains/test/verysimpleform.html)):
 
-![](img/image002.jpg){width="395" height="129"}
+![Very simple form](img/image002.jpg)
 
 And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). **NB, the application in this example is now a dummy, so you'll get a "permission denied" message when you try to execute it, but you can still see what happens to the URL.**
 

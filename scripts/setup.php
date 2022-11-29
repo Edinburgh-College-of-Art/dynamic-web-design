@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Setup Page for Dynamic Web Design -->
+<!-- Setup Page for Dynamic Web Design
+    On GET this script will
+
+    - Create ~/AboveWebRoot (if non-existent)
+    - Create ~/AboveWebRoot/autoload (if non-existent)
+    - download Fat Free Framework @ tag 3.7.3 into ~/AboveWebRoot/fatfree-master (if non-existent)
+    - download FFF-SimpleExample to ~/public_html/FFF-SimpleExample (if non-existent)
+
+    On POST:
+    - Check usernames match
+    - Check passwords match
+    - Check credentials are valid
+    - Check if database exists in format UUN_SimpleModel
+    - Check connection can be made to databases that do exist
+    - if all checks pass
+      - create DatabaseConnection.php in ~/AboveWebRoot/autoload w/ filled in credentials
+      - create a table named simpleModel with format (id int NOT NULL AUTO_INCREMENT, name varchar(128),  colour varchar(128), PRIMARY KEY (id) if it does not already exist
+      - redirect to <domain>/FFF-SimpleExample
+ -->
 </head>
 <body>
 

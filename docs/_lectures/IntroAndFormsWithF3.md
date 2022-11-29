@@ -91,11 +91,11 @@ When this HTML is displayed, it looks as follows ([or as at this link](https://j
 
 ![Very simple form](img/image002.jpg)
 
-And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). **NB, the application in this example is now a dummy, so you'll get a "permission denied" message when you try to execute it, but you can still see what happens to the URL.**
+And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). **NB, the application in this example is no longer there, so you'll get a "not found" message when you try to execute it, but you can still see what happens to the URL.**
 
 This principle can be extended, in that there are a considerable range of types of input available (lists, buttons, checkboxes, etc.), and clearly the URL produced can become very complicated, but the mechanism remains the same.
 
-Editors such as Dreamweaver make the creation of forms very simple. The trickier part comes when you want to do something with the data they create. The basic mechanism is fairly simple: the "form" tag specifies through its "action" attribute a CGI application that will be used by the server to process the form data, and the method (GET or POST) will be as specified by the "method" attribute:
+Editors can make the creation of forms very simple. The trickier part comes when you want to do something with the data they create. The basic mechanism is fairly simple: the "form" tag specifies through its "action" attribute a CGI application that will be used by the server to process the form data, and the method (GET or POST) will be as specified by the "method" attribute:
 
 ```html
 <form method="GET" action="namesave.cgi">
@@ -103,9 +103,9 @@ Editors such as Dreamweaver make the creation of forms very simple. The trickier
 
 All you need to do, then, is decide what application to use and create a program that handles the data appropriately.
 
-The most obvious difference between GET and POST, in practice, is that whereas the GET method sends parameters via the URL as described above, POST causes the information to be sent in a different way, which is not visible on the URL. We have chosen to use GET here for clarity, but obviously POST may have advantages in many situations. The application that processes the data will also have to decode it differently depending on which of these methods is used, and decoding POST information is more complicated. (With PHP, as we'll see below, we normally use POST for form data, but we will not need to know the details of how PHP decodes it.)
+The most obvious difference between GET and POST, in practice, is that whereas the GET method sends parameters via the URL as described above, POST causes the information to be sent in a different way, which is not visible on the URL. We have chosen to use GET here for clarity, but obviously POST may have advantages in many situations. The application that processes the data will also have to decode it differently depending on which of these methods is used, and decoding POST information may be more complicated. (With PHP, as we'll see below, it's much the same in practice: we normally use POST for form data, but we will not need to know the details of how PHP decodes it.)
 
-Remember that the URL query string can be used even wihout forms, to provide information for an application. This will continue to be important for us.
+Remember that the URL query string can be used even without forms, to provide information for an application. This will continue to be important for us.
 
 We are concerned here only with the "back-end" processing of form data, but the appearance and behaviour of the form for the user is of course also very important. HTML5 provides many useful features in this respect and is now the best choice for form development (see the Forms chapter in the excellent _Dive into HTML5_ for explanation and examples \--- <http://diveintohtml5.info/forms.html>).
 
@@ -175,19 +175,6 @@ RewriteRule .* index.php [L,QSA]
 Roughly speaking, this means: (line 1) the RewriteEngine is activated; (lines 2-4) if a URL is requested from this directory that looks like a filename but isn't a file, directory or link, it is (line 5) passed to the RewriteRule that says it is rewritten to `index.php` (in the same directory as the `.htaccess` file).
 
 This .htaccess file has to be in the home directory of the F3 application, and each F3 application will require its own .htaccess file (though usually they are all identical to the above).
-
-[**Important note:**] there is a wrinkle here, in that the rewrite mechanism will not work in this simple way on our Playground server, or in other situations where other types of rewriting are happening. On the Playground server, our URLs typically include a component that starts with "~", followed by a username (e.g., in my case, "~jlee"), which identifies with the "html" directory (web root) of a particular user. In this kind of context, the resolving of the "~" seems to confuse the resolving of the rewrite. To get around this, the .htaccess file needs to have another line that specifies the application home directory, so in full it should be (for my directory on Playground):
-
-```
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule .* index.php [L,QSA]
-RewriteBase /~jlee/fatfree/FFF-simpleExample/
-```
-
-For you, this final line will be different, depending on the name of the directory you are using. If your student id is _s1900000_, then the directory will be _/~s1900000/fatree/FFF-simpleExample_ if you have called your directory "FFF-simpleExample" and put it inside a directory called "fatfree" in your html directory.
 
 So in the FFF-SimpleExample example discussed in the introductory Viewtorial for this course, the home directory of the F3 application is _.../FFF-SimpleExample/_ (where "..." is the file system path to the directory, e.g., on my laptop, /Users/jlee/Sites/fatfree/FFF-SimpleExample/). In this directory there is a .htaccess file as above. When I visit the URL _<http://localhost/fatfree/FFF-SimpleExample/>_ the server will go to index.php, but then it will look for a rule defining the directory as a route, bearing in mind that by default my browser will be sending an HTTP request using the method GET. This rule appears as:
 

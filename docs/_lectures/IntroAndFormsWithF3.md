@@ -142,7 +142,7 @@ This is clearly HTML with just the embedded PHP tags. Within the scope of these 
 
 ## Today's date is 11/01/2019
 
-(Try <http://playground.eca.ed.ac.uk/~jlee/test/date.php>. See if you can guess how to make it put the day before the month!)
+(Try <https://jlee.edinburgh.domains/test/date.php>. See if you can guess how to make it put the day before the month!)
 
 The processing of this page is illustrated in the following diagram (click for larger version).
 

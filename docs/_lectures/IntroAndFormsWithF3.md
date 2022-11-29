@@ -254,6 +254,7 @@ We can take advantage of any features of HTML that we like, so for instance if w
 
 A key item in SimpleExample is the simple form that allows the user to enter their name and choose a colour. The HTML for this is very simple:
 
+{% raw %}
 ```html
 <p>This is a simple form</p>
 <form id="form1" name="form1" method="post" action="{{@BASE}}/simpleform"> Please enter your name:
@@ -270,6 +271,7 @@ A key item in SimpleExample is the simple form that allows the user to enter the
     </p>
 </form>
 ```
+{% endraw %}
 
 The first main point to note is the _action_ attribute of the opening `<form>` tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the `simpleform` route. Hence, F3 looks in `index.php` for a rule that begins with 'POST /simpleform', and it finds
 
@@ -289,12 +291,14 @@ $f3->route('POST /simpleform', function ($f3) {
 
 This looks slightly complicated, but basically it extracts the data entered on the form. This comes to F3 as members of the `POST` object: one for each HTML `input` or `select` on the form. The form defined an input called `name` and a select called `colour`: hence, the POST object has members `POST.name` and `POST.colour`. The code takes these and packs them into a two-element associative array called *$formdata*, which it then hands to the controller function that puts the elements into the database. If the items on the form, the keys in the array and the fields in the database all consistently use the same names, the scheme is very clear and easy to maintain, modify, etc. Finally, the *$formdata* array is also put into the F3 variable *formdata*, which the *response.html* template will use to show the user that it got the correct values:
 
+{% raw %}
 ```html
 <h1>Thanks for your data, {{ @formData.name }} ...</h1>
 <p> Your colour was {{ @formData.colour }} </p>
 <hr/>
 <a href="{{ @BASE }}/dataView">Show all data</a>
 ```
+{% endraw %}
 
 ### The GET object
 

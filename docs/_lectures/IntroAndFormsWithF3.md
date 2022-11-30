@@ -188,7 +188,7 @@ $f3->route('GET /', function ($f3) {
 
 This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, `layout.html`.
 
-Of course, if you click on the URL above, you will get an error (unless you have exactly the same setup at your own _localhost_ server); however, I also have the Simple Example running on Edinburgh Domains at https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/, so you can look there to see how the things described here actually appear. I'll use URLs for that from now on.
+Of course, if you click on the URL above, you will get an error (unless you have exactly the same setup at your own _localhost_ server); however, I also have the Simple Example running on Edinburgh Domains at _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/>_, so you can look there to see how the things described here actually appear. I'll use URLs for that from now on.
 
 In general, a route will need a first argument that specifies an HTTP method and a URL element, and a second that specifies or defines a function to run. In FFF-SimpleExample, there is another route rule, for example, that looks like this:
 
@@ -202,7 +202,7 @@ $f3->route('GET /simpleform', function ($f3) {
 
 which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce exactly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its `html_title` variable being different.)
 
-If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is quite different.
+If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is very different, as we will shortly see.
 
 Routes are absolutely fundamental to the use of F3, and also support various other features such as the use of parameters on URLs. These are shown in the F3 documentation, and some of them used in the course examples.
 
@@ -235,7 +235,7 @@ Crucially, the template system supports constructions such as loops. Suppose we 
 ```
 {% endraw %}
 
-Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _/dataView_) -- this HTML is from the template `dataView.html` (view at https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/dataView.html).
+Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _/dataView_) -- this HTML is from the template `dataView.html` (view at _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/dataView.html>_).
 
 We can take advantage of any features of HTML that we like, so for instance if we had a URL in the database then, rather than just printing it out, it's easy to make it into a clickable link. We could also of course style this page by simply adding any required id or class attributes and some CSS styles or a link to a stylesheet. Since the data we are displaying on the page we are creating here is tabular data, it makes sense to use a table to present it, but instead we could generate a whole series of DIVs etc. if we wanted. Then we would certainly want to use CSS for formatting -- we could even, if we wanted, write PHP code to generate or adapt CSS dynamically, so that things would be formatted differently in different circumstances.
 
@@ -261,7 +261,7 @@ A key item in SimpleExample is the simple form that allows the user to enter the
 </form>
 ```
 {% endraw %}
-(https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform).
+(_<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_).
 
 The first main point to note is the _action_ attribute of the opening `<form>` tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes _a `POST` request_ to the `simpleform` route. Hence, F3 looks in `index.php` for a rule that begins with 'POST /simpleform', and it finds
 
@@ -289,7 +289,7 @@ This looks slightly complicated, but basically it extracts the data entered on t
 <a href="{{ @BASE }}/dataView">Show all data</a>
 ```
 {% endraw %}
-(No URL for this page is given here because the only sensible way to get to it is by submitting the form!)
+(No URL for the *response* page is given here because it has no route: the only sensible way to get to it is by submitting the form!)
 
 ### The GET object
 

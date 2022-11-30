@@ -176,7 +176,7 @@ Roughly speaking, this means: (line 1) the RewriteEngine is activated; (lines 2-
 
 This .htaccess file has to be in the home directory of the F3 application, and each F3 application will require its own .htaccess file (though usually they are all identical to the above).
 
-So in the FFF-SimpleExample example discussed in the introductory Viewtorial for this course, the home directory of the F3 application is _.../FFF-SimpleExample/_ (where "..." is the file system path to the directory, e.g., on my laptop, /Users/jlee/Sites/fatfree/FFF-SimpleExample/). In this directory there is a .htaccess file as above. When I visit the URL _<http://localhost/fatfree/FFF-SimpleExample/>_ the server will go to index.php, but then it will look for a rule defining the directory as a route, bearing in mind that by default my browser will be sending an HTTP request using the method GET. This rule appears as:
+So in the FFF-SimpleExample example discussed in the introductory Viewtorial for this course, the home directory of the F3 application is _.../FFF-SimpleExample/_ (where "..." is the file system path to the directory, e.g., on my laptop, /Users/jlee/Sites/fatfree/FFF-SimpleExample/). In this directory there is a .htaccess file as above. When I visit the URL _<http://localhost/fatfree/FFF-SimpleExample/>_ the server will go to index.php, but there the F3 code will make it look for a rule defining the directory as a route, bearing in mind that by default my browser will be sending an HTTP request using the method GET. This rule appears as:
 
 ```php
 $f3->route('GET /', function ($f3) {
@@ -188,6 +188,8 @@ $f3->route('GET /', function ($f3) {
 
 This says that the F3 method _route_ (a method of the F3 object represented by _$f3_) is called with two arguments. Each use of this method constitutes a rule that defines a route. The first argument is a string, 'GET /'. This means the route matches an HTTP GET request for "/", which here represents the root directory of the application, i.e. the URL we are discussing. The second argument is a function definition, an anonymous function that sets two F3 variables and then calls the _render_ method of the _Template_ object to render a template, `layout.html`.
 
+Of course, if you click on the URL above, you will get an error (unless you have exactly the same setup at your own _localhost_ server); however, I also have the Simple Example running on Edinburgh Domains at https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/, so you can look there to see how the things described here actually appear. I'll use URLs for that from now on.
+
 In general, a route will need a first argument that specifies an HTTP method and a URL element, and a second that specifies or defines a function to run. In FFF-SimpleExample, there is another route rule, for example, that looks like this:
 
 ```php
@@ -198,11 +200,11 @@ $f3->route('GET /simpleform', function ($f3) {
 });
 ```
 
-which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<http://localhost/fatfree/FFF-SimpleExample/simpleform>_ \--  will produce exacly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its `html_title` variable being different.)
+which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce exactly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its `html_title` variable being different.)
 
 If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is quite different.
 
-Routes are absolutely fundamental to the use of F3, and also support various other feaatures such as the use of parameters on URLs. These are shown in the F3 documentstion, and some of them used in the course examples.
+Routes are absolutely fundamental to the use of F3, and also support various other features such as the use of parameters on URLs. These are shown in the F3 documentation, and some of them used in the course examples.
 
 ### Templates
 
@@ -214,7 +216,7 @@ Another concept fundamental to F3, and to most other frameworks, is the idea of 
 
 --  if we find this embedded in normal HTML, it means that when the template is rendered, this will be removed completely and replaced, in this case, by the value of the F3 variable `html_title` (any white space between the double braces will be removed as well). The "@" symbol just directs the interpreter to look for an F3 variable. Other things can be done as well -- see the F3 documentation for details.
 
-Crucially, the template system supports contructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
+Crucially, the template system supports constructions such as loops. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
 {% raw %}
 ```html
@@ -233,7 +235,7 @@ Crucially, the template system supports contructions such as loops. Suppose we h
 ```
 {% endraw %}
 
-Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _FFF-SimpleExample/dataView_) -- this HTML is from the template `dataView.html`.
+Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression trim (`@record.name`) simply takes the name element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _/dataView_) -- this HTML is from the template `dataView.html` (view at https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/dataView.html).
 
 We can take advantage of any features of HTML that we like, so for instance if we had a URL in the database then, rather than just printing it out, it's easy to make it into a clickable link. We could also of course style this page by simply adding any required id or class attributes and some CSS styles or a link to a stylesheet. Since the data we are displaying on the page we are creating here is tabular data, it makes sense to use a table to present it, but instead we could generate a whole series of DIVs etc. if we wanted. Then we would certainly want to use CSS for formatting -- we could even, if we wanted, write PHP code to generate or adapt CSS dynamically, so that things would be formatted differently in different circumstances.
 
@@ -259,8 +261,9 @@ A key item in SimpleExample is the simple form that allows the user to enter the
 </form>
 ```
 {% endraw %}
+(https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform).
 
-The first main point to note is the _action_ attribute of the opening `<form>` tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes a POST request to the `simpleform` route. Hence, F3 looks in `index.php` for a rule that begins with 'POST /simpleform', and it finds
+The first main point to note is the _action_ attribute of the opening `<form>` tag: it is a URL, formed by adding "/simpleform" to the URL of the F3 SimpleExample directory, which is available through the F3 variable _@BASE_. Also, the _method_ attribute is set to "post" (which isn't case sensitive). This means that when we click the Submit button, the form makes _a `POST` request_ to the `simpleform` route. Hence, F3 looks in `index.php` for a rule that begins with 'POST /simpleform', and it finds
 
 ```php
 $f3->route('POST /simpleform', function ($f3) {
@@ -286,6 +289,7 @@ This looks slightly complicated, but basically it extracts the data entered on t
 <a href="{{ @BASE }}/dataView">Show all data</a>
 ```
 {% endraw %}
+(No URL for this page is given here because the only sensible way to get to it is by submitting the form!)
 
 ### The GET object
 
@@ -302,5 +306,4 @@ $f3->route('GET /example/@var', function ($f3) {
 }
 ```
 
-If you now browse to the URL `.../example/fish`, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an er
-ror will result.
+If you now browse to the URL `.../example/fish`, then the application will respond "The parameter value you gave was: fish". This is something we'll see used in a few examples during the course. Note that this is a separate route rule from one that you might have for `'GET /example/`' (with no parameter) -- you will need to define that as a separate rule if you want to allow a URL with no added parameters, otherwise an error will result.

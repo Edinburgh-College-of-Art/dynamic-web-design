@@ -181,7 +181,7 @@ So in the FFF-SimpleExample example discussed in the introductory Viewtorial for
 ```php
 $f3->route('GET /', function ($f3) {
     $f3->set('html_title', 'Simple Example Home');
-    $f3->set('content', 'simpleform.html');
+    $f3->set('content', 'simplehome.html');
     echo Template::instance()->render('layout.html');
 });
 ```
@@ -200,9 +200,9 @@ $f3->route('GET /simpleform', function ($f3) {
 });
 ```
 
-which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce exactly the same effect as the root URL -- it will display the Simple Form page -- but with a different title on the page. (In both cases, the _layout,html_ template is rendered, with its _content_ variable being set to "simpleform.html", but its `html_title` variable being different.)
+which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce a similar effect to the root URL, except instead of displaying the _simple home.html_ page it will display the Simple Form page -- and with a different title on the page. (In both cases, the _layout.html_ template is rendered, with its `content` variable being set to either "simplehome.html" or "simpleform.html", and its `html_title` variable being different.)
 
-If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is very different, as we will shortly see.
+If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is **very** different, as we will shortly see.
 
 Routes are absolutely fundamental to the use of F3, and also support various other features such as the use of parameters on URLs. These are shown in the F3 documentation, and some of them used in the course examples.
 

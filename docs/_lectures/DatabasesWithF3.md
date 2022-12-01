@@ -20,7 +20,7 @@ week: 1
 
 Once we start to accumulate material from forms, or any other data that we want to present on web pages, things can become quite complicated quite quickly. We might want to create forms that are already filled-in with some of the information, and get people to add to them; we might want to have quite elaborate HTML pages which just include at certain points data that comes from constantly updated files about, say, prices of items or descriptions of new additions.
 
-In more sophisticated applications, data is typically organised using databases. Increasingly, web sites are used for e-commerce purposes that require them to present information that is constantly being updated elsewhere (at the "back end") rather than through the user-facing web site itself. They might be presenting product lines to customers, stock control information to managers on an intranet, or many other things. Or a web site might be presenting simpler, but still continually changing data, such as a message-board or wiki type of application, or a "web content management system" such as WordPress (which is built using PHP), etc.
+In more sophisticated applications, data is typically organised using databases. Ubiquitously, web sites are used for e-commerce purposes that require them to present information that is constantly being updated elsewhere (at the "back end") rather than through the user-facing web site itself. They might be presenting product lines to customers, stock control information to managers on an intranet, or many other things. Or a web site might be presenting simpler, but still continually changing data, such as a message-board or wiki type of application, or a "web content management system" such as WordPress (which is built using PHP), etc.
 
 In all of these cases, usually the web pages are created dynamically from a database, which is also liable to be updated by other people or systems (perhaps using a web service API, which is something we'll look at in the course, though not in these notes). In the rest of this lecture, we look at a particular system which can achieve connecting to a database, as well as a number of other things: PHP, in combination with a MySQL database. This combination is perhaps the most commonly encountered method of integrating databases to be found on the internet, but it is also widely misused. Using the "Fat-Free Framework" (F3) will enable us easily to avoid many of the worst pitfalls in this area.
 
@@ -106,7 +106,7 @@ will _delete all the records in the Product table_! So one needs to restrict thi
 
 which will delete all records concerning any product called "Door 26".
 
-Further examples of SQL abound, but for many purposes you will not need to know much more about it than this. General details of the language, with examples and tutorials, are easily found in many textbooks and web sites, as well as the copious documentation of MySQL.
+Further examples of SQL abound, but for many purposes you will not need to know much more about it than this. General details of the language, with examples and tutorials, are easily found in many textbooks and web sites, as well as [the copious documentation of MySQL](https://dev.mysql.com/doc/refman/8.0/en/).
 
 ## Linking to databases using PHP
 
@@ -118,7 +118,7 @@ Security is a very important consideration when doing anything with PHP. It is s
 
 **_In particular, it means you should be very careful when "borrowing" PHP code from sites on the internet. Unless you are very sure of the security and reliability of the source, do not use any code that you have not read carefully and thoroughly understood (which is often difficult with PHP code). This can apply equally to code that doesn't access a database, especially if it uses some risky function such as email._**
 
-We will not discuss the various methods of connecting to databases using PHP outside of F3. You will find much code on the internet that is based on such methods, including especially the oldest and simplest method, which uses the function _mysql_connect()_. This function, along with others associated with it, is extremely unsafe, **deprecated** and dropped in later versions of PHP, but you will often find it in many places. Please **_do not use these functions_** in your own code: use the method described here, with F3. **_Remember: DO NOT USE mysql_connect()_** **_in any circumstances_**.
+We will not discuss the various methods of connecting to databases using PHP outside of F3. You will find much code on the internet that is based on such methods, including especially the oldest and simplest method, which uses the function `mysql_connect()`. This function, along with others associated with it, is extremely unsafe, **deprecated** and dropped in later versions of PHP, but you will often find it in many places. Please **_do not use these functions_** in your own code: use the method described here, with F3. **_Remember: DO NOT USE `mysql_connect()` in ANY circumstances_**.
 
 We will assume from here that you are not going to connect to your MySQL database directly from lower-level PHP code, but only through functions provided by the Fat-Free Framework.
 

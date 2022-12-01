@@ -51,11 +51,11 @@ The server will execute the application; it will also pass as a **_parameter_** 
 
 `http://www.google.com/search?hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search`
 
-In this URL, _search,_ just before the "_?_",  will be the name of some application on the Google server machine, and the string _hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search_ [is what's handed to it as a parameter.
+In this URL, _search,_ just before the "_?_",  will be the name of some application on the Google server machine, and the string _hl=en&q=MSc+Design+Digital+Media&btnG=Google+Search_ is what's handed to it as a parameter.
 
 By convention, this parameter string (often called the "*query string*") consists of a list of named parameters (in this case three: _h1, q,_ and `btnG`) and their values, linked by "=". The parameter-value pairs are separated by "&". Within parameter values, words are separated with the "+" character.
 
-Spaces are not allowed: any such non-alphanumeric characters are represented by "%" and then their ASCII code as a two-digit hexadecimal number, so if spaces do appear they are encoded as "%20". (Because the ASCII code for a space is 32 in decimal, 20 in hex. This arrangement is called ]{style="font-style:normal"}_URL encoding_, and has to be used in all URLs, though most browsers now will silently encode URLs before sending them if you just type them in directly.)
+Spaces are not allowed: any such non-alphanumeric characters are represented by "%" and then their ASCII code as a two-digit hexadecimal number, so if spaces do appear they are encoded as "%20". (Because the ASCII code for a space is 32 in decimal, 20 in hex. This arrangement is called _URL encoding_, and has to be used in all URLs, though most browsers now will silently encode URLs before sending them if you just type them in directly.)
 
 ## The HTTP request methods
 
@@ -68,7 +68,6 @@ In the case of *forms*, the browser is in fact providing data to the server, but
 HTML forms are, at their simplest, just a quick and convenient way of adding information to an HTTP request. For example, they can be used to construct a query string for a CGI URL.
 
 Suppose we have an application on our server that saves people's names in a file, and the application is called _namesave.cgi_. If one executes it with a name as parameter, it will add the name to a file. We could have the user always type in a URL ending with `.../namesave.cgi?name=John+Smith`
-
 (or whatever their name might be), but this is not at all convenient. Usually the user would be put off by this, and it is more practical, as well as more attractive and simpler, to provide instead an HTML form as follows.
 
 ```html
@@ -91,7 +90,8 @@ When this HTML is displayed, it looks as follows ([or as at this link](https://j
 
 ![Very simple form](img/image002.jpg)
 
-And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). **NB, the application in this example is no longer there, so you'll get a "not found" message when you try to execute it, but you can still see what happens to the URL.**
+And when the Submit button is clicked, the URL changes to the one shown above, i.e. it ends in _namesave.cgi_ (and what comes before that depends on the URL of the form itself, because in the HTML of the form _action_ attribute we have used a _relative link --_ relative and absolute links work in forms just the same way as anywhere else). 
+**NB, the application in this example is no longer there, so you'll get a "not found" message when you try to execute it, but you can still see what happens to the URL.**
 
 This principle can be extended, in that there are a considerable range of types of input available (lists, buttons, checkboxes, etc.), and clearly the URL produced can become very complicated, but the mechanism remains the same.
 
@@ -111,7 +111,7 @@ We are concerned here only with the "back-end" processing of form data, but the 
 
 ## The processing script
 
-The application program you create to handle form data could be almost anything that can be run on the server machine. You could write it in C, Java, Prolog, Applescript, Visual Basic, FileMaker Pro or various other things that might be available. The key factor is that the server runs the application in an _environment_ where it is provided with the values for various variables as part of the CGI interface, which includes the query string, along with things like the user's IP number, the kind of browser they're using, etc.
+The application program you create to handle form data could be almost anything that can be run on the server machine. You could write it in C, Java, Prolog, Applescript, Visual Basic or various other things that might be available. The key factor is that the server runs the application in an _environment_ where it is provided with the values for various variables as part of the CGI interface, which includes the query string, along with things like the user's IP number, the kind of browser they're using, etc.
 
 Often, however, form data is processed by some system that is more integrated with the task of producing HTML pages from other data. Such systems are PHP, ASP, JSP, Coldfusion, and others. These can all be used for a range of CGI-related purposes. We are going to use PHP, which is just one example. You are welcome to look at and compare the others if you want. (PHP can be used on our own server -- details follow. ASP is normally available only on Windows-based servers, but the others are supported on various platforms.)
 
@@ -121,26 +121,28 @@ What happens with all of these systems is that you write _templates_, which are 
 
 We have chosen PHP mainly because it is free, open source software and very widely used. It is also extremely powerful. Its development history is well described at <http://uk.php.net/manual/en/history.php>. It has a comprehensive manual, as well as tutorials and other material, on its own web site at <http://uk.php.net/docs.php>. It is also well integrated with Dreamweaver for editing and design purposes.
 
-You can install PHP on your own computer (e.g. laptop), along with the MySQL database and the Apache web server, in the form of a neatly packaged setup called (if you are using a Macintosh) MAMP ([www.mamp.info/](www.mamp.info/)). This stands for "Macintosh, Apache, MySQL, PHP", and derives from the original LAMP, which is for the Linux operating system. There is also WAMP or WampServer for Windows machines. We do not undertake to support students in running any setup on their own machines: if you wish to try it, this is up to you. We provide access to all the components via the _Edinburgh Domains_ service, as described [at this link](additional.html).
+You can install PHP on your own computer (e.g. laptop), along with the MySQL database and the Apache web server, in the form of a neatly packaged setup called (if you are using a Macintosh) MAMP ([www.mamp.info/](http://www.mamp.info/)). This stands for "Macintosh, Apache, MySQL, PHP", and derives from the original LAMP, which is for the Linux operating system. There is also WAMP or WampServer for Windows machines. We do not undertake to support students in running any setup on their own machines: if you wish to try it, this is up to you. We provide access to all the components via the _Edinburgh Domains_ service, as described [at this link](additional.html).
 
-PHP defines a language written between tags that are placed within HTML pages (or in files that have no HTML, which function simply as PHP scripts). The tags open with `<?php`, and close with `?>`; they are embedded in ordinary HTML pages that are placed on a machine with a special PHP web server (which is often an extension of the server that serves plain HTML web pages). These pages are sometimes known as _templates_. When they are served by the server, _all the PHP code, with its tags, disappears_ and is replaced by pieces of HTML that depend on what the PHP statements specified. The resulting page is therefore interpretable by any normal browser. If you look at the HTML source of any PHP page as it arrives at your browser, you will find nothing other than ordinary HTML, CSS etc. -- no trace of PHP code. With this kind of system, the pages can be designed exactly as usual, but with these PHP tags as placeholders for material that will be provided dynamically when the page is viewed in the user's browser.
+PHP defines a language written between tags that are placed within HTML pages (or in files that have no HTML, which function simply as PHP scripts). The tags open with `<?php`, and close with `?>`; they are embedded in ordinary HTML pages that are placed on a machine with a special PHP web server (which is often an extension of the server that serves plain HTML web pages). These pages are sometimes known as _templates_. When they are served by the server, _all the PHP code, with its tags, disappears_ and is replaced by pieces of HTML that depend on what the PHP statements specified. The resulting page is therefore interpretable by any normal browser. If you look at the HTML source of any PHP page as it arrives at your browser, you will find nothing other than ordinary HTML, CSS, perhaps javascript etc. -- no trace of PHP code. With this kind of system, the pages can be designed exactly as usual, but with these PHP tags as placeholders for material that will be provided dynamically when the page is viewed in the user's browser.
 
-So there is no PHP user interface: you design your page templates using Dreamweaver, or any other text editor, and you include PHP script elements into the HTML. Dreamweaver and some other editors will have functionality that helps you to do this, but you don't have to use it. Your template contains nothing but text. Then you place the templates onto the PHP-enabled web server and access them via a web browser, like any other web pages.
+So there is no PHP user interface: you design your page templates using any text editor, and you include PHP script elements into the HTML. [Adobe Dreamweaver](https://www.adobe.com/uk/products/dreamweaver.html), or a variety of other "WYSIWYG" editors, will have functionality that helps you to do this, but you don't have to use it. [PHPStorm](https://www.jetbrains.com/phpstorm/) and similar editors provide more of an "integrated development environment". In any case, your template contains nothing but text, some of which may be code. Then you place the templates onto the PHP-enabled web server and access them via a web browser, like any other web pages.
 
-There are many books on PHP, and even more material on the web --- a good introduction can be found, as usual, [at w3schools.com](http://www.w3schools.com/php/), And, of course, there is much excellent material on Lynda.com.
+There are many books on PHP, and even more material on the web --- a good introduction can be found, as usual, [at w3schools.com](http://www.w3schools.com/php/), And, of course, there is much excellent material on *LinkedIn Learning*.
 
 There are plenty of things you can do with PHP without needing to use a database. Here's a simple example of a PHP page. I will refer to the parts **within the PHP tags** as _script_ elements, or simply _the PHP script_.
 
 ```php
 <HTML>
 <HEAD><TITLE>PHP Example</TITLE></HEAD>
-<BODY><H2>Today's date is ``<?php         echo date("d/m/Y");       ``?>         </H2></BODY>
+<BODY>
+<H2>Today's date is ``<?php echo date("d/m/Y"); ``?></H2>
+</BODY>
 </HTML>
 ```
 
 This is clearly HTML with just the embedded PHP tags. Within the scope of these tags, everything is taken to be PHP code that should be evaluated. In this case, the result of the evaluation (which is today's date) is simply inserted into the HTML page and handed to the user's browser. What appears on the browser (at the time of editing these notes) is simply:
 
-## Today's date is 11/01/2019
+## Today's date is 01/12/2022
 
 (Try <https://jlee.edinburgh.domains/test/date.php>. See if you can guess how to make it put the day before the month!)
 
@@ -148,7 +150,7 @@ The processing of this page is illustrated in the following diagram (click for l
 
 ![PHP processing diagram](img/PHP-process.png)
 
-_Always remember that the PHP script is only processed if the page is **requested from the server**, i.e. if you use a browser and **a URL that begins with http&#x3A;//** ... If you access the template file **directly** with a browser (in which case your URL will begin **file://**) then the script will **not** be processed and so you will **not** see the result you expect._
+_**Always remember** that the PHP script is only processed if the page is **requested from the server**, i.e. if you use a browser and **a URL that begins with http&#x3A;//** ... If you access the template file **directly** with a browser (in which case you will see that the URL in the browser will begin **file://**) then the script will **not** be processed and so you will **not** see the result you expect._
 
 This is the basic idea behind PHP, which means "PHP: Hypertext Preprocessor" --- it pre-processes your web pages in various ways before they are served to the user. PHP has a very wide range of capabilities and can be used for a great many things. Here we'll talk mainly about forms and databases, but there is also support for email, searching, http connectivity, security and encryption, graphing and charting, and more advanced scripting. See the many books available (or the PHP web site, which has very good documentation) for details.
 

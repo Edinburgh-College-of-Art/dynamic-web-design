@@ -214,27 +214,34 @@ F3 also provides mapper methods to retrieve and delete data, which we exploit in
 
 ## Managing input and output via web pages
 
-The most typical way to get information from a web site user is via a form, and with F3 the standard way to put information onto a web page is to define a template that contains F3 variables with values that will be resolved when the template is rendered. The variables can then take values that are derived form the database, and hence the database data can be output to a web page. We have already seen how forms can be used, and the code considered there got to the point where it called a method defined in the SimpleController class, which is _putIntoDatabase()_. This method takes an associative array of values where the keys in the array have the same names as the fields in the databse table that we'd like to put them into, in the SimpleExample case being _name_ and _colour_. Because F3 does so much for us already, the definition of the function is very simple:
+The most typical way to get information from a web site user is via a form, and with F3 the standard way to put information onto a web page is to define a template that contains F3 variables with values that will be resolved when the template is rendered. The variables can then take values that are derived form the database, and hence the database data can be output to a web page. We have already seen how forms can be used, and the code considered there got to the point where it called a method defined in the SimpleController class, which is `putIntoDatabase()`. This method takes an associative array of values where the keys in the array have the same names as the fields in the database table that we'd like to put them into, in the SimpleExample case being _name_ and _colour_. Because F3 does so much for us already, the definition of the function is very simple:
 
-`public function putIntoDatabase($data) { $this->mapper->name = $data["name"]; // set value for "name" field $this->mapper->colour = $data["colour"]; // set value for "colour" field $this->mapper->save(); // save new record with these fields }`
+```php
+public function putIntoDatabase($data) { 
+	$this->mapper->name = $data["name"]; // set value for "name" field 
+	$this->mapper->colour = $data["colour"]; // set value for "colour" field 
+	$this->mapper->save(); // save new record with these fields 
+}
+```
 
-All this does is [set the members of the mapper object to take the values that are given in the $data array], and then [call the mapper's save() method], which saves the values in the mapper object into the corresponding databse fields (by using SQL behind the scenes). That's really all there is to it.
+All this does is set the members of the mapper object to take the values that are given in the $data array, and then call the mapper's `save()` method, which saves the values in the mapper object into the corresponding database fields (by using SQL behind the scenes). That's really all there is to it.
 
 Retrieving data from the database is, in a simple case, even more straightforward. If you simply want to retrieve all the data in the data table, then the following method
 
 `public function getData() { $list = $this->mapper->find(); return $list; }`
 
-achieves this by [using the find() method of the mapper object, which if given no arguments will simply find all the data]. The returned data will actually be in the form of an array containing one object for each row in the database table. Each of these objects is an associative array, or in other words a list of key-value pairs, where the keys will be the names of the database fields and the values will be whatever value that field has in the particualr row. [This array is returned from the method function using the variable *$list*]. The array can be used in simple loop to display the data, e.g. as a table.
+achieves this by using the `find()` method of the mapper object, which if given no arguments will simply find all the data. The returned data will actually be in the form of an array containing one object for each row in the database table. Each of these objects is an associative array, or in other words a list of key-value pairs, where the keys will be the names of the database fields and the values will be whatever value that field has in the particular row. This array is returned from the method function using the variable *$list*. The array can be used in simple loop to display the data, e.g. as a table.
 
 This is shown in the notes under Templates, repeated here. Suppose we have an F3 variable whose value is an array (it could be an array of strings, or numbers, or an associative array). Then we can loop through the array and produce HTML, for example a table, that includes all of the values in it:
 
+{% raw %}
 ```php
 <table>
     <tr>
         <th>Name</th>
         <th>Colour</th>
     </tr>
-    <repeat group="{% raw %}{{ @dbData }}{% endraw %}" value="{{ @record }}">
+    <repeat group="{{ @dbData }}" value="{{ @record }}">
         <tr>
             <td>{{ trim(@record.name) }}</td>
             <td>{{ trim(@record.colour) }}</td>
@@ -242,8 +249,9 @@ This is shown in the notes under Templates, repeated here. Suppose we have an F3
     </repeat>
 </table>
 ```
+{% endraw %}
 
-Here, between the _<repeat>_ tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. Each member of the array contains a further associative array, each with keys name and colour. The expression trim(@record.name) simply takes the name element in the current record and trims any leading or trailing white space from it. So this _repeat_ loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the _dataView_ route (URL ending in _FFF-SimpleExample/dataView_) -- this HTML is from the template _dataView.htm_l.
+Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. Each member of the array contains a further associative array, each with keys name and colour. The expression `trim(@record.name)` simply takes the name element in the current record and trims any leading or trailing white space from it. So this `repeat` loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the _dataView_ route (URL ending in _/dataView_) -- this HTML is from the template _dataView.html_.
 
 In the index.php file, a rule is defined for the _dataView_ route as follows:
 
@@ -258,6 +266,6 @@ $f3->route('GET /dataView', function($f3)
 });
 ```
 
-which straightforwardly [creates a *SimpleController* object], then [uses its *getData()* method as above to retrieve all the rows], [which are put into the variable *$alldata*]. This variable is then [used to set an F3 variable *dbData*], which is expected in the _dataView.html_ template, as above.
+which straightforwardly creates a *SimpleController* object, then uses its *getData()* method as above to retrieve all the rows, which are put into the variable *$alldata*. This variable is then used to set an F3 variable *dbData*, which is expected in the _dataView.html_ template, as above.
 
 This has been a very simple introduction, but still you need no more than is covered in these notes and the viewtorials to make some very effective dynamic web sites using F3.

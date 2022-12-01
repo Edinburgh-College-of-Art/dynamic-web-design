@@ -228,7 +228,9 @@ All this does is set the members of the mapper object to take the values that ar
 
 Retrieving data from the database is, in a simple case, even more straightforward. If you simply want to retrieve all the data in the data table, then the following method
 
-`public function getData() { $list = $this->mapper->find(); return $list; }`
+```php
+public function getData() { $list = $this->mapper->find(); return $list; }
+```
 
 achieves this by using the `find()` method of the mapper object, which if given no arguments will simply find all the data. The returned data will actually be in the form of an array containing one object for each row in the database table. Each of these objects is an associative array, or in other words a list of key-value pairs, where the keys will be the names of the database fields and the values will be whatever value that field has in the particular row. This array is returned from the method function using the variable *$list*. The array can be used in simple loop to display the data, e.g. as a table.
 

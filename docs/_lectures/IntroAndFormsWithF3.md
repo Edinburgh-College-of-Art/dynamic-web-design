@@ -127,7 +127,7 @@ PHP defines a language written between tags that are placed within HTML pages (o
 
 So there is no PHP user interface: you design your page templates using any text editor, and you include PHP script elements into the HTML. [Adobe Dreamweaver](https://www.adobe.com/uk/products/dreamweaver.html), or a variety of other "WYSIWYG" editors, will have functionality that helps you to do this, but you don't have to use it. [PHPStorm](https://www.jetbrains.com/phpstorm/) and similar editors provide more of an "integrated development environment". In any case, your template contains nothing but text, some of which may be code. Then you place the templates onto the PHP-enabled web server and access them via a web browser, like any other web pages.
 
-There are many books on PHP, and even more material on the web --- a good introduction can be found, as usual, [at w3schools.com](http://www.w3schools.com/php/), And, of course, there is much excellent material on *LinkedIn Learning*.
+There are many books on PHP, and even more material on the web --- a good introduction can be found, as usual, [at w3schools.com](http://www.w3schools.com/php/), and, of course, there is much excellent material on *LinkedIn Learning*.
 
 There are plenty of things you can do with PHP without needing to use a database. Here's a simple example of a PHP page. I will refer to the parts **within the PHP tags** as _script_ elements, or simply _the PHP script_.
 
@@ -202,11 +202,13 @@ $f3->route('GET /simpleform', function ($f3) {
 });
 ```
 
-which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce a similar effect to the root URL, except instead of displaying the _simple home.html_ page it will display the Simple Form page -- and with a different title on the page. (In both cases, the _layout.html_ template is rendered, with its `content` variable being set to either "simplehome.html" or "simpleform.html", and its `html_title` variable being different.)
+which says that the URL where "/simpleform" appears at the end of the root URL -- i.e. _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/simpleform>_ \--  will produce a similar effect to the root URL, except instead of displaying the _simplehome.html_ page it will display the Simple Form page -- and with a different title on the page. (In both cases, the _layout.html_ template is rendered, with its `content` variable being set to either "simplehome.html" or "simpleform.html", and its `html_title` variable being different.)
 
 If the simpleform URL is requested with the HTTP method POST (which in this case occurs when it is used as the action of the HTML form), we get a completely different result, because the route rule for 'POST /simpleform' is **very** different, as we will shortly see.
 
-Routes are absolutely fundamental to the use of F3, and also support various other features such as the use of parameters on URLs. These are shown in the F3 documentation, and some of them used in the course examples.
+Routes are absolutely fundamental to the use of F3. _**Notice especially that this means URLs in F3 rarely end in `.html`, or `.php` etc., and such URLs will not work: if you have such a URL in your application, it is probably an error. PHP code that is not written for use with F3 will typically not work in an F3 application without being adapted. Bear this in mind when looking for tutorials or other materials online.**_ 
+
+Routes also support various other features such as the use of parameters on URLs, as discussed below. These are shown in the F3 documentation, and some of them used in the course examples. 
 
 ### Templates
 
@@ -237,7 +239,7 @@ Crucially, the template system supports constructions such as loops. Suppose we 
 ```
 {% endraw %}
 
-Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression _trim (`@record.name`)_ simply takes the *name* element in the current record and trims any leading or trailing white space from it. So this repeat loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _/dataView_) -- this HTML is from the template `dataView.html` (view at _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/dataView>_).
+Here, between the `<repeat>` tags, we have a table row with two cells. Attributes of the opening tag are _group_ and _value_. The group is set to an F3 variable that contains an array; the value is used to create an F3 variable (record) that will hold one of the array members each time round the loop. The array contains associative pairs, each with keys name and colour. The expression `trim(@record.name)` simply takes the *name* element in the current record and trims any leading or trailing white space from it. So this *repeat* loops through the array, and for each element in it produces a row in the HTML table that puts the name and the colour into separate cells, as you can see in SimpleExample by using the `dataView` route (URL ending in _/dataView_) -- this HTML is from the template `dataView.html` (view via _<https://jlee.edinburgh.domains/fatfree/F3-SimpleExample/dataView>_).
 
 We can take advantage of any features of HTML that we like, so for instance if we had a URL in the database then, rather than just printing it out, it's easy to make it into a clickable link. We could also of course style this page by simply adding any required id or class attributes and some CSS styles or a link to a stylesheet. Since the data we are displaying on the page we are creating here is tabular data, it makes sense to use a table to present it, but instead we could generate a whole series of DIVs etc. if we wanted. Then we would certainly want to use CSS for formatting -- we could even, if we wanted, write PHP code to generate or adapt CSS dynamically, so that things would be formatted differently in different circumstances.
 

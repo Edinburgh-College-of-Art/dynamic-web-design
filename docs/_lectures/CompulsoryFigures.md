@@ -7,13 +7,13 @@ week: 1
 
 -   [Introduction](#introduction)
 -   [Compulsory Figures](#compulsory-figures)
-    -   [Database + form (SimpleExample)](database--form-simpleexample)
-    -   [Simple case of AJAX](simple-case-of-ajax)
-    -   [User interactions](user-interactions)
-    -   [Simple case of using an API](simple-case-of-using-an-api)
-    -   [Usability and responsiveness](usability-and-responsiveness)
-    -   [Accessibility](accessibility)
-    -   [Safe uploads](safe-uploads)
+    -   [Database + form (SimpleExample)](#database--form-simpleexample)
+    -   [Simple case of AJAX](#simple-case-of-ajax)
+    -   [User interactions](#user-interactions)
+    -   [Simple case of using an API](#simple-case-of-using-an-api)
+    -   [Usability and responsiveness](#usability-and-responsiveness)
+    -   [Accessibility](#accessibility)
+    -   [Safe uploads](#safe-uploads)
 -   [Assessment](#assessment)
 
 

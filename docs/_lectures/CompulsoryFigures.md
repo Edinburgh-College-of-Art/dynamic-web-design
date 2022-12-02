@@ -5,9 +5,11 @@ author: "John Lee"
 week: 1
 ---
 
--   [Introduction]
--   [Compulsory Figures]
--   [Assessment]
+-   [Introduction](#introduction)
+-   [Compulsory Figures](#compulsory-figures)
+    -   [Database + form (SimpleExample)](database-+-form-(SimpleExample))
+    -   [Simple case of AJAX](simple-case-of-AJAX)
+-   [Assessment](#assessment)
 
 
 ## Introduction
@@ -24,7 +26,7 @@ The course is structured around these elements, in that we will cover the backgr
 
 The following list outlines the "compulsory figures" we will be using, and the time schedule for delivering them. In each case, there will be an existing skeleton implementation that will be presented in a lecture or viewtorial (or both), and making that work in your site will be the minimal way to deliver the task. This might take anything from minutes to hours, depending on the existing level of skill in your team and how quickly you learn, but we have our own team of skilled and experienced tutors on hand to help you with any problems you encounter.
 
-### Database + form (simple example)
+### Database + form (SimpleExample)
 
 The course starts with a "Simple Example" that demonstrates setting up a database on the server, and getting information into it and out again using HTML forms and templates. Making this work is the first task, which your team must achieve by the end of week 2.
 

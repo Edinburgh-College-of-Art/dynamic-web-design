@@ -12,8 +12,8 @@ week: 1
     -   [User interactions](user-interactions)
     -   [Simple case of using an API](simple-case-of-using-an-api)
     -   [Usability and responsiveness](usability-and-responsiveness)
-    -   [Accessibility] (accessibility)
-    -   [Safe uploads] (safe-uploads)
+    -   [Accessibility](accessibility)
+    -   [Safe uploads](safe-uploads)
 -   [Assessment](#assessment)
 
 

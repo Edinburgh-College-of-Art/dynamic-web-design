@@ -25,9 +25,9 @@ Another critical key to success is that your team works effectively together: ev
 
 ## Compulsory figures
 
-At one time, in ice-skating competitions, there used to be a specific list of "figures" (loops, jumps, spins, etc.) that each skater had to include somewhere in their routine. The skater would be marked on the technical quality of their figures, but also, and equally importantly, on the "artistic interpretation" of the whole routine. We borrow these concepts. There are certain specific elements that your site must contain --- the compulsory figures --- and you should do these as well as possible, but in the end they have to come together as elements in a harmonious and effective design for the whole site. How they fit together and how you use them is as important as how well done they are in themselves. Some of the elements are very much about the technology while others are more focused on design.
+At one time, in ice-skating competitions, there used to be a specific list of "figures" (loops, jumps, spins, etc.) that each skater had to include somewhere in their routine. The skater would be marked on the technical quality of their figures, but also, and equally importantly, on the "artistic interpretation" of the whole routine. We borrow these concepts. There are certain specific kinds of elements that your site must contain --- the compulsory figures --- and you should do these as well as possible, but in the end they have to come together as elements in a harmonious and effective design for the whole site. How they fit together and how you use them is as important as how well done they are in themselves. Some of the elements are very much about the technology while others are more focused on design.
 
-The course is structured around these elements, in that we will cover the background and techniques necessary for them in turn, and we will expect your team to deliver a demonstration of each one as included in your site. Meanwhile, you should also be working out creative, imaginative and appropriate ways of integrating them into your overall site design. An important aspect of these elements is that they are relatively simple, but all can be used in more sophisticated ways if you develop the ideas and techniques further.
+The course is structured around these elements, in that we will cover the background and techniques necessary for them in turn, and we will expect your team to deliver a demonstration of each one in the context of your site. Meanwhile, you should also be working out creative, imaginative and appropriate ways of integrating them into your overall site design. An important aspect of these elements is that they are relatively simple, but all can be used in more sophisticated ways if you develop the ideas and techniques further.
 
 The following list outlines the "compulsory figures" we will be using, and the time schedule for delivering them. In each case, there will be an existing skeleton implementation that will be presented in a lecture or viewtorial (or both), and integrating that into your site will be the minimal way to deliver the task. This might take anything from minutes to hours, depending on the existing level of skill in your team and how quickly you learn, but we have our own team of skilled and experienced tutors on hand to help you with any problems you encounter.
 
@@ -37,7 +37,7 @@ The course starts with a "Simple Example" that demonstrates setting up a databas
 
 ### Simple case of AJAX
 
-*AJAX* is a technique (Asynchronous Javascript And XML) that offers a more flexible way of relating the front (browser) end and back (server) end of your web application. We will implement a simple case of this by the end of week 3.
+*AJAX* is a technique (Asynchronous Javascript And XML) that offers a more flexible way of relating the front (browser) and back (server) end of your web application. We will implement a simple case of this by the end of week 3.
 
 ### User interactions
 

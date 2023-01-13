@@ -33,3 +33,20 @@ Examples:
 - <https://medium.com/managing-on-the-margins/respectful-collection-of-demographic-data-56de9fcb80e2> 
 
 
+## EDUCATION
+
+### Develop a method of exploring an archive or collection in a way that enhances understanding and encourages learning.
+
+Pick an organisation with links to education such as a library, museum, school, wildlife reserve, journal, etc. Your goal is to create an interactive learning tool for the organisation. Your target audience will be a specific group of users within the organisation's demographic (eg, children attending a wildlife reserve, design students accessing the university library).
+
+What learning-based questions might your target audience ask this organisation? How can you categorise these? How will you enable them to ask questions, then present them with insightful results that inspire them to explore further?
+
+Inspired by <https://creativeinformatics.org/participant/jupiter-artland/>
+
+Examples:
+
+- <https://historicengland.org.uk/images-books/photos/>
+- <https://scotlands-sounds.nls.uk/index.php/collections-directory/>
+- <https://www.nms.ac.uk/explore-our-collections/search-our-collections/> 
+
+

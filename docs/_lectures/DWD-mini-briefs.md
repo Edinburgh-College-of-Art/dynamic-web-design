@@ -14,9 +14,9 @@ As soon as your team has been created, you should get together and choose one of
 - [COMMUNITY](#COMMUNITY)
 - [ARTS](#ARTS)
 
-**INCLUSION**
+## INCLUSION
 
-**Develop a method of gathering and displaying demographic data in an inclusive and identity positive way.** 
+### Develop a method of gathering and displaying demographic data in an inclusive and identity positive way.
 
 Pick an organisation that works with people from a broad range of backgrounds – this can be social, political, (sub)cultural, commercial, etc. Your goal is to create a tool to gather and display information about their users in a way that doesn’t alienate anyone. The means of collecting the data is as important as how you present it.
 
@@ -31,9 +31,9 @@ Examples:
 - <https://datashine.org.uk/#table=QS302EW&col=QS302EW0002&ramp=RdYlGn&layers=BTTT&zoom=13.010517100937975&lon=-0.8053&lat=51.8044> 
 - <https://medium.com/managing-on-the-margins/respectful-collection-of-demographic-data-56de9fcb80e2> 
 
-**EDUCATION**
+## EDUCATION
 
-**Develop a method of exploring an archive or collection in a way that enhances understanding and encourages learning.**
+### Develop a method of exploring an archive or collection in a way that enhances understanding and encourages learning.
 
 Pick an organisation with links to education such as a library, museum, school, wildlife reserve, journal, etc. Your goal is to create an interactive learning tool for the organisation. Your target audience will be a specific group of users within the organisation’s demographic (eg, children attending a wildlife reserve, design students accessing the university library).
 
@@ -48,9 +48,9 @@ Examples:
 - <https://www.nms.ac.uk/explore-our-collections/search-our-collections/> 
 
 
-**SCIENCE**
+## SCIENCE
 
-**Develop a method of displaying a dataset in an approachable, insightful way.**
+### Develop a method of displaying a dataset in an approachable, insightful way.
 
 Pick a dataset containing scientific data. This could relate to climate or environment, the cosmos, Earth sciences, population dynamics, etc. Your goal is to create an immersive, interactive visualisation that allows users to search and compare data in an intuitive way and share their results. While this could have broad applications (educational, commercial, etc) it should work as a standalone, self-contained creative piece.
 
@@ -65,9 +65,9 @@ Examples:
 - <https://www.education-inequalities.org/> 
 
 
-**COMMUNITY**
+## COMMUNITY
 
-**Develop a method of gathering and displaying data relating to a local community.** 
+### Develop a method of gathering and displaying data relating to a local community.
 
 Pick a small location which is frequented by people. This could be the building or street you live in, an office block, a shopping precinct, a park or public space, a university campus, etc. Your goal is to create an interactive map detailing how the space is used and by whom. You can draw on interviews, oral histories, photographs, archival maps, etc.
 
@@ -81,9 +81,9 @@ Examples:
 - <https://leithlatevirtualtours.co.uk/>
 - <https://scotlandcommute.datashine.org.uk/> 
 
-**ARTS**
+## ARTS
 
-**Develop a method of collecting and displaying works of art based on theme.**
+### Develop a method of collecting and displaying works of art based on theme.
 
 Pick an artform (or set of related artforms) such as painting, music, sculpture, literature, poetry, etc. Your goal is to create a community of artists and fans that encourages deeper connection with the artform through the exploration of themes. The themes should be integral, informing the structure and means of interaction on some level.
 

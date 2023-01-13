@@ -1,6 +1,6 @@
 ﻿---
 layout: page
-title: Project Mini Briefs
+title: "Project Mini Briefs"
 author: "Dave House / John Lee"
 order: 1
 week: 1

@@ -18,7 +18,7 @@ As soon as your team has been created, you should get together and choose one of
 
 ### Develop a method of gathering and displaying demographic data in an inclusive and identity positive way.
 
-Pick an organisation that works with people from a broad range of backgrounds – this can be social, political, (sub)cultural, commercial, etc. Your goal is to create a tool to gather and display information about their users in a way that doesn’t alienate anyone. The means of collecting the data is as important as how you present it.
+Pick an organisation that works with people from a broad range of backgrounds – this can be social, political, (sub)cultural, commercial, etc. Your goal is to create a tool to gather and display information about their users in a way that doesn't alienate anyone. The means of collecting the data is as important as how you present it.
 
 How can you capture and present user data that celebrates the many and varied characteristics of the people that engage with this organisation? What questions will you ask, and how? What methods will you use to store, query, display and compare this data?
 
@@ -35,7 +35,7 @@ Examples:
 
 ### Develop a method of exploring an archive or collection in a way that enhances understanding and encourages learning.
 
-Pick an organisation with links to education such as a library, museum, school, wildlife reserve, journal, etc. Your goal is to create an interactive learning tool for the organisation. Your target audience will be a specific group of users within the organisation’s demographic (eg, children attending a wildlife reserve, design students accessing the university library).
+Pick an organisation with links to education such as a library, museum, school, wildlife reserve, journal, etc. Your goal is to create an interactive learning tool for the organisation. Your target audience will be a specific group of users within the organisation's demographic (eg, children attending a wildlife reserve, design students accessing the university library).
 
 What learning-based questions might your target audience ask this organisation? How can you categorise these? How will you enable them to ask questions, then present them with insightful results that inspire them to explore further?
 
@@ -87,7 +87,7 @@ Examples:
 
 Pick an artform (or set of related artforms) such as painting, music, sculpture, literature, poetry, etc. Your goal is to create a community of artists and fans that encourages deeper connection with the artform through the exploration of themes. The themes should be integral, informing the structure and means of interaction on some level.
 
-Which themes will you choose to focus on (emotions, politics, history, psychology, race...) or will you let your users determine them? How can you collect and categorise relevant artworks? How can users access and engage with the art in meaningful ways? Will you focus on established artists and fans, or try and grow the artform’s popularity?
+Which themes will you choose to focus on (emotions, politics, history, psychology, race...) or will you let your users determine them? How can you collect and categorise relevant artworks? How can users access and engage with the art in meaningful ways? Will you focus on established artists and fans, or try and grow the artform's popularity?
 
 Inspired by <https://creativeinformatics.org/challenge/john-byrne-award/>
 

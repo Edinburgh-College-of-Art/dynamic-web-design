@@ -38,27 +38,29 @@ The course starts with a "Simple Example" that demonstrates setting up a databas
 
 ### Simple case of AJAX
 
-*AJAX* is a technique (Asynchronous Javascript And XML) that offers a more flexible way of relating the front (browser) and back (server) end of your web application. We will implement a simple case of this by the end of week 3.
+*AJAX* is a technique (Asynchronous Javascript And XML) that offers a more flexible way of relating the front (browser) and back (server) end of your web application. An introduction to the technologies used for this will be given in week 3, and we will expect a simple case of it to be implemented in your site by the end of week 4.
 
 ### User interactions
 
-Turning the focus more fully onto the front end, it's time to look at some interaction techniques with great creative potential, e.g. drag-and-drop, various kinds of animations, etc. A selection of these will need to be demonstrated in use on your site by the end of week 4. In your final design, the creativity of how you use these kinds of elements will be even more important than the technology.
+Turning the focus more fully onto the front end, it's time to look at some interaction techniques with great creative potential, e.g. drag-and-drop, various kinds of animations, etc. A selection of these will be discussed in week 4 and need to be demonstrated in use on your site by the end of week 5. In your final design, the creativity of how you use these kinds of elements will be even more important than the technology.
 
 ### Simple case of using an API
 
 An *API* (Application Programming Interface) is used to connect different pieces of software together, e.g. when bringing data into your site from a web service provided somewhere else (e.g. weather data, recipes, videos of cats, or whatever). We will address this during week 5, coinciding with the submission of the assessed "Alpha Prototype" of the website.
 
+The following week is not week 6 ... It is "Creative Learning Week", and it is expected that you will engage in things that are not necessarily related to your project. However, in our official week 6, which follows it, we will have a crit of the Alpha Prototype submissions, but we will expect an API example to be implemented into your site by the end of the week.
+
 ### Usability and responsiveness
 
-Any web site must be designed with careful thought for how those in the expected user group will react to it. In week 6 the focus will be most strongly on this issue, and the task is to carry out and document a usability evaluation of your prototype, deriving pointers for further development towards the Beta version. Responsiveness is also a concern here, given that your site may be likely to be used on a variety of devices; this needs to be considered in relation to the nature of the design and the user community.
+Any web site must be designed with careful thought for how those in the expected user group will react to it. In the class session in week 6, the focus will be most strongly on this issue, and the task is to carry out and document a usability evaluation of your prototype, deriving pointers for further development towards the Beta version. Responsiveness is also a concern here, given that your site may be likely to be used on a variety of devices; this needs to be considered in relation to the nature of the design and the user community. We will expect a usability review of your site by the end of week 7.
 
 ### Accessibility
 
-Websites need to be accessible to users with e.g. visual impairments and other difficulties. There are international rules, standards and techniques for these aspects of site design. This task will involve making sure that your site meets appropriate standards and passes certain simple automated tests.  This will be addressed in week 7.
+Websites need to be accessible to users with e.g. visual impairments and other difficulties. There are international rules, standards and techniques for these aspects of site design. This task will involve making sure that your site meets appropriate standards and passes certain simple automated tests.  This will be introduced in week 7, for completion by the end of week 8.
 
 ### Safe uploads
 
-It's common for a site to offer the opportunity to upload files of some kind (images, perhaps sounds and other things). This task involves understanding issues around the security and safety of such operations, and integrating an existing skeleton implementation into your site by the end of week 8. (These days, it's common to use various "Cloud" services via APIs for this kind of functionality, which we will also discuss but not expect you to implement.)
+It's common for a site to offer the opportunity to upload files of some kind (images, perhaps sounds and other things). We will discuss the technology in week 8. This task involves understanding issues around the security and safety of such operations, and integrating an existing skeleton implementation into your site by the end of week 9. (These days, it's common to use various "Cloud" services via APIs for this kind of functionality, which we will also discuss but not expect you to implement.)
 
 
 ## Assessment

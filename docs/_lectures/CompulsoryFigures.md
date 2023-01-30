@@ -48,7 +48,7 @@ Turning the focus more fully onto the front end, it's time to look at some inter
 
 An *API* (Application Programming Interface) is used to connect different pieces of software together, e.g. when bringing data into your site from a web service provided somewhere else (e.g. weather data, recipes, videos of cats, or whatever). We will address this during week 5, coinciding with the submission of the assessed "Alpha Prototype" of the website.
 
-The following week is not week 6 ... It is "Creative Learning Week", and it is expected that you will engage in things that are not necessarily related to your project. However, in our official week 6, which follows it, we will have a crit of the Alpha Prototype submissions, but we will expect an API example to be implemented into your site by the end of the week.
+The following week is not week 6 ... It is "Flexible Learning Week", and it is expected that you will engage in things that are not necessarily related to your project. However, in our official week 6, which follows it, we will have a crit of the Alpha Prototype submissions, but we will expect an API example to be implemented into your site by the end of the week.
 
 ### Usability and responsiveness
 

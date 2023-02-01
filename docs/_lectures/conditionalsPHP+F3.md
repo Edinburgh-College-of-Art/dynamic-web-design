@@ -2,8 +2,8 @@
 layout: page
 title: Additional thoughts on PHP
 author: "John Lee"
-order: 33
-week: 3
+order: 49
+week: 4
 ---
 
 -   [Conditional expressions](#conditional-expressions)
@@ -49,6 +49,7 @@ which simply says "You ordered 1 item", if _\\$n_ is 1, or else e.g. "You ordere
 
 When we are using F3, the framework itself provides its own versions of the global PHP environment variables such as _\\$\_GET_, and a function _\\$f3->exists()_ to test them. You don't have to use these, since the normal PHP mechanism will still work, but the F3 code is arguably neater and easier to work with. To realise the present example in F3, you could get away with not using a template, since the output page is so minimal; we can just echo the output from the routing code. In your index.php file, you would set the usual $f3 variable for F3 itself, and perhaps DEBUG, and of course have \*$f3->(run)\* at the end. Or you could drop the following code into any F3 index.php file, such as the SimpleExample one. So you could define a route, let's say for a URL ending in "/urltest", such as:
 
+{% raw %}
 ```php
 $f3->route('GET /urltest',
   function($f3)
@@ -60,6 +61,7 @@ $f3->route('GET /urltest',
   }
 );
 ```
+{% endraw %}
 
 It works just the same as the vanilla PHP version.
 
@@ -72,10 +74,12 @@ isset(\$\_POST["checkIt"])?"checked":"";?>] />
 
 you could have:
 
+{% raw %}
 ```php
 <input type="checkbox" name="checkIt" id="checkbox" [{{
 @POST.checkIt?"checked":"" }}] />
 ```
+{% endraw %}
 
 which is much neater and more readable than the bare PHP version.
 

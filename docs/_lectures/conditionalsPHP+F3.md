@@ -89,7 +89,7 @@ The above example noted that PHP may be very forgiving if parameters are not set
 
 ## Checkboxes
 
-Another useful context for conditionals is where you are using checkboxes on a form. These can be confusing because if the box is checked then its value will (by default) be the string "on", whereas if the box is not checked on the form, then the corresponding _\\$\_POST_ variable is _unset_, so if you try to use it you will get either an error or an empty string (depending on how your server is configured).
+Another useful context for conditionals is where you are using checkboxes on a form. These can be confusing because if the box is checked then its value will (by default) be the string "on", whereas if the box is not checked on the form, then the corresponding _\$\_POST_ variable is _unset_, so if you try to use it you will get either an error or an empty string (depending on how your server is configured).
 
 Consider this situation (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)):
 
@@ -132,6 +132,6 @@ But this still looks odd to the user, since the text doesn't always correspond t
 (isset($_POST["checkIt"]) ? "on" : "off"); ?>
 ```
 
-Notice that if you want "on" (the actual value returned from the form) to be something else, say "set", then you can add _value="set"_ as a attribute to the input of type checkbox, but in the code we have here we are never looking at the actual value returned in _\\$\_POST["checkIt"]_, so it doesn't matter.
+Notice that if you want "on" (the actual value returned from the form) to be something else, say "set", then you can add _value="set"_ as a attribute to the input of type checkbox, but in the code we have here we are never looking at the actual value returned in _\$\_POST["checkIt"]_, so it doesn't matter.
 
 Of course, there are many situations where we want a form to appear with values already in it, and this is often a useful technique when getting that to happen.

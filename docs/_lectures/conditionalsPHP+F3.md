@@ -68,16 +68,16 @@ It works just the same as the vanilla PHP version.
 In F3, it would be natural to use a template for situations such as the checkbox examples below, but otherwise the same considerations apply. It would be a useful exercise to reconstruct these examples using an F3 template. Here's a hint: in F3 you can embed expressions within templates (see <https://fatfreeframework.com/3.6/views-and-templates>, which is highly recommended reading). So instead of a line like:
 
 ```php
-<input type="checkbox" name="checkIt" id="checkbox" [<?php echo
-isset(\$\_POST["checkIt"])?"checked":"";?>] />
+<input type="checkbox" name="checkIt" id="checkbox" 
+[<?php echo isset(\$\_POST["checkIt"])?"checked":"";?>] />
 ```
 
 you could have:
 
 {% raw %}
 ```php
-<input type="checkbox" name="checkIt" id="checkbox" [{{
-@POST.checkIt?"checked":"" }}] />
+<input type="checkbox" name="checkIt" id="checkbox" 
+[{{ @POST.checkIt?"checked":"" }}] />
 ```
 {% endraw %}
 
@@ -109,7 +109,8 @@ Consider this situation (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest.php>
 Here, you'll find that if the box is checked, the value is "on", but if it isn't you get an error, or at least an incomplete sentence. The simplest way to fix this would be to use a conditional expression:
 
 ```php
-<?php echo "Value of checkbox is " . (isset($_POST["checkIt"])?"on":"off");?>
+<?php echo "Value of checkbox is " . 
+(isset($_POST["checkIt"]) ? "on":"off");?>
 ```
 
 (or use whatever other strings you like instead of "on" and "off") then the problem is resolved fairly elegantly (<http://playground.eca.ed.ac.uk/~jlee/test/boxtest2.php>[](http://webdbdev.ucs.ed.ac.uk/ddm/1011/test/cfboxtest.cfm)).
@@ -127,7 +128,8 @@ But this still looks odd to the user, since the text doesn't always correspond t
     </p>
 </form>
 
-<?php echo "Value of checkbox is " . (isset($_POST["checkIt"]) ? "on" : "off"); ?>
+<?php echo "Value of checkbox is " . 
+(isset($_POST["checkIt"]) ? "on" : "off"); ?>
 ```
 
 Notice that if you want "on" (the actual value returned from the form) to be something else, say "set", then you can add _value="set"_ as a attribute to the input of type checkbox, but in the code we have here we are never looking at the actual value returned in _\\$\_POST["checkIt"]_, so it doesn't matter.

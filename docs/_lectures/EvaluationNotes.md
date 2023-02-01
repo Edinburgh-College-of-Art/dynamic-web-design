@@ -3,7 +3,7 @@ layout: page
 title: Usability and Evaluation
 author: "John Lee"
 order: 5
-week: 3
+week: 6
 ---
 
 -   [Introduction](#introduction)

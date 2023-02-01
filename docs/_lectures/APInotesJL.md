@@ -3,8 +3,9 @@ layout: page
 title: "More on APIs: when requests get more complicated ..."
 author: "John Lee"
 order: 8
-week: 7
+week: 4
 ---
+\[Note: the material in this section is old. It's still valid in principle, as far as the technology is concerned, but the example discussed is no longer operational. The way things work with the XML string is the remaining useful point. In other respects, F3 provides a much better way of accessing the API than is used here.\]
 
 APIs can take many different forms. Some of them require no parameters to be supplied, but usually you'll have to specify something, if only a string to search for, etc. Such parameters might be asked for in the form of a query string on the URL, which you can easily construct. Sometimes they are asked for in the form of an XML document that you have to send to the server. An example of this is the Txttools API for retrieving text messages sent to their SMS interface.
 

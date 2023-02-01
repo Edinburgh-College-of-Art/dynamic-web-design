@@ -3,7 +3,7 @@ layout: page
 title: Javascript and jQuery
 author: "John Lee"
 order: 6
-week: 5
+week: 3
 ---
 
 -   [Introduction to JavaScript](#introduction-to-javascript)

@@ -3,7 +3,7 @@ layout: page
 title: Testing JQuery
 author: "John Lee"
 order: 7
-week: 5
+week: 3
 ---
 
 A silly example that displays some text such that the mouse running over the text causes words to change colour and displays in another div the current word and its position in the text. Styling is minimal.

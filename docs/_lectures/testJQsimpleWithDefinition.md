@@ -2,8 +2,8 @@
 layout: page
 title: JQuery and AJAX
 author: "John Lee"
-order: 7
-week: 5
+order: 8
+week: 3
 ---
 
 This example expands on the [JQuery example](testJQsimple.html), but also adds an AJAX query to a dictionary API.

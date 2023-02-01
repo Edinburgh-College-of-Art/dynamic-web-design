@@ -69,7 +69,7 @@ In F3, it would be natural to use a template for situations such as the checkbox
 
 ```php
 <input type="checkbox" name="checkIt" id="checkbox" 
-[<?php echo isset(\$\_POST["checkIt"])?"checked":"";?>] />
+[<?php echo isset($_POST["checkIt"])?"checked":"";?>] />
 ```
 
 you could have:

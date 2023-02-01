@@ -2,7 +2,7 @@
 layout: page
 title: "Dynamic Web Design: tasks, timekeeping and teamwork"
 author: "John Lee"
-order: 1
+order: 4
 week: 1
 ---
 

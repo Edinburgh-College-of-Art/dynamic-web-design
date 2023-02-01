@@ -2,7 +2,7 @@
 layout: page
 title: "DWD Mini Briefs"
 author: "John Lee"
-order: 1
+order: 7
 week: 1
 ---
 

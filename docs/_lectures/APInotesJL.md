@@ -2,7 +2,7 @@
 layout: page
 title: "More on APIs: when requests get more complicated ..."
 author: "John Lee"
-order: 8
+order: 40
 week: 4
 ---
 \[Note: the material in this section is old. It's still valid in principle, as far as the technology is concerned, but the example discussed is no longer operational. The way things work with the XML string is the remaining useful point. In other respects, F3 provides a much better way of accessing the API than is used here.\]

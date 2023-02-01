@@ -2,7 +2,7 @@
 layout: page
 title: "Project Mini Briefs"
 author: "Dave House"
-order: 1
+order: 6
 week: 1
 ---
 

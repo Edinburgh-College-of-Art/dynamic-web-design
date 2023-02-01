@@ -2,7 +2,7 @@
 layout: page
 title: JQuery and AJAX
 author: "John Lee"
-order: 8
+order: 38
 week: 3
 ---
 

@@ -2,7 +2,7 @@
 layout: page
 title: Javascript and jQuery
 author: "John Lee"
-order: 6
+order: 36
 week: 3
 ---
 

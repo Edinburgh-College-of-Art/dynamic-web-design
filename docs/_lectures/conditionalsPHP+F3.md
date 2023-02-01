@@ -32,7 +32,7 @@ Consider this (<http://playground.eca.ed.ac.uk/~jlee/test/urltest.php>[](http://
 
 (It's an old example: such use of the _font_ tag is deprecated now -- use CSS for anything like this.)
 
-The part highlighted in red says that if the URL parameter _message1_ is set, then it should be echoed, otherwise the string "not specified" should be. The part in green says the same about _message2_, but without using _isset()_. What happens in this case depends on how the PHP server is set up. On my local machine, _\\$\_GET["message2"]_ will evaluate to FALSE if the paramter is not set, so that _isset()_ can be omitted. However, on the _playground_ server, there is a check for undefined parameters, and so you will get an error in this case. Therefore you should always use the _isset()_ test when working with URL parameters, so that your code remains safe and portable.
+The part highlighted in red says that if the URL parameter _message1_ is set, then it should be echoed, otherwise the string "not specified" should be. The part in green says the same about _message2_, but without using _isset()_. What happens in this case depends on how the PHP server is set up. On my local machine, _\$\_GET["message2"]_ will evaluate to FALSE if the paramter is not set, so that _isset()_ can be omitted. However, on the _playground_ server, there is a check for undefined parameters, and so you will get an error in this case. Therefore you should always use the _isset()_ test when working with URL parameters, so that your code remains safe and portable.
 
 Notice that the whole conditional expression is enclosed in brackets. This is necessary, because otherwise the scope of the conditional includes the initial _echo_, which is clearly too wide.
 
@@ -43,11 +43,11 @@ strings for output, e.g. as in:
     echo "You ordered " . $n . " item" . ($n==1?"":"s") . "n";
 ```
 
-which simply says "You ordered 1 item", if _\\$n_ is 1, or else e.g. "You ordered 23 items" if _\\$n_ is not 1. A small consideration, but little things like this can make an interface seem much more natural and would be far more clumsy to code without this handy little expression. It's worth noting that the expression is inherited from C, and exists also in C++, Java, Actionscript, Javascript, etc.
+which simply says "You ordered 1 item", if _\$n_ is 1, or else e.g. "You ordered 23 items" if _\$n_ is not 1. A small consideration, but little things like this can make an interface seem much more natural and would be far more clumsy to code without this handy little expression. It's worth noting that the expression is inherited from C, and exists also in C++, Java, Actionscript, Javascript, etc.
 
 ## In the Fat-Free Framework (F3)
 
-When we are using F3, the framework itself provides its own versions of the global PHP environment variables such as _\\$\_GET_, and a function _\\$f3->exists()_ to test them. You don't have to use these, since the normal PHP mechanism will still work, but the F3 code is arguably neater and easier to work with. To realise the present example in F3, you could get away with not using a template, since the output page is so minimal; we can just echo the output from the routing code. In your index.php file, you would set the usual $f3 variable for F3 itself, and perhaps DEBUG, and of course have \*$f3->(run)\* at the end. Or you could drop the following code into any F3 index.php file, such as the SimpleExample one. So you could define a route, let's say for a URL ending in "/urltest", such as:
+When we are using F3, the framework itself provides its own versions of the global PHP environment variables such as _\$\_GET_, and a function _\$f3->exists()_ to test them. You don't have to use these, since the normal PHP mechanism will still work, but the F3 code is arguably neater and easier to work with. To realise the present example in F3, you could get away with not using a template, since the output page is so minimal; we can just echo the output from the routing code. In your index.php file, you would set the usual $f3 variable for F3 itself, and perhaps DEBUG, and of course have \*$f3->(run)\* at the end. Or you could drop the following code into any F3 index.php file, such as the SimpleExample one. So you could define a route, let's say for a URL ending in "/urltest", such as:
 
 {% raw %}
 ```php

@@ -16,8 +16,10 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 <br />
 <input type=button onclick="setupWords()" value="Setup">  <!-- Button that will call setupWords() when clicked -->
 </div>
+<div id="holder" style="height: 3cm; border-bottom-style: solid">
 <!-- div that will be hidden except when the mouse is over a word in the text -->
 <div id="div2">The current word is: <span id="wddiv"></span> at position <span id="posdiv"></span></div>
+</div>
 
 <script>
 
@@ -81,8 +83,10 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 <br />
 <input type=button onclick="setupWords()" value="Setup">  <!-- Button that will call setupWords() when clicked -->
 </div>
+<div id="holder" style="height: 3cm; border-bottom-style: solid">
 <!-- div that will be hidden except when the mouse is over a word in the text -->
 <div id="div2">The current word is: <span id="wddiv"></span> at position <span id="posdiv"></span></div>
+</div>
 
 <script>
 

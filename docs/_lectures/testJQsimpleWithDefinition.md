@@ -38,7 +38,7 @@ function simpleQuery(queryUrl)
 
 function setDefinitionFromDictionaryResponse(response)
 {
-  let first_definition = response[0].meanings[0].definitions[0].definition
+  let first_definition = response[0].meanings[0].definitions[0].definition;
   $("#definition").html(first_definition);
 }
 
@@ -70,8 +70,8 @@ function setupjQ()
         $("#posdiv").html($(this).attr("id").substring(2));
         $("#div2").show();
 
-        let dictionary_url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-        simpleQuery(dictionary_url)
+        let dictionary_url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+        simpleQuery(dictionary_url);
     });
 
     $(".word").mouseleave(function ()

@@ -54,25 +54,13 @@ But also, in javascript, functions can be _anonymous_ -- you can create a functi
 This is often used to add methods to objects. Consider the example from <http://www.w3schools.com/js/tryit.asp?filename=tryjs_create_object3>: in this case, there is code that says:
 
 ```js
-this.changeName = changeName;
-
-function changeName(name)
-{
-  this.lastname = name;
-}
-
-```
-
-What's happening here is that the variable changeName is being given the function that's also called changeName as a value. But we could equally well write the code like this:
-
-```js
 this.changeName = function(name)
 {
   this.lastname = name;
 }
 ```
 
-(Try it and see!) This is the way you will see it more often done. The code is more compact, and (once you get used to it) easier to work with.
+What's happening here is that the variable changeName is being given the anonymous function as a value. The function just changes the lastname in the current object to whatever is given as the argument to the function. As you can see in the example, _myMother_ starts off being called "Sally Rally", but then the last name is changed to "Doe" by calling the _changeName()_ method.
 
 But also, anonymous functions like this can be e.g. given as arguments to other functions. Suppose we wanted to specify the changeName function as a _parameter_ of the object; then we could rewrite this example along the lines:
 

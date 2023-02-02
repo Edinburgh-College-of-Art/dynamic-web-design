@@ -77,12 +77,14 @@ function setupjQ()
     $(".word").mouseleave(function ()
     {
         $(this).css("color", "blue");
-        $("#div2").hide();
+       // $("#div2").hide();
+       $("#div2").html("");
     });
 }
 
 $(document).ready(function () {
-    $("#div2").hide();    // hide div2 element as soon as document is ready (on page load)
+    // $("#div2").hide();    // hide div2 element as soon as document is ready (on page load)
+    $("#div2").html("");    // blank div2 element as soon as document is ready (on page load)
 });
 </script>
 And here is the script for this version:
@@ -102,7 +104,7 @@ function simpleQuery(queryUrl)
 
 function setDefinitionFromDictionaryResponse(response)
 {
-  let first_definition = response[0].meanings[0].definitions[0].definition
+  let first_definition = response[0].meanings[0].definitions[0].definition;
   $("#definition").html(first_definition);
 }
 

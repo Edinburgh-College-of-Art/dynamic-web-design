@@ -84,12 +84,12 @@ myMother.changeName("Doe");
 document.write(myMother.lastname);
 ```
 
-So here, where we created the new person, we also specified the function for changing their name. The code in red is just an anonymous function definition, dropped in as a parameter to another function call. This isn't of much practical use here, but could be in a case where people's names might be changed in different ways, or something like that.
+So here, where we created the new person, we also specified the function for changing their name. The code in red is just an anonymous function definition, dropped in as a parameter to another function call. This isn't of much practical use here, but could be in a case where people's names might be changed in different ways, or something like that. And, in fact, you have seen exactly this pattern used in PHP, in the F3 route rules where typically an anonymous function is specified in just this way as an argument of the route method.
 
 Play with some of these examples, and try out these ideas. One might modify the example to something like:
 
 ```js
-function person(firstname, lastname, age, eyecolor,changefunc)
+function person(firstname, lastname, age, eyecolor, changefunc)
 {
   this.firstname = firstname;
   this.lastname = lastname;

@@ -14,9 +14,9 @@ week: 3
 
 ## Introduction to JavaScript
 
-In these notes I assume familiarity with the basic syntax etc. of javascript. It's quite similar to various programming or scripting languages you might have come across, including PHP (but with some important differences, e.g. variables don't normally start with "\\$"). I will refer heavily to some external resources such as the w3schools pages, which on these topics are very good, and their "Try it yourself" feature is invaluable for experimenting.
+In these notes I assume familiarity with the basic syntax etc. of javascript. It's quite similar to various programming or scripting languages you might have come across, including PHP (but with some important differences, e.g. variables don't normally start with "\$"). I will refer heavily to some external resources such as the w3schools pages, which on these topics are very good, and their "Try it yourself" feature is invaluable for experimenting.
 
-**_Do always experiment!_** Try different things; try things you think will work and things you think won't -- try to find out why they don't. You can't break anything. Experiment _until you understand_. If you can't see why something does or doesn't work, do ask me or Jules (or search e.g. <http://stackoverflow.com> and other online resources).
+**_Do always experiment!_** Try different things; try things you think will work and things you think won't -- try to find out why they don't. You can't break anything. Experiment _until you understand_. If you can't see why something does or doesn't work, do ask me or post to the Message Board (or search e.g. <http://stackoverflow.com> and other online resources).
 
 I focus here on objects and functions because these are especially important in jQuery.
 
@@ -39,7 +39,7 @@ Objects have the usual kind of "dot-based" syntax, e.g. in _document.getElementB
 
 The document object has many properties and methods (<http://www.w3schools.com/jsref/dom_obj_document.asp>), as do many of the DOM objects.
 
-First, here are some excellent notes by Mike Greer, a former DDM graduate and tutor with us for several years: <https://playground.eca.ed.ac.uk/~jlee/test/javascript/>. These show the basic relationship between javascript and the HTML Document Object Model (DOM), which is central to everything that follows.
+First, here are some excellent notes by Mike Greer, a former DDM graduate and tutor with us for several years: <https://edinburgh-college-of-art.github.io/dynamic-web-design/javascript/the-dom.html>. These show the basic relationship between javascript and the HTML Document Object Model (DOM), which is central to everything that follows.
 
 The document is just one object among many, and you can create your own. There are some good object examples at w3schools: <http://www.w3schools.com/js/js_objects.asp>
 

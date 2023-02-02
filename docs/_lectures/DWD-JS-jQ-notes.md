@@ -209,7 +209,8 @@ the text -->
 </div>
 ```
 
-Footnote: I've subsequently noticed that the remarkable jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>) can be used to implement the `setupWords()` function above rather more succinctly as:
+### Footnote: 
+I've subsequently noticed that the remarkable jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>) can be used to implement the `setupWords()` function above rather more succinctly as:
 
 ```js
 function setupWords()

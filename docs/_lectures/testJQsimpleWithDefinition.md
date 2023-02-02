@@ -22,7 +22,6 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 </div>
 <div id="holder" style="height: 3cm; border-bottom-style: solid">
 <!-- div that will be hidden except when the mouse is over a word in the text -->
-<br/>
 <div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span>.<br/> Definition: <em id='definition'></em></div>
 </div>
 
@@ -100,7 +99,6 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 </div>
 <div id="holder" style="height: 3cm; border-bottom-style: solid">
 <!-- div that will be hidden except when the mouse is over a word in the text -->
-<br/>
 <div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span>.<br/> Definition: <em id='definition'></em></div>
 </div>
 

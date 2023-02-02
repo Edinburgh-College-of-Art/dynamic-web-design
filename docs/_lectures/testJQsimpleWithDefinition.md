@@ -87,9 +87,23 @@ $(document).ready(function () {
     $("#div2").hide();    // hide div2 element as soon as document is ready (on page load)
 });
 </script>
-And here is the script for this version:
+And here is the page source, including script, for this version:
 
 ```php
+<div id="maindiv">
+<!-- Textarea containing arbitrary text; the user can paste something else into this textarea if they want -->
+<textarea rows="10" cols="70" id="wordarea">
+Of course, two SOMs connected in this fashion can learn no more or less than a single SOM would. But the stratification of the SOMs allows for processing to occur at intermediate stages. There are three types of intermediate processing that are relevant to the present discussion: activation decay, activation blurring, and multi-modal layers. Activation decay allows the activation of a given node to decay over time, rather than reset at each time step.
+</textarea>
+<br />
+<input type=button onclick="setupWords()" value="Setup">  <!-- Button that will call setupWords() when clicked -->
+</div>
+<div id="holder" style="height: 3cm; border-bottom-style: solid">
+<!-- div that will be hidden except when the mouse is over a word in the text -->
+<br/>
+<div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span>.<br/> Definition: <em id='definition'></em></div>
+</div>
+
 <script>
 
 function simpleQuery(queryUrl)

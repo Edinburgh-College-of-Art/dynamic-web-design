@@ -72,7 +72,6 @@ $(document).ready(function () {
 
 And here is the script (which is just part of the source of this file) ...
 
-{% raw %}
 ```php
 <div id="maindiv">
 <!-- Textarea containing arbitrary text; the user can paste something else into this textarea if they want -->
@@ -136,4 +135,3 @@ $(document).ready(function () {
 
 </script>
 ```
-{% endraw %}

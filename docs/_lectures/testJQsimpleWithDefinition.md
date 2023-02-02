@@ -87,7 +87,6 @@ $(document).ready(function () {
 </script>
 And here is the script for this version:
 
-{% raw %}
 ```php
 <script>
 
@@ -151,4 +150,3 @@ $(document).ready(function () {
 });
 </script>
 ```
-{% raw %}

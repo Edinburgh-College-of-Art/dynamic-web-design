@@ -74,7 +74,7 @@ $(document).ready(function () {
 
 And here is the script (which is just part of the source of this file) ...
 
-```php
+```javascript
 <div id="maindiv">
 <!-- Textarea containing arbitrary text; the user can paste something else into this textarea if they want -->
 <textarea rows="10" cols="70" id="wordarea">
@@ -83,9 +83,9 @@ Of course, two SOMs connected in this fashion can learn no more or less than a s
 <br />
 <input type=button onclick="setupWords()" value="Setup">  <!-- Button that will call setupWords() when clicked -->
 </div>
-<div id="holder" style="height: 3cm; border-bottom-style: solid">
+<div id="holder" style="height: 1.5cm; border-bottom-style: solid">
 <!-- div that will be hidden except when the mouse is over a word in the text -->
-<div id="div2">The current word is: <span id="wddiv"></span> at position <span id="posdiv"></span></div>
+<div id="div2">The current word is: <strong><span id="wddiv"></span></strong> at position <span id="posdiv"></span></div>
 </div>
 
 <script>

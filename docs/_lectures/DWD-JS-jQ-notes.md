@@ -60,7 +60,7 @@ this.changeName = function(name)
 }
 ```
 
-What's happening here is that the variable changeName is being given the anonymous function as a value. The function just changes the lastname in the current object to whatever is given as the argument to the function. As you can see in the example, _myMother_ starts off being called "Sally Rally", but then the last name is changed to "Doe" by calling the _changeName()_ method.
+What's happening here is that the variable changeName is being given the anonymous function as a value. The function just changes the lastname in the current object to whatever is given as the argument to the function. As you can see in the example, `myMother` starts off being called "Sally Rally", but then the last name is changed to "Doe" by calling the `changeName()` method.
 
 But also, anonymous functions like this can be e.g. given as arguments to other functions. Suppose we wanted to specify the changeName function as a _parameter_ of the object; then we could rewrite this example along the lines:
 
@@ -210,7 +210,7 @@ the text -->
 ```
 
 ### Footnote: 
-I've subsequently noticed that the remarkable jQuery method `\$.each()` (see <https://api.jquery.com/jQuery.each/>) can be used to implement the `setupWords()` function above rather more succinctly as:
+I've subsequently noticed that the remarkable jQuery method `$.each()` (see <https://api.jquery.com/jQuery.each/>) can be used to implement the `setupWords()` function above rather more succinctly as:
 
 ```js
 function setupWords()
@@ -218,8 +218,7 @@ function setupWords()
   var words = "";
   $.each($("#wordarea").val().split(" "), function(i, word)
   {
-    words += "<span class='word' id='wd" + i + "'>" + word + "</span>
-    ";
+    words += "<span class='word' id='wd" + i + "'>" + word + "</span>";
   });
   $("#maindiv").html(words);
 
@@ -227,4 +226,4 @@ function setupWords()
 }
 ```
 
-This does exactly the same thing as the same function (coloured blue) in the code above. It's probably slightly more efficient to run; but perhaps a bit less readable!
+This does exactly the same thing as the same function in the code above. It's probably slightly more efficient to run; but perhaps a bit less readable!

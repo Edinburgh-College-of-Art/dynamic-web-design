@@ -36,7 +36,7 @@ For those who haven't looked at HTML & CSS before... you should look at these "v
 7.  Conditional expressions plus cookies / sessions: [A viewtorial on implementing login with a session in F3](https://vid-linker-dev.eca.ed.ac.uk/linker.html?v=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&p=0&cv=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&cp=0)
     \-- code for this, with some additional comments, can be downloaded
     [here](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip). The demo can be viewed and played
-    with [here](https://playground.eca.ed.ac.uk/~jlee/fatfree/FFF-SimpleExampleS/)
+    with [here](http://jlee.edinburgh.domains/fatfree/FFF-SimpleExampleS/)
     (with username guest, password **guest**).] This is [cookietest.php](http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php), and this is [login.php](http://playground.eca.ed.ac.uk/~jlee/test/login.php);
     - [here you can read as text the PHP file for the cookies example](php/cookietest.txt)
     - [here is the one for the login example](php/login.txt).

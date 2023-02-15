@@ -135,7 +135,7 @@ The method _store()_ very simply copies details of the uploaded image into a DB 
 ```php
 public function store() {
   global $f3; // because we need f3->get()
-  $pic = new DBSQLMapper($f3->get('DB'),$this->pictable); // create DB query mapper object
+  $pic = new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
   $pic->picname = $this->filedata["title"];
   $pic->picfile = $this->filedata["name"];
   $pic->pictype = $this->filedata["type"];
@@ -162,7 +162,7 @@ public function infoService($picID=0)
 {
   global $f3;
   $returnData = array();
-  $pic=new DBSQLMapper($f3->get('DB'),$this->pictable); // create DB query mapper object
+  $pic=new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
   $list = $pic->find();
   if ($picID == 0)
   {
@@ -220,7 +220,7 @@ The _viewimages.html_ template contains a central loop that displays the images:
 
 and what happens here is that it goes through the IDs of all the images that are in the DB, displaying each one through a URL of the form: _BASE_/thumb/_id_, as a link that when clicked will go to a URL of the form: _BASE_/image/_id_. For example, the URL <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/thumb/1> shows the thumbnail associated with the image in the database that has id=1 (assuming the image with this id still exists, i.e. hasn't been deleted), and <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/image/1> shows the image itself at its original size. It also includes a link to delete the image. The URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/delete/1> would delete image 1 (however, the image with ID=1 has already been deleted, so it won't be deleted if this link is visited).
 
-This is the part that would normally seem simple: we just use the image URL. _But the images don't have a URL because they're stored above the web root!_ The solution to this is to provide a URL that actually points to a piece of code that can behave exactly like an image. A URL will seem (to the browser) to be an image if it outputs a suitable image header followed by raw image data (because this is just what the browser sees if it looks at an image file). The code for a route such as _/image/1_ does just this; hence we can use it as the source parameter in an image link, e.g.:
+This is the part that would normally seem simple: we just use the image URL. _*But the images don't have a URL because they're stored above the web root!*_ The solution to this is to provide a URL that actually points to a piece of code that can behave exactly like an image. A URL will seem (to the browser) to be an image if it outputs a suitable image header followed by raw image data (because this is just what the browser sees if it looks at an image file). The code for a route such as _/image/1_ does just this; hence we can use it as the source parameter in an image link, e.g.:
 
 ```php
 <img src="http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/image/1"/>

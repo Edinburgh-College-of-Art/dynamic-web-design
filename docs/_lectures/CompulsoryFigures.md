@@ -62,6 +62,8 @@ Websites need to be accessible to users with e.g. visual impairments and other d
 
 It's common for a site to offer the opportunity to upload files of some kind (images, perhaps sounds and other things). We will discuss the technology in week 8. This task involves understanding issues around the security and safety of such operations, and integrating an existing skeleton implementation into your site by the end of week 9. (These days, it's common to use various "Cloud" services via APIs for this kind of functionality, which we will also discuss but not expect you to implement.)
 
+In week 10, we will just have activities to support you in optimising your Beta prototype submission at the end of the week.
+
 
 ## Assessment
 

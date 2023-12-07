@@ -116,7 +116,7 @@ best advantage. Similarly, highly experienced developers have sometimes done les
 things in ways that are not understood by the rest of the team and prevent them from achieving a good design outcome.*
 
 **No matter how good the individual members of a team may be,
-they will not succeed if they can't work effectively together, because
+the team will not succeed if they can't work effectively together, and
 then none of them will get a high mark on this course.**
 
 ***The importance of good teamwork in this course cannot be overstated.***

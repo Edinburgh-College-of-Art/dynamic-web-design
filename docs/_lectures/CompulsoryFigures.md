@@ -113,11 +113,12 @@ already a good programmer, others may not. The team needs to evaluate the skills
 effectively as possible. In principle, a team with good design skills but no previous experience of any of the
 technologies can be highly successful in this course by understanding how to use minimal technical resources to their
 best advantage. Similarly, highly experienced developers have sometimes done less well by tending to overcomplicate
-things in ways that are not understood by the rest of the team and prevent them from achieving a good design outcome. 
+things in ways that are not understood by the rest of the team and prevent them from achieving a good design outcome.**
 
-No matter how good the individual members of a team may be, 
+**No matter how good the individual members of a team may be, 
 they will not succeed if they can't work effectively together, and
 then none of them will get a high mark on this course.** 
+
 ***The importance of good teamwork in this course cannot be overstated.***
 
 However, the marks of individual group members will be moderated by their contribution to the group effort, mainly using

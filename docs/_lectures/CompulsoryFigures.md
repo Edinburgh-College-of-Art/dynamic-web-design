@@ -108,16 +108,16 @@ integrates them in at least a simple way into the ongoing prototype development.
 elements, implemented correctly and effectively. But no less important will be the design flair, creativity and
 imagination of the overall design that they form part of.
 
-*Assessment is primarily of the team, not the individual. Teams are inevitably unequal. Some will include a member who is
-already a good programmer, others may not. The team needs to evaluate the skills available to it and use them as
+***Assessment is primarily of the team, not the individual.*** *Teams are inevitably unequal. Some will include a member
+who is already a good programmer, others may not. The team needs to evaluate the skills available to it and use them as
 effectively as possible. In principle, a team with good design skills but no previous experience of any of the
 technologies can be highly successful in this course by understanding how to use minimal technical resources to their
 best advantage. Similarly, highly experienced developers have sometimes done less well by tending to overcomplicate
 things in ways that are not understood by the rest of the team and prevent them from achieving a good design outcome.*
 
-**No matter how good the individual members of a team may be, 
-they will not succeed if they can't work effectively together, and
-then none of them will get a high mark on this course.** 
+**No matter how good the individual members of a team may be,
+they will not succeed if they can't work effectively together, because
+then none of them will get a high mark on this course.**
 
 ***The importance of good teamwork in this course cannot be overstated.***
 

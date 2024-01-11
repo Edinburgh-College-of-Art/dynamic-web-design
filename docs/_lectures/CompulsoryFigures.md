@@ -135,7 +135,7 @@ team has worked together, and the roles of the individuals in it.
 
 Here, I echo the following, which was originated by colleagues Martin Parker and Jules Rawlinson (in this case, think of the field of web design):
 
-**"My re-occurring advice to you this semester will be to look widely and across your field to see and identify the work that impresses you. Ask yourself frequently, how would you meet those same standards? How are they doing what they're doing and why is it exciting you so much? When the technical challenges begin to bite, step away from the screen and try to remind yourself why you were doing what you were doing, what was the expressive, aesthetic, conceptual aim? This will lead to simpler attitudes to technical things, but bigger impact in the experience.”**
+*"My re-occurring advice to you this semester will be to look widely and across your field to see and identify the work that impresses you. Ask yourself frequently, how would you meet those same standards? How are they doing what they're doing and why is it exciting you so much? When the technical challenges begin to bite, step away from the screen and try to remind yourself why you were doing what you were doing, what was the expressive, aesthetic, conceptual aim? This will lead to simpler attitudes to technical things, but bigger impact in the experience.”*
 
 Perhaps different members of your team will be impressed by different things, for different reasons. But that's OK; it will foster useful discussion about the core values of your team's design. In this course, a key objective is to ***excite the users*** of your web site, not just serve them efficiently or make money effectively.
 

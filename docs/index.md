@@ -5,7 +5,9 @@ title: Dynamic Web Design
 
 ## Help Pages
 
-See these pages for simple step-by-step instructions on how to setup for Dynamic Web Design:
+See these pages for simple step-by-step instructions on how to setup for Dynamic Web Design. 
+These are provided partly for troubleshooting and so that you can understand the process more clearly;
+in practice, steps 2-5 are done for you by the setup script.
 
 {% assign setup_by_order = site.setup | sort: "order" %}
 {% for setup in setup_by_order | sort: "order" %}

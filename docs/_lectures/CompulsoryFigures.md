@@ -103,10 +103,12 @@ via APIs for this kind of functionality, which we will also discuss but not expe
 
 The "compulsory figures" are not directly assessed, but will be subject to classroom demonstration and critique. The
 Alpha and Beta prototypes will be expected to include those elements that have been covered up to the point of
-submission. Therefore, it's very important that the whole team works on these elements as they are introduced, and
-integrates them in at least a simple way into the ongoing prototype development. A good prototype will embody all these
-elements, implemented correctly and effectively. But no less important will be the design flair, creativity and
-imagination of the overall design that they form part of.
+submission. *Therefore, it's very important that the whole team works on these elements as they are introduced, and
+integrates them in at least a simple way into the ongoing prototype development.* A good prototype will embody all these
+elements, implemented correctly and effectively. But no less important will be **the design flair, creativity and
+imagination of the overall design** that they form part of.
+
+### Teamwork
 
 ***Assessment is primarily of the team, not the individual.*** *Teams are inevitably unequal. Some will include a member
 who is already a good programmer, others may not. The team needs to evaluate the skills available to it and use them as
@@ -128,6 +130,15 @@ contributions. Other evidence may be used at the discretion of the Course Organi
 Both prototype submissions will be accompanied by a report (around 750 words) giving a clear account of the design
 rationale (why the site is the way it is), the methodology and the techniques used. This should clearly explain how the
 team has worked together, and the roles of the individuals in it.
+
+### Inspirational quote
+
+Here, I echo the following, which was originated by colleagues Martin Parker and Jules Rawlinson (in this case, think of the field of web design):
+
+**"My re-occurring advice to you this semester will be to look widely and across your field to see and identify the work that impresses you. Ask yourself frequently, how would you meet those same standards? How are they doing what they're doing and why is it exciting you so much? When the technical challenges begin to bite, step away from the screen and try to remind yourself why you were doing what you were doing, what was the expressive, aesthetic, conceptual aim? This will lead to simpler attitudes to technical things, but bigger impact in the experience.”**
+
+Perhaps different members of your team will be impressed by different things, for different reasons. But that's OK; it will foster useful discussion about the core values of your team's design. In this course, a key objective is to ***excite the users*** of your web site, not just serve them efficiently or make money effectively.
+
 
 
 

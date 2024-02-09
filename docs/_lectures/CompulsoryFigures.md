@@ -62,14 +62,7 @@ by the end of week 2.
 ### Simple case of AJAX
 
 *AJAX* is a technique (Asynchronous Javascript And XML) that offers a more flexible way of relating the front (browser)
-and back (server) end of your web application. We will implement a simple case of this by the end of week 3.
-
-### User interactions
-
-Turning the focus more fully onto the front end, it's time to look at some interaction techniques with great creative
-potential, e.g. drag-and-drop, various kinds of animations, etc. A selection of these will need to be demonstrated in
-use on your site by the end of week 4. In your final design, the creativity of how you use these kinds of elements will
-be even more important than the technology.
+and back (server) end of your web application. We will implement a simple case of this by the end of week 4.
 
 ### Simple case of using an API
 
@@ -86,17 +79,24 @@ prototype, deriving pointers for further development towards the Beta version. R
 given that your site may be likely to be used on a variety of devices; this needs to be considered in relation to the
 nature of the design and the user community.
 
+### User interactions
+
+Turning the focus more fully onto the front end, it's time to look at some interaction techniques with great creative
+potential, e.g. drag-and-drop, various kinds of animations, etc. A selection of these will need to be demonstrated in
+use on your site by the end of week 7. In your final design, the creativity of how you use these kinds of elements will
+be even more important than the technology.
+
 ### Accessibility
 
 Websites need to be accessible to users with e.g. visual impairments and other difficulties. There are international
 rules, standards and techniques for these aspects of site design. This task will involve making sure that your site
-meets appropriate standards and passes certain simple automated tests. This will be addressed in week 7.
+meets appropriate standards and passes certain simple automated tests. This will be addressed in week 8.
 
 ### Safe uploads
 
 It's common for a site to offer the opportunity to upload files of some kind (images, perhaps sounds and other things).
 This task involves understanding issues around the security and safety of such operations, and integrating an existing
-skeleton implementation into your site by the end of week 8. (These days, it's common to use various "Cloud" services
+skeleton implementation into your site by the end of week 9. (These days, it's common to use various "Cloud" services
 via APIs for this kind of functionality, which we will also discuss but not expect you to implement.)
 
 ## Assessment

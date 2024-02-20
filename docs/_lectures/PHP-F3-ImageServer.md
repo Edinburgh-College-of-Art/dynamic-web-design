@@ -19,11 +19,11 @@ week: 7
 
 ## An example application: the ImageServer
 
-The strategy in this example is to build an application that will allow us to upload images (or in principle any kind of file), see the images we have uploaded, and delete them if desired. We will also want to be able to show the images as standardised thumbnails as well as at whatever size they were uploaded. To do all this, we will use a simple database to maintain information about the images. The application is complicated by the fact that for security reasons we need to store the uploaded images "above the web root", where they cannot be directly accessed by potentially malicious code; but all the same we will need some way of having a URL for each image, so that we can show them on web pages.
+The strategy in this example is to build an application that will allow us to upload images (or in principle any kind of file), see the images we have uploaded, and delete them if desired. We will also want to be able to show the images as standardised thumbnails as well as at whatever size they were uploaded. To do all this, we will use a simple database to maintain information about the images (which is a form of non-standard metadata, additional to the standard kind of metadata often stored in [EXIF](https://en.wikipedia.org/wiki/Exif) format in the image file itself). The application is complicated by the fact that for security reasons we need to store the uploaded images "above the web root", where they cannot be directly accessed by potentially malicious code; but all the same we will need some way of having a URL for each image, so that we can show them on web pages.
 
 As always, there are many different ways this could be done, and many different possible architectures even for such a small application. In the chosen approach, the code is written using the Fat-Free Framework (F3). This allows us to define a quite nice separation between code that drives the presentation of the images, and code that drives the manipulation of the database etc. The concept is a loose application of the Model-View-Controller (MVC) pattern, but not very strict because no particular adherence to this pattern is enforced by F3.
 
-The complete code can be downloaded from the main notes page, and it's best to look at the snippets discussed below in their context in the whole application, which also includes other useful comments in the code. Note that the application also requires a database with a table, here called "picdata_fff", that contains the fields _id, picname, picfile_ and _pictype_, which are used respectively to store an auto-incremented id, an arbitrary name or label entered by the user, the file name and the MIME type of each uploaded image. If you have any questions about any of it, do just [email me](mailto:j.lee@ed.ac.uk).
+The complete code can be downloaded from the main notes page, and it's best to look at the snippets discussed below in their context in the whole application, which also includes other useful comments in the code. Note that the application also requires a database with a table, here called "picdata_fff", that contains the fields _id, filepath, title_ and _type_, and _thumbnail_ which are used respectively to store an auto-incremented id, the file name, an arbitrary title or label entered by the user, the MIME type of each uploaded image, and the filename of the thumbnail image that our code will create. If you have any questions about any of it, do just [email me](mailto:j.lee@ed.ac.uk).
 
 ### 1. The ImageServer class
 
@@ -32,13 +32,13 @@ We define the class ImageServer in the file _ImageServer.php_, which is in the "
 ```php
 private $filedata;
 private $uploadResult = "Upload failed! (unknown reason)";
-private $pictable = "picdata_fff";
+private $table = "picdata_fff";
 private $thumbsize = 200; // max width/height of thumbnail
 images
 private $acceptedTypes = ["image/jpeg", "image/png", "image/gif", "image/tiff", "image/svg+xml"]; // file types we'll accept for uploading
 ```
 
-_\$pictable_ is the table in the DB, and thumbsize is the size in pixels for thumbnail images. _\$filedata_ is simply a variable to hold data temporarily, and _\$uploadResult_ is a self-explanatory message, which will be changed by the code below as necessary. These are all _private_ properties, which cannot be accessed other than by methods defined inside the class itself.
+_\$table_ is the table in the DB, and thumbsize is the size in pixels for thumbnail images. _\$filedata_ is simply a variable to hold data temporarily, and _\$uploadResult_ is a self-explanatory message, which will be changed by the code below as necessary. These are all _private_ properties, which cannot be accessed other than by methods defined inside the class itself.
 
 In the index.php file for the application, we also define several (global) F3 variables, as usual:
 ```php
@@ -57,16 +57,16 @@ ImageServer has an empty constructor function, because no initial setting of the
 - `upload()` -- which deals with uploading imagefiles
 - `store()` -- which stores data about an image
 - `infoService()` -- a "service" that returns information about the images that are stored
-- `deleteService()` --  a service that deletes specified images, including their files and database data
-- `showImage()` --  a method that outputs the raw content of an image file, with a suitable type header, as explained below
+- `deleteService()` -- a service that deletes specified images, including their files and database data
+- `showImage()` -- a method that outputs the raw content of an image file, with a suitable type header, as explained below
 - `thumbFile()` -- which returns the name of the thumbnail file for a given image
-- `createThumbnail()` -- which creates a file containing a thumbnail-size copy of an image (always jpg, no matter what the type of the original image)
+- `createThumbnail()` -- which creates a file containing a thumbnail-size copy of an image (always jpg, no matter what the type of the original image).
 
 We'll discuss these as we see how they're used. The last two of them are _private_ methods, which means they can only be used by code of other methods inside the class itself.
 
 ### 2. Uploading the images
 
-The first thing the user wants to do is upload an image. So we offer a simple form in an F3 template, _upload.html_. This is defined in the folder identified by the _UI_ variable, as in the FFF-SimpleExample. The template is reached immediately by the route defined for the application root (<http://jlee.edinburgh.domains/fatfree/F3-ImageServer/>):
+The first thing the user wants to do is upload an image. So we offer a simple form in an F3 template, _upload.html_. This is defined in the folder identified by the _UI_ variable, as in the FFF-SimpleExample. The template is reached immediately by the route defined for the application root (<http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/>):
 
 ```php
 <h1>Upload</h1>
@@ -126,7 +126,7 @@ Web::instance()->receive(function($file,$anything)
 
 This looks more complicated than it is ... 
 
-The first two lines just set two variables that we will use later to supply arguments to the upload function: this helps us to remember what the arguments mean. We create a variable, *$files*, which will be the uploaded file data as returned by a method that belongs to the *Web* class (see <https://fatfreeframework.com/3.8/web>). We make an instance of this class, and call its *receive()* method. The first argument of the method is an anonymous function, which takes two arguments, *$file* and *$anything* (for our purposes the value of the latter will not be used and it doesn't matter what it's called). *$file* will become the data about the uploaded file, so we save it by putting it into the variable *$this->filedata*, which means it will be available to any method of the ImageServer class. We then have a couple of tests, to check whether the uploaded file is less than 2MB (an arbitrary limit, which we could change if we like) and that it is one of a specified set of types (because we don't want to allow uploads of just anything). If these tests fail, the anonymous function returns `false`, and this will cause the upload to be aborted, but we set an informative error message which can be used later. Otherwise, we set a variable to say that everything has worked and return `true`, which means that the uploaded file will be moved into the uploads folder specified in the F3 variable UPLOADS. The final two arguments of the Web *receive()* method are given using the variables we set earlier: *$overwrite* is `true` if we want the upload to overwrite any existing file with the same name (since it's `false` here, a duplicated file will be renamed to make it unique). *$slug* is true if we want the file name to be "slugged", which means that unusual characters etc. will be transformed to avoid any problems with the filesystem.
+The first two lines just set two variables that we will use later to supply arguments to the upload function: this helps us to remember what the arguments mean. We create a variable, *$files*, which will be the uploaded file data as returned by a method that belongs to the *Web* class (see <https://fatfreeframework.com/3.8/web>). We make an instance of this class, and call its *receive()* method. The first argument of the method is an anonymous function, which takes two arguments, *$file* and *$anything* (for our purposes the value of the latter will not be used and it doesn't matter what it's called). *$file* will become the data about the uploaded file, so we save it by putting it into the variable *$this->filedata*, which means it will be available to any method of the ImageServer class. We then have a couple of tests, to check whether the uploaded file is less than 2MB (an arbitrary limit, which we could change if we like) and that it is one of a specified set of types (because we don't want to allow uploads of just anything). If these tests fail, the anonymous function returns `false`, and this will cause the upload to be aborted, but we set an informative error message which can be used later. Otherwise, we set a variable to say that everything has worked and return `true`, which means that the uploaded file will be moved into the uploads folder specified in the F3 variable UPLOADS. The final two arguments of the Web *receive()* method are given using the variables we set earlier: *$overwrite* is `true` if we want the upload to overwrite any existing file with the same name. (Since it's `false` here, an attempt to upload the same image twice will fail, which may seem undesirable. However, this is better than having one image file associated with two sets of image metadata, which wil cause problems if we want to delete one of them.) *$slug* is true if we want the file name to be "slugged", which means that unusual characters etc. will be transformed to avoid any problems with the filesystem.
 
 #### 2.2 Storing the image data
 
@@ -135,68 +135,71 @@ The method _store()_ very simply copies details of the uploaded image into a DB 
 ```php
 public function store() {
   global $f3; // because we need f3->get()
-  $pic = new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
-  $pic->picname = $this->filedata["title"];
-  $pic->picfile = $this->filedata["name"];
-  $pic->pictype = $this->filedata["type"];
-  $pic->save();
+  $mapper = new DB\SQL\Mapper($f3->get('DB'),$this->table); // create DB query mapper object
+  $mapper->title = $this->filedata["title"];
+  $mapper->filepath = $this->filedata["name"];
+  $mapper->type = $this->filedata["type"];
+  $mapper->thumbnail = $filedata['thumbnail'];
+  $mapper->save();
 }
 ```
 
--- where _picfile_ is the actual pathname of the file as saved, _picname_ is the name given to the picture as typed in by the user, and _pictype_ is the MIME type of the image file (e.g. jpg). Entering the image into the DB creates an _id_ for it, which will be completely crucial later.
+-- where _filepath_ is the actual pathname of the file as saved, _title_ is the name given to the picture as typed in by the user, and _type_ is the MIME type of the image file (e.g. jpg). Entering the image into the DB creates an _id_ for it (by auto-increment), which will be completely crucial later.
 
 ### 3. Viewing the images
 
-To view all the images we will want a template for a page on which they will all appear (as thumbnails) -- this is called _viewimages.html_ (viewed via the route <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/viewimages>).
+To view all the images we will want a template for a page on which they will all appear (as thumbnails) -- this is called _viewimages.html_ (viewed via the route <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/viewimages>).
 
 #### 3.1 Retrieving image information
 
-In here, we first query the _ImageServer_ method _infoService()_ to find out what images there are. It just returns all the data in the DB, unless it is given a non-zero ID, in which case it returns just the data for that picture:
+In here, we first query the _ImageServer_ method _getAllImageData()_ to find out what images there are. It just returns all the data in the DB; a similar method, _getImageData()_, takes an image ID and returns just the data for that picture:
 
 ```php
-// This just returns all the data we have about images in the DB, just as an array.
-// If given no argument, it uses the default argument, 0, and in this case it returns data about all images.
-// If given an image ID as argument (there can be no image with ID 0), it returns data only about that image.
-
-public function infoService($picID=0)
-{
-  global $f3;
-  $returnData = array();
-  $pic=new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
-  $list = $pic->find();
-  if ($picID == 0)
-  {
-    foreach ($list as $record)
+  // given an image ID as argument it returns data only about that image.
+    public function getImageData($id)
     {
-      $recordData = array();
-      $recordData["picfile"] = $record["picfile"];
-      $recordData["pictype"] = $record["pictype"];
-      $recordData["picname"] = $record["picname"];
-      $recordData["picID"] = $record["id"];
-      $recordData["thumbNail"] =
-      $f3->get('UPLOADS').$this->thumbFile($pic["picfile"]);
-      array_push( $returnData, $recordData);
+        global $f3;
+        $mapper = new DB\SQL\Mapper($f3->get('DB'), $this->table);    // create DB query mapper object
+        $mapper->load(['id=?',$id]);
+        $imageData = [
+            'filepath'   => $f3->get('UPLOADS') . $mapper['filepath'],  // add UPLOADS file path
+            'type'       => $mapper['type'],
+            'title'      => $mapper['title'],
+            'id'         => $mapper['id'],
+            'thumbnail'  => $f3->get('UPLOADS') . $mapper['thumbnail']  // ditto
+        ];
+        return $imageData;
     }
-    return $returnData;
-  }
 
-  $pic->load('id=?',$picID);
-  $recordData = array();
-  $recordData["picfile"] = $pic["picfile"];
-  $recordData["pictype"] = $pic["pictype"];
-  $recordData["picname"] = $pic["picname"];
-  $recordData["picID"] = $pic["id"];
-  return $recordData;
-}
+    //-------------------------------------------------------------------------------------------
+    // return data on all images
+    public function getAllImageData()
+    {
+        global $f3;
+        $mapper    = new DB\SQL\Mapper($f3->get('DB'), $this->table);    // create DB query mapper object
+        $imageData = [];
+        $images    = $mapper->find();
+
+        foreach ($images as $image) {
+            array_push($imageData, [
+                'filepath'   => $f3->get('UPLOADS') . $image['filepath'],
+                'type'       => $image['type'],
+                'title'      => $image['title'],
+                'id'         => $image['id'],
+                'thumbnail'  => $f3->get('UPLOADS') . $image['thumbnail']
+            ]);
+        }
+        return $imageData;
+    }
 ```
 
-The code in red is assembling an array of all the results, because _\$pic->find()_ provides each row from the database in the form of an associative array, and the relevant elements are extracted from this and then collected together into a larger array, which is then what is returned to the calling point (in this case, in _index.php_). In _index.php_ there is code for the _viewimages_ route URL that very simply acquires the above data from the _infoService()_ method and then feeds it to the _viewimages.html_ template:
+The code here is assembling an array of all the results, because _\$mapper->find()_ provides each row from the database in the form of an associative array, and the relevant elements are extracted from this and then collected together into a larger array, which is then what is returned to the calling point (in this case, in _index.php_). In _index.php_ there is code for the _viewimages_ route URL that very simply acquires the above data from the _getAllImageData()_ method and then feeds it to the _viewimages.html_ template:
 
 ```php
 $f3->route('GET /viewimages',
 function($f3) {
   $is = new ImageServer;
-  $info = $is->infoService(0);
+  $info = $is->getAllImageData();
   $f3->set('datalist', $info);
   $f3->set('content', 'viewimages.html');
   echo template::instance()->render('layout.html');
@@ -210,15 +213,15 @@ The _viewimages.html_ template contains a central loop that displays the images:
 ```php
 <repeat group="{{ @datalist }}" value="{{ @item }}">
     <div id="imgdisplay">
-        <p><a href="{{ @BASE }}/image/{{ @item.picID }}"><img src="{{
-@BASE }}/thumb/{{ @item.picID }}" /></a></p>
-        <p>{{ @item.picname }} (<a href="{{ @BASE }}/delete/{{
+        <p><a href="{{ @BASE }}/image/{{ @item.id }}"><img src="{{
+@BASE }}/thumb/{{ @item.id }}" /></a></p>
+        <p>{{ @item.title }} (<a href="{{ @BASE }}/delete/{{
 @item.picID }}">Delete?</a>)</p>
     </div>
 </repeat>
 ```
 
-and what happens here is that it goes through the IDs of all the images that are in the DB, displaying each one through a URL of the form: _BASE_/thumb/_id_, as a link that when clicked will go to a URL of the form: _BASE_/image/_id_. For example, the URL <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/thumb/1> shows the thumbnail associated with the image in the database that has id=1 (assuming the image with this id still exists, i.e. hasn't been deleted), and <http://jlee.edinburgh.domains/fatfree/F3-ImageServer/image/1> shows the image itself at its original size. It also includes a link to delete the image. The URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/delete/0> would delete image 0 (however, there is never an image with ID=0, so nothing will be be deleted if this link is visited -- please do **NOT** delete image 1, otherwise the above couple of links will not work!).
+and what happens here is that it goes through the IDs of all the images that are in the DB, displaying each one through a URL of the form: _BASE_/thumb/_id_, as a link that when clicked will go to a URL of the form: _BASE_/image/_id_. For example, the URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/thumb/1> shows the thumbnail associated with the image in the database that has id=1 (assuming the image with this id still exists, i.e. hasn't been deleted), and <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/image/1> shows the image itself at its original size. It also includes a link to delete the image. The URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/delete/0> would delete image 0 (however, there is never an image with ID=0, so nothing will be be deleted if this link is visited -- please do **NOT** delete image 1, otherwise the above couple of links will not work!).
 
 This is the part that would normally seem simple: we just use the image URL. _**But the images don't have a URL because they're stored above the web root!**_ The solution to this is to provide a URL that actually points to a piece of code that can behave exactly like an image. A URL will seem (to the browser) to be an image if it outputs a suitable image header followed by raw image data (because this is just what the browser sees if it looks at an image file). The code for a route such as _/image/1_ does just this; hence we can use it as the source parameter in an image link, e.g.:
 
@@ -243,21 +246,22 @@ Note here that this is defined for either GET or POST requests (because we might
 The method _showImage()_ takes the id of the image required, and a boolean parameter that will show the thumbnail if true or the original image if false.
 
 ```php
-public function showImage($picID, $thumb)
-{
-  global $f3;
-  $pic=new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
-  $pic->load('id=?',$picID); // load DB record matching the given ID
-  $fileToShow = ($thumb?$f3->get('UPLOADS').$this->thumbFile($pic["picfile"]):$pic["picfile"]);
-  $fileType = ($thumb?"image/jpeg":$pic["pictype"]); // thumb is always jpeg
-  header("Content-type: " . $fileType); // write out the image file http header
-  readfile($fileToShow); // write out raw file contents (image data)
-}
+publi  public function showImage($id, $thumb)
+    {
+        global $f3;
+        $mapper = new DB\SQL\Mapper($f3->get('DB'), $this->table); // create DB query mapper object
+        $mapper->load(['id=?', $id]);                              // load DB record matching the given ID
+        $fileToShow = (($thumb) ? $mapper['thumbnail'] : $mapper['filepath']);
+        $fileToShow = $f3->get('UPLOADS') . $fileToShow;        // remember to add UPLOADS dir path
+        $fileType   = (($thumb) ? 'image/jpeg' : $mapper['type']);    // thumb is always jpeg
+        header('Content-type: ' . $fileType);               // write out the image file http header
+        readfile($fileToShow);                                     // write out raw file contents (image data)
+    }
 ```
 
 It finds the DB record for the required image, then locates either the image or thumbnail file in the UPLOAD folder, which is in AboveWebRoot and therefore not normally visible on the web. Then it outputs an HTTP header appropriate to the MIME type of the image. This header is what tells the browser to interpret the following data as an image of that type. It then reads out the image file data directly from the image file and sends it to the output. The effect is therefore that the browser receives directly the content of a file that is stored above the web root. This is a very secure way of storing and serving files of all kinds.
 
-_NB:_ It's crucial that nothing else is output before the HTTP header, i.e. there can be no HTML or other output of any kind from the code in index.php or the ImageServer file, except for this header and then the raw image file data. It's important to rememebr this e.g. if you sometimes put diagnostic "echo" commands in your code.
+_NB:_ It's crucial that nothing else is output before the HTTP header, i.e. there can be no HTML or other output of any kind from the code in index.php or the ImageServer code, except for this header and then the raw image file data. It's important to remember this e.g. if you sometimes put diagnostic "echo" commands in your code.
 
 At the _viewimages_ URL, we have therefore now generated a display of a neat set of clickable thumbnail images, each one being a link to the full-size version of the image, and each with a "delete" link that will allow the image, and all trace of it, to be deleted, as follows.
 
@@ -266,14 +270,15 @@ At the _viewimages_ URL, we have therefore now generated a display of a neat set
 To delete an image, we need to remove the image file, the thumbnail image file, and the related database record. This is done by the _deleteService()_ method in the _ImageServer_ class:
 
 ```php
-public function deleteService($picID) {
-  global $f3;
-  $pic=new DB\SQL\Mapper($f3->get('DB'),$this->pictable); // create DB query mapper object
-  $pic->load('id=?',$picID); // load DB record matching the given ID
-  unlink($pic["picfile"]); // remove the image file
-  unlink($f3->get('UPLOADS').$this->thumbFile($pic["picfile"])); // remove the thumbnail file
-  $pic->erase(); // delete the DB record
-}
+  public function deleteService($id)
+    {
+        global $f3;
+        $mapper = new DB\SQL\Mapper($f3->get('DB'), $this->table);    // create DB query mapper object
+        $mapper->load(['id=?', $id]);                            // load DB record matching the given ID
+        unlink($f3->get('UPLOADS') . $mapper['filepath']);                                        // remove the image file
+        unlink($f3->get('UPLOADS') . $mapper['thumbnail']);    // remove the thumbnail file
+        $mapper->erase();                                                    // delete the DB record
+    }
 ```
 
 The DB is queried to get the data, then the builtin function *unlink()* is used to remove the image file and the thumbnail, then the database record is deleted.
@@ -285,3 +290,4 @@ Note that things other than images can be handled easily by changing or removing
 If you look at index.php, there are various other things that haven't been mentioned in these notes, e.g. the provision of "silent" upload and delete functions that don't produce any output, and an infoService that simply outputs JSON data. These are intended to be used in AJAX requests. In effect, they provide a simple API to the image server back end.
 
 There are many aspects and elements in even this small application that haven't been mentioned here: do study the code, and raise questions about anything that's unclear (of which there will be plenty!). If using or adapting this code, you should certainly introduce **error checking**. As mentioned before, many things could have been done differently, and probably much better: this was was translated quickly from a non-F3 version, which itself was translated quickly from an original ColdFusion version, that was put together very quickly in the first place, and is far from perfect. However, the application had to be largely restructured to make sense in F3, and it's already clear that this has been a significant improvement. You could consider many further improvements -- e.g. should the thumbnails be created on upload or only when information is requested? There is no real reason for the thumbnails always to be jpg images. Etc.
+(The code here was also somewhat refactored and improved by Matthew Hamilton in about 2021-22.)

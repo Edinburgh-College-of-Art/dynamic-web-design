@@ -3,7 +3,7 @@ layout: page
 title: Further PHP, with Fat-Free Framework (F3)
 author: "John Lee"
 order: 76
-week: 7
+week: 5
 ---
 
 -   [An example application: the ImageServer](#an-example-application-the-imageserver)

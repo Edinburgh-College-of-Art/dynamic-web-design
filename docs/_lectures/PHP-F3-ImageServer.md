@@ -56,8 +56,8 @@ ImageServer has an empty constructor function, because no initial setting of the
 
 - `upload()` -- which deals with uploading imagefiles
 - `store()` -- which stores data about an image
-- `infoService()` -- a "service" that returns information about the images that are stored
-- `deleteService()` -- a service that deletes specified images, including their files and database data
+- `getImageData()`, `getAllImageData()` -- services that return information about the images that are stored
+- `deleteService()` -- a "service" that deletes specified images, including their files and database data
 - `showImage()` -- a method that outputs the raw content of an image file, with a suitable type header, as explained below
 - `thumbFile()` -- which returns the name of the thumbnail file for a given image
 - `createThumbnail()` -- which creates a file containing a thumbnail-size copy of an image (always jpg, no matter what the type of the original image).

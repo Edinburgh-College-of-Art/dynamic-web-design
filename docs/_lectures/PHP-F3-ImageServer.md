@@ -50,7 +50,7 @@ $f3->set('UI','ui/');
 $f3->set('UPLOADS','../../../AboveWebRoot/ServerImages/');
 ```
 
-Here, _UPLOADS_ is the folder where we will store the image files on the server. It should be above the web root but also be somewhere where you have access to write files, which in the setup you have on playground means at the same level as your html directory. As in the FFF-SimpleExample case, we have here assumed a folder at that level called _AboveWebRoot_ and we have created our _ServerImages_ folder inside it. _DB_ is just the database in which details will be kept.
+Here, _UPLOADS_ is the folder where we will store the image files on the server. It should be above the web root but also be somewhere where you have access to write files, which in the setup you have on Edinburgh Domains means at the same level as your html directory. As in the FFF-SimpleExample case, we have here assumed a folder at that level called _AboveWebRoot_ and we have created our _ServerImages_ folder inside it. _DB_ is just the database in which details will be kept.
 
 ImageServer has an empty constructor function, because no initial setting of the varables is required beyond what we have already done. Otherwise, it defines a number of methods. These include:
 

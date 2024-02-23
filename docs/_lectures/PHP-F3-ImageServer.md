@@ -216,10 +216,8 @@ The _viewimages.html_ template contains a central loop that displays the images:
 ```php
 <repeat group="{{ @datalist }}" value="{{ @item }}">
     <div id="imgdisplay">
-        <p><a href="{{ @BASE }}/image/{{ @item.id }}"><img src="{{
-@BASE }}/thumb/{{ @item.id }}" /></a></p>
-        <p>{{ @item.title }} (<a href="{{ @BASE }}/delete/{{
-@item.picID }}">Delete?</a>)</p>
+        <p><a href="{{ @BASE }}/image/{{ @item.id }}"><img src="{{ @BASE }}/thumb/{{ @item.id }}"></a></p>
+        <p>{{ @item.title }} (<a href="{{ @BASE }}/delete/{{ @item.picID }}">Delete?</a>)</p>
     </div>
 </repeat>
 ```

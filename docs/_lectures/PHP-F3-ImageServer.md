@@ -68,6 +68,7 @@ We'll discuss these as we see how they're used. The last two of them are _privat
 
 The first thing the user wants to do is upload an image. So we offer a simple form in an F3 template, _upload.html_. This is defined in the folder identified by the _UI_ variable, as in the FFF-SimpleExample. The template is reached immediately by the route defined for the application root (<http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/>):
 
+{% raw %}
 ```php
 <h1>Upload</h1>
 <form name="upload" method="POST" action="{{ @BASE }}{{@PARAMS.0 }}" enctype="multipart/form-data">
@@ -76,6 +77,7 @@ The first thing the user wants to do is upload an image. So we offer a simple fo
   <input type="submit" name="submit" value="Submit" />
 </form>
 ```
+{% endraw %}
 
 The form is normal HTML, using an input of type _file_, which will invite the user to choose a file that will be uploaded and a text input that will be used simply to name or describe the file. Note the attribute enctype="multipart/form-data"  --- this is important. You'll see that the action URL of this form is the F3 route [{{ @BASE }}{{ @PARAMS.0 }}], which means the base URL with the first element of the form PARAMS, which is the file name "upload", but visited with a POST request method. In _index.php_, the route for a POST request to "/upload" says:
 
@@ -210,6 +212,7 @@ function($f3) {
 
 The _viewimages.html_ template contains a central loop that displays the images:
 
+{% raw %}
 ```php
 <repeat group="{{ @datalist }}" value="{{ @item }}">
     <div id="imgdisplay">
@@ -220,6 +223,7 @@ The _viewimages.html_ template contains a central loop that displays the images:
     </div>
 </repeat>
 ```
+{% endraw %}
 
 and what happens here is that it goes through the IDs of all the images that are in the DB, displaying each one through a URL of the form: _BASE_/thumb/_id_, as a link that when clicked will go to a URL of the form: _BASE_/image/_id_. For example, the URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/thumb/1> shows the thumbnail associated with the image in the database that has id=1 (assuming the image with this id still exists, i.e. hasn't been deleted), and <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/image/1> shows the image itself at its original size. It also includes a link to delete the image. The URL <http://jlee.edinburgh.domains/fatfree/FFF-ImageServer/delete/0> would delete image 0 (however, there is never an image with ID=0, so nothing will be be deleted if this link is visited -- please do **NOT** delete image 1, otherwise the above couple of links will not work!).
 

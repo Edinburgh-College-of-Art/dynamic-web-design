@@ -43,7 +43,9 @@ This is sometimes surprisingly controversial. It has to do with how the web site
 
 _Efficiency_ is often seen as an obvious example. How many mouse clicks, etc., does it take for the user to get the information they need, or complete the operation the designer (or the designer's client) wants them to complete, etc.?
 
-Also _effectiveness_: how well does the site succeed in helping (or inducing) users to do what was wanted?\[  _User satisfaction_ is another thing often measured, but often simply on the assumption that a satisfied user is more likely to do what the site design assumes they will do.
+Also _effectiveness_: how well does the site succeed in helping (or inducing) users to do what was wanted?
+
+_User satisfaction_ is another thing often measured, but often simply on the assumption that a satisfied user is more likely to do what the site design assumes they will do.
 
 A good many questions need to be disentangled when thinking about effectiveness and usability. Suppose a web site is intended to sell books:
 
@@ -79,7 +81,7 @@ Who is the user? What kind of person? All sorts of issues are hidden under quest
 
 All of this tends to assume a rather dynamic site. But perhaps for some users, with some tasks, an entirely static site can be just as effective - and of course probably much cheaper to build. Note that users and tasks come in pairs: very often the same user (or kind of user, perhaps) will behave quite differently with a different task (or kind of task). The combinatorics of possibilities for adaptive sites can therefore become rather worrying.
 
-A final, _but by no means least important_ issue concerning users is accessibility for disabled users, e.g. the partially sighted or colour-blind. This is something that should _always_ be given very careful thought when designing a site, and the recent standards and guidelines on the subject give it considerable prominence. In Europe, **recent legislation makes accessibility a legal obligation on web sites that provide information**, so that material provided graphically will have to have an alternative accessible to the blind, etc. (see <http://www.disability.gov.uk/> for the legalities and <http://www.w3c.org/WAI/> for technical approaches to accessible web design -- a discussion at <http://www.webcredible.co.uk/user-friendly-resources/web-accessibility/uk-website-legal-requirements.shtml> suggests that the legalities are really not very clear).
+A final, _but by no means least important_ issue concerning users is accessibility for disabled users, e.g. the partially sighted or colour-blind. This is something that should _always_ be given very careful thought when designing a site, and the recent standards and guidelines on the subject give it considerable prominence. In Europe, **recent legislation makes accessibility a legal obligation on web sites that provide information**, so that material provided graphically will have to have an alternative accessible to the blind, etc. (see <http://www.disability.gov.uk/> for the legalities and <http://www.w3c.org/WAI/> for technical approaches to accessible web design -- a discussion at <https://inviqa.com/blog/why-is-accessibility-important> suggests that the legalities are really not very clear).
 
 ### Social context
 
@@ -157,7 +159,7 @@ Here, the user is encouraged or required to verbalise (speak) continuously while
 
 ### carefully organised, counterbalanced user trials
 
-This is an approach favoured by many who come from a background in experimental psychology. The objective is often to obtain data that statistical techniques can be meaningfully used on (see next), but sometimes a more qualitative design can be used. In any case, the argument is that the variables relevant to behaviour with the system can be isolated and studied in separate experimental "conditions". Commonly, this is used in conjunction with very detailed behavioural measurements, e.g. "response latencies" (reaction times), and sometimes automated logging. ([HCRC](http://www.hcrc.ed.ac.uk/) has conducted a number of such experimental evaluations, especially on educational systems and systems intended to support collaborative work.) Usually a consequence of aiming to use statistics is that numbers of subjects need to be relatively large. There is recently a strong tendency to argue that, at least in formative evaluation, most of the insight can be obtained from a small sample, and hence just a few users will be enough to work with (cf "heuristic evaluation").
+This is an approach favoured by many who come from a background in experimental psychology. The objective is often to obtain data that statistical techniques can be meaningfully used on (see next), but sometimes a more qualitative design can be used. In any case, the argument is that the variables relevant to behaviour with the system can be isolated and studied in separate experimental "conditions". Commonly, this is used in conjunction with very detailed behavioural measurements, e.g. "response latencies" (reaction times), and sometimes automated logging. Usually a consequence of aiming to use statistics is that numbers of subjects need to be relatively large. There is recently a strong tendency to argue that, at least in formative evaluation, most of the insight can be obtained from a small sample, and hence just a few users will be enough to work with (cf "heuristic evaluation").
 
 ### heavy-duty statistics
 
@@ -165,7 +167,7 @@ Often, an argument is perceived as being stronger if it is founded on statistica
 
 ## "Think-aloud" protocols: issues
 
-Think-aloud protocols are one of the simplest and often most revealing kinds of study to implement, and can be very useful for dealing with web sites. They will most likely figure prominently in the formative evaluation work of the class. Often they are combined with short questionnaires, given immediately before and after the exercise, which can help to establish the user's expectations and can help to find out various of their impressions of the experience that they had not mentioned while involved in it. They can also be used with "paper prototypes", and are closely related to "participatory evaluation" (<http://www.hostserver150.com/usabilit/tools/evaluate.htm>). The following are good points to note when attempting the use of think-aloud techniques:
+Think-aloud protocols are one of the simplest and often most revealing kinds of study to implement, and can be very useful for dealing with web sites. They will most likely figure prominently in the formative evaluation work of the class. Often they are combined with short questionnaires, given immediately before and after the exercise, which can help to establish the user's expectations and can help to find out various of their impressions of the experience that they had not mentioned while involved in it. They can also be used with "paper prototypes", and are closely related to "participatory evaluation" (<https://www.betterevaluation.org/methods-approaches/approaches/participatory-evaluation>). The following are good points to note when attempting the use of think-aloud techniques:
 
 ### distinction between satisfaction and effectiveness
 
@@ -202,15 +204,10 @@ There are hundreds of web sites that have interesting and useful material relati
 -   The classic Jakob Neilsen again: <http://www.useit.com/>
 -   US government advice on usability methods and techniques.
     -   <https://www.usability.gov/how-to-and-tools/methods/index.html>
-    -   <http://www.hostserver150.com/usabilit/tools/list.htm>
 -   This one is related to a book by _Dix et al_. It's good for detailed tips on using specific evaluation techniques, and there is other useful material on the site (and in the book). <http://www.hcibook.com/hcibook/links/linksch11.html>
 -   Discussion of the then new international ISO usability standard (2004-8).
-
     -   <https://www.userfocus.co.uk/articles/ISO23973.html>
-    -   <http://www.isrc.umbc.edu/Research/Eval/EvalProject.html>
-
 -   Some resources at a GitHub site: <https://github.com/peiyaoh/hci-ux-learning-resources>>
 -   An excellent collection of resources at the Interaction Design Foundation. This is one of the best sets of resources available: <https://www.interaction-design.org/literature>
--   Finally. The company called _User Interface Engineering_ seems to be a good source of useful discussions and pointers concerning, fairly specifically, the design of e-commerce websites. The second of these links is to their archive of often fascinating articles on particular topics. They also have an interesting blog feature. (Disclaimer: no-one connected with our programme has any relationship with this company.)
-    -   [User Interface Engineering site](http://www.uie.com/)
+-   Finally. The company called _User Interface Engineering_ seems to be a good source of useful discussions and pointers concerning, fairly specifically, the design of e-commerce websites. This link is to their archive of often fascinating articles on particular topics. They also have an interesting blog feature. (Disclaimer: no-one connected with our programme has any relationship with this company.)
     -   [User Interface Engineering articles](https://articles.uie.com)

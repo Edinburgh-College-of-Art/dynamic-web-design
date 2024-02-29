@@ -207,7 +207,7 @@ There are hundreds of web sites that have interesting and useful material relati
 -   This one is related to a book by _Dix et al_. It's good for detailed tips on using specific evaluation techniques, and there is other useful material on the site (and in the book). <http://www.hcibook.com/hcibook/links/linksch11.html>
 -   Discussion of the then new international ISO usability standard (2004-8).
     -   <https://www.userfocus.co.uk/articles/ISO23973.html>
--   Some resources at a GitHub site: <https://github.com/peiyaoh/hci-ux-learning-resources>>
+-   Some resources at a GitHub site: <https://github.com/peiyaoh/hci-ux-learning-resources>
 -   An excellent collection of resources at the Interaction Design Foundation. This is one of the best sets of resources available: <https://www.interaction-design.org/literature>
 -   Finally. The company called _User Interface Engineering_ seems to be a good source of useful discussions and pointers concerning, fairly specifically, the design of e-commerce websites. This link is to their archive of often fascinating articles on particular topics. They also have an interesting blog feature. (Disclaimer: no-one connected with our programme has any relationship with this company.)
     -   [User Interface Engineering articles](https://articles.uie.com)

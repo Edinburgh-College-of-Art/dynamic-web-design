@@ -67,7 +67,8 @@
       shell_exec("mkdir ~/AboveWebRoot");
     }
     if (!file_exists($home."/AboveWebRoot/fatfree-master")){
-      shell_exec("git clone --depth 1 --branch 3.7.3 https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master");
+      shell_exec("git clone https://github.com/bcosca/fatfree.git ~/AboveWebRoot/fatfree-master");
+      shell_exec("git clone https://github.com/bcosca/fatfree-core ~/AboveWebRoot/fatfree-master/lib");    
     }
     if (!file_exists($home."/AboveWebRoot/autoload")){
       shell_exec("mkdir ~/AboveWebRoot/autoload");

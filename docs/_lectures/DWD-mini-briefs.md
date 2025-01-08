@@ -14,6 +14,13 @@ As soon as your team has been created, you should get together and choose one of
 - [COMMUNITY](#COMMUNITY)
 - [ARTS](#ARTS)
 
+## Tips
+* Each mini-brief has slightly different requirements: make sure you're sticking to the one you've been assigned.
+* Research the specific organisation/area/topic you pick and consider reaching out to relevant parties with questions. You'll find it much easier to develop a strong idea.
+* It's never too early to conduct user research. Ask non-leading questions to determine what people want and, later on, if your solution is effective.
+* Don't replicate an existing web service, think about how you can offer something useful and new. The mini-briefs are designed to encourage you to think more broadly about how data and web technologies can be implemented.
+
+
 ## INCLUSION
 
 ### Develop a method of gathering and displaying demographic data in an inclusive and identity positive way.

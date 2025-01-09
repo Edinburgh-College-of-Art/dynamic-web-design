@@ -58,6 +58,8 @@ team of skilled and experienced tutors on hand to help you with any problems you
 The course starts with a "Simple Example" that demonstrates setting up a database on the server, and getting information
 into it and out again using HTML forms and templates. Making this work is the first task, which your team must achieve
 by the end of week 2.
+At this point, also, we will expect your team to demonstrate a solid choice of subject as described by your mini-brief, to be developed in slightly more detail for week 3.
+In week 3, we have a _Crit_ session, in which each team will present, for brief discussion, a short proposal for their website development.
 
 ### Simple case of AJAX
 
@@ -75,7 +77,7 @@ website.
 
 Any web site must be designed with careful thought for how those in the expected user group will react to it. In week 6
 the focus will be most strongly on this issue, and the task is to carry out and document a usability evaluation of your
-prototype, deriving pointers for further development towards the Beta version. Responsiveness is also a concern here,
+prototype, deriving pointers for further development towards the Beta version. "Responsiveness" is also a concern here,
 given that your site may be likely to be used on a variety of devices; this needs to be considered in relation to the
 nature of the design and the user community.
 
@@ -102,7 +104,7 @@ via APIs for this kind of functionality, which we will also discuss but not expe
 ## Assessment
 
 The "compulsory figures" are not directly assessed, but will be subject to classroom demonstration and critique. The
-Alpha and Beta prototypes will be expected to include those elements that have been covered up to the point of
+Alpha and Beta prototypes will be expected to include, in some form, those elements that have been covered up to the point of
 submission. *Therefore, it's very important that the whole team works on these elements as they are introduced, and
 integrates them in at least a simple way into the ongoing prototype development.* A good prototype will embody all these
 elements, implemented correctly and effectively. But no less important will be **the design flair, creativity and
@@ -127,7 +129,7 @@ However, the marks of individual group members will be moderated by their contri
 the *WebPA* peer assessment system of simple online questionnaires in which the team members assess each others'
 contributions. Other evidence may be used at the discretion of the Course Organiser.
 
-Both prototype submissions will be accompanied by a report (around 750 words) giving a clear account of the design
+Both prototype submissions will be accompanied by a report (also a single submission per group, of around 750 words) giving a clear account of the design
 rationale (why the site is the way it is), the methodology and the techniques used. This should clearly explain how the
 team has worked together, and the roles of the individuals in it.
 

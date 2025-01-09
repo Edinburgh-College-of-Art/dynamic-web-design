@@ -77,7 +77,7 @@ Pick a small location which is frequented by people. This could be the building 
 
 What are the primary and secondary purposes of this area? What do people want from it and how could it be improved? How has it changed over time? How do these insights relate to each other and how can they be used to improve the community experience?
 
-xamples:
+Examples:
 
 - <https://www.centralparknyc.org/peak-fall-foliage-map>
 - <https://leithlatevirtualtours.co.uk/>

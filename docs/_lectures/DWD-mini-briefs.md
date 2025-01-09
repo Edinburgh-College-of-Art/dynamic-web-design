@@ -6,7 +6,7 @@ order: 6
 week: 1
 ---
 
-As soon as your team has been created, you should get together and choose one of these briefs as a starting point for your project. You will then need quickly to develop your ideas about your design in response to this. 
+As soon as your team has been created, you should get together and choose one of these briefs as a starting point for your project. You will then need quickly to develop your ideas about your design in response to this. (Note: it isn't a completely free choice, because we limit the number of teams that can choose each mini-brief. A process for this will be announced.)
 
 - [INCLUSION](#INCLUSION)
 - [EDUCATION](#EDUCATION)
@@ -29,8 +29,6 @@ Pick an organisation that works with people from a broad range of backgrounds â€
 
 How can you capture and present user data that celebrates the many and varied characteristics of the people that engage with this organisation? What questions will you ask, and how? What methods will you use to store, query, display and compare this data?
 
-Inspired by <https://creativeinformatics.org/participant/fruitmarket-gallery/> 
-
 Examples:
 
 - <https://www.ons.gov.uk/releases/interactivecontentfromcensus2021firstresults>
@@ -45,8 +43,6 @@ Examples:
 Pick an organisation with links to education such as a library, museum, school, wildlife reserve, journal, etc. Your goal is to create an interactive learning tool for the organisation. Your target audience will be a specific group of users within the organisation's demographic (eg, children attending a wildlife reserve, design students accessing the university library).
 
 What learning-based questions might your target audience ask this organisation? How can you categorise these? How will you enable them to ask questions, then present them with insightful results that inspire them to explore further?
-
-Inspired by <https://creativeinformatics.org/participant/jupiter-artland/> 
 
 Examples:
 
@@ -80,8 +76,6 @@ Pick a small location which is frequented by people. This could be the building 
 
 What are the primary and secondary purposes of this area? What do people want from it and how could it be improved? How has it changed over time? How do these insights relate to each other and how can they be used to improve the community experience?
 
-Inspired by <https://creativeinformatics.org/challenge/edinburgh-printmakers/> 
-
 Examples:
 
 - <https://www.centralparknyc.org/peak-fall-foliage-map>
@@ -96,11 +90,9 @@ Pick an artform (or set of related artforms) such as painting, music, sculpture,
 
 Which themes will you choose to focus on (emotions, politics, history, psychology, race...) or will you let your users determine them? How can you collect and categorise relevant artworks? How can users access and engage with the art in meaningful ways? Will you focus on established artists and fans, or try and grow the artform's popularity?
 
-Inspired by <https://creativeinformatics.org/challenge/john-byrne-award/>
-
 Examples:
 
 - <https://www.doodleaddicts.com/>
 - <https://dribbble.com/>
-- <https://www.annathurber.com/> 
+- <https://www.moodplayl.ist/mood-playlist-generator-personalised-taste/>
 

@@ -19,9 +19,9 @@ in practice, steps 2-5 are done for you by the setup script.
 
 Use the following projects as the template for your own work.
 
-- [Simple Example](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip)
-- [Image Server](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-ImageServer.zip)
-- [AJAX Queries](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExampleAJAX.zip)
+- [Simple Example](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.1/FFF-SimpleExample.zip)
+- [Image Server](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.1/FFF-ImageServer.zip)
+- [AJAX Queries](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.1/FFF-SimpleExampleAJAX.zip)
 
 ## Lecture Notes
 

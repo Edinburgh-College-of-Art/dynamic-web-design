@@ -21,7 +21,9 @@ On this server, you are very much in control -- you can install software, change
 
 This is actually a custom version of a commercial service called "Domain of One's Own" (DoOO) -- you'll find that some of the instructional material (videos) on this course were made with the commercial service, but the differences are minimal. Most web service providers, in fact, use tools and systems that are very similar to these, so skills that you learn with this arrangement will be highly transferable to other situations.
 
-Once you're into the Edinburgh Domains system, make sure that you're looking at the "Dashboard". This has a new interface theme called "Jupiter", which you might see a message about; the dashboard may look a bit different from the one in the course videos, but it still works in the same way. Here, you'll find links to an impressive array of tools that you can use to do all kinds of things. Specifically, we'll need to set up a database and make sure that we can connect to the server using a protocoal called SFTP. This is almost all that we'll need to do here -- most work with the server subsequently will be done by simply using the database through PHP.
+Once you're into the Edinburgh Domains system, make sure that you're looking at the "Dashboard". This has a new interface theme called "Jupiter", which you might see a message about; the dashboard may look a bit different from the one in the course videos, but it still works in the same way. There are some error warnings that appear, which come from code we have no conrtol over and can safely be ignored. 
+
+Here, you'll find links to an impressive array of tools that you can use to do all kinds of things. Specifically, we'll need to set up a database and make sure that we can connect to the server using a protocol called SFTP. This is almost all that we'll need to do here -- most work with the server subsequently will be done by simply using the database through PHP.
 
 The generic picture of the situation is like this:
 ![](img/diagramPHP.png)

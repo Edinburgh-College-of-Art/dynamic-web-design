@@ -44,7 +44,7 @@ Then pages (as templates) can be designed freely, placed on the server and conve
 
 It is possible to use a variety of DB systems with PHP, e.g. Microsoft Access, Oracle, etc. The particular database system we will be using is MySQL, which is a free, server-based system very often used with PHP. The database is maintained on a server that may be (but in our case is not) on a different machine from the web server: in any case, PHP can get access to it in just the same way.
 
-[Further details about how to use MySQL locally are available here](additional21.html#MySQL).
+[Further details about how to use MySQL locally are available here](additional.html#MySQL).
 
 First, let's take note of the usual structure of databases. We are for present purposes only interested in very simple ones. These consist of one or more _Tables_, where each table can be thought of as an array with rows and columns. The rows are _records_, and within each record the columns are _fields_. The table will have a name, and so will the fields in each record. A database table is for most purposes very similar to a simple _spreadsheet_.
 

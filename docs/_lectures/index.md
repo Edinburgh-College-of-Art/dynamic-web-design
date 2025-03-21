@@ -48,12 +48,19 @@ These are notes that support material mentioned in lectures -- they do not neces
    [here](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip).
    The demo can be viewed and played
    with [here](http://jlee.edinburgh.domains/fatfree/FFF-SimpleExampleS/)
-   (with username guest, password **guest**).] This
-   is [cookietest.php](http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php), and this
-   is [login.php](http://playground.eca.ed.ac.uk/~jlee/test/login.php);
-    - [here you can read as text the PHP file for the cookies example](php/cookietest.txt)
-    - [here is the one for the login example](php/login.txt).
-    - A video of a lecture about these (very poor quality) is at <https://vimeo.com/119117628>.
+   (with username guest, password **guest**). 
+
+[//]: # (This)
+
+[//]: # (   is [cookietest.php]&#40;http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php&#41;, and this)
+
+[//]: # (   is [login.php]&#40;http://playground.eca.ed.ac.uk/~jlee/test/login.php&#41;;)
+
+[//]: # (    - [here you can read as text the PHP file for the cookies example]&#40;php/cookietest.txt&#41;)
+
+[//]: # (    - [here is the one for the login example]&#40;php/login.txt&#41;.)
+
+[//]: # (    - A video of a lecture about these &#40;very poor quality&#41; is at <https://vimeo.com/119117628>.)
 8. Further PHP and the ImageServer:
     - [here are the notes](PHP-F3-ImageServer.html)
     - [here is the zipped code](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-ImageServer.zip)

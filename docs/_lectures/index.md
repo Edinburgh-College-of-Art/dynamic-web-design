@@ -40,38 +40,26 @@ These are notes that support material mentioned in lectures -- they do not neces
 1. [Instructions for using local servers](additional.html)
 2. [Introduction and Forms with F3](IntroAndFormsWithF3.html "Intro and Forms")
 3. [Databases with F3](DatabasesWithF3.html "DBs with PHP")
-5. More PHP [updated for Fat-Free Framework](conditionalsPHP+F3.html)
-6. [Evaluation / Usability](EvaluationNotes.html)
-7. Conditional expressions plus cookies /
+4. More PHP [updated for Fat-Free Framework](conditionalsPHP+F3.html)
+5. [Evaluation / Usability](EvaluationNotes.html)
+6. Conditional expressions plus cookies /
    sessions: [A viewtorial on implementing login with a session in F3](https://vid-linker-dev.eca.ed.ac.uk/linker.html?v=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&p=0&cv=1_b1dg98o6%7C1_ztas5fkg%7C32599141%7C2010292&cp=0)
    \-- code for this, with some additional comments, can be downloaded
    [here](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-SimpleExample.zip).
    The demo can be viewed and played
    with [here](http://jlee.edinburgh.domains/fatfree/FFF-SimpleExampleS/)
    (with username guest, password **guest**). 
-
-[//]: # (This)
-
-[//]: # (   is [cookietest.php]&#40;http://playground.eca.ed.ac.uk/~jlee/test/cookietest.php&#41;, and this)
-
-[//]: # (   is [login.php]&#40;http://playground.eca.ed.ac.uk/~jlee/test/login.php&#41;;)
-
-[//]: # (    - [here you can read as text the PHP file for the cookies example]&#40;php/cookietest.txt&#41;)
-
-[//]: # (    - [here is the one for the login example]&#40;php/login.txt&#41;.)
-
-[//]: # (    - A video of a lecture about these &#40;very poor quality&#41; is at <https://vimeo.com/119117628>.)
-8. Further PHP and the ImageServer:
+7. Further PHP and the ImageServer:
     - [here are the notes](PHP-F3-ImageServer.html)
     - [here is the zipped code](https://github.com/Edinburgh-College-of-Art/dynamic-web-design/releases/download/0.1.0/FFF-ImageServer.zip)
       Just let me know if you have any problems with this.
-9. Javascript and APIs: [here are links to Jules' notes](http://ddm.ace.ed.ac.uk/dynamic/apiflickr.html) --
+8. Javascript and APIs: [here are links to Jules' notes](http://ddm.ace.ed.ac.uk/dynamic/apiflickr.html) --
    There used to be notes here for the Google Maps APIs; however, Google have changed the API so these are now out of
    date, and Google's own notes are now much better. So just look
    at [the Google documentation here](https://developers.google.com/maps/documentation/javascript/).
-10. [Javascript and jQuery notes](DWD-JS-jQ-notes.html)
-    [Zipped code](zip/AJAX.zip) for AJAX and jQuery examples, based on
-    Jules' originals. [(see this video of the lecture)](https://vimeo.com/121459052>.)
+9. [Javascript and jQuery notes](DWD-JS-jQ-notes.html)
+   [Zipped code](zip/AJAX.zip) for AJAX and jQuery examples, based on
+   Jules' originals. [(see this video of the lecture)](https://vimeo.com/121459052>.)
 
 **NB: not all of these things will necessarily be referred to in
 this year's lectures or tutorials.**
